@@ -31,16 +31,19 @@ import lombok.experimental.SuperBuilder;
 public class Challenge implements Serializable, Comparable<Challenge> {
 
     private static final long serialVersionUID = 1L;
+    private static final int LENGTH = 40000;
 
     @Id
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = LENGTH)
     private String interviewQuotes;
-    @Column(nullable = false)
+    @Column(nullable = false, length = LENGTH)
     private String abstracts;
-    @Column(nullable = false)
+    @Column(length = LENGTH)
     private String mainIdea;
+    @Column(nullable = false, length = LENGTH)
+    private String code;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -49,7 +52,9 @@ public class Challenge implements Serializable, Comparable<Challenge> {
     private boolean specific;
     @Column(nullable = false)
     private long amountOfInterviews;
-    @Column(nullable = false)
+    @Column(nullable = false, length = LENGTH)
+    private String tags;
+    @Column(nullable = false, length = LENGTH)
     private String allText;
 
     @Singular
