@@ -34,6 +34,7 @@ import lombok.experimental.SuperBuilder;
 public class LinkFeedback implements Serializable, Comparable<LinkFeedback> {
 
     private static final long serialVersionUID = 1L;
+    private static final int LENGTH = 40000;
 
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
     @Id
@@ -48,6 +49,12 @@ public class LinkFeedback implements Serializable, Comparable<LinkFeedback> {
     
     @Column(nullable = false)
     private String username;
+
+    @Column(nullable = false, length = LENGTH)
+    private String justification;
+
+    @Column(nullable = false, length = LENGTH)
+    private String courseImprovement;
 
     @Override
     public int compareTo(LinkFeedback o) {

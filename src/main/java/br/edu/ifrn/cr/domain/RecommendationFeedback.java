@@ -37,6 +37,7 @@ import lombok.experimental.SuperBuilder;
 public class RecommendationFeedback implements Serializable, Comparable<RecommendationFeedback> {
 
     private static final long serialVersionUID = 1L;
+    private static final int LENGTH = 40000;
 
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
     @Id
@@ -53,6 +54,12 @@ public class RecommendationFeedback implements Serializable, Comparable<Recommen
     
     @Column(nullable = false)
     private String username;
+
+    @Column(nullable = false, length = LENGTH)
+    private String justification;
+
+    @Column(nullable = false, length = LENGTH)
+    private String courseImprovement;
 
     @Override
     public int compareTo(RecommendationFeedback o) {
