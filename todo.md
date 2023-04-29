@@ -1,7 +1,7 @@
 banco de dados
-ok 1- criar o esquema ao rodar a app
+1- criar o esquema ao rodar a app
 2- importar os dados da pesquisa no banco
-1d
+ok - 1d
 
 visualizações padrão
 1- criar o visual da listagem da recomendação com detalhe e com busca por theme ou campo livre
