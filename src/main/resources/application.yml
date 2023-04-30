@@ -22,7 +22,7 @@ joinfaces:
     project-stage: Development
     facelets-refresh-period: 0  
   primefaces:
-    theme: saga
+    theme: vela
 info:
   url: @project.url@
   version: @project.version@

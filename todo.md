@@ -3,15 +3,24 @@ banco de dados
 2- importar os dados da pesquisa no banco
 ok - 1d
 
-visualizações padrão
-1- criar o visual da listagem da recomendação com detalhe e com busca por theme ou campo livre
-2- criar o visual da listagem de link entre challenge e recomendação com detalhe e com busca por theme ou campo livre
+recommendation and links
+1- listagem
+    filtrar por all text, like, dislike, indiferent
+2- detalhe
+    colocar textArea nos campos abstracts e interviewQuotes
+    opções de like, dislike, indiferente
 2d
+
+layout app
+1- cor de rótulo do crud
 
 feedback
 1- adicionar botoes para feedback: like, dislike, remove, indiferente
 2- criar tela para mostrar os feedback informados
-3- colocar segurança na app com logon com usuarios pré-definidos
+
+segurança
+1- colocar segurança na app com logon com usuarios pré-definidos
+2- salvar e mostrar feedback desse usuario
 2d
 
 deployment

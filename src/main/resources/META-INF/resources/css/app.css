@@ -15,10 +15,10 @@
 /* body > contentForm > page > layout > tituloAtividade > title */
 
 .title {
-    height: 30px;
+    height: 45px;
     margin-left: 0px;
     margin-bottom: 3px;
-    padding: 8px 0 0 10px;
+    padding: 0px 0 0 10px;
     text-align: center;
 }
 
@@ -37,5 +37,13 @@
     font-size: 50px;
     text-align: left;
     width: 100%;
+}
+
+body .ui-menu.ui-menubar {
+    padding: 0px;
+}
+
+.listActionLinksStyleClassOne {
+    width: 220px !important;
 }
 

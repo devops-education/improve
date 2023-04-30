@@ -1,9 +1,12 @@
 package org.persapiens.crde.view.crud;
 
 import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Named;
+import java.util.List;
 
 import org.persapiens.crde.domain.Recommendation;
+import org.persapiens.crde.persistence.RecommendationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * CrudMBean de ValorInicialDoDonoNaContaPatrimonio.
@@ -11,11 +14,14 @@ import org.persapiens.crde.domain.Recommendation;
  * @author Marcelo Fernandes
  */
 @ViewScoped
-@Named
+@Component
 public class RecommendationCrudMBean extends CrudMBean<Recommendation, Long> {
 
     private static final long serialVersionUID = 1L;
 
+    @Autowired
+    private RecommendationRepository recommendationRepository;
+    
     @Override
     protected Recommendation createBean() {
         return Recommendation.builder().build();
@@ -30,5 +36,11 @@ public class RecommendationCrudMBean extends CrudMBean<Recommendation, Long> {
     public boolean isCheckStartUpdate(Recommendation bean) {
         return false;
     }
+
+    @Override
+    public List<Recommendation> find() {
+        return recommendationRepository.findByOrderByAmountOfInterviewsDesc();
+    }
+ 
     
 }

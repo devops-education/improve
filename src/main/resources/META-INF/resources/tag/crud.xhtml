@@ -6,7 +6,7 @@
                 xmlns:f="jakarta.faces.core"
                 xmlns:c="jakarta.tags.core"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:m="https://ifrn.edu.br/conta"
+                xmlns:m="crde.persapiens.org"
                 >
     <m:contentLayout title="#{title}">
 
@@ -61,8 +61,8 @@
             <c:set var="visualizationModeAfterInsert" value="#{empty visualizationModeAfterInsert ? managedBean.visualizationModeAfterInsert : visualizationModeAfterInsert}" />
             <c:set var="visualizationModeAfterUpdate" value="#{empty visualizationModeAfterUpdate ? managedBean.visualizationModeAfterUpdate : visualizationModeAfterUpdate}" />
             <c:set var="visualizationModeAfterDelete" value="#{empty visualizationModeAfterDelete ? managedBean.visualizationModeAfterDelete : visualizationModeAfterDelete}" />
-            <c:set var="dataTableRows"                value="#{empty dataTableRows ? 10 : dataTableRows}" />
-            <c:set var="dataTableRowsPerPageTemplate" value="#{empty dataTableRowsPerPageTemplate ? '10,20,50' : dataTableRowsPerPageTemplate}" />
+            <c:set var="dataTableRows"                value="#{empty dataTableRows ? 7 : dataTableRows}" />
+            <c:set var="dataTableRowsPerPageTemplate" value="#{empty dataTableRowsPerPageTemplate ? '7,10,20,50' : dataTableRowsPerPageTemplate}" />
             <c:set var="dataTableStyle" 			  value="#{empty dataTableStyle ? '' : dataTableStyle}" />
             <c:set var="insertButtonLabel"            value="#{empty insertButtonLabel ? 'Incluir' : insertButtonLabel}" />
             <c:set var="updateButtonLabel"            value="#{empty updateButtonLabel ? 'Salvar' : updateButtonLabel}" />
@@ -86,6 +86,7 @@
                              rowStyleClass="#{dataTableRowStyleClass}"
                              lazy="#{dataTableLazy}"  
                              selection="#{selection}"
+                             stripedRows="true"
                              >
                     <p:ajax event="sort" oncomplete="applyStyleLine()" />
                     <p:ajax event="filter" oncomplete="applyStyleLine()" />
@@ -93,7 +94,7 @@
                     
                     <ui:insert name="listColumns"></ui:insert>                
 
-                    <p:column headerText="Ações" styleClass="#{listActionLinksStyleClass}" rendered="#{showActionLinksColumn}" exportable="false">
+                    <p:column headerText="Actions" styleClass="#{listActionLinksStyleClass}" rendered="#{showActionLinksColumn}" exportable="false">
                         <ui:insert name="listActionLinks"></ui:insert>
 
                         <p:commandButton
@@ -139,11 +140,11 @@
                         <p:spacer width="10px"/>
 
                         <p:commandButton
-                            title="Visualizar"
+                            title="Detail"
                             action="#{managedBean.startDetailAction}"
                             rendered="#{showDetailActionLink}"
                             disabled="#{not managedBean.isDetailable(bean)}" 
-                            value="Visualizar" icon="pi pi-search"
+                            value="Detail" icon="pi pi-search"
                             process="@this"
                             update="@form" ajax="true">
                             <f:setPropertyActionListener
