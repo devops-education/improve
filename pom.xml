@@ -6,25 +6,52 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.6</version>
+        <version>3.1.0-RC1</version>
         <relativePath/>
     </parent>
 
-    <groupId>br.edu.ifrn</groupId>
-    <artifactId>conta</artifactId>
+    <groupId>org.persapiens.crde</groupId>
+    <artifactId>cr-devops</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
         <java.version>17</java.version>
         
-        <joinfaces.version>5.0.6</joinfaces.version>
+        <joinfaces.version>5.1.0-rc1</joinfaces.version>
         <querydsl.version>5.0.0</querydsl.version>
         <apt-maven-plugin.version>1.1.3</apt-maven-plugin.version>
 
+        <!-- check library versions -->
+        <no-package-cycles-enforcer-rule.version>1.0.9</no-package-cycles-enforcer-rule.version>
+        <spotbugs-maven-plugin.version>4.7.3.4</spotbugs-maven-plugin.version>
+        <findsecbugs-plugin.version>1.12.0</findsecbugs-plugin.version>
+        <findbugs-annotations.version>3.0.1</findbugs-annotations.version>
+        <jdepend-maven-plugin.version>2.0</jdepend-maven-plugin.version>
         <maven-pmd-plugin.version>3.20.0</maven-pmd-plugin.version>
-        <cpd.dir>src/cpd-config</cpd.dir>
-        <cpd.excludeFromFailureFile>${cpd.dir}/cpd-exclude.properties</cpd.excludeFromFailureFile>
+        <maven-checkstyle-plugin.version>3.2.2</maven-checkstyle-plugin.version>
+        <checkstyle.version>10.10.0</checkstyle.version>
+
+        <check.dir>src/static-analysis</check.dir>
+        <checkstyle.dir>${check.dir}/checkstyle</checkstyle.dir>
+        <pmd.dir>${check.dir}/pmd</pmd.dir>
+
+        <pmd.ruleset>${pmd.dir}/pmd-ruleset.xml</pmd.ruleset>
+        <pmd.excludeFromFailureFile>${check.dir}/pmd/pmd-exclude.properties</pmd.excludeFromFailureFile> 
+        <cpd.excludeFromFailureFile>${check.dir}/cpd/cpd-exclude.properties</cpd.excludeFromFailureFile>
+        <checkstyle.configLocation>${checkstyle.dir}/checkstyle.xml</checkstyle.configLocation>
+        <checkstyle.suppressionsLocation>${checkstyle.dir}/checkstyle-suppressions.xml</checkstyle.suppressionsLocation>
+        <checkstyle.headerLocation>${checkstyle.dir}/checkstyle-header.txt</checkstyle.headerLocation>
+        <checkstyle.excludes/>
+        <duplicate-finder-maven-plugin.version>1.5.1</duplicate-finder-maven-plugin.version>
+        <duplicate.ignoredResourcePattern>(application.yml)</duplicate.ignoredResourcePattern>
+        <duplicate.ignoredClassPattern>()</duplicate.ignoredClassPattern>
+
+        <dependency-check-maven.version>8.2.1</dependency-check-maven.version>
+        <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
+        <sonar.projectKey>persapiens_crde</sonar.projectKey>
+        <sonar.organization>persapiens</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <dependencyManagement>
@@ -42,12 +69,6 @@
                 <version>${querydsl.version}</version>
                 <classifier>jakarta</classifier>
                 <scope>provided</scope>
-                <exclusions>
-                    <exclusion>
-                        <groupId>javax.transaction</groupId>
-                        <artifactId>jta</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.querydsl</groupId>
@@ -55,6 +76,11 @@
                 <version>${querydsl.version}</version>
                 <classifier>jakarta</classifier>
             </dependency>    
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>findbugs-annotations</artifactId>
+                <version>${findbugs-annotations.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -104,13 +130,11 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>		
-        <!--
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
-            <scope>runtime</scope>
+            <scope>test</scope>
         </dependency>        
-        -->
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-apt</artifactId>
@@ -120,6 +144,10 @@
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-jpa</artifactId>
             <classifier>jakarta</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>findbugs-annotations</artifactId>
         </dependency>
     </dependencies>
 
@@ -149,9 +177,92 @@
                     <configuration>
                         <targetJdk>${java.source}</targetJdk>
                         <includeTests>false</includeTests>
+                        <rulesets>
+                            <ruleset>${pmd.ruleset}</ruleset>
+                        </rulesets>
                         <analysisCache>true</analysisCache>
+                        <excludeFromFailureFile>${pmd.excludeFromFailureFile}</excludeFromFailureFile>
                         <linkXRef>false</linkXRef>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>com.github.spotbugs</groupId>
+                    <artifactId>spotbugs-maven-plugin</artifactId>
+                    <version>${spotbugs-maven-plugin.version}</version>
+                    <configuration>
+                        <plugins>
+                            <plugin>
+                                <groupId>com.h3xstream.findsecbugs</groupId>
+                                <artifactId>findsecbugs-plugin</artifactId>
+                                <version>${findsecbugs-plugin.version}</version>
+                            </plugin>                            
+                        </plugins>
+                        <includeTests>true</includeTests>
+                        <xmlOutput>true</xmlOutput>
+                        <effort>Max</effort>
+                        <failOnError>true</failOnError>
+                    </configuration>
+                </plugin>            
+                <plugin>
+                    <groupId>org.basepom.maven</groupId>
+                    <artifactId>duplicate-finder-maven-plugin</artifactId>
+                    <version>${duplicate-finder-maven-plugin.version}</version>
+                    <configuration>
+                        <printEqualFiles>false</printEqualFiles>
+                        <failBuildInCaseOfDifferentContentConflict>true</failBuildInCaseOfDifferentContentConflict>
+                        <failBuildInCaseOfEqualContentConflict>false</failBuildInCaseOfEqualContentConflict>
+                        <failBuildInCaseOfConflict>false</failBuildInCaseOfConflict>
+                        <checkCompileClasspath>true</checkCompileClasspath>
+                        <checkRuntimeClasspath>true</checkRuntimeClasspath>
+                        <checkTestClasspath>true</checkTestClasspath>
+                        <ignoredResourcePatterns>
+                            <ignoredResourcePattern>${duplicate.ignoredResourcePattern}</ignoredResourcePattern>
+                        </ignoredResourcePatterns>
+                        <ignoredClassPatterns>
+                            <ignoredClassPattern>${duplicate.ignoredClassPattern}</ignoredClassPattern>
+                        </ignoredClassPatterns>
+                        <skip>false</skip>
+                        <quiet>false</quiet>
+                    </configuration>
+                </plugin>            
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${maven-checkstyle-plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.puppycrawl.tools</groupId>
+                            <artifactId>checkstyle</artifactId>
+                            <version>${checkstyle.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <failsOnError>true</failsOnError>
+                        <failOnViolation>true</failOnViolation>
+                        <configLocation>${checkstyle.configLocation}</configLocation>
+                        <suppressionsLocation>${checkstyle.suppressionsLocation}</suppressionsLocation>
+                        <headerLocation>${checkstyle.headerLocation}</headerLocation>
+                        <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+                        <consoleOutput>true</consoleOutput>
+                        <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                        <sourceDirectories>
+                            <param>${project.build.sourceDirectory}</param>
+                        </sourceDirectories>
+                        <testSourceDirectories>
+                            <param>${project.build.testSourceDirectory}</param>
+                        </testSourceDirectories>
+                        <excludes>${checkstyle.excludes}</excludes>
+                    </configuration>
+                </plugin>            
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>${sonar-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.owasp</groupId>
+                    <artifactId>dependency-check-maven</artifactId>
+                    <version>${dependency-check-maven.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -170,6 +281,27 @@
 
     <profiles>
         <profile>
+            <id>check-checkstyle</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-checkstyle-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>checkstyle-validation</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
             <id>check-cpd</id>
             <build>
                 <plugins>
@@ -180,7 +312,6 @@
                             <skip>false</skip>
                             <printFailingErrors>true</printFailingErrors>
                             <verbose>true</verbose>
-                            <minimumTokens>50</minimumTokens>                            
                         </configuration>
                         <executions>
                             <execution>
@@ -192,6 +323,146 @@
                                     <excludeFromFailureFile>${cpd.excludeFromFailureFile}</excludeFromFailureFile>
                                 </configuration>
                             </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>check-pmd</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-pmd-plugin</artifactId>
+                        <configuration>
+                            <skip>false</skip>
+                            <printFailingErrors>true</printFailingErrors>
+                            <verbose>true</verbose>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>pmd-check</id>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>check-cycles</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-enforcer-plugin</artifactId>
+                        <dependencies>
+                            <dependency>
+                                <groupId>de.andrena.tools.nopackagecycles</groupId>
+                                <artifactId>no-package-cycles-enforcer-rule</artifactId>
+                                <version>${no-package-cycles-enforcer-rule.version}</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <id>enforce-no-package-cycles</id>
+                                <goals>
+                                    <goal>enforce</goal>
+                                </goals>
+                                <phase>test</phase>
+                                <configuration>
+                                    <rules>
+                                        <NoPackageCyclesRule implementation="de.andrena.tools.nopackagecycles.NoPackageCyclesRule"/>
+                                    </rules>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>check-spotbugs</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.spotbugs</groupId>
+                        <artifactId>spotbugs-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>check-duplicate</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.basepom.maven</groupId>
+                        <artifactId>duplicate-finder-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>check-duplicate</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>check-sonarqube</id>
+            <properties>
+                <sonar.dependencyCheck.htmlReportPath>target/dependency-check-report.html</sonar.dependencyCheck.htmlReportPath>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonarsource.scanner.maven</groupId>
+                        <artifactId>sonar-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>sonar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>check-dependency</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.owasp</groupId>
+                        <artifactId>dependency-check-maven</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>aggregate</goal>
+                                </goals>
+                            </execution>                            
                         </executions>
                     </plugin>
                 </plugins>
