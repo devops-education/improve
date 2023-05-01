@@ -18,7 +18,7 @@
     height: 45px;
     margin-left: 0px;
     margin-bottom: 3px;
-    padding: 0px 0 0 10px;
+    padding: 0px 0 0 0px;
     text-align: center;
 }
 
@@ -44,6 +44,5 @@ body .ui-menu.ui-menubar {
 }
 
 .listActionLinksStyleClassOne {
-    width: 220px !important;
+    width: 40px !important;
 }
-

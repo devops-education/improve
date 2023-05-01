@@ -7,7 +7,9 @@
 
     <p:outputPanel id="layout">
 
-        <m:title title="#{title}" />
+        <p:panel id="titlePanel">
+            <m:title title="#{title}" />
+        </p:panel>
 
         <p:panel id="contentLayoutPanel">
             <ui:insert name="layoutContent"/>

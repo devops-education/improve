@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>org.persapiens.crde</groupId>
-    <artifactId>cr-devops</artifactId>
+    <artifactId>crde</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -470,8 +470,8 @@
         </profile>
     </profiles>
     
-    <name>cr devops</name>
-    <description>Challenges and Recommendations</description>
+    <name>crde</name>
+    <description>Challenges and Recommendations on DevOps Education</description>
     <url>https://github.com/persapiens/conta</url>
     <inceptionYear>2023</inceptionYear>
 

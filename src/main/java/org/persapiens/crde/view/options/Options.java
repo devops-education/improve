@@ -7,32 +7,16 @@ import java.util.List;
 
 import jakarta.faces.convert.Converter;
 import jakarta.faces.model.SelectItem;
-import jakarta.inject.Inject;
 
 import org.persapiens.crde.view.AbstractMBean;
 import org.omnifaces.converter.ListConverter;
-import org.springframework.data.repository.CrudRepository;
 
-/**
- * Options de entidades.
- *
- * @param <ID> tipo da chave da entidade.
- * @param <T> tipo da entidade.
- * @author Marcelo Fernandes
- */
 public abstract class Options<T, ID extends Serializable> extends AbstractMBean {
 
-    private static final String EI_EXPOSE_REP = "EI_EXPOSE_REP";
     private static final long serialVersionUID = 1L;
+
+    protected static final String EI_EXPOSE_REP = "EI_EXPOSE_REP";
     private boolean listCreated = false;
-
-    private CrudRepository<T, ID> service;
-
-    @SuppressFBWarnings(EI_EXPOSE_REP)
-    @Inject
-    public void setService(CrudRepository<T, ID> service) {
-        this.service = service;
-    }
 
     /**
      * SOBRESCREVA se quiser alterar a forma padrao de como os beans sao
@@ -40,9 +24,7 @@ public abstract class Options<T, ID extends Serializable> extends AbstractMBean 
      *
      * @return list of beans
      */
-    protected List<T> fillList() {
-        return toList(this.service.findAll());
-    }
+    protected abstract List<T> fillList();
 
     protected void verify() {
         if (!this.listCreated) {

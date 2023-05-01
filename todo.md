@@ -7,16 +7,19 @@ recommendation and links
 1- listagem
     filtrar por all text, like, dislike, indiferent
 2- detalhe
-    colocar textArea nos campos abstracts e interviewQuotes
+    colocar texto com enter nos campos abstracts e interviewQuotes
     opções de like, dislike, indiferente
 2d
 
 layout app
 1- cor de rótulo do crud
 
+tags
+1- mapa de tags
+
 feedback
-1- adicionar botoes para feedback: like, dislike, remove, indiferente
-2- criar tela para mostrar os feedback informados
+1- mudar cor da linha quando selecionado like ou dislike
+2- justificar feedback no detalhe
 
 segurança
 1- colocar segurança na app com logon com usuarios pré-definidos

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="crde.persapiens.org"
+    xmlns:fn="jakarta.tags.functions"
+    template="/layout/template.xhtml">
+    <ui:define name="content" >
+        <c:crud title="Recommendations on DevOps Education" managedBean="#{recommendationFeedbackCrudMBean}" showInsert="false" showUpdateActionLink="false">
+            <ui:define name="listColumns">
+                <p:column responsivePriority="3" headerText="Interviews" sortBy="#{bean.recommendation.amountOfInterviews}" filterBy="#{bean.recommendation.amountOfInterviews}" style="width: 110px;">
+                    <h:outputText value="#{bean.recommendation.amountOfInterviews}" />
+                </p:column>
+
+                <p:column responsivePriority="1" headerText="Main Idea" sortBy="#{bean.recommendation.mainIdea}" filterBy="#{bean.recommendation.mainIdea}" >
+                    <h:outputText value="#{bean.recommendation.mainIdea}" />
+                </p:column>
+
+                <p:column responsivePriority="4" headerText="Theme" sortBy="#{bean.recommendation.theme}" filterBy="#{bean.recommendation.theme}" style="width: 220px;" >
+                    <h:outputText value="#{bean.recommendation.theme.value}" />
+                </p:column>
+
+                <p:column responsivePriority="2" 
+                          headerText="Rating" 
+                          sortBy="#{bean.rating}"
+                          field="rating"
+                          filterMatchMode="exact" 
+                          style="width: 170px;" >
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('dataTable').filter()" >
+                            <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
+                            <f:selectItems value="#{ratingOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.description}"/>
+                        </p:selectOneMenu>
+                    </f:facet>
+                    <p:rating value="#{bean.rating}" converter="#{ratingConverter}">
+                        <p:ajax event="rate" listener="#{recommendationFeedbackCrudMBean.onrate(bean)}" update="messages"/>
+                        <p:ajax event="cancel" listener="#{recommendationFeedbackCrudMBean.oncancel(bean)}" update="messages"/>
+                    </p:rating>
+                </p:column>
+            </ui:define>
+
+            <ui:define name="detail">
+                <h:panelGrid columns="2" cellpadding="3">
+                    <c:text readonly="true" value="#{recommendationFeedbackCrudMBean.bean.recommendation.amountOfInterviews}" label="Interviews" />
+                    <c:text readonly="true" value="#{recommendationFeedbackCrudMBean.bean.recommendation.mainIdea}" label="Main Idea" />
+                    <c:text readonly="true" value="#{recommendationFeedbackCrudMBean.bean.recommendation.theme.value}" label="Theme" />
+                    
+                    <p:outputLabel value="Abstracts" />
+                    <p:panel>
+                        <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackCrudMBean.bean.recommendation.abstracts, '\\n', '&lt;br/&gt;')}" escape="false"/>
+                    </p:panel>
+                    
+                    <p:outputLabel value="Interviews Quotes" />
+                    <p:panel>
+                        <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackCrudMBean.bean.recommendation.interviewQuotes, '\\n', '&lt;br/&gt;')}" escape="false" />
+                    </p:panel>
+                    
+                    <p:outputLabel value="Rating" />
+                    <p:rating value="#{recommendationFeedbackCrudMBean.bean.rating}" converter="#{ratingConverter}">
+                        <p:ajax event="rate" listener="#{recommendationFeedbackCrudMBean.onrate(recommendationFeedbackCrudMBean.bean)}" update="messages"/>
+                        <p:ajax event="cancel" listener="#{recommendationFeedbackCrudMBean.oncancel(recommendationFeedbackCrudMBean.bean)}" update="messages"/>
+                    </p:rating>
+                </h:panelGrid>
+            </ui:define>
+        </c:crud>
+    </ui:define>
+</ui:composition>

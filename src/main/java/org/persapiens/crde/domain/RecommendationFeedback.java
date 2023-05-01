@@ -28,7 +28,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(exclude = "id")
+@EqualsAndHashCode(of = {"recommendation", "username"})
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
@@ -49,22 +49,22 @@ public class RecommendationFeedback implements Serializable, Comparable<Recommen
     private Recommendation recommendation;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private FeedbackType feedbackType;
+    @Enumerated(EnumType.ORDINAL)
+    private Rating rating;
     
     @Column(nullable = false)
     private String username;
 
-    @Column(nullable = false, length = LENGTH)
+    @Column(length = LENGTH)
     private String justification;
 
-    @Column(nullable = false, length = LENGTH)
+    @Column(length = LENGTH)
     private String courseImprovement;
 
     @Override
     public int compareTo(RecommendationFeedback o) {
         return Comparator.comparing(RecommendationFeedback::getRecommendation)
-                .thenComparing(RecommendationFeedback::getFeedbackType)
+                .thenComparing(RecommendationFeedback::getRating)
                 .thenComparing(RecommendationFeedback::getUsername)
                 .compare(this, o);
     }

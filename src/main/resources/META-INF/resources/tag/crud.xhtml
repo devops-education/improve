@@ -32,21 +32,6 @@
 
             <ui:insert name="middleTitle"></ui:insert>
 
-            <c:set var="dataExporterEncoding" value="#{empty dataExporterEncoding ? 'utf-8' : dataExporterEncoding}" />
-
-            <span style="float:right;padding-right: 20px;">
-                <h:commandLink title="csv" rendered="#{(managedBean.visualizationMode == 'LIST') and showList}">  
-                    <p:graphicImage value="#{resource['images/csv.png']}" width="23px"/>  
-                    <p:dataExporter type="csv" target="datatable" fileName="planilha" encoding="#{dataExporterEncoding}" />  
-                </h:commandLink>  
-
-                <p:spacer width="20" height="10"/>
-
-                <h:commandLink id="lnk">  
-                    <p:printer target="layout" />  
-                    <p:graphicImage value="#{resource['images/print.png']}" style="padding-top: 3px;"/>  
-                </h:commandLink>  
-            </span>
         </ui:define>
 
         <ui:define name="layoutContent" >
@@ -67,7 +52,7 @@
             <c:set var="insertButtonLabel"            value="#{empty insertButtonLabel ? 'Incluir' : insertButtonLabel}" />
             <c:set var="updateButtonLabel"            value="#{empty updateButtonLabel ? 'Salvar' : updateButtonLabel}" />
 
-            <p:messages id="messages" showDetail="true" showSummary="false" escape="false"/>
+            <p:messages id="messages" showDetail="true" showSummary="false" escape="false" closable="true"/>
 
             <p:outputPanel id="listPanel" rendered="#{managedBean.visualizationMode == 'LIST' and showList}" >
                 <ui:insert name="listBeforeDatatable"></ui:insert>                
@@ -87,6 +72,7 @@
                              lazy="#{dataTableLazy}"  
                              selection="#{selection}"
                              stripedRows="true"
+                             widgetVar="dataTable"
                              >
                     <p:ajax event="sort" oncomplete="applyStyleLine()" />
                     <p:ajax event="filter" oncomplete="applyStyleLine()" />
@@ -94,7 +80,7 @@
                     
                     <ui:insert name="listColumns"></ui:insert>                
 
-                    <p:column headerText="Actions" styleClass="#{listActionLinksStyleClass}" rendered="#{showActionLinksColumn}" exportable="false">
+                    <p:column headerText="Detail" styleClass="#{listActionLinksStyleClass}" rendered="#{showActionLinksColumn}" exportable="false">
                         <ui:insert name="listActionLinks"></ui:insert>
 
                         <p:commandButton
@@ -122,7 +108,7 @@
                                 value="#{bean}" />                        
                         </p:commandButton>
 
-                        <p:spacer width="10px" rendered="#{managedBean.isCheckBeforeDelete(bean)}"/>
+                        <p:spacer width="10px" rendered="#{managedBean.isCheckBeforeDelete(bean) and showDeleteActionLink}"/>
 
                         <p:commandButton
                             title="Alterar"
@@ -137,14 +123,14 @@
                                 value="#{bean}" />
                         </p:commandButton>
 
-                        <p:spacer width="10px"/>
+                        <p:spacer width="10px" rendered="#{showUpdateActionLink}"/>
 
                         <p:commandButton
-                            title="Detail"
+                            title="Detail the information"
                             action="#{managedBean.startDetailAction}"
                             rendered="#{showDetailActionLink}"
                             disabled="#{not managedBean.isDetailable(bean)}" 
-                            value="Detail" icon="pi pi-search"
+                            icon="pi pi-search"
                             process="@this"
                             update="@form" ajax="true">
                             <f:setPropertyActionListener

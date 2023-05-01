@@ -28,8 +28,8 @@ import lombok.experimental.SuperBuilder;
  */
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode(exclude = {"recommendationTags", "links"})
+@ToString(exclude = {"recommendationTags", "links"})
+@EqualsAndHashCode(of = {"id"})
 @SuperBuilder
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

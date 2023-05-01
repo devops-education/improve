@@ -44,22 +44,22 @@ public class LinkFeedback implements Serializable, Comparable<LinkFeedback> {
     private Link link;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private FeedbackType feedbackType;
+    @Enumerated(EnumType.ORDINAL)
+    private Rating rating;
     
     @Column(nullable = false)
     private String username;
 
-    @Column(nullable = false, length = LENGTH)
+    @Column(length = LENGTH)
     private String justification;
 
-    @Column(nullable = false, length = LENGTH)
+    @Column(length = LENGTH)
     private String courseImprovement;
 
     @Override
     public int compareTo(LinkFeedback o) {
         return Comparator.comparing(LinkFeedback::getLink)
-                .thenComparing(LinkFeedback::getFeedbackType)
+                .thenComparing(LinkFeedback::getRating)
                 .thenComparing(LinkFeedback::getUsername)
                 .compare(this, o);
     }

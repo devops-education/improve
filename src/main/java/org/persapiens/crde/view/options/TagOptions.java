@@ -5,24 +5,20 @@ import jakarta.inject.Named;
 
 import org.persapiens.crde.domain.Tag;
 
-/**
- * Options de Dono.
- * @author Marcelo Fernandes
- */
 @ViewScoped
 @Named
-public class TagOptions extends Options<Tag, Long> {
+public class TagOptions extends DomainOptions<Tag, Long> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Override
-	public String label(Tag e) {
-		return e.getDescricao();
-	}
+    @Override
+    public String label(Tag e) {
+        return e.getDescricao();
+    }
 
-	@Override
-	protected Object key(Tag e) {
-		return e.getId();
-	}
+    @Override
+    protected Object key(Tag e) {
+        return e.getId();
+    }
 
 }
