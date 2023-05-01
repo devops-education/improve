@@ -27,6 +27,11 @@ deployment
 2- implantar na nuvem do ifrn (nginx, jar, postgresql)
 1d
 
+
+
 feedback
 1- mudar cor da linha quando selecionado like ou dislike
 2- justificar feedback no detalhe
+
+roteiro de uso
+1- fazer no papel? implementar por metas (exemplo: detalhou 5 recomendações de 2 categorias cada)?
