@@ -3,6 +3,9 @@ banco de dados
 2- importar os dados da pesquisa no banco
 ok - 1d
 
+layout app
+ok 1- cor de rótulo do crud
+
 recommendation and links
 1- listagem
     filtrar por all text, like, dislike, indiferent
@@ -11,15 +14,8 @@ recommendation and links
     opções de like, dislike, indiferente
 2d
 
-layout app
-1- cor de rótulo do crud
-
 tags
 1- mapa de tags
-
-feedback
-1- mudar cor da linha quando selecionado like ou dislike
-2- justificar feedback no detalhe
 
 segurança
 1- colocar segurança na app com logon com usuarios pré-definidos
@@ -27,6 +23,10 @@ segurança
 2d
 
 deployment
-1- criar o dump inicial do banco de dados
+1- importar o dump inicial do banco de dados
 2- implantar na nuvem do ifrn (nginx, jar, postgresql)
 1d
+
+feedback
+1- mudar cor da linha quando selecionado like ou dislike
+2- justificar feedback no detalhe

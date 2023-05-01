@@ -11,11 +11,16 @@
     <ui:define name="content" >
         <c:crud title="Recommendations on DevOps Education" managedBean="#{recommendationFeedbackCrudMBean}" showInsert="false" showUpdateActionLink="false">
             <ui:define name="listColumns">
+                <f:facet name="header">
+                    <p:inputText id="globalFilter" onkeyup="PF('dataTable').filter()" style="width:305px"
+                                 placeholder="Search main idea, abstracts, quotes, tags" />
+                </f:facet>
+
                 <p:column responsivePriority="3" headerText="Interviews" sortBy="#{bean.recommendation.amountOfInterviews}" filterBy="#{bean.recommendation.amountOfInterviews}" style="width: 110px;">
                     <h:outputText value="#{bean.recommendation.amountOfInterviews}" />
                 </p:column>
 
-                <p:column responsivePriority="1" headerText="Main Idea" sortBy="#{bean.recommendation.mainIdea}" filterBy="#{bean.recommendation.mainIdea}" >
+                <p:column responsivePriority="1" headerText="Main Idea" sortBy="#{bean.recommendation.mainIdea}" >
                     <h:outputText value="#{bean.recommendation.mainIdea}" />
                 </p:column>
 
@@ -47,17 +52,22 @@
                     <c:text readonly="true" value="#{recommendationFeedbackCrudMBean.bean.recommendation.amountOfInterviews}" label="Interviews" />
                     <c:text readonly="true" value="#{recommendationFeedbackCrudMBean.bean.recommendation.mainIdea}" label="Main Idea" />
                     <c:text readonly="true" value="#{recommendationFeedbackCrudMBean.bean.recommendation.theme.value}" label="Theme" />
-                    
+
                     <p:outputLabel value="Abstracts" />
                     <p:panel>
                         <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackCrudMBean.bean.recommendation.abstracts, '\\n', '&lt;br/&gt;')}" escape="false"/>
                     </p:panel>
-                    
+
                     <p:outputLabel value="Interviews Quotes" />
                     <p:panel>
                         <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackCrudMBean.bean.recommendation.interviewQuotes, '\\n', '&lt;br/&gt;')}" escape="false" />
                     </p:panel>
-                    
+
+                    <p:outputLabel value="Tags" />
+                    <p:panel>
+                        <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackCrudMBean.bean.recommendation.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
+                    </p:panel>
+
                     <p:outputLabel value="Rating" />
                     <p:rating value="#{recommendationFeedbackCrudMBean.bean.rating}" converter="#{ratingConverter}">
                         <p:ajax event="rate" listener="#{recommendationFeedbackCrudMBean.onrate(recommendationFeedbackCrudMBean.bean)}" update="messages"/>

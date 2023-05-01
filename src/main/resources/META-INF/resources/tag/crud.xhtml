@@ -73,6 +73,7 @@
                              selection="#{selection}"
                              stripedRows="true"
                              widgetVar="dataTable"
+                             globalFilterFunction="#{managedBean.globalFilterFunction}"
                              >
                     <p:ajax event="sort" oncomplete="applyStyleLine()" />
                     <p:ajax event="filter" oncomplete="applyStyleLine()" />

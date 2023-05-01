@@ -5,17 +5,19 @@ import jakarta.faces.view.ViewScoped;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import org.persapiens.crde.domain.Recommendation;
 import org.persapiens.crde.domain.RecommendationFeedback;
 import org.persapiens.crde.persistence.RecommendationFeedbackRepository;
 import org.persapiens.crde.persistence.RecommendationRepository;
+import org.primefaces.util.LangUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Log
+@Slf4j
 @ViewScoped
 @Component
 public class RecommendationFeedbackCrudMBean extends CrudMBean<RecommendationFeedback, Long> {
@@ -63,7 +65,7 @@ public class RecommendationFeedbackCrudMBean extends CrudMBean<RecommendationFee
                         .username(username())
                         .build();
             } else {
-                log.warning("RecommendationFeedback " + recommendationFeedback.getRating());
+                log.debug("RecommendationFeedback " + recommendationFeedback.getRating());
             }
             result.add(recommendationFeedback);
         }
@@ -89,6 +91,19 @@ public class RecommendationFeedbackCrudMBean extends CrudMBean<RecommendationFee
         recommendationFeedback.setId(null);
         String message = "You cancelled!";
         addInfoMessage(null, message, message);        
+    }
+
+    public boolean globalFilterFunction(Object value, Object filter, Locale locale) {
+        String filterText = (filter == null) ? null : filter.toString().trim().toLowerCase();
+        if (LangUtils.isBlank(filterText)) {
+            return true;
+        }
+
+        Recommendation recommendation = ((RecommendationFeedback) value).getRecommendation();
+        return recommendation.getMainIdea().toLowerCase().contains(filterText)
+                || recommendation.getAbstracts().toLowerCase().contains(filterText)
+                || recommendation.getInterviewQuotes().toLowerCase().contains(filterText)
+                || recommendation.getTags().toLowerCase().contains(filterText);
     }
     
 }
