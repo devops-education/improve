@@ -17,7 +17,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Getter
 @Setter
 @ToString
@@ -31,11 +34,13 @@ public class Link implements Serializable, Comparable<Link> {
 
     private static final long serialVersionUID = 1L;
 
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Id
     @ManyToOne
     @JoinColumn(name= "challenge", nullable = false, foreignKey = @ForeignKey(name = "fk_link_challenge"))
     private Challenge challenge;
 
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Id
     @ManyToOne
     @JoinColumn(name = "recommendation", nullable = false, foreignKey = @ForeignKey(name = "fk_link_recommendation"))

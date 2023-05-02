@@ -16,15 +16,23 @@
                                  placeholder="Search main idea, abstracts, quotes, tags" />
                 </f:facet>
 
-                <p:column responsivePriority="3" headerText="Interviews" sortBy="#{bean.recommendation.amountOfInterviews}" filterBy="#{bean.recommendation.amountOfInterviews}" style="width: 110px;">
-                    <h:outputText value="#{bean.recommendation.amountOfInterviews}" />
-                </p:column>
-
                 <p:column responsivePriority="1" headerText="Main Idea" sortBy="#{bean.recommendation.mainIdea}" >
                     <h:outputText value="#{bean.recommendation.mainIdea}" />
                 </p:column>
 
+                <p:column responsivePriority="3" headerText="Interviews" sortBy="#{bean.recommendation.amountOfInterviews}" filterBy="#{bean.recommendation.amountOfInterviews}" style="width: 110px;">
+                    <h:outputText value="#{bean.recommendation.amountOfInterviews}" />
+                </p:column>
+
+                <p:column responsivePriority="3" headerText="Challenges" sortBy="#{bean.recommendation.links.size()}" filterBy="#{bean.recommendation.links.size()}" style="width: 110px;">
+                    <h:outputText value="#{bean.recommendation.links.size()}" />
+                </p:column>
+
                 <p:column responsivePriority="4" headerText="Theme" sortBy="#{bean.recommendation.theme}" filterBy="#{bean.recommendation.theme}" style="width: 220px;" >
+                    <h:outputText value="#{bean.recommendation.theme.value}" />
+                </p:column>
+
+                <p:column responsivePriority="4" headerText="Challenges" sortBy="#{recommendationFeedbackCrudMBean.challengebean.recommendation.theme}" filterBy="#{bean.recommendation.theme}" style="width: 220px;" >
                     <h:outputText value="#{bean.recommendation.theme.value}" />
                 </p:column>
 
@@ -49,30 +57,41 @@
 
             <ui:define name="detail">
                 <h:panelGrid columns="2" cellpadding="3">
-                    <c:text readonly="true" value="#{recommendationFeedbackCrudMBean.bean.recommendation.amountOfInterviews}" label="Interviews" />
                     <c:text readonly="true" value="#{recommendationFeedbackCrudMBean.bean.recommendation.mainIdea}" label="Main Idea" />
+                    <c:text readonly="true" value="#{recommendationFeedbackCrudMBean.bean.recommendation.amountOfInterviews}" label="Interviews" />
                     <c:text readonly="true" value="#{recommendationFeedbackCrudMBean.bean.recommendation.theme.value}" label="Theme" />
+                </h:panelGrid>
 
-                    <p:outputLabel value="Abstracts" />
-                    <p:panel>
-                        <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackCrudMBean.bean.recommendation.abstracts, '\\n', '&lt;br/&gt;')}" escape="false"/>
-                    </p:panel>
+                <p:fieldset legend="Abstracts" toggleable="true" toggleSpeed="100" collapsed="true">
+                    <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackCrudMBean.bean.recommendation.abstracts, '\\n', '&lt;br/&gt;')}" escape="false" />
+                </p:fieldset>
 
-                    <p:outputLabel value="Interviews Quotes" />
-                    <p:panel>
-                        <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackCrudMBean.bean.recommendation.interviewQuotes, '\\n', '&lt;br/&gt;')}" escape="false" />
-                    </p:panel>
+                <p:fieldset legend="Interviews Quotes" toggleable="true" toggleSpeed="100" collapsed="true">
+                    <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackCrudMBean.bean.recommendation.interviewQuotes, '\\n', '&lt;br/&gt;')}" escape="false" />
+                </p:fieldset>
 
-                    <p:outputLabel value="Tags" />
-                    <p:panel>
-                        <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackCrudMBean.bean.recommendation.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
-                    </p:panel>
+                <p:fieldset legend="Tags" toggleable="true" toggleSpeed="100" collapsed="true">
+                    <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackCrudMBean.bean.recommendation.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
+                </p:fieldset>
 
-                    <p:outputLabel value="Rating" />
+
+                <p:dataTable value="#{recommendationFeedbackCrudMBean.bean.recommendation.links}"
+                             var="link"
+                             emptyMessage="Sem Registros"
+                             >
+                    <p:column responsivePriority="1" headerText="Main Idea" sortBy="#{link.mainIdea}" >
+                        <h:outputText value="#{link.challenge.mainIdea}" />
+                    </p:column>
+                </p:dataTable>
+
+                <h:panelGrid columns="2" cellpadding="3">
+                    <c:label label="Rating" />
                     <p:rating value="#{recommendationFeedbackCrudMBean.bean.rating}" converter="#{ratingConverter}">
                         <p:ajax event="rate" listener="#{recommendationFeedbackCrudMBean.onrate(recommendationFeedbackCrudMBean.bean)}" update="messages"/>
                         <p:ajax event="cancel" listener="#{recommendationFeedbackCrudMBean.oncancel(recommendationFeedbackCrudMBean.bean)}" update="messages"/>
                     </p:rating>
+
+                    <c:text label="Justification" value="#{recommendationFeedbackCrudMBean.bean.justification}" size="50"/>
                 </h:panelGrid>
             </ui:define>
         </c:crud>

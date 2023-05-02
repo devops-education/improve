@@ -1,7 +1,6 @@
 package org.persapiens.crde.domain;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
 import java.io.Serializable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -20,12 +19,15 @@ import lombok.Setter;
 import lombok.Singular;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * Valor Inicial do Dono na Conta Patrimonio entity.
  *
  * @author Marcelo Fernandes
  */
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Getter
 @Setter
 @ToString(exclude = {"recommendationTags", "links"})
@@ -63,10 +65,12 @@ public class Recommendation implements Serializable, Comparable<Recommendation> 
     @Column(nullable = false, length = LENGTH)
     private String allText;
 
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Singular
     @OneToMany(mappedBy = "recommendation")
     private Set<RecommendationTag> recommendationTags;
 
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Singular
     @OneToMany(mappedBy = "recommendation")
     private Set<Link> links;

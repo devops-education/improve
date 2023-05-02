@@ -19,7 +19,10 @@ import lombok.Setter;
 import lombok.Singular;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Getter
 @Setter
 @ToString(exclude = {"challengeTags", "links"})
@@ -57,10 +60,12 @@ public class Challenge implements Serializable, Comparable<Challenge> {
     @Column(nullable = false, length = LENGTH)
     private String allText;
 
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Singular
     @OneToMany(mappedBy = "challenge")
     private Set<ChallengeTag> challengeTags;
 
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Singular
     @OneToMany(mappedBy = "challenge")
     private Set<Link> links;

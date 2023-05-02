@@ -19,7 +19,10 @@ import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Getter
 @Setter
 @ToString
@@ -33,12 +36,14 @@ public class ChallengeTag implements Serializable, Comparable<ChallengeTag> {
 
     private static final long serialVersionUID = 1L;
 
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Id
     @NonNull
     @ManyToOne
     @JoinColumn(name = "challenge", nullable = false, foreignKey = @ForeignKey(name = "fk_challengeTag_challenge"))
     private Challenge challenge;
 
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Id
     @NonNull
     @ManyToOne

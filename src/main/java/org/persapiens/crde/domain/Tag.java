@@ -17,7 +17,10 @@ import lombok.Setter;
 import lombok.Singular;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Getter
 @Setter
 @ToString(of = {"id", "descricao"})
@@ -28,25 +31,27 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Tag implements Serializable, Comparable<Tag> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	private Long id;
+    @Id
+    private Long id;
 
-	@Column(nullable = false, unique = true)
-	private String descricao;
+    @Column(nullable = false, unique = true)
+    private String descricao;
 
-	@Singular
-	@OneToMany(mappedBy = "tag")
-	private Set<ChallengeTag> challengeTags;
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Singular
+    @OneToMany(mappedBy = "tag")
+    private Set<ChallengeTag> challengeTags;
 
-	@Singular
-	@OneToMany(mappedBy = "tag")
-	private Set<RecommendationTag> recommendationTags;
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Singular
+    @OneToMany(mappedBy = "tag")
+    private Set<RecommendationTag> recommendationTags;
 
-	@Override
-	public int compareTo(Tag o) {
-		return this.descricao.compareTo(o.descricao);
-	}
+    @Override
+    public int compareTo(Tag o) {
+        return this.descricao.compareTo(o.descricao);
+    }
 
 }

@@ -18,7 +18,10 @@ import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Getter
 @Setter
 @ToString
@@ -32,12 +35,14 @@ public class RecommendationTag implements Serializable, Comparable<Recommendatio
 
     private static final long serialVersionUID = 1L;
 
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Id
     @NonNull
     @ManyToOne
     @JoinColumn(name= "recommendation", nullable = false, foreignKey = @ForeignKey(name = "fk_recommendationTag_recommendation"))
     private Recommendation recommendation;
 
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Id
     @NonNull
     @ManyToOne

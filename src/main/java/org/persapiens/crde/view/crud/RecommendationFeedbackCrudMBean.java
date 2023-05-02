@@ -4,13 +4,19 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.faces.view.ViewScoped;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import lombok.extern.slf4j.Slf4j;
+import org.persapiens.crde.domain.Link;
 
 import org.persapiens.crde.domain.Recommendation;
 import org.persapiens.crde.domain.RecommendationFeedback;
+import org.persapiens.crde.persistence.LinkRepository;
 import org.persapiens.crde.persistence.RecommendationFeedbackRepository;
 import org.persapiens.crde.persistence.RecommendationRepository;
 import org.primefaces.util.LangUtils;
@@ -31,6 +37,10 @@ public class RecommendationFeedbackCrudMBean extends CrudMBean<RecommendationFee
     @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
     private RecommendationFeedbackRepository recommendationFeedbackRepository;
+    
+    @SuppressFBWarnings("SE_BAD_FIELD")
+    @Autowired
+    private LinkRepository linkRepository;
     
     @Override
     protected RecommendationFeedback createBean() {
@@ -55,6 +65,8 @@ public class RecommendationFeedbackCrudMBean extends CrudMBean<RecommendationFee
             recommendationFeedbackMap.put(recommendationFeedback.getRecommendation(), recommendationFeedback);
         }
 
+        Map<Recommendation, List<Link>> recommendationLinkMap = StreamSupport.stream(linkRepository.findAll().spliterator(), false).collect(Collectors.groupingBy(Link::getRecommendation));
+        
         // create all recommendationFeedback from recommendation and previous feedback
         List<RecommendationFeedback> result = new ArrayList<>();
         for(Recommendation recommendation : recommendationRepository.findByOrderByAmountOfInterviewsDesc()) {
@@ -67,6 +79,13 @@ public class RecommendationFeedbackCrudMBean extends CrudMBean<RecommendationFee
             } else {
                 log.debug("RecommendationFeedback " + recommendationFeedback.getRating());
             }
+            
+            Set<Link> links = new HashSet<>();
+            if (recommendationLinkMap.containsKey(recommendation)) {
+                links.addAll(recommendationLinkMap.get(recommendation));
+            }
+            
+            recommendationFeedback.getRecommendation().setLinks(links);
             result.add(recommendationFeedback);
         }
 
