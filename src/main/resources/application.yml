@@ -29,6 +29,11 @@ joinfaces:
     facelets-refresh-period: 0  
   primefaces:
     theme: vela
+application-users:
+  users-credentials:
+    - username: marcelo
+      password: devops
+      authorities: ROLE_ADMIN
 info:
   url: @project.url@
   version: @project.version@

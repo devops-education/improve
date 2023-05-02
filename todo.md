@@ -20,12 +20,12 @@ tags
 segurança
 1- colocar segurança na app com logon com usuarios pré-definidos
 2- salvar e mostrar feedback desse usuario
-2d
+ok 2d
 
 deployment
 1- importar o dump inicial do banco de dados
 2- implantar na nuvem do ifrn (nginx, jar, postgresql)
-1d
+ok - 1d
 
 
 
