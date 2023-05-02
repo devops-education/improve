@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import lombok.extern.slf4j.Slf4j;
+import org.persapiens.crde.domain.Challenge;
 import org.persapiens.crde.domain.Link;
 
 import org.persapiens.crde.domain.Recommendation;
@@ -65,7 +66,10 @@ public class RecommendationFeedbackCrudMBean extends CrudMBean<RecommendationFee
             recommendationFeedbackMap.put(recommendationFeedback.getRecommendation(), recommendationFeedback);
         }
 
-        Map<Recommendation, List<Link>> recommendationLinkMap = StreamSupport.stream(linkRepository.findAll().spliterator(), false).collect(Collectors.groupingBy(Link::getRecommendation));
+        Iterable<Link> iterable = linkRepository.findAll();
+        
+        Map<Recommendation, List<Link>> recommendationLinkMap = StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.groupingBy(Link::getRecommendation));
+        Map<Challenge, List<Link>> challengeLinkMap = StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.groupingBy(Link::getChallenge));
         
         // create all recommendationFeedback from recommendation and previous feedback
         List<RecommendationFeedback> result = new ArrayList<>();
@@ -86,6 +90,14 @@ public class RecommendationFeedbackCrudMBean extends CrudMBean<RecommendationFee
             }
             
             recommendationFeedback.getRecommendation().setLinks(links);
+            for(Link link : links) {
+                Challenge challenge = link.getChallenge();
+                Set<Link> challengeLinks = new HashSet<>();
+                if (challengeLinkMap.containsKey(challenge)) {
+                    challengeLinks.addAll(challengeLinkMap.get(challenge));
+                }
+                challenge.setLinks(challengeLinks);
+            }
             result.add(recommendationFeedback);
         }
 

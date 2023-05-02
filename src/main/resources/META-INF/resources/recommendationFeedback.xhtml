@@ -32,10 +32,6 @@
                     <h:outputText value="#{bean.recommendation.theme.value}" />
                 </p:column>
 
-                <p:column responsivePriority="4" headerText="Challenges" sortBy="#{recommendationFeedbackCrudMBean.challengebean.recommendation.theme}" filterBy="#{bean.recommendation.theme}" style="width: 220px;" >
-                    <h:outputText value="#{bean.recommendation.theme.value}" />
-                </p:column>
-
                 <p:column responsivePriority="2" 
                           headerText="Rating" 
                           sortBy="#{bean.rating}"
@@ -79,9 +75,38 @@
                              var="link"
                              emptyMessage="Sem Registros"
                              >
-                    <p:column responsivePriority="1" headerText="Main Idea" sortBy="#{link.mainIdea}" >
+                    <p:column responsivePriority="1" headerText="Main Idea" sortBy="#{link.challenge.mainIdea}" >
                         <h:outputText value="#{link.challenge.mainIdea}" />
                     </p:column>
+                    <p:column responsivePriority="3" headerText="Interviews" sortBy="#{link.challenge.amountOfInterviews}" style="width: 110px;" >
+                        <h:outputText value="#{link.challenge.amountOfInterviews}" />
+                    </p:column>
+                    <p:column responsivePriority="3" headerText="Challenges" sortBy="#{link.challenge.links.size()}" style="width: 170px;">
+                        <h:outputText value="#{link.challenge.links.size()}" />
+                    </p:column>
+                    <p:column responsivePriority="4" headerText="Theme" sortBy="#{link.challenge.theme}" style="width: 220px;" >
+                        <h:outputText value="#{link.challenge.theme.value}" />
+                    </p:column>
+                    
+                    <!--
+                    <p:column responsivePriority="2" 
+                              headerText="Rating" 
+                              sortBy="#{link.rating}"
+                              field="rating"
+                              filterMatchMode="exact" 
+                              style="width: 170px;" >
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('dataTable').filter()" >
+                                <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
+                                <f:selectItems value="#{ratingOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.description}"/>
+                            </p:selectOneMenu>
+                        </f:facet>
+                        <p:rating value="#{link.rating}" converter="#{ratingConverter}">
+                            <p:ajax event="rate" listener="#{recommendationFeedbackCrudMBean.onrate(link)}" update="messages"/>
+                            <p:ajax event="cancel" listener="#{recommendationFeedbackCrudMBean.oncancel(link)}" update="messages"/>
+                        </p:rating>
+                    </p:column>
+                    -->
                 </p:dataTable>
 
                 <h:panelGrid columns="2" cellpadding="3">
