@@ -93,6 +93,7 @@ under the License.
     <rule ref="category/java/codestyle.xml/UnnecessaryModifier" name="UnnecessaryFinalModifier" />
     <rule ref="category/java/codestyle.xml/TooManyStaticImports" />
     <rule ref="category/java/codestyle.xml/UnnecessaryFullyQualifiedName" />
+    <rule ref="category/java/codestyle.xml/UnnecessaryImport" />
 
     <rule ref="category/java/performance.xml/BigIntegerInstantiation" />
     <rule ref="category/java/performance.xml/AppendCharacterWithChar" />
