@@ -3,9 +3,9 @@ package org.persapiens.crde;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CrApplication {
+public class CrdeApplication {
 
-	protected CrApplication() {
+	protected CrdeApplication() {
 	}
 
 }

@@ -2,14 +2,14 @@ package org.persapiens.crde;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
-public class CrApplicationMain {
+public class CrdeApplicationMain {
 
-	protected CrApplicationMain() {
+	protected CrdeApplicationMain() {
 	}
 
 	public static void main(String[] args) {
 		new SpringApplicationBuilder()
-			.sources(CrApplication.class)
+			.sources(CrdeApplication.class)
 			.run(args);
 	}
 
