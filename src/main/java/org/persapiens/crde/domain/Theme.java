@@ -3,11 +3,6 @@ package org.persapiens.crde.domain;
 import java.util.stream.Stream;
 import lombok.Getter;
 
-/**
- * Theme enum.
- *
- * @author Marcelo Fernandes
- */
 public enum Theme {
     CURRICULUM("curriculum"),
     DEVOPS_CONCEPTS("devops concepts"),
@@ -24,9 +19,9 @@ public enum Theme {
         this.value = value;
     }
     
-    public static Theme of(String persistentValue) {
+    public static Theme of(String value) {
         return Stream.of(Theme.values())
-                .filter(t -> t.getValue().equals(persistentValue))
+                .filter(t -> t.getValue().equals(value))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }

@@ -34,6 +34,18 @@ application-users:
     - username: marcelo
       password: devops
       authorities: ROLE_ADMIN
+    - username: p1
+      password: devops
+      authorities: ROLE_ADMIN
+    - username: p2
+      password: devops
+      authorities: ROLE_ADMIN
+    - username: p3
+      password: devops
+      authorities: ROLE_ADMIN
+    - username: p4
+      password: devops
+      authorities: ROLE_ADMIN
 info:
   url: @project.url@
   version: @project.version@

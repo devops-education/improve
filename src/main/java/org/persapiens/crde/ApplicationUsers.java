@@ -8,10 +8,6 @@ import lombok.Setter;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-/**
- * Application users credentials.
- * @author Marcelo Fernandes
- */
 @ConfigurationProperties("application-users")
 @Getter
 @Setter

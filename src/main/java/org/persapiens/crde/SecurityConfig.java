@@ -14,11 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-/**
- * Spring Security Configuration.
- *
- * @author Marcelo Fernandes
- */
 @SuppressFBWarnings("SPRING_CSRF_PROTECTION_DISABLED")
 @Configuration
 @EnableWebSecurity

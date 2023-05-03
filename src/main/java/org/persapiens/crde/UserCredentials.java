@@ -6,10 +6,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * User Credentials.
- * @author Marcelo Fernandes
- */
 @Getter
 @Setter
 public class UserCredentials {

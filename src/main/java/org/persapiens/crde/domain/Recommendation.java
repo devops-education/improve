@@ -25,11 +25,6 @@ import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-/**
- * Valor Inicial do Dono na Conta Patrimonio entity.
- *
- * @author Marcelo Fernandes
- */
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Getter
 @Setter

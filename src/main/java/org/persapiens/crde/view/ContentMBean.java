@@ -6,10 +6,6 @@ import jakarta.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * Content Page.
- * @author Marcelo Fernandes
- */
 @Setter
 @Getter
 @Named

@@ -22,8 +22,14 @@
 
                 <p:column responsivePriority="3" headerText="Challenges" field="recommendation.links.size()" style="width: 110px;" />
 
-                <p:column responsivePriority="4" headerText="Theme" field="recommendation.theme" style="width: 220px;" >
+                <p:column responsivePriority="4" headerText="Theme" field="recommendation.theme" style="width: 125px;" filterMatchMode="exact">
                     #{bean.recommendation.theme.value}
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('dataTable').filter()">
+                            <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
+                            <f:selectItems value="#{themeOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.value}"/>
+                        </p:selectOneMenu>
+                    </f:facet>
                 </p:column>
 
                 <p:column responsivePriority="2" 
@@ -76,9 +82,9 @@
                                      stripedRows="true"
                                      >
                             <p:column responsivePriority="1" headerText="Main Idea" field="link.challenge.mainIdea" sortable="true" filterable="false" />
-                            <p:column responsivePriority="3" headerText="Interviews" field="link.challenge.amountOfInterviews" style="width: 110px;" sortable="true" filterable="false" />
-                            <p:column responsivePriority="3" headerText="Recommendations" field="link.challenge.links.size()" style="width: 170px;" sortable="true" filterable="false" />
-                            <p:column responsivePriority="4" headerText="Theme" field="link.challenge.theme" style="width: 220px;" sortable="true" filterable="false" >
+                            <p:column responsivePriority="3" headerText="Interviews" field="link.challenge.amountOfInterviews" style="width: 70px;" sortable="true" filterable="false" />
+                            <p:column responsivePriority="3" headerText="Recommendations" field="link.challenge.links.size()" style="width: 130px;" sortable="true" filterable="false" />
+                            <p:column responsivePriority="4" headerText="Theme" field="link.challenge.theme" style="width: 125px;" sortable="true" filterable="false" >
                                 #{linkFeedback.link.challenge.theme.value}
                             </p:column>
 

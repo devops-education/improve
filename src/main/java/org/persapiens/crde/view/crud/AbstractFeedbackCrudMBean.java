@@ -12,6 +12,7 @@ import org.persapiens.crde.domain.LinkFeedback;
 import org.persapiens.crde.persistence.LinkFeedbackRepository;
 import org.persapiens.crde.persistence.LinkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -44,7 +45,7 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
     }
  
     protected String username() {
-        return "marcelo";
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
     public abstract void onrate(T recommendationFeedback);

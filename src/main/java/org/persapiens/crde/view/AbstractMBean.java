@@ -15,10 +15,6 @@ import jakarta.faces.context.Flash;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 
-/**
- * Maganed Bean Abstrato de Visao.
- * @author Marcelo Fernandes
- */
 public abstract class AbstractMBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
