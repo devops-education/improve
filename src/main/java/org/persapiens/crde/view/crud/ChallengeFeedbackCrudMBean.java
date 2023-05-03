@@ -143,5 +143,9 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
         }
         setLinkFeedbackList(newLinkFeedbackList);
     }    
+
+    public void justificationListener() {
+        challengeFeedbackRepository.save(getBean());
+    }
     
 }

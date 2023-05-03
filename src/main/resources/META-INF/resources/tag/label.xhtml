@@ -16,8 +16,8 @@
     <c:set var="labelStyle" value="#{empty labelStyle ? 'font-weight:bold;' : labelStyle}" />
 
     <p:outputPanel rendered="#{rendered and not empty label}" style="float:left">
-        <h:outputLabel value="#{label}:" style="#{labelStyle}" id="label_#{id}" styleClass="#{labelStyleClass}"/>
+        <h:outputLabel value="#{label}:" style="#{labelStyle}" id="label_#{id}" styleClass="#{labelStyleClass}" title="#{title}"/>
         <p:spacer width="2" />
-        <h:outputText value="*" style="color:red;font-weight:bold" rendered="#{required}"/>
+        <h:outputText value="*" style="color:red;font-weight:bold" rendered="#{required}" title="#{title}"/>
     </p:outputPanel>
 </ui:composition>

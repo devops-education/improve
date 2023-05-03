@@ -111,11 +111,25 @@
                 <h:panelGrid columns="2" cellpadding="3">
                     <c:label label="Rating" />
                     <p:rating value="#{recommendationFeedbackCrudMBean.bean.rating}" converter="#{ratingConverter}">
-                        <p:ajax event="rate" listener="#{recommendationFeedbackCrudMBean.onrate(recommendationFeedbackCrudMBean.bean)}" update="messages"/>
-                        <p:ajax event="cancel" listener="#{recommendationFeedbackCrudMBean.oncancel(recommendationFeedbackCrudMBean.bean)}" update="messages"/>
+                        <p:ajax event="rate" listener="#{recommendationFeedbackCrudMBean.onrate(recommendationFeedbackCrudMBean.bean)}" update="messages ratingJustification ratingCourseImprovementJustifrication"/>
+                        <p:ajax event="cancel" listener="#{recommendationFeedbackCrudMBean.oncancel(recommendationFeedbackCrudMBean.bean)}" update="messages ratingJustification ratingCourseImprovementJustifrication"/>
                     </p:rating>
 
-                    <c:text label="Justification" value="#{recommendationFeedbackCrudMBean.bean.justification}" size="50"/>
+                    <c:label label="Justification" />
+                    <p:inputTextarea id="ratingJustification" value="#{recommendationFeedbackCrudMBean.bean.ratingJustification}"
+                                     placeholder="Reason your rating for this recommendation. It is optional."
+                                     rows="4" cols="80"
+                                     disabled="#{recommendationFeedbackCrudMBean.bean.rating eq null}">
+                        <p:ajax listener="#{recommendationFeedbackCrudMBean.justificationListener}" />
+                    </p:inputTextarea>
+                    <c:label label="Course Improvement" />
+                    <p:inputTextarea id="ratingCourseImprovementJustifrication"
+                                     value="#{recommendationFeedbackCrudMBean.bean.ratingCourseImprovementJustification}" 
+                                     placeholder="Reason how this recommendation affect your course. Do you use or plan to use it? It is optional." 
+                                     rows="4" cols="80"
+                                     disabled="#{recommendationFeedbackCrudMBean.bean.rating eq null}">
+                        <p:ajax listener="#{recommendationFeedbackCrudMBean.justificationListener}" />
+                    </p:inputTextarea>
                 </h:panelGrid>
             </ui:define>
         </c:crud>

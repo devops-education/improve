@@ -111,11 +111,25 @@
                 <h:panelGrid columns="2" cellpadding="3">
                     <c:label label="Rating" />
                     <p:rating value="#{challengeFeedbackCrudMBean.bean.rating}" converter="#{ratingConverter}">
-                        <p:ajax event="rate" listener="#{challengeFeedbackCrudMBean.onrate(challengeFeedbackCrudMBean.bean)}" update="messages"/>
-                        <p:ajax event="cancel" listener="#{challengeFeedbackCrudMBean.oncancel(challengeFeedbackCrudMBean.bean)}" update="messages"/>
+                        <p:ajax event="rate" listener="#{challengeFeedbackCrudMBean.onrate(challengeFeedbackCrudMBean.bean)}" update="messages ratingJustification ratingCourseImprovementJustifrication"/>
+                        <p:ajax event="cancel" listener="#{challengeFeedbackCrudMBean.oncancel(challengeFeedbackCrudMBean.bean)}" update="messages ratingJustification ratingCourseImprovementJustifrication"/>
                     </p:rating>
 
-                    <c:text label="Justification" value="#{challengeFeedbackCrudMBean.bean.justification}" size="50"/>
+                    <c:label label="Justification" />
+                    <p:inputTextarea id="ratingJustification" value="#{challengeFeedbackCrudMBean.bean.ratingJustification}"
+                                     placeholder="Reason your rating for this challenge. It is optional."
+                                     rows="4" cols="80"
+                                     disabled="#{challengeFeedbackCrudMBean.bean.rating eq null}">
+                        <p:ajax listener="#{challengeFeedbackCrudMBean.justificationListener}" />
+                    </p:inputTextarea>
+                    <c:label label="Course Improvement" />
+                    <p:inputTextarea id="ratingCourseImprovementJustifrication"
+                                     value="#{challengeFeedbackCrudMBean.bean.ratingCourseImprovementJustification}" 
+                                     placeholder="Reason how this challenge affect your course. It is optional." 
+                                     rows="4" cols="80" 
+                                     disabled="#{challengeFeedbackCrudMBean.bean.rating eq null}">
+                        <p:ajax listener="#{challengeFeedbackCrudMBean.justificationListener}" />
+                    </p:inputTextarea>
                 </h:panelGrid>
             </ui:define>
         </c:crud>

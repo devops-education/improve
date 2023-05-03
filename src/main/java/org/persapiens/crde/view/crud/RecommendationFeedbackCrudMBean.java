@@ -143,5 +143,9 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
         }
         setLinkFeedbackList(newLinkFeedbackList);
     }    
+
+    public void justificationListener() {
+        recommendationFeedbackRepository.save(getBean());
+    }
     
 }

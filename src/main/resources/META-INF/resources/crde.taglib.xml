@@ -13,10 +13,24 @@
         <tag-name>title</tag-name>
         <source>tag/title.xhtml</source>
         <attribute>
-            <description>Titulo da página.
+            <description>Texto da página.
             </description>
             <name>text</name>
             <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Hint da página.
+            </description>
+            <name>title</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Placeholder da página.
+            </description>
+            <name>placeholder</name>
+            <required>false</required>
             <type>java.lang.String</type>
         </attribute>
         <attribute>

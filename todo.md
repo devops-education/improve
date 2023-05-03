@@ -1,3 +1,9 @@
+salvar as justificativas
+criar rating do link e do challenge
+criar dialog para salvar as justificativas do link e do challenge
+colocar hint para mostrar as justificativas do link e do challenge
+como filtrar os ratings dos links? criar uma tela só para isso? pública ou privada?
+
 banco de dados
 1- criar o esquema ao rodar a app
 2- importar os dados da pesquisa no banco

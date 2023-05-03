@@ -55,10 +55,10 @@ public class LinkFeedback implements Serializable, Comparable<LinkFeedback> {
     private String username;
 
     @Column(length = LENGTH)
-    private String justification;
+    private String ratingJustification;
 
     @Column(length = LENGTH)
-    private String courseImprovement;
+    private String ratingCourseImprovementJustification;
 
     @Override
     public int compareTo(LinkFeedback o) {
