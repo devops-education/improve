@@ -64,7 +64,7 @@
                         <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackCrudMBean.bean.recommendation.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
                     </p:tab>
 
-                    <p:tab title="Challenge Links (#{recommendationFeedbackCrudMBean.linkFeedbackList})" titleStyleClass="challenge" >
+                    <p:tab title="Challenge Links (#{recommendationFeedbackCrudMBean.linkFeedbackList.size()})" titleStyleClass="challenge" >
                         <p:dataTable value="#{recommendationFeedbackCrudMBean.linkFeedbackList}"
                                      var="linkFeedback"
                                      emptyMessage="Sem Registros"
