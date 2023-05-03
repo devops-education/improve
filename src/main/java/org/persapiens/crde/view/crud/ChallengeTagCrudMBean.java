@@ -5,10 +5,6 @@ import jakarta.inject.Named;
 
 import org.persapiens.crde.domain.ChallengeTag;
 
-/**
- * CrudMBean de Lancamento.
- * @author Marcelo Fernandes
- */
 @ViewScoped
 @Named
 public class ChallengeTagCrudMBean extends CrudMBean<ChallengeTag, Long> {

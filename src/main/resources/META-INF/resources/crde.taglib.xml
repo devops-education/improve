@@ -15,8 +15,22 @@
         <attribute>
             <description>Titulo da página.
             </description>
-            <name>title</name>
+            <name>text</name>
             <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Estilo do Titulo da página. Default to ''.
+            </description>
+            <name>style</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Estilo do Titulo da página. Default to ''.
+            </description>
+            <name>styleClass</name>
+            <required>false</required>
             <type>java.lang.String</type>
         </attribute>
     </tag>
@@ -29,8 +43,22 @@
         <attribute>
             <description>Titulo da página.
             </description>
-            <name>title</name>
+            <name>titleText</name>
             <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Estilo do Titulo da página. Default to ''.
+            </description>
+            <name>titleStyle</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Estilo do Titulo da página. Default to ''.
+            </description>
+            <name>titleStyleClass</name>
+            <required>false</required>
             <type>java.lang.String</type>
         </attribute>
     </tag>
@@ -43,8 +71,22 @@
         <attribute>
             <description>Titulo da página.
             </description>
-            <name>title</name>
+            <name>titleText</name>
             <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Estilo do Titulo da página. Default to ''.
+            </description>
+            <name>titleStyle</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Estilo do Titulo da página. Default to ''.
+            </description>
+            <name>titleStyleClass</name>
+            <required>false</required>
             <type>java.lang.String</type>
         </attribute>
         <attribute>

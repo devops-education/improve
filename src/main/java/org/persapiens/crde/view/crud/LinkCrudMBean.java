@@ -5,10 +5,6 @@ import jakarta.inject.Named;
 
 import org.persapiens.crde.domain.Link;
 
-/**
- * CrudMBean de Categoria.
- * @author Marcelo Fernandes
- */
 @ViewScoped
 @Named
 public class LinkCrudMBean extends CrudMBean<Link, Long> {

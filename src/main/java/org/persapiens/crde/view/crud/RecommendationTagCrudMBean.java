@@ -6,10 +6,6 @@ import jakarta.inject.Named;
 import org.persapiens.crde.domain.RecommendationTag;
 import org.persapiens.crde.domain.Tag;
 
-/**
- * CrudMBean de Conta Credito.
- * @author Marcelo Fernandes
- */
 @ViewScoped
 @Named
 public class RecommendationTagCrudMBean extends CrudMBean<RecommendationTag, Long> {

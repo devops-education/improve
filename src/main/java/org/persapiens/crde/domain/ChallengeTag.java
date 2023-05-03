@@ -1,11 +1,10 @@
 package org.persapiens.crde.domain;
 
+import jakarta.persistence.EmbeddedId;
 import java.io.Serializable;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.util.Comparator;
@@ -31,23 +30,23 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
 @Entity
-@IdClass(ChallengeTagId.class)
 public class ChallengeTag implements Serializable, Comparable<ChallengeTag> {
 
     private static final long serialVersionUID = 1L;
 
+    @EmbeddedId
+    private ChallengeTagId id;
+
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Id
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "challenge", nullable = false, foreignKey = @ForeignKey(name = "fk_challengeTag_challenge"))
+    @JoinColumn(name = "challenge", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_challengeTag_challenge"))
     private Challenge challenge;
 
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Id
     @NonNull
     @ManyToOne
-    @JoinColumn(name= "tag", nullable = false, foreignKey = @ForeignKey(name = "fk_challengeTag_tag"))
+    @JoinColumn(name= "tag", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_challengeTag_tag"))
     private Tag tag;
 
     @Override

@@ -6,16 +6,8 @@ ok - 1d
 layout app
 ok 1- cor de rótulo do crud
 
-recommendation and links
-1- listagem
-    filtrar por all text, like, dislike, indiferent
-2- detalhe
-    colocar texto com enter nos campos abstracts e interviewQuotes
-    opções de like, dislike, indiferente
-2d
-
-tags
-1- mapa de tags
+recommendation and challenges
+ok
 
 segurança
 1- colocar segurança na app com logon com usuarios pré-definidos
@@ -28,10 +20,14 @@ deployment
 ok - 1d
 
 
-
 feedback
-1- mudar cor da linha quando selecionado like ou dislike
-2- justificar feedback no detalhe
+1- colorir a linha de acordo com o rating?
+2- justificar feedback no detalhe?
+3- justificar feedback do link?
+4- detalhe do link? ou redirecionar para outra página?
+5- feedback do link e do challenge na linha?
+6- mapa de tags?
+7- implementar metas dentro do sistema?
 
 roteiro de uso
 1- fazer no papel? implementar por metas (exemplo: detalhou 5 recomendações de 2 categorias cada)?

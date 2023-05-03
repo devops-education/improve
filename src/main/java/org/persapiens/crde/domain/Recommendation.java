@@ -7,7 +7,10 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 
 import lombok.AccessLevel;
@@ -86,4 +89,11 @@ public class Recommendation implements Serializable, Comparable<Recommendation> 
                 .compare(this, o);
     }
 
+    public List<Link> getLinkSortedByChallengeAmountOfInterviewsList() {
+        List<Link> result = new ArrayList<>();
+        result.addAll(getLinks());
+        Collections.sort(result, Comparator.comparing(Link::getChallenge, (s1, s2) -> { return Long.valueOf(s1.getAmountOfInterviews() - s2.getAmountOfInterviews()).intValue();}).reversed());
+        return result;
+    }
+    
 }

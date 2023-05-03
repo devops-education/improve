@@ -12,10 +12,12 @@
     <c:set var="required" value="#{empty required ? false : required}" />
     <c:set var="rendered" value="#{empty rendered ? true : rendered}" />
     <c:set var="id" value="${fn:replace(label,' ', '_')}" />
+    <c:set var="style" value="#{empty style ? '' : style}" />
+    <c:set var="styleClass" value="#{empty styleClass ? '' : styleClass}" />
 
     <h1 class="title ui-widget-header ui-corner-all">
-        <span style="float:left;padding-right: 10px;">
-            #{title}
+        <span style="float:left;padding-right: 10px;#{style}" class="#{styleClass}">
+            #{text}
         </span>
         <ui:insert name="afterTitle" />
     </h1>

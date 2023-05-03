@@ -5,19 +5,15 @@ import jakarta.inject.Named;
 
 import org.persapiens.crde.domain.LinkFeedback;
 
-/**
- * CrudMBean de Categoria.
- * @author Marcelo Fernandes
- */
 @ViewScoped
 @Named
 public class LinkFeedbackCrudMBean extends CrudMBean<LinkFeedback, Long> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Override
-	protected LinkFeedback createBean() {
-		return LinkFeedback.builder().build();
-	}
+    @Override
+    protected LinkFeedback createBean() {
+        return LinkFeedback.builder().build();
+    }
 
 }

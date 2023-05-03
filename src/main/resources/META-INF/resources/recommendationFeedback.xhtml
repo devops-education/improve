@@ -9,32 +9,25 @@
     xmlns:fn="jakarta.tags.functions"
     template="/layout/template.xhtml">
     <ui:define name="content" >
-        <c:crud title="Recommendations on DevOps Education" managedBean="#{recommendationFeedbackCrudMBean}" showInsert="false" showUpdateActionLink="false">
+        <c:crud titleText="Recommendations on DevOps Education" titleStyleClass="recommendation" managedBean="#{recommendationFeedbackCrudMBean}" showInsert="false" showUpdateActionLink="false">
             <ui:define name="listColumns">
                 <f:facet name="header">
                     <p:inputText id="globalFilter" onkeyup="PF('dataTable').filter()" style="width:305px"
                                  placeholder="Search main idea, abstracts, quotes, tags" />
                 </f:facet>
 
-                <p:column responsivePriority="1" headerText="Main Idea" sortBy="#{bean.recommendation.mainIdea}" >
-                    <h:outputText value="#{bean.recommendation.mainIdea}" />
-                </p:column>
+                <p:column responsivePriority="1" headerText="Main Idea" field="recommendation.mainIdea" filterable="false"/>
 
-                <p:column responsivePriority="3" headerText="Interviews" sortBy="#{bean.recommendation.amountOfInterviews}" filterBy="#{bean.recommendation.amountOfInterviews}" style="width: 110px;">
-                    <h:outputText value="#{bean.recommendation.amountOfInterviews}" />
-                </p:column>
+                <p:column responsivePriority="3" headerText="Interviews" field="recommendation.amountOfInterviews" style="width: 110px;"/>
 
-                <p:column responsivePriority="3" headerText="Challenges" sortBy="#{bean.recommendation.links.size()}" filterBy="#{bean.recommendation.links.size()}" style="width: 110px;">
-                    <h:outputText value="#{bean.recommendation.links.size()}" />
-                </p:column>
+                <p:column responsivePriority="3" headerText="Challenges" field="recommendation.links.size()" style="width: 110px;" />
 
-                <p:column responsivePriority="4" headerText="Theme" sortBy="#{bean.recommendation.theme}" filterBy="#{bean.recommendation.theme}" style="width: 220px;" >
-                    <h:outputText value="#{bean.recommendation.theme.value}" />
+                <p:column responsivePriority="4" headerText="Theme" field="recommendation.theme" style="width: 220px;" >
+                    #{bean.recommendation.theme.value}
                 </p:column>
 
                 <p:column responsivePriority="2" 
                           headerText="Rating" 
-                          sortBy="#{bean.rating}"
                           field="rating"
                           filterMatchMode="exact" 
                           style="width: 170px;" >
@@ -58,56 +51,56 @@
                     <c:text readonly="true" value="#{recommendationFeedbackCrudMBean.bean.recommendation.theme.value}" label="Theme" />
                 </h:panelGrid>
 
-                <p:fieldset legend="Abstracts" toggleable="true" toggleSpeed="100" collapsed="true">
-                    <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackCrudMBean.bean.recommendation.abstracts, '\\n', '&lt;br/&gt;')}" escape="false" />
-                </p:fieldset>
+                <p:accordionPanel multiple="true" activeIndex="3">
+                    <p:tab title="Abstracts">
+                        <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackCrudMBean.bean.recommendation.abstracts, '\\n', '&lt;br/&gt;')}" escape="false" />
+                    </p:tab>
 
-                <p:fieldset legend="Interviews Quotes" toggleable="true" toggleSpeed="100" collapsed="true">
-                    <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackCrudMBean.bean.recommendation.interviewQuotes, '\\n', '&lt;br/&gt;')}" escape="false" />
-                </p:fieldset>
+                    <p:tab title="Interviews Quotes">
+                        <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackCrudMBean.bean.recommendation.interviewQuotes, '\\n', '&lt;br/&gt;')}" escape="false" />
+                    </p:tab>
 
-                <p:fieldset legend="Tags" toggleable="true" toggleSpeed="100" collapsed="true">
-                    <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackCrudMBean.bean.recommendation.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
-                </p:fieldset>
+                    <p:tab title="Tags">
+                        <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackCrudMBean.bean.recommendation.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
+                    </p:tab>
 
+                    <p:tab title="Challenge Links (#{recommendationFeedbackCrudMBean.linkFeedbackList})" titleStyleClass="challenge" >
+                        <p:dataTable value="#{recommendationFeedbackCrudMBean.linkFeedbackList}"
+                                     var="linkFeedback"
+                                     emptyMessage="Sem Registros"
+                                     rows="5"
+                                     paginator="true"
+                                     rowsPerPageTemplate="5,10,20,50"
+                                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+                                     paginatorPosition="bottom"
+                                     stripedRows="true"
+                                     >
+                            <p:column responsivePriority="1" headerText="Main Idea" field="link.challenge.mainIdea" sortable="true" filterable="false" />
+                            <p:column responsivePriority="3" headerText="Interviews" field="link.challenge.amountOfInterviews" style="width: 110px;" sortable="true" filterable="false" />
+                            <p:column responsivePriority="3" headerText="Recommendations" field="link.challenge.links.size()" style="width: 170px;" sortable="true" filterable="false" />
+                            <p:column responsivePriority="4" headerText="Theme" field="link.challenge.theme" style="width: 220px;" sortable="true" filterable="false" >
+                                #{linkFeedback.link.challenge.theme.value}
+                            </p:column>
 
-                <p:dataTable value="#{recommendationFeedbackCrudMBean.bean.recommendation.links}"
-                             var="link"
-                             emptyMessage="Sem Registros"
-                             >
-                    <p:column responsivePriority="1" headerText="Main Idea" sortBy="#{link.challenge.mainIdea}" >
-                        <h:outputText value="#{link.challenge.mainIdea}" />
-                    </p:column>
-                    <p:column responsivePriority="3" headerText="Interviews" sortBy="#{link.challenge.amountOfInterviews}" style="width: 110px;" >
-                        <h:outputText value="#{link.challenge.amountOfInterviews}" />
-                    </p:column>
-                    <p:column responsivePriority="3" headerText="Recommendations" sortBy="#{link.challenge.links.size()}" style="width: 170px;">
-                        <h:outputText value="#{link.challenge.links.size()}" />
-                    </p:column>
-                    <p:column responsivePriority="4" headerText="Theme" sortBy="#{link.challenge.theme}" style="width: 220px;" >
-                        <h:outputText value="#{link.challenge.theme.value}" />
-                    </p:column>
-                    
-                    <!--
-                    <p:column responsivePriority="2" 
-                              headerText="Rating" 
-                              sortBy="#{link.rating}"
-                              field="rating"
-                              filterMatchMode="exact" 
-                              style="width: 170px;" >
-                        <f:facet name="filter">
-                            <p:selectOneMenu onchange="PF('dataTable').filter()" >
-                                <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
-                                <f:selectItems value="#{ratingOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.description}"/>
-                            </p:selectOneMenu>
-                        </f:facet>
-                        <p:rating value="#{link.rating}" converter="#{ratingConverter}">
-                            <p:ajax event="rate" listener="#{recommendationFeedbackCrudMBean.onrate(link)}" update="messages"/>
-                            <p:ajax event="cancel" listener="#{recommendationFeedbackCrudMBean.oncancel(link)}" update="messages"/>
-                        </p:rating>
-                    </p:column>
-                    -->
-                </p:dataTable>
+                            <p:column responsivePriority="2" 
+                                      headerText="Rating" 
+                                      field="rating"
+                                      filterable="true"
+                                      style="width: 170px;" >
+                                <f:facet name="filter">
+                                    <p:selectOneMenu onchange="PF('dataTable').filter()" >
+                                        <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
+                                        <f:selectItems value="#{ratingOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.description}"/>
+                                    </p:selectOneMenu>
+                                </f:facet>
+                                <p:rating value="#{linkFeedback.rating}" converter="#{ratingConverter}">
+                                    <p:ajax event="rate" listener="#{recommendationFeedbackCrudMBean.onrateLinkFeedback(linkFeedback)}" update="messages"/>
+                                    <p:ajax event="cancel" listener="#{recommendationFeedbackCrudMBean.oncancelLinkFeedback(linkFeedback)}" update="messages"/>
+                                </p:rating>
+                            </p:column>
+                        </p:dataTable>
+                    </p:tab>
+                </p:accordionPanel>
 
                 <h:panelGrid columns="2" cellpadding="3">
                     <c:label label="Rating" />

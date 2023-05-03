@@ -1,10 +1,9 @@
 package org.persapiens.crde.domain;
 
+import jakarta.persistence.EmbeddedId;
 import java.io.Serializable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.util.Comparator;
@@ -29,21 +28,21 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@IdClass(LinkId.class)
 public class Link implements Serializable, Comparable<Link> {
 
     private static final long serialVersionUID = 1L;
 
+    @EmbeddedId
+    private LinkId id;
+    
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Id
     @ManyToOne
-    @JoinColumn(name= "challenge", nullable = false, foreignKey = @ForeignKey(name = "fk_link_challenge"))
+    @JoinColumn(name= "challenge", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_link_challenge"))
     private Challenge challenge;
 
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Id
     @ManyToOne
-    @JoinColumn(name = "recommendation", nullable = false, foreignKey = @ForeignKey(name = "fk_link_recommendation"))
+    @JoinColumn(name = "recommendation", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_link_recommendation"))
     private Recommendation recommendation;
 
     @Override

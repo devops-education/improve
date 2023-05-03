@@ -9,15 +9,16 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import lombok.extern.slf4j.Slf4j;
 import org.persapiens.crde.domain.Challenge;
 import org.persapiens.crde.domain.Link;
+import org.persapiens.crde.domain.LinkFeedback;
 
 import org.persapiens.crde.domain.Recommendation;
 import org.persapiens.crde.domain.RecommendationFeedback;
-import org.persapiens.crde.persistence.LinkRepository;
 import org.persapiens.crde.persistence.RecommendationFeedbackRepository;
 import org.persapiens.crde.persistence.RecommendationRepository;
 import org.primefaces.util.LangUtils;
@@ -27,7 +28,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @ViewScoped
 @Component
-public class RecommendationFeedbackCrudMBean extends CrudMBean<RecommendationFeedback, Long> {
+public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<RecommendationFeedback> {
 
     private static final long serialVersionUID = 1L;
 
@@ -39,23 +40,9 @@ public class RecommendationFeedbackCrudMBean extends CrudMBean<RecommendationFee
     @Autowired
     private RecommendationFeedbackRepository recommendationFeedbackRepository;
     
-    @SuppressFBWarnings("SE_BAD_FIELD")
-    @Autowired
-    private LinkRepository linkRepository;
-    
     @Override
     protected RecommendationFeedback createBean() {
         return RecommendationFeedback.builder().build();
-    }
-
-    @Override
-    public boolean isCheckStartInsert(RecommendationFeedback bean) {
-        return false;
-    }
-
-    @Override
-    public boolean isCheckStartUpdate(RecommendationFeedback bean) {
-        return false;
     }
 
     @Override
@@ -104,26 +91,25 @@ public class RecommendationFeedbackCrudMBean extends CrudMBean<RecommendationFee
         return result;
     }
  
-    private String username() {
-        return "marcelo";
-    }
-
+    @Override
     public void onrate(RecommendationFeedback recommendationFeedback) {
         recommendationFeedbackRepository.save(recommendationFeedback);
-        String message = "You rated " + recommendationFeedback.getRating().getDescription();
+        String message = "You rated the Recommendation " + recommendationFeedback.getRating().getDescription() + "!";
         addInfoMessage(null, message, message);
     }
     
+    @Override
     public void oncancel(RecommendationFeedback recommendationFeedback) {
         if (recommendationFeedback.getId() != null) {
             recommendationFeedbackRepository.delete(recommendationFeedback);
         }
         recommendationFeedback.setRating(null);
         recommendationFeedback.setId(null);
-        String message = "You cancelled!";
+        String message = "You unrated the Recommendation!";
         addInfoMessage(null, message, message);        
     }
 
+    @Override
     public boolean globalFilterFunction(Object value, Object filter, Locale locale) {
         String filterText = (filter == null) ? null : filter.toString().trim().toLowerCase();
         if (LangUtils.isBlank(filterText)) {
@@ -136,5 +122,26 @@ public class RecommendationFeedbackCrudMBean extends CrudMBean<RecommendationFee
                 || recommendation.getInterviewQuotes().toLowerCase().contains(filterText)
                 || recommendation.getTags().toLowerCase().contains(filterText);
     }
+
+    @Override
+    public void startDetailAction() {
+        super.startDetailAction(); 
+
+        Map<Link, LinkFeedback> linkLinkFeedBackMap = linkFeedbackRepository.findByLinkInAndUsername(getBean().getRecommendation().getLinks(), username())
+                .stream().collect(Collectors.toMap(LinkFeedback::getLink, Function.identity()));
+        
+        List<LinkFeedback> newLinkFeedbackList = new ArrayList<>();
+        for (Link link : getBean().getRecommendation().getLinkSortedByChallengeAmountOfInterviewsList()) {
+            LinkFeedback linkFeedback = linkLinkFeedBackMap.get(link);
+            if (linkFeedback == null) {
+                linkFeedback = LinkFeedback.builder()
+                    .link(link)
+                    .username(username())
+                    .build();
+            }
+            newLinkFeedbackList.add(linkFeedback);                    
+        }
+        setLinkFeedbackList(newLinkFeedbackList);
+    }    
     
 }

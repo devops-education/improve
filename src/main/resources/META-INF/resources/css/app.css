@@ -46,3 +46,11 @@ body .ui-menu.ui-menubar {
 .listActionLinksStyleClassOne {
     width: 40px !important;
 }
+
+.challenge {
+    color: red !important;
+}
+
+.recommendation {
+    color: limegreen !important;
+}

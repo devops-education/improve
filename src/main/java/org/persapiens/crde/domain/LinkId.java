@@ -1,5 +1,6 @@
 package org.persapiens.crde.domain;
 
+import jakarta.persistence.Embeddable;
 import java.io.Serializable;
 
 import lombok.AccessLevel;
@@ -8,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@Embeddable
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
