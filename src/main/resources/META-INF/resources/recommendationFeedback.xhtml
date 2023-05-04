@@ -98,16 +98,16 @@
                 <p:accordionPanel multiple="true" activeIndex="0" id="linkChallengeFeedbackAccordionPanel">
                     <p:tab title="Challenge Links (#{recommendationFeedbackCrudMBean.linkChallengeFeedbackList.size()})" titleStyleClass="challenge" >
                         <p:dataTable 
-                                     value="#{recommendationFeedbackCrudMBean.linkChallengeFeedbackList}"
-                                     var="linkChallengeFeedback"
-                                     emptyMessage="Sem Registros"
-                                     rows="5"
-                                     paginator="true"
-                                     rowsPerPageTemplate="5,10,20,50"
-                                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
-                                     paginatorPosition="bottom"
-                                     stripedRows="true"
-                                     >
+                            value="#{recommendationFeedbackCrudMBean.linkChallengeFeedbackList}"
+                            var="linkChallengeFeedback"
+                            emptyMessage="Sem Registros"
+                            rows="5"
+                            paginator="true"
+                            rowsPerPageTemplate="5,10,20,50"
+                            paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+                            paginatorPosition="bottom"
+                            stripedRows="true"
+                            >
                             <p:column responsivePriority="1" headerText="Main Idea" field="linkFeedback.link.challenge.mainIdea" sortable="true" filterable="false" />
                             <p:column responsivePriority="3" headerText="Interviews" field="linkFeedback.link.challenge.amountOfInterviews" style="width: 70px;" sortable="true" filterable="false" />
                             <p:column responsivePriority="3" headerText="Recommendations" field="linkFeedback.link.challenge.links.size()" style="width: 130px;" sortable="true" filterable="false" />
@@ -151,6 +151,53 @@
                         </p:dataTable>
                     </p:tab>
                 </p:accordionPanel>
+
+                <p:dialog header="Challenge Rating" widgetVar="challengeRatingJustification" showEffect="fade" dynamic="true" >
+                    #{recommendationFeedbackCrudMBean.ratedChallengeFeedback.id}
+                    <h:panelGrid columns="2" cellpadding="3">
+                        <c:label id="challengeRatingJustification" label="Justification" />
+                        <p:inputTextarea value="#{recommendationFeedbackCrudMBean.ratedChallengeFeedback.ratingJustification}"
+                                         placeholder="Reason your rating for this recommendation. It is optional."
+                                         rows="4" cols="80"
+                                         disabled="#{recommendationFeedbackCrudMBean.bean.rating eq null}">
+                            <p:ajax listener="#{recommendationFeedbackCrudMBean.ratedChallengeFeedbackJustificationListener}" />
+                        </p:inputTextarea>
+                        <c:label id="challengeRatingCourseImprovementJustification" label="Course Improvement" />
+                        <p:inputTextarea 
+                            value="#{recommendationFeedbackCrudMBean.ratedChallengeFeedback.ratingCourseImprovementJustification}" 
+                            placeholder="Reason how this recommendation affect your course. Do you use or plan to use it? It is optional." 
+                            rows="4" cols="80"
+                            disabled="#{recommendationFeedbackCrudMBean.bean.rating eq null}">
+                            <p:ajax listener="#{recommendationFeedbackCrudMBean.ratedChallengeFeedbackJustificationListener}" />
+                        </p:inputTextarea>
+                    </h:panelGrid>
+                    <f:facet name="footer">
+                        <p:commandButton type="button" value="Ok" style="width: 5rem" onclick="PF('challengeRatingJustification').hide()"/>
+                    </f:facet>
+                </p:dialog>
+
+                <p:dialog header="Link Rating" widgetVar="linkRatingJustification" showEffect="fade" dynamic="true" >
+                    <h:panelGrid columns="2" cellpadding="3">
+                        <c:label id="linkRatingJustification" label="Justification" />
+                        <p:inputTextarea value="#{recommendationFeedbackCrudMBean.ratedLinkFeedback.ratingJustification}"
+                                         placeholder="Reason your rating for this recommendation. It is optional."
+                                         rows="4" cols="80"
+                                         disabled="#{recommendationFeedbackCrudMBean.bean.rating eq null}">
+                            <p:ajax listener="#{recommendationFeedbackCrudMBean.ratedLinkFeedbackJustificationListener}" />
+                        </p:inputTextarea>
+                        <c:label id="linkRatingCourseImprovementJustification" label="Course Improvement" />
+                        <p:inputTextarea 
+                            value="#{recommendationFeedbackCrudMBean.ratedLinkFeedback.ratingCourseImprovementJustification}" 
+                            placeholder="Reason how this recommendation affect your course. Do you use or plan to use it? It is optional." 
+                            rows="4" cols="80"
+                            disabled="#{recommendationFeedbackCrudMBean.bean.rating eq null}">
+                            <p:ajax listener="#{recommendationFeedbackCrudMBean.ratedLinkFeedbackJustificationListener}" />
+                        </p:inputTextarea>
+                    </h:panelGrid>
+                    <f:facet name="footer">
+                        <p:commandButton type="button" value="Ok" style="width: 5rem" onclick="PF('linkRatingJustification').hide()"/>
+                    </f:facet>
+                </p:dialog>
             </ui:define>
         </c:crud>
     </ui:define>

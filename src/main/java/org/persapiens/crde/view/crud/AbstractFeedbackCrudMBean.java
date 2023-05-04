@@ -3,6 +3,8 @@ package org.persapiens.crde.view.crud;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.faces.view.ViewScoped;
 import java.util.Locale;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.persapiens.crde.domain.ChallengeFeedback;
 import org.persapiens.crde.domain.LinkFeedback;
@@ -39,6 +41,18 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
     @Autowired
     protected RecommendationFeedbackRepository recommendationFeedbackRepository;
 
+    @Getter
+    @Setter
+    private ChallengeFeedback ratedChallengeFeedback;
+
+    @Getter
+    @Setter
+    private RecommendationFeedback ratedRecommendationFeedback;
+
+    @Getter
+    @Setter
+    private LinkFeedback ratedLinkFeedback;
+    
     @Override
     public boolean isCheckStartInsert(T bean) {
         return false;
@@ -57,6 +71,7 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
 
     public void onrateLinkFeedback(LinkFeedback linkFeedback) {
         linkFeedbackRepository.save(linkFeedback);
+        setRatedLinkFeedback(linkFeedback);
         String message = "You rated the Link " + linkFeedback.getRating().getDescription() + "!";
         addInfoMessage(null, message, message);
     }
@@ -71,8 +86,13 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
         addInfoMessage(null, message, message);        
     }
  
+    public void ratedLinkFeedbackJustificationListener() {
+        linkFeedbackRepository.save(getRatedLinkFeedback());
+    }
+
     public void onrateRecommendationFeedback(RecommendationFeedback recommendationFeedback) {
         recommendationFeedbackRepository.save(recommendationFeedback);
+        setRatedRecommendationFeedback(recommendationFeedback);
         String message = "You rated the Recommendation " + recommendationFeedback.getRating().getDescription() + "!";
         addInfoMessage(null, message, message);
     }
@@ -87,8 +107,13 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
         addInfoMessage(null, message, message);        
     }
 
+    public void ratedRecommendationFeedbackJustificationListener() {
+        recommendationFeedbackRepository.save(getRatedRecommendationFeedback());
+    }
+
     public void onrateChallengeFeedback(ChallengeFeedback challengeFeedback) {
         challengeFeedbackRepository.save(challengeFeedback);
+        setRatedChallengeFeedback(challengeFeedback);
         String message = "You rated the Challenge " + challengeFeedback.getRating().getDescription() + "!";
         addInfoMessage(null, message, message);
     }
@@ -103,5 +128,9 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
         addInfoMessage(null, message, message);        
     }
 
+    public void ratedChallengeFeedbackJustificationListener() {
+        challengeFeedbackRepository.save(getRatedChallengeFeedback());
+    }
+    
     public abstract void justificationListener();
 }

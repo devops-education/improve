@@ -23,6 +23,7 @@ import org.persapiens.crde.domain.LinkFeedback;
 import org.persapiens.crde.domain.Recommendation;
 import org.persapiens.crde.domain.RecommendationFeedback;
 import org.persapiens.crde.persistence.RecommendationRepository;
+import org.primefaces.PrimeFaces;
 import org.primefaces.util.LangUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -153,5 +154,20 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
     public void justificationListener() {
         recommendationFeedbackRepository.save(getBean());
     }
+
+    @Override
+    public void onrateLinkFeedback(LinkFeedback linkFeedback) {
+        super.onrateLinkFeedback(linkFeedback); 
+        
+        PrimeFaces.current().executeScript("PF('linkRatingJustification').show()");
+    }
+
+    @Override
+    public void onrateChallengeFeedback(ChallengeFeedback challengeFeedback) {
+        super.onrateChallengeFeedback(challengeFeedback);
+        
+        PrimeFaces.current().executeScript("PF('challengeRatingJustification').show()");
+    }
+    
     
 }
