@@ -98,7 +98,8 @@
                         
                 <p:accordionPanel multiple="true" activeIndex="0" id="linkRecommendationFeedbackAccordionPanel">
                     <p:tab title="Recommendation Links (#{challengeFeedbackCrudMBean.linkRecommendationFeedbackList.size()})" titleStyleClass="recommendation" >
-                        <p:dataTable value="#{challengeFeedbackCrudMBean.linkRecommendationFeedbackList}"
+                        <p:dataTable widgetVar="linkDatatable"
+                                     value="#{challengeFeedbackCrudMBean.linkRecommendationFeedbackList}"
                                      var="linkRecommendationFeedback"
                                      emptyMessage="Sem Registros"
                                      rows="5"
@@ -121,7 +122,7 @@
                                       filterable="true" 
                                       style="width: 170px;" >
                                 <f:facet name="filter">
-                                    <p:selectOneMenu onchange="PF('dataTable').filter()" >
+                                    <p:selectOneMenu onchange="PF('linkDatatable').filter()" >
                                         <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
                                         <f:selectItems value="#{ratingOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.description}"/>
                                     </p:selectOneMenu>
@@ -160,7 +161,7 @@
                                       filterable="true" 
                                       style="width: 170px;" >
                                 <f:facet name="filter">
-                                    <p:selectOneMenu onchange="PF('dataTable').filter()" >
+                                    <p:selectOneMenu onchange="PF('linkDatatable').filter()" >
                                         <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
                                         <f:selectItems value="#{ratingOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.description}"/>
                                     </p:selectOneMenu>

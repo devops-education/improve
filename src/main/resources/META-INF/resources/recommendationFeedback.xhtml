@@ -98,7 +98,8 @@
 
                 <p:accordionPanel multiple="true" activeIndex="0" id="linkChallengeFeedbackAccordionPanel">
                     <p:tab title="Challenge Links (#{recommendationFeedbackCrudMBean.linkChallengeFeedbackList.size()})" titleStyleClass="challenge" >
-                        <p:dataTable value="#{recommendationFeedbackCrudMBean.linkChallengeFeedbackList}"
+                        <p:dataTable widgetVar="linkDatatable"
+                                     value="#{recommendationFeedbackCrudMBean.linkChallengeFeedbackList}"
                                      var="linkChallengeFeedback"
                                      emptyMessage="Sem Registros"
                                      rows="5"
@@ -117,11 +118,11 @@
 
                             <p:column responsivePriority="2" 
                                       headerText="Challenge Rating" 
-                                      field="challengeRating.rating"
+                                      field="challengeFeedback.rating"
                                       filterable="true"
                                       style="width: 170px;" >
                                 <f:facet name="filter">
-                                    <p:selectOneMenu onchange="PF('dataTable').filter()" >
+                                    <p:selectOneMenu onchange="PF('linkDatatable').filter()" >
                                         <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
                                         <f:selectItems value="#{ratingOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.description}"/>
                                     </p:selectOneMenu>
@@ -156,11 +157,11 @@
 
                             <p:column responsivePriority="2" 
                                       headerText="Link Rating" 
-                                      field="rating"
+                                      field="linkFeedback.rating"
                                       filterable="true"
                                       style="width: 170px;" >
                                 <f:facet name="filter">
-                                    <p:selectOneMenu onchange="PF('dataTable').filter()" >
+                                    <p:selectOneMenu onchange="PF('linkDatatable').filter()" >
                                         <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
                                         <f:selectItems value="#{ratingOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.description}"/>
                                     </p:selectOneMenu>
