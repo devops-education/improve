@@ -12,14 +12,16 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.persapiens.crde.domain.Challenge;
+import org.persapiens.crde.domain.ChallengeFeedback;
 import org.persapiens.crde.domain.Link;
 import org.persapiens.crde.domain.LinkFeedback;
 
 import org.persapiens.crde.domain.Recommendation;
 import org.persapiens.crde.domain.RecommendationFeedback;
-import org.persapiens.crde.persistence.RecommendationFeedbackRepository;
 import org.persapiens.crde.persistence.RecommendationRepository;
 import org.primefaces.util.LangUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +38,9 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
     @Autowired
     private RecommendationRepository recommendationRepository;
     
-    @SuppressFBWarnings("SE_BAD_FIELD")
-    @Autowired
-    private RecommendationFeedbackRepository recommendationFeedbackRepository;
+    @Getter
+    @Setter
+    private List<LinkChallengeFeedback> linkChallengeFeedbackList;
     
     @Override
     protected RecommendationFeedback createBean() {
@@ -90,24 +92,6 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
 
         return result;
     }
- 
-    @Override
-    public void onrate(RecommendationFeedback recommendationFeedback) {
-        recommendationFeedbackRepository.save(recommendationFeedback);
-        String message = "You rated the Recommendation " + recommendationFeedback.getRating().getDescription() + "!";
-        addInfoMessage(null, message, message);
-    }
-    
-    @Override
-    public void oncancel(RecommendationFeedback recommendationFeedback) {
-        if (recommendationFeedback.getId() != null) {
-            recommendationFeedbackRepository.delete(recommendationFeedback);
-        }
-        recommendationFeedback.setRating(null);
-        recommendationFeedback.setId(null);
-        String message = "You unrated the Recommendation!";
-        addInfoMessage(null, message, message);        
-    }
 
     @Override
     public boolean globalFilterFunction(Object value, Object filter, Locale locale) {
@@ -130,7 +114,14 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
         Map<Link, LinkFeedback> linkLinkFeedBackMap = linkFeedbackRepository.findByLinkInAndUsername(getBean().getRecommendation().getLinks(), username())
                 .stream().collect(Collectors.toMap(LinkFeedback::getLink, Function.identity()));
         
-        List<LinkFeedback> newLinkFeedbackList = new ArrayList<>();
+        List<LinkChallengeFeedback> newLinkChallengeFeedbackList = new ArrayList<>();
+        
+        // recuperando os recommendation feedback dos links do desafio
+        Map<Challenge, ChallengeFeedback> challengeChallengeFeedbackMap = challengeFeedbackRepository.findByChallengeInAndUsername(
+            getBean().getRecommendation().getLinkSortedByChallengeAmountOfInterviewsList().stream().map(Link::getChallenge).collect(Collectors.toList()), username())
+                .stream().collect(Collectors.toMap(ChallengeFeedback::getChallenge, Function.identity()));
+        
+        // varrendo os links do desafio
         for (Link link : getBean().getRecommendation().getLinkSortedByChallengeAmountOfInterviewsList()) {
             LinkFeedback linkFeedback = linkLinkFeedBackMap.get(link);
             if (linkFeedback == null) {
@@ -139,11 +130,26 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
                     .username(username())
                     .build();
             }
-            newLinkFeedbackList.add(linkFeedback);                    
+            
+            Challenge challenge = linkFeedback.getLink().getChallenge();
+            ChallengeFeedback challengeFeedback = challengeChallengeFeedbackMap.get(challenge);
+            if (challengeFeedback == null) {
+                challengeFeedback = ChallengeFeedback.builder()
+                    .challenge(challenge)
+                    .username(username())
+                    .build();
+            }
+            
+            newLinkChallengeFeedbackList.add(LinkChallengeFeedback.builder()
+                    .linkFeedback(linkFeedback)
+                    .challengeFeedback(challengeFeedback)
+                    .build());                    
         }
-        setLinkFeedbackList(newLinkFeedbackList);
+        
+        setLinkChallengeFeedbackList(newLinkChallengeFeedbackList);
     }    
 
+    @Override
     public void justificationListener() {
         recommendationFeedbackRepository.save(getBean());
     }

@@ -44,8 +44,8 @@
                         </p:selectOneMenu>
                     </f:facet>
                     <p:rating value="#{bean.rating}" converter="#{ratingConverter}">
-                        <p:ajax event="rate" listener="#{challengeFeedbackCrudMBean.onrate(bean)}" update="messages"/>
-                        <p:ajax event="cancel" listener="#{challengeFeedbackCrudMBean.oncancel(bean)}" update="messages"/>
+                        <p:ajax event="rate" listener="#{challengeFeedbackCrudMBean.onrateChallengeFeedback(bean)}" update="messages"/>
+                        <p:ajax event="cancel" listener="#{challengeFeedbackCrudMBean.oncancelChallengeFeedback(bean)}" update="messages"/>
                     </p:rating>
                 </p:column>
             </ui:define>
@@ -57,7 +57,7 @@
                     <c:text readonly="true" value="#{challengeFeedbackCrudMBean.bean.challenge.theme.value}" label="Theme" />
                 </h:panelGrid>
 
-                <p:accordionPanel multiple="true" activeIndex="3">
+                <p:accordionPanel multiple="true" activeIndex="">
                     <p:tab title="Abstracts">
                         <h:outputText readonly="true" value="#{fn:replace(challengeFeedbackCrudMBean.bean.challenge.abstracts, '\\n', '&lt;br/&gt;')}" escape="false" />
                     </p:tab>
@@ -69,50 +69,13 @@
                     <p:tab title="Tags">
                         <h:outputText readonly="true" value="#{fn:replace(challengeFeedbackCrudMBean.bean.challenge.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
                     </p:tab>
-
-                    <p:tab title="Recommendation Links (#{challengeFeedbackCrudMBean.linkFeedbackList.size()})" titleStyleClass="recommendation" >
-                        <p:dataTable value="#{challengeFeedbackCrudMBean.linkFeedbackList}"
-                                     var="linkFeedback"
-                                     emptyMessage="Sem Registros"
-                                     rows="5"
-                                     paginator="true"
-                                     rowsPerPageTemplate="5,10,20,50"
-                                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
-                                     paginatorPosition="bottom"
-                                     stripedRows="true"
-                                     >
-                            <p:column responsivePriority="1" headerText="Main Idea" field="link.recommendation.mainIdea" sortable="true" filterable="false" />
-                            <p:column responsivePriority="3" headerText="Interviews" field="link.recommendation.amountOfInterviews" style="width: 70px;" sortable="true" filterable="false" />
-                            <p:column responsivePriority="3" headerText="Challenges" field="link.recommendation.links.size()" style="width: 80px;" sortable="true" filterable="false"/>
-                            <p:column responsivePriority="4" headerText="Theme" field="link.recommendation.theme" style="width: 125px;" sortable="true" filterable="false" >
-                                #{linkFeedback.link.recommendation.theme.value}
-                            </p:column>
-
-                            <p:column responsivePriority="2" 
-                                      headerText="Rating" 
-                                      field="rating"
-                                      filterable="true" 
-                                      style="width: 170px;" >
-                                <f:facet name="filter">
-                                    <p:selectOneMenu onchange="PF('dataTable').filter()" >
-                                        <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
-                                        <f:selectItems value="#{ratingOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.description}"/>
-                                    </p:selectOneMenu>
-                                </f:facet>
-                                <p:rating value="#{linkFeedback.rating}" converter="#{ratingConverter}">
-                                    <p:ajax event="rate" listener="#{challengeFeedbackCrudMBean.onrateLinkFeedback(linkFeedback)}" update="messages"/>
-                                    <p:ajax event="cancel" listener="#{challengeFeedbackCrudMBean.oncancelLinkFeedback(linkFeedback)}" update="messages"/>
-                                </p:rating>
-                            </p:column>
-                        </p:dataTable>
-                    </p:tab>
                 </p:accordionPanel>
-
+                
                 <h:panelGrid columns="2" cellpadding="3">
                     <c:label label="Rating" />
                     <p:rating value="#{challengeFeedbackCrudMBean.bean.rating}" converter="#{ratingConverter}">
-                        <p:ajax event="rate" listener="#{challengeFeedbackCrudMBean.onrate(challengeFeedbackCrudMBean.bean)}" update="messages ratingJustification ratingCourseImprovementJustifrication"/>
-                        <p:ajax event="cancel" listener="#{challengeFeedbackCrudMBean.oncancel(challengeFeedbackCrudMBean.bean)}" update="messages ratingJustification ratingCourseImprovementJustifrication"/>
+                        <p:ajax event="rate" listener="#{challengeFeedbackCrudMBean.onrateChallengeFeedback(challengeFeedbackCrudMBean.bean)}" update="messages ratingJustification ratingCourseImprovementJustifrication linkRecommendationFeedbackAccordionPanel"/>
+                        <p:ajax event="cancel" listener="#{challengeFeedbackCrudMBean.oncancelChallengeFeedback(challengeFeedbackCrudMBean.bean)}" update="messages ratingJustification ratingCourseImprovementJustifrication linkRecommendationFeedbackAccordionPanel"/>
                     </p:rating>
 
                     <c:label label="Justification" />
@@ -131,6 +94,62 @@
                         <p:ajax listener="#{challengeFeedbackCrudMBean.justificationListener}" />
                     </p:inputTextarea>
                 </h:panelGrid>
+                        
+                <p:accordionPanel multiple="true" activeIndex="0" id="linkRecommendationFeedbackAccordionPanel">
+                    <p:tab title="Recommendation Links (#{challengeFeedbackCrudMBean.linkRecommendationFeedbackList.size()})" titleStyleClass="recommendation" >
+                        <p:dataTable value="#{challengeFeedbackCrudMBean.linkRecommendationFeedbackList}"
+                                     var="linkRecommendationFeedback"
+                                     emptyMessage="Sem Registros"
+                                     rows="5"
+                                     paginator="true"
+                                     rowsPerPageTemplate="5,10,20,50"
+                                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+                                     paginatorPosition="bottom"
+                                     stripedRows="true"
+                                     >
+                            <p:column responsivePriority="1" headerText="Main Idea" field="linkFeedback.link.recommendation.mainIdea" sortable="true" filterable="false" />
+                            <p:column responsivePriority="3" headerText="Interviews" field="linkFeedback.link.recommendation.amountOfInterviews" style="width: 70px;" sortable="true" filterable="false" />
+                            <p:column responsivePriority="3" headerText="Challenges" field="linkFeedback.link.recommendation.links.size()" style="width: 80px;" sortable="true" filterable="false"/>
+                            <p:column responsivePriority="4" headerText="Theme" field="linkFeedback.link.recommendation.theme" style="width: 125px;" sortable="true" filterable="false" >
+                                #{linkRecommendationFeedback.linkFeedback.link.recommendation.theme.value}
+                            </p:column>
+
+                            <p:column responsivePriority="2" 
+                                      headerText="Recommendation Rating" 
+                                      field="recommendationFeedback.rating"
+                                      filterable="true" 
+                                      style="width: 170px;" >
+                                <f:facet name="filter">
+                                    <p:selectOneMenu onchange="PF('dataTable').filter()" >
+                                        <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
+                                        <f:selectItems value="#{ratingOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.description}"/>
+                                    </p:selectOneMenu>
+                                </f:facet>
+                                <p:rating value="#{linkRecommendationFeedback.recommendationFeedback.rating}" converter="#{ratingConverter}" disabled="#{challengeFeedbackCrudMBean.bean.rating eq null}">
+                                    <p:ajax event="rate" listener="#{challengeFeedbackCrudMBean.onrateRecommendationFeedback(linkRecommendationFeedback.recommendationFeedback)}" update="messages"/>
+                                    <p:ajax event="cancel" listener="#{challengeFeedbackCrudMBean.oncancelRecommendationFeedback(linkRecommendationFeedback.recommendationFeedback)}" update="messages"/>
+                                </p:rating>
+                            </p:column>
+
+                            <p:column responsivePriority="2" 
+                                      headerText="Link Rating" 
+                                      field="linkFeedback.rating"
+                                      filterable="true" 
+                                      style="width: 170px;" >
+                                <f:facet name="filter">
+                                    <p:selectOneMenu onchange="PF('dataTable').filter()" >
+                                        <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
+                                        <f:selectItems value="#{ratingOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.description}"/>
+                                    </p:selectOneMenu>
+                                </f:facet>
+                                <p:rating value="#{linkRecommendationFeedback.linkFeedback.rating}" converter="#{ratingConverter}" disabled="#{challengeFeedbackCrudMBean.bean.rating eq null}">
+                                    <p:ajax event="rate" listener="#{challengeFeedbackCrudMBean.onrateLinkFeedback(linkRecommendationFeedback.linkFeedback)}" update="messages"/>
+                                    <p:ajax event="cancel" listener="#{challengeFeedbackCrudMBean.oncancelLinkFeedback(linkRecommendationFeedback.linkFeedback)}" update="messages"/>
+                                </p:rating>
+                            </p:column>
+                        </p:dataTable>
+                    </p:tab>
+                </p:accordionPanel>
             </ui:define>
         </c:crud>
     </ui:define>
