@@ -1,5 +1,3 @@
-colocar hint para mostrar as justificativas do link e do challenge
-
 banco de dados
 1- criar o esquema ao rodar a app
 2- importar os dados da pesquisa no banco
@@ -22,14 +20,11 @@ deployment
 ok - 1d
 
 
+
+
 feedback
-1- colorir a linha de acordo com o rating?
-2- justificar feedback no detalhe?
-3- justificar feedback do link?
-4- detalhe do link? ou redirecionar para outra página?
-5- feedback do link e do challenge na linha?
-6- mapa de tags?
-7- implementar metas dentro do sistema?
+1- mapa de tags?
+2- implementar metas dentro do sistema?
 
 roteiro de uso
 1- fazer no papel? implementar por metas (exemplo: detalhou 5 recomendações de 2 categorias cada)?
