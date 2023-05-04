@@ -1,4 +1,3 @@
-criar dialog para salvar as justificativas do link e do challenge
 colocar hint para mostrar as justificativas do link e do challenge
 
 banco de dados

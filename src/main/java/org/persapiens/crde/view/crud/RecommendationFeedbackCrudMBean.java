@@ -156,18 +156,10 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
     }
 
     @Override
-    public void onrateLinkFeedback(LinkFeedback linkFeedback) {
-        super.onrateLinkFeedback(linkFeedback); 
-        
-        PrimeFaces.current().executeScript("PF('linkRatingJustification').show()");
-    }
-
-    @Override
     public void onrateChallengeFeedback(ChallengeFeedback challengeFeedback) {
         super.onrateChallengeFeedback(challengeFeedback);
         
-        PrimeFaces.current().executeScript("PF('challengeRatingJustification').show()");
+        PrimeFaces.current().executeScript("PF('challengeRatingJustification"+challengeFeedback.getChallenge().getId()+"').show()");
     }
-    
-    
+        
 }

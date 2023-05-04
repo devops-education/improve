@@ -14,6 +14,7 @@ import org.persapiens.crde.persistence.ChallengeFeedbackRepository;
 import org.persapiens.crde.persistence.LinkFeedbackRepository;
 import org.persapiens.crde.persistence.LinkRepository;
 import org.persapiens.crde.persistence.RecommendationFeedbackRepository;
+import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -74,6 +75,8 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
         setRatedLinkFeedback(linkFeedback);
         String message = "You rated the Link " + linkFeedback.getRating().getDescription() + "!";
         addInfoMessage(null, message, message);
+
+        PrimeFaces.current().executeScript("PF('linkRatingJustification"+linkFeedback.getLink().getId()+"').show()");
     }
     
     public void oncancelLinkFeedback(LinkFeedback linkFeedback) {
