@@ -22,9 +22,15 @@ ok - 1d
 
 
 
-feedback
+features
 1- mapa de tags?
-2- implementar metas dentro do sistema?
 
 roteiro de uso
-1- fazer no papel? implementar por metas (exemplo: detalhou 5 recomendações de 2 categorias cada)?
+1- fazer no papel ou implementar metas dentro do sistema? 
+    - quantidade de categorias, desafios, recomendações, links.
+    - detalhamento de desafio e recomendação.
+2- usar 2 categorias, 10 desafios, 10 recomendações e respectivos links.
+3- dois encontros com 1 semana de diferença.
+    primeiro: explicar o sistema e as metas.
+    segundo: revisar os resultados. gravar?
+4- obrigar a justificativa pelo sistema?
