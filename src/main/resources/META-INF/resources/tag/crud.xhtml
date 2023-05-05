@@ -52,7 +52,7 @@
             <c:set var="insertButtonLabel"            value="#{empty insertButtonLabel ? 'Incluir' : insertButtonLabel}" />
             <c:set var="updateButtonLabel"            value="#{empty updateButtonLabel ? 'Salvar' : updateButtonLabel}" />
 
-            <p:messages id="messages" showDetail="true" showSummary="false" escape="false" closable="true"/>
+            <p:growl id="messages" showDetail="true" showSummary="false" escape="false" life="1500"/>
 
             <p:outputPanel id="listPanel" rendered="#{managedBean.visualizationMode == 'LIST' and showList}" >
                 <ui:insert name="listBeforeDatatable"></ui:insert>                
