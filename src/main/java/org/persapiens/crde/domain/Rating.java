@@ -3,11 +3,11 @@ package org.persapiens.crde.domain;
 import lombok.Getter;
 
 public enum Rating {
-    FULLY_DISAGREE(1, "Fully Disagree"),
-    DISAGREE(2, "Disagree"),
-    NEUTRAL(3, "Neutral"),
+    FULLY_AGREE(5, "Fully Agree"),
     AGREE(4, "Agree"),
-    FULLY_AGREE(5, "Fully Agree");
+    NEUTRAL(3, "Neutral"),
+    DISAGREE(2, "Disagree"),
+    FULLY_DISAGREE(1, "Fully Disagree");
     
     @Getter
     private final int code;

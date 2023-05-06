@@ -1,3 +1,42 @@
+- temas ordenados alfabeticamente.
+
+- criar ações na recommendation: 
+    conhecia?
+    sim -> utilizava?
+           sim.
+           não -> pretende usar?
+                  sim.
+                  não.
+    não -> pretende usar?
+           sim.
+           não.
+    conhecia linked challenge?
+    sim.
+    não.
+                
+- criar comment recommendation
+
+- criar ações no challenge: 
+    conhecia?
+    sim -> conhecia recommendation linked?
+           sim -> utilizava recommendation linked?
+                  sim.
+                  não? -> pretende usar recommendation linked?
+                          sim.
+                          não.
+           não -> pretende usar recommendation linked?
+                  sim.
+                  não.
+    não -> utilizava algum link/recommendation?
+           sim.
+           não? -> pretende usar algum link/recommendation?
+                   sim.
+                   não.
+
+- criar comment challenge
+
+- colocar hint nas ações recommendation e challenge
+
 banco de dados
 1- criar o esquema ao rodar a app
 2- importar os dados da pesquisa no banco

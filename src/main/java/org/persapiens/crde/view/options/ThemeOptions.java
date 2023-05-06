@@ -2,9 +2,7 @@ package org.persapiens.crde.view.options;
 
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import org.persapiens.crde.domain.Rating;
 import org.persapiens.crde.domain.Theme;
@@ -27,8 +25,6 @@ public class ThemeOptions extends Options<Theme, Rating> {
 
     @Override
     protected List<Theme> fillList() {
-        ArrayList<Theme> result = new ArrayList<>(Arrays.asList(Theme.values()));
-        Collections.sort(result);
-        return result;
+        return Arrays.asList(Theme.values());
     }
 }

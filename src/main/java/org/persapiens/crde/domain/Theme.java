@@ -4,13 +4,13 @@ import java.util.stream.Stream;
 import lombok.Getter;
 
 public enum Theme {
+    ASSESSMENT("assessment"),
+    CLASS_PREPARATION("class preparation"),
     CURRICULUM("curriculum"),
     DEVOPS_CONCEPTS("devops concepts"),
-    ASSESSMENT("assessment"),
     ENVIRONMENT_SETUP("environment setup"),
-    TOOL_TECHNOLOGY("tool / technology"),
-    CLASS_PREPARATION("class preparation"),
-    STRATEGIES_IN_COURSE_EXECUTION("strategies in course execution");
+    STRATEGIES_IN_COURSE_EXECUTION("strategies in course execution"),
+    TOOL_TECHNOLOGY("tool / technology");
     
     @Getter
     private String value;
