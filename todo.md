@@ -1,4 +1,80 @@
-- temas ordenados alfabeticamente.
+tela challenge default
+
+resumo
+
+(PRIMEIRA LISTA COM RECOMENDAÇÕES A SEREM IMPLEMENTADAS)
+lista de recomendações por pretendo usar e não utilizava
+	ordenar por não conhecia
+
+Teaching method based on practical activities.
+	- não conhecia: sabia de outras disciplinas
+	- pretendo usar: torna a aula mais dinâmica
+	- não utilizava: não usava por falta de tempo de preparar novas aulas
+	- lista de desafios a serem mitigados pela recomendação ordenar por pretende mitigar e não conhecia
+		- Insufficient time in the course to teach DevOps.
+			* pretende mitigar
+			* não conhecia
+		- It's challeging to be up-to-date with industrial DevOps tools.
+			* não pretende mitigar
+			* conhecia
+Use relevant industry tools.
+	- não conhecia: sabia de outros cursos devops
+	- pretendo usar: aumenta o interesse dos alunos
+	- não utilizava: não usava por falta de tempo de estudar as ferramentas
+	- lista de desafios a serem mitigados pela recomendação
+		- It's hard to show to students that DevOps is not all about tooling.
+			* pretende mitigar
+			* não conhecia
+		- There is a large number of DevOps tools.
+			* não pretende mitigar
+			* conhecia
+
+The assess should be with hands-on activity.
+	- conhecia: utilizo em outras disciplinas.
+	- pretendo usar: facilita a avaliação porque as aulas práticas já são com hands-on.
+	- não utilizava: dedução lógica porque já conhecia e pretende usar.
+	- lista de desafios a serem mitigados pela recomendação
+		- It's challeging to balance DevOps theory and practice.
+		- There is a large number of DevOps tools.
+Teach continuous integration and pipeline automation.
+	- conhecia: sim, mas não ensinava por falta de tempo na disciplina.
+	- pretendo usar: são conceitos fundamentais de devops a ensinar.
+	- não utilizava: dedução lógica porque já conhecia e pretende usar.
+	- lista de desafios a serem mitigados pela recomendação
+		- It's challeging to deal with students having different backgrounds.
+		- It's hard to show to students that DevOps is not all about tooling.
+
+lista com conhecia e já utilizava (estou no caminho certo)
+
+lista menos destacada não pretendo usar
+	- ordenar por não conhecia
+
+
+
+
+
+ações no challenge: 
+	conhece?
+	pretende mitigar?
+
+
+(SEGUNDA LISTA COM DESAFIOS QUE PRECISAM DE RECOMENDAÇÕES E NÃO TEM NENHUMA AINDA)
+lista de desafios filtro que pretende mitigar sem nenhuma recomendação utilizada e não pretende usar
+	- There is a large number of DevOps tools.
+		- conhecia
+		- pretende mitigar
+		- lista de recomendações não pretende usar
+		- lista de recomendações restantes
+		
+		
+gráfico de recomendações do desafio
+	- verde: já utiliza
+	- laranjar: pretende usar
+	- vermelho: não utiliza
+
+
+
+
 
 - criar ações na recommendation: 
     conhecia?
