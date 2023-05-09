@@ -51,25 +51,35 @@ public class RecommendationFeedback implements Serializable, Comparable<Recommen
     @ManyToOne
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_recommendationFeedback_recommendation"))
     private Recommendation recommendation;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.ORDINAL)
-    private Rating rating;
     
     @Column(nullable = false)
     private String username;
 
-    @Column(length = LENGTH)
-    private String ratingJustification;
+    @Column(nullable = false)
+    private Boolean known;
+
+    @Column(nullable = false)
+    private Boolean willUse;
+
+    @Column(nullable = false)
+    private Boolean alreadUsed;
 
     @Column(length = LENGTH)
-    private String ratingCourseImprovementJustification;
+    private String knownComment;
+
+    @Column(length = LENGTH)
+    private String willUseComment;
+
+    @Column(length = LENGTH)
+    private String alreadyUsedComment;
 
     @Override
     public int compareTo(RecommendationFeedback o) {
         return Comparator.comparing(RecommendationFeedback::getRecommendation)
-                .thenComparing(RecommendationFeedback::getRating)
                 .thenComparing(RecommendationFeedback::getUsername)
+                .thenComparing(Comparator.nullsLast(Comparator.comparing(RecommendationFeedback::getKnown)))
+                .thenComparing(Comparator.nullsLast(Comparator.comparing(RecommendationFeedback::getWillUse)))
+                .thenComparing(Comparator.nullsLast(Comparator.comparing(RecommendationFeedback::getAlreadUsed)))
                 .compare(this, o);
     }
 

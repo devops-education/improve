@@ -7,11 +7,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.persapiens.crde.domain.ChallengeFeedback;
-import org.persapiens.crde.domain.LinkFeedback;
 import org.persapiens.crde.domain.RecommendationFeedback;
 import org.persapiens.crde.persistence.ChallengeFeedbackRepository;
 
-import org.persapiens.crde.persistence.LinkFeedbackRepository;
 import org.persapiens.crde.persistence.LinkRepository;
 import org.persapiens.crde.persistence.RecommendationFeedbackRepository;
 import org.primefaces.PrimeFaces;
@@ -32,10 +30,6 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
     
     @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
-    protected LinkFeedbackRepository linkFeedbackRepository;
-    
-    @SuppressFBWarnings("SE_BAD_FIELD")
-    @Autowired
     protected ChallengeFeedbackRepository challengeFeedbackRepository;
     
     @SuppressFBWarnings("SE_BAD_FIELD")
@@ -49,10 +43,6 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
     @Getter
     @Setter
     private RecommendationFeedback ratedRecommendationFeedback;
-
-    @Getter
-    @Setter
-    private LinkFeedback ratedLinkFeedback;
     
     @Override
     public boolean isCheckStartInsert(T bean) {
@@ -69,34 +59,11 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
     }
 
     public abstract boolean globalFilterFunction(Object value, Object filter, Locale locale);
-
-    public void onrateLinkFeedback(LinkFeedback linkFeedback) {
-        linkFeedbackRepository.save(linkFeedback);
-        setRatedLinkFeedback(linkFeedback);
-        String message = "You rated the Link " + linkFeedback.getRating().getDescription() + "!";
-        addInfoMessage(null, message, message);
-
-        PrimeFaces.current().executeScript("PF('linkRatingJustification"+linkFeedback.getLink().getId()+"').show()");
-    }
-    
-    public void oncancelLinkFeedback(LinkFeedback linkFeedback) {
-        if (linkFeedback.getId() != null) {
-            linkFeedbackRepository.delete(linkFeedback);
-        }
-        linkFeedback.setRating(null);
-        linkFeedback.setId(null);
-        String message = "You unrated the Link!";
-        addInfoMessage(null, message, message);        
-    }
  
-    public void ratedLinkFeedbackJustificationListener() {
-        linkFeedbackRepository.save(getRatedLinkFeedback());
-    }
-
     public void onrateRecommendationFeedback(RecommendationFeedback recommendationFeedback) {
         recommendationFeedbackRepository.save(recommendationFeedback);
         setRatedRecommendationFeedback(recommendationFeedback);
-        String message = "You rated the Recommendation " + recommendationFeedback.getRating().getDescription() + "!";
+        String message = "You rated the Recommendation " + recommendationFeedback.getKnown() + "!";
         addInfoMessage(null, message, message);
     }
     
@@ -104,7 +71,7 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
         if (recommendationFeedback.getId() != null) {
             recommendationFeedbackRepository.delete(recommendationFeedback);
         }
-        recommendationFeedback.setRating(null);
+        recommendationFeedback.setKnown(null);
         recommendationFeedback.setId(null);
         String message = "You unrated the Recommendation!";
         addInfoMessage(null, message, message);        
@@ -117,7 +84,7 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
     public void onrateChallengeFeedback(ChallengeFeedback challengeFeedback) {
         challengeFeedbackRepository.save(challengeFeedback);
         setRatedChallengeFeedback(challengeFeedback);
-        String message = "You rated the Challenge " + challengeFeedback.getRating().getDescription() + "!";
+        String message = "You rated the Challenge " + challengeFeedback.getKnown() + "!";
         addInfoMessage(null, message, message);
     }
     
@@ -125,7 +92,7 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
         if (challengeFeedback.getId() != null) {
             challengeFeedbackRepository.delete(challengeFeedback);
         }
-        challengeFeedback.setRating(null);
+        challengeFeedback.setKnown(null);
         challengeFeedback.setId(null);
         String message = "You unrated the Challenge!";
         addInfoMessage(null, message, message);        

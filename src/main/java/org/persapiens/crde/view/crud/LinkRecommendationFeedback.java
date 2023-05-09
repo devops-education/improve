@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import org.persapiens.crde.domain.LinkFeedback;
 import org.persapiens.crde.domain.RecommendationFeedback;
 
 @Getter
@@ -25,15 +24,12 @@ import org.persapiens.crde.domain.RecommendationFeedback;
 public class LinkRecommendationFeedback implements Serializable, Comparable<LinkRecommendationFeedback> {
 
     private static final long serialVersionUID = 1L;
-
-    private LinkFeedback linkFeedback;
     
     private RecommendationFeedback recommendationFeedback;
     
     @Override
     public int compareTo(LinkRecommendationFeedback o) {
-        return Comparator.comparing(LinkRecommendationFeedback::getLinkFeedback)
-                .thenComparing(LinkRecommendationFeedback::getRecommendationFeedback)
+        return Comparator.comparing(LinkRecommendationFeedback::getRecommendationFeedback)
                 .compare(this, o);
     }
 

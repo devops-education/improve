@@ -51,25 +51,28 @@ public class ChallengeFeedback implements Serializable, Comparable<ChallengeFeed
     @ManyToOne
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_challengeFeedback_challenge"))
     private Challenge challenge;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.ORDINAL)
-    private Rating rating;
     
     @Column(nullable = false)
     private String username;
 
-    @Column(length = LENGTH)
-    private String ratingJustification;
+    @Column(nullable = false)
+    private Boolean known;
+
+    @Column(nullable = false)
+    private Boolean willMitigate;
 
     @Column(length = LENGTH)
-    private String ratingCourseImprovementJustification;
+    private String knownComment;
+
+    @Column(length = LENGTH)
+    private String willMitigateComment;
 
     @Override
     public int compareTo(ChallengeFeedback o) {
         return Comparator.comparing(ChallengeFeedback::getChallenge)
-                .thenComparing(ChallengeFeedback::getRating)
                 .thenComparing(ChallengeFeedback::getUsername)
+                .thenComparing(Comparator.nullsLast(Comparator.comparing(ChallengeFeedback::getKnown)))
+                .thenComparing(Comparator.nullsLast(Comparator.comparing(ChallengeFeedback::getWillMitigate)))
                 .compare(this, o);
     }
 
