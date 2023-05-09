@@ -111,9 +111,6 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
     public void startDetailAction() {
         super.startDetailAction(); 
 
-        Map<Link, LinkFeedback> linkLinkFeedBackMap = linkFeedbackRepository.findByLinkInAndUsername(getBean().getRecommendation().getLinks(), username())
-                .stream().collect(Collectors.toMap(LinkFeedback::getLink, Function.identity()));
-        
         List<LinkChallengeFeedback> newLinkChallengeFeedbackList = new ArrayList<>();
         
         // recuperando os recommendation feedback dos links do desafio
@@ -123,15 +120,7 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
         
         // varrendo os links do desafio
         for (Link link : getBean().getRecommendation().getLinkSortedByChallengeAmountOfInterviewsList()) {
-            LinkFeedback linkFeedback = linkLinkFeedBackMap.get(link);
-            if (linkFeedback == null) {
-                linkFeedback = LinkFeedback.builder()
-                    .link(link)
-                    .username(username())
-                    .build();
-            }
-            
-            Challenge challenge = linkFeedback.getLink().getChallenge();
+            Challenge challenge = link.getChallenge();
             ChallengeFeedback challengeFeedback = challengeChallengeFeedbackMap.get(challenge);
             if (challengeFeedback == null) {
                 challengeFeedback = ChallengeFeedback.builder()
@@ -141,7 +130,7 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
             }
             
             newLinkChallengeFeedbackList.add(LinkChallengeFeedback.builder()
-                    .linkFeedback(linkFeedback)
+                    .link(link)
                     .challengeFeedback(challengeFeedback)
                     .build());                    
         }
