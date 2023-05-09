@@ -13,6 +13,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import org.persapiens.crde.domain.ChallengeFeedback;
+import org.persapiens.crde.domain.Link;
 
 @Getter
 @Setter
@@ -25,11 +26,14 @@ public class LinkChallengeFeedback implements Serializable, Comparable<LinkChall
 
     private static final long serialVersionUID = 1L;
     
+    private Link link;
+    
     private ChallengeFeedback challengeFeedback;
     
     @Override
     public int compareTo(LinkChallengeFeedback o) {
         return Comparator.comparing(LinkChallengeFeedback::getChallengeFeedback)
+                .thenComparing(LinkChallengeFeedback::getLink)
                 .compare(this, o);
     }
 

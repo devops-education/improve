@@ -110,10 +110,6 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
     @Override
     public void startDetailAction() {
         super.startDetailAction(); 
-
-        // recuperando os links feedback dos links do desafios do challenge feedback desse usuario
-        Map<Link, LinkFeedback> linkLinkFeedBackMap = linkFeedbackRepository.findByLinkInAndUsername(getBean().getChallenge().getLinks(), username())
-                .stream().collect(Collectors.toMap(LinkFeedback::getLink, Function.identity()));
         
         List<LinkRecommendationFeedback> newLinkRecommendationFeedbackList = new ArrayList<>();
         
@@ -124,15 +120,7 @@ getBean().getChallenge().getLinkSortedByRecommendationAmountOfInterviewsList().s
         
         // varrendo os links do desafio
         for (Link link : getBean().getChallenge().getLinkSortedByRecommendationAmountOfInterviewsList()) {
-            LinkFeedback linkFeedback = linkLinkFeedBackMap.get(link);
-            if (linkFeedback == null) {
-                linkFeedback = LinkFeedback.builder()
-                    .link(link)
-                    .username(username())
-                    .build();
-            }
-            
-            Recommendation recommendation = linkFeedback.getLink().getRecommendation();
+            Recommendation recommendation = link.getRecommendation();
             RecommendationFeedback recommendationFeedback = recommendationRecommendationFeedbackMap.get(recommendation);
             if (recommendationFeedback == null) {
                 recommendationFeedback = RecommendationFeedback.builder()
@@ -142,7 +130,7 @@ getBean().getChallenge().getLinkSortedByRecommendationAmountOfInterviewsList().s
             }
 
             newLinkRecommendationFeedbackList.add(LinkRecommendationFeedback.builder()
-                    .linkFeedback(linkFeedback)
+                    .link(link)
                     .recommendationFeedback(recommendationFeedback)
                     .build());                    
         }

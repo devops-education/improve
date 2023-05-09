@@ -12,7 +12,6 @@ import org.persapiens.crde.persistence.ChallengeFeedbackRepository;
 
 import org.persapiens.crde.persistence.LinkRepository;
 import org.persapiens.crde.persistence.RecommendationFeedbackRepository;
-import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
