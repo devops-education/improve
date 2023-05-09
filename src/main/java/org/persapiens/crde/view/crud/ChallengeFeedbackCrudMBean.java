@@ -138,15 +138,15 @@ getBean().getChallenge().getLinkSortedByRecommendationAmountOfInterviewsList().s
     }    
 
     @Override
-    public void justificationListener() {
+    public void commentListener() {
         challengeFeedbackRepository.save(getBean());
     }
 
     @Override
-    public void onrateRecommendationFeedback(RecommendationFeedback recommendationFeedback) {
-        super.onrateRecommendationFeedback(recommendationFeedback);
+    public void onSelectRecommendationFeedback(RecommendationFeedback recommendationFeedback) {
+        super.onSelectRecommendationFeedback(recommendationFeedback);
         
-        PrimeFaces.current().executeScript("PF('recommendationRatingJustification"+recommendationFeedback.getRecommendation().getId()+"').show()");
+        PrimeFaces.current().executeScript("PF('recommendationComment"+recommendationFeedback.getRecommendation().getId()+"').show()");
     }
     
 }
