@@ -53,10 +53,10 @@ public class ChallengeFeedback implements Serializable, Comparable<ChallengeFeed
     @Column(nullable = false)
     private String username;
 
-    @Column(nullable = false)
+    @Column
     private Boolean known;
 
-    @Column(nullable = false)
+    @Column
     private Boolean willMitigate;
 
     @Column(length = LENGTH)

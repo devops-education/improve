@@ -53,13 +53,13 @@ public class RecommendationFeedback implements Serializable, Comparable<Recommen
     @Column(nullable = false)
     private String username;
 
-    @Column(nullable = false)
+    @Column
     private Boolean known;
 
-    @Column(nullable = false)
+    @Column
     private Boolean willUse;
 
-    @Column(nullable = false)
+    @Column
     private Boolean alreadUsed;
 
     @Column(length = LENGTH)
