@@ -139,15 +139,15 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
     }    
 
     @Override
-    public void justificationListener() {
+    public void commentListener() {
         recommendationFeedbackRepository.save(getBean());
     }
 
     @Override
-    public void onrateChallengeFeedback(ChallengeFeedback challengeFeedback) {
-        super.onrateChallengeFeedback(challengeFeedback);
+    public void onSelectChallengeFeedback(ChallengeFeedback challengeFeedback) {
+        super.onSelectChallengeFeedback(challengeFeedback);
         
-        PrimeFaces.current().executeScript("PF('challengeRatingJustification"+challengeFeedback.getChallenge().getId()+"').show()");
+        PrimeFaces.current().executeScript("PF('challengeComment"+challengeFeedback.getChallenge().getId()+"').show()");
     }
         
 }

@@ -33,20 +33,41 @@
                 </p:column>
 
                 <p:column responsivePriority="2" 
-                          headerText="Rating" 
-                          field="rating"
+                          headerText="Known" 
+                          field="known"
                           filterMatchMode="exact" 
-                          style="width: 170px;" >
+                          style="width: 115px;" >
                     <f:facet name="filter">
                         <p:selectOneMenu onchange="PF('dataTable').filter()" >
-                            <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
-                            <f:selectItems value="#{ratingOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.description}"/>
+                            <f:selectItem itemLabel="" itemValue="#{null}"/>
+                            <f:selectItem itemLabel="Yes" itemValue="#{true}"/>
+                            <f:selectItem itemLabel="No" itemValue="#{false}"/>
                         </p:selectOneMenu>
                     </f:facet>
-                    <p:rating value="#{bean.rating}" converter="#{ratingConverter}">
-                        <p:ajax event="rate" listener="#{challengeFeedbackCrudMBean.onrateChallengeFeedback(bean)}" update="messages"/>
-                        <p:ajax event="cancel" listener="#{challengeFeedbackCrudMBean.oncancelChallengeFeedback(bean)}" update="messages"/>
-                    </p:rating>
+                    <p:selectOneButton value="#{bean.known}">
+                        <f:selectItem itemLabel="Yes" itemValue="#{true}"/>
+                        <f:selectItem itemLabel="No" itemValue="#{false}"/>
+                        <p:ajax listener="#{challengeFeedbackCrudMBean.onSelectChallengeFeedback(bean)}"/>
+                    </p:selectOneButton>
+                </p:column>
+
+                <p:column responsivePriority="2" 
+                          headerText="Will mitigate" 
+                          field="willMitigate"
+                          filterMatchMode="exact" 
+                          style="width: 120px;" >
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('dataTable').filter()" >
+                            <f:selectItem itemLabel="" itemValue="#{null}"/>
+                            <f:selectItem itemLabel="Yes" itemValue="#{true}"/>
+                            <f:selectItem itemLabel="No" itemValue="#{false}"/>
+                        </p:selectOneMenu>
+                    </f:facet>
+                    <p:selectOneButton value="#{bean.willMitigate}">
+                        <f:selectItem itemLabel="Yes" itemValue="#{true}"/>
+                        <f:selectItem itemLabel="No" itemValue="#{false}"/>
+                        <p:ajax listener="#{challengeFeedbackCrudMBean.onSelectChallengeFeedback(bean)}"/>
+                    </p:selectOneButton>
                 </p:column>
             </ui:define>
 
@@ -72,27 +93,19 @@
                 </p:accordionPanel>
                 
                 <h:panelGrid columns="2" cellpadding="3">
-                    <c:label label="Rating" />
-                    <p:rating value="#{challengeFeedbackCrudMBean.bean.rating}" converter="#{ratingConverter}">
-                        <p:ajax event="rate" listener="#{challengeFeedbackCrudMBean.onrateChallengeFeedback(challengeFeedbackCrudMBean.bean)}" update="messages ratingJustification ratingCourseImprovementJustifrication linkRecommendationFeedbackAccordionPanel"/>
-                        <p:ajax event="cancel" listener="#{challengeFeedbackCrudMBean.oncancelChallengeFeedback(challengeFeedbackCrudMBean.bean)}" update="messages ratingJustification ratingCourseImprovementJustifrication linkRecommendationFeedbackAccordionPanel"/>
-                    </p:rating>
+                    <c:label label="Known" />
+                    <p:selectOneButton value="#{challengeFeedbackCrudMBean.bean.known}">
+                        <f:selectItem itemLabel="Yes" itemValue="#{true}"/>
+                        <f:selectItem itemLabel="No" itemValue="#{false}"/>
+                        <p:ajax listener="#{challengeFeedbackCrudMBean.onSelectChallengeFeedback(challengeFeedbackCrudMBean.bean)}"/>
+                    </p:selectOneButton>
 
-                    <c:label label="Justification" />
-                    <p:inputTextarea id="ratingJustification" value="#{challengeFeedbackCrudMBean.bean.ratingJustification}"
-                                     placeholder="Reason your rating for this challenge. It is optional."
+                    <c:label label="Known Comment" />
+                    <p:inputTextarea id="knownComment" value="#{challengeFeedbackCrudMBean.bean.knownComment}"
+                                     placeholder="Comment how you know this challenge. It is optional."
                                      rows="4" cols="80"
-                                     disabled="#{challengeFeedbackCrudMBean.bean.rating eq null}">
-                        <p:ajax listener="#{challengeFeedbackCrudMBean.justificationListener}" />
-                    </p:inputTextarea>
-
-                    <c:label label="Course Improvement" />
-                    <p:inputTextarea id="ratingCourseImprovementJustifrication"
-                                     value="#{challengeFeedbackCrudMBean.bean.ratingCourseImprovementJustification}" 
-                                     placeholder="Reason how this challenge affect your course. It is optional." 
-                                     rows="4" cols="80" 
-                                     disabled="#{challengeFeedbackCrudMBean.bean.rating eq null}">
-                        <p:ajax listener="#{challengeFeedbackCrudMBean.justificationListener}" />
+                                     disabled="#{challengeFeedbackCrudMBean.bean.known eq null}">
+                        <p:ajax listener="#{challengeFeedbackCrudMBean.commentListener}" />
                     </p:inputTextarea>
                 </h:panelGrid>
                         
@@ -109,88 +122,43 @@
                                      paginatorPosition="bottom"
                                      stripedRows="true"
                                      >
-                            <p:column responsivePriority="1" headerText="Main Idea" field="linkFeedback.link.recommendation.mainIdea" sortable="true" filterable="false" />
-                            <p:column responsivePriority="3" headerText="Interviews" field="linkFeedback.link.recommendation.amountOfInterviews" style="width: 70px;" sortable="true" filterable="false" />
-                            <p:column responsivePriority="3" headerText="Challenges" field="linkFeedback.link.recommendation.links.size()" style="width: 80px;" sortable="true" filterable="false"/>
-                            <p:column responsivePriority="4" headerText="Theme" field="linkFeedback.link.recommendation.theme" style="width: 125px;" sortable="true" filterable="false" >
-                                #{linkRecommendationFeedback.linkFeedback.link.recommendation.theme.value}
+                            <p:column responsivePriority="1" headerText="Main Idea" field="link.recommendation.mainIdea" sortable="true" filterable="false" />
+                            <p:column responsivePriority="3" headerText="Interviews" field="link.recommendation.amountOfInterviews" style="width: 70px;" sortable="true" filterable="false" />
+                            <p:column responsivePriority="3" headerText="Challenges" field="link.recommendation.links.size()" style="width: 80px;" sortable="true" filterable="false"/>
+                            <p:column responsivePriority="4" headerText="Theme" field="link.recommendation.theme" style="width: 125px;" sortable="true" filterable="false" >
+                                #{linkRecommendationFeedback.link.recommendation.theme.value}
                             </p:column>
 
                             <p:column responsivePriority="2" 
-                                      headerText="Recommendation Rating" 
-                                      field="recommendationFeedback.rating"
+                                      headerText="Recommendation Known" 
+                                      field="recommendationFeedback.known"
                                       filterable="true" 
                                       style="width: 170px;" >
                                 <f:facet name="filter">
                                     <p:selectOneMenu onchange="PF('linkDatatable').filter()" >
-                                        <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
-                                        <f:selectItems value="#{ratingOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.description}"/>
+                                        <f:selectItem itemLabel="Yes" itemValue="#{true}"/>
+                                        <f:selectItem itemLabel="No" itemValue="#{false}"/>
                                     </p:selectOneMenu>
                                 </f:facet>
-                                <p:rating value="#{linkRecommendationFeedback.recommendationFeedback.rating}" converter="#{ratingConverter}" disabled="#{challengeFeedbackCrudMBean.bean.rating eq null}">
-                                    <p:ajax event="rate" listener="#{challengeFeedbackCrudMBean.onrateRecommendationFeedback(linkRecommendationFeedback.recommendationFeedback)}" update="messages"/>
-                                    <p:ajax event="cancel" listener="#{challengeFeedbackCrudMBean.oncancelRecommendationFeedback(linkRecommendationFeedback.recommendationFeedback)}" update="messages"/>
-                                </p:rating>
+                                <p:selectOneButton value="#{linkRecommendationFeedback.recommendationFeedback.known}" disabled="#{challengeFeedbackCrudMBean.bean.known eq null}">
+                                    <f:selectItem itemLabel="Yes" itemValue="#{true}"/>
+                                    <f:selectItem itemLabel="No" itemValue="#{false}"/>
+                                    <p:ajax listener="#{challengeFeedbackCrudMBean.onSelectRecommendationFeedback(linkRecommendationFeedback.recommendationFeedback)}"/>
+                                </p:selectOneButton>
 
-                                <p:dialog header="Recommendation Rating" widgetVar="recommendationRatingJustification#{linkRecommendationFeedback.recommendationFeedback.recommendation.id}" showEffect="fade" dynamic="true" >
+                                <p:dialog header="Recommendation Known" widgetVar="recommendationComment#{linkRecommendationFeedback.recommendationFeedback.recommendation.id}" showEffect="fade" dynamic="true" >
                                     <p:panelGrid columns="2" layout="flex">
-                                        <c:text readonly="true" value="#{challengeFeedbackCrudMBean.ratedRecommendationFeedback.recommendation.mainIdea}" label="Main Idea" />
+                                        <c:text readonly="true" value="#{challengeFeedbackCrudMBean.selectedRecommendationFeedback.recommendation.mainIdea}" label="Main Idea" />
                                         
-                                        <c:label id="recommendationRatingJustification" label="Justification" />
-                                        <p:inputTextarea value="#{challengeFeedbackCrudMBean.ratedRecommendationFeedback.ratingJustification}"
-                                                         placeholder="Reason your rating for this recommendation. It is optional."
+                                        <c:label id="recommendationKnownComment" label="Comment" />
+                                        <p:inputTextarea value="#{challengeFeedbackCrudMBean.selectedRecommendationFeedback.knownComment}"
+                                                         placeholder="Comment your known about this recommendation. It is optional."
                                                          rows="4" cols="70">
-                                            <p:ajax listener="#{challengeFeedbackCrudMBean.ratedRecommendationFeedbackJustificationListener}" />
-                                        </p:inputTextarea>
-                                        <c:label id="recommendationRatingCourseImprovementJustification" label="Course Improvement" />
-                                        <p:inputTextarea value="#{challengeFeedbackCrudMBean.ratedRecommendationFeedback.ratingCourseImprovementJustification}" 
-                                                         placeholder="Reason how this recommendation affect your course. Do you use or plan to use it? It is optional." 
-                                                         rows="4" cols="70">
-                                            <p:ajax listener="#{challengeFeedbackCrudMBean.ratedRecommendationFeedbackJustificationListener}" />
+                                            <p:ajax listener="#{challengeFeedbackCrudMBean.selectRecommendationFeedbackCommentListener}" />
                                         </p:inputTextarea>
                                     </p:panelGrid>
                                     <f:facet name="footer">
-                                        <p:commandButton type="button" value="Ok" onclick="PF('recommendationRatingJustification#{linkRecommendationFeedback.recommendationFeedback.recommendation.id}').hide()"/>
-                                    </f:facet>
-                                </p:dialog>
-                            </p:column>
-
-                            <p:column responsivePriority="2" 
-                                      headerText="Link Rating" 
-                                      field="linkFeedback.rating"
-                                      filterable="true" 
-                                      style="width: 170px;" >
-                                <f:facet name="filter">
-                                    <p:selectOneMenu onchange="PF('linkDatatable').filter()" >
-                                        <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
-                                        <f:selectItems value="#{ratingOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.description}"/>
-                                    </p:selectOneMenu>
-                                </f:facet>
-                                <p:rating value="#{linkRecommendationFeedback.linkFeedback.rating}" converter="#{ratingConverter}" disabled="#{challengeFeedbackCrudMBean.bean.rating eq null}">
-                                    <p:ajax event="rate" listener="#{challengeFeedbackCrudMBean.onrateLinkFeedback(linkRecommendationFeedback.linkFeedback)}" update="messages"/>
-                                    <p:ajax event="cancel" listener="#{challengeFeedbackCrudMBean.oncancelLinkFeedback(linkRecommendationFeedback.linkFeedback)}" update="messages"/>
-                                </p:rating>
-
-                                <p:dialog header="Link Rating" widgetVar="linkRatingJustification#{linkRecommendationFeedback.linkFeedback.link.id}" showEffect="fade" dynamic="true" >
-                                    <p:panelGrid columns="2" layout="flex">
-                                        <c:text readonly="true" value="#{challengeFeedbackCrudMBean.ratedLinkFeedback.link.recommendation.mainIdea}" label="Recommendation" />
-                                        <c:text readonly="true" value="#{challengeFeedbackCrudMBean.ratedLinkFeedback.link.challenge.mainIdea}" label="Challenge" />
-
-                                        <c:label id="linkRatingJustification" label="Justification" />
-                                        <p:inputTextarea value="#{challengeFeedbackCrudMBean.ratedLinkFeedback.ratingJustification}"
-                                                         placeholder="Reason your rating for this link. It is optional."
-                                                         rows="4" cols="80">
-                                            <p:ajax listener="#{challengeFeedbackCrudMBean.ratedLinkFeedbackJustificationListener}" />
-                                        </p:inputTextarea>
-                                        <c:label id="linkRatingCourseImprovementJustification" label="Course Improvement" />
-                                        <p:inputTextarea value="#{challengeFeedbackCrudMBean.ratedLinkFeedback.ratingCourseImprovementJustification}" 
-                                                         placeholder="Reason how this link affect your course. Do you use or plan to use it? It is optional." 
-                                                         rows="4" cols="80">
-                                            <p:ajax listener="#{challengeFeedbackCrudMBean.ratedLinkFeedbackJustificationListener}" />
-                                        </p:inputTextarea>
-                                    </p:panelGrid>
-                                    <f:facet name="footer">
-                                        <p:commandButton type="button" value="Ok" onclick="PF('linkRatingJustification#{linkRecommendationFeedback.linkFeedback.link.id}').hide()"/>
+                                        <p:commandButton type="button" value="Ok" onclick="PF('recommendationComment#{linkRecommendationFeedback.recommendationFeedback.recommendation.id}').hide()"/>
                                     </f:facet>
                                 </p:dialog>
                             </p:column>

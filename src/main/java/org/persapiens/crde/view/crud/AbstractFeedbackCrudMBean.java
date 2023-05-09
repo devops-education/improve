@@ -37,11 +37,11 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
 
     @Getter
     @Setter
-    private ChallengeFeedback ratedChallengeFeedback;
+    private ChallengeFeedback selectedChallengeFeedback;
 
     @Getter
     @Setter
-    private RecommendationFeedback ratedRecommendationFeedback;
+    private RecommendationFeedback selectedRecommendationFeedback;
     
     @Override
     public boolean isCheckStartInsert(T bean) {
@@ -59,11 +59,9 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
 
     public abstract boolean globalFilterFunction(Object value, Object filter, Locale locale);
  
-    public void onrateRecommendationFeedback(RecommendationFeedback recommendationFeedback) {
+    public void onSelectRecommendationFeedback(RecommendationFeedback recommendationFeedback) {
         recommendationFeedbackRepository.save(recommendationFeedback);
-        setRatedRecommendationFeedback(recommendationFeedback);
-        String message = "You rated the Recommendation " + recommendationFeedback.getKnown() + "!";
-        addInfoMessage(null, message, message);
+        setSelectedRecommendationFeedback(recommendationFeedback);
     }
     
     public void oncancelRecommendationFeedback(RecommendationFeedback recommendationFeedback) {
@@ -72,19 +70,15 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
         }
         recommendationFeedback.setKnown(null);
         recommendationFeedback.setId(null);
-        String message = "You unrated the Recommendation!";
-        addInfoMessage(null, message, message);        
     }
 
-    public void ratedRecommendationFeedbackJustificationListener() {
-        recommendationFeedbackRepository.save(getRatedRecommendationFeedback());
+    public void selectRecommendationFeedbackCommentListener() {
+        recommendationFeedbackRepository.save(getSelectedRecommendationFeedback());
     }
 
-    public void onrateChallengeFeedback(ChallengeFeedback challengeFeedback) {
+    public void onSelectChallengeFeedback(ChallengeFeedback challengeFeedback) {
         challengeFeedbackRepository.save(challengeFeedback);
-        setRatedChallengeFeedback(challengeFeedback);
-        String message = "You rated the Challenge " + challengeFeedback.getKnown() + "!";
-        addInfoMessage(null, message, message);
+        setSelectedChallengeFeedback(challengeFeedback);
     }
     
     public void oncancelChallengeFeedback(ChallengeFeedback challengeFeedback) {
@@ -93,13 +87,11 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
         }
         challengeFeedback.setKnown(null);
         challengeFeedback.setId(null);
-        String message = "You unrated the Challenge!";
-        addInfoMessage(null, message, message);        
     }
 
-    public void ratedChallengeFeedbackJustificationListener() {
-        challengeFeedbackRepository.save(getRatedChallengeFeedback());
+    public void selectChallengeFeedbackCommentListener() {
+        challengeFeedbackRepository.save(getSelectedChallengeFeedback());
     }
     
-    public abstract void justificationListener();
+    public abstract void commentListener();
 }
