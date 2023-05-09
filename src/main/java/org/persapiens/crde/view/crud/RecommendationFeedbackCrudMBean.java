@@ -18,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.persapiens.crde.domain.Challenge;
 import org.persapiens.crde.domain.ChallengeFeedback;
 import org.persapiens.crde.domain.Link;
-import org.persapiens.crde.domain.LinkFeedback;
 
 import org.persapiens.crde.domain.Recommendation;
 import org.persapiens.crde.domain.RecommendationFeedback;
@@ -71,7 +70,7 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
                         .username(username())
                         .build();
             } else {
-                log.debug("RecommendationFeedback " + recommendationFeedback.getRating());
+                log.debug("RecommendationFeedback " + recommendationFeedback.getKnown());
             }
             
             Set<Link> links = new HashSet<>();
