@@ -9,6 +9,6 @@ public class RedirectToIndexController  {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String redirect() {
-		return "redirect:recommendationFeedback.faces";
+		return "redirect:challengeFeedback.faces";
 	}
 }

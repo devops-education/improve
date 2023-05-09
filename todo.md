@@ -1,4 +1,5 @@
-tela challenge default
+implementar novas opções de feedback na visao
+criar tela de resumo
 
 resumo
 
