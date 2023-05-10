@@ -1,5 +1,7 @@
-implementar novas opções de feedback na visao
 criar tela de resumo
+    comecar pela primeira listagem: consulta no repositorio, mbean, pagina
+    fazer a segunda listagem
+colocar hint nas ações recommendation e challenge -> não consegui com label. tooltip é chato.
 
 resumo
 
@@ -112,8 +114,6 @@ gráfico de recomendações do desafio
 
 - criar comment challenge
 
-- colocar hint nas ações recommendation e challenge
-
 banco de dados
 1- criar o esquema ao rodar a app
 2- importar os dados da pesquisa no banco
@@ -142,11 +142,11 @@ features
 1- mapa de tags?
 
 roteiro de uso
-1- fazer no papel ou implementar metas dentro do sistema? 
-    - quantidade de categorias, desafios, recomendações, links.
+1- fazer no papel ou implementar metas dentro do sistema? no papel.
+    - quantidade de categorias, desafios, recomendações, links
     - detalhamento de desafio e recomendação.
-2- usar 2 categorias, 10 desafios, 10 recomendações e respectivos links.
+2- usar 2 categorias, 10 desafios, 20 recomendações e respectivos links.
 3- dois encontros com 1 semana de diferença.
     primeiro: explicar o sistema e as metas.
-    segundo: revisar os resultados. gravar?
-4- obrigar a justificativa pelo sistema?
+    segundo: revisar os resultados. gravar? sim
+4- obrigar a justificativa pelo sistema? não
