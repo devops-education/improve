@@ -491,20 +491,20 @@
     
     <name>crde</name>
     <description>Challenges and Recommendations on DevOps Education</description>
-    <url>https://github.com/persapiens/conta</url>
+    <url>https://github.com/persapiens/crde</url>
     <inceptionYear>2023</inceptionYear>
 
     <!-- Issue Managment -->
     <issueManagement>
         <system>Github</system>
-        <url>https://github.com/persapiens/conta/issues</url>
+        <url>https://github.com/persapiens/crde/issues</url>
     </issueManagement>
 
     <!-- SCM -->
     <scm>
-        <connection>scm:git:https://github.com/persapiens/conta.git</connection>
-        <developerConnection>scm:git:https://github.com/persapiens/conta.git</developerConnection>
-        <url>scm:git:https://github.com/persapiens/conta.git</url>
+        <connection>scm:git:https://github.com/persapiens/crde.git</connection>
+        <developerConnection>scm:git:https://github.com/persapiens/crde.git</developerConnection>
+        <url>scm:git:https://github.com/persapiens/crde.git</url>
         <tag>HEAD</tag>
     </scm>
 

@@ -30,7 +30,6 @@ public class RecommendationFeedbackRepositoryImpl implements RecommendationFeedb
         QLink link = QLink.link;
         JPQLQueryFactory query = new JPAQueryFactory(this.entityManager);
 
-        // soma todos os lancamentos de credito do dono na conta patrimonio
         return query.from(recommendationFeedback)
                 .select(recommendationFeedback)
                 .leftJoin(recommendationFeedback.recommendation, recommendation).fetchJoin()
@@ -46,7 +45,6 @@ public class RecommendationFeedbackRepositoryImpl implements RecommendationFeedb
         QRecommendation recommendation = QRecommendation.recommendation;
         JPQLQueryFactory query = new JPAQueryFactory(this.entityManager);
 
-        // soma todos os lancamentos de credito do dono na conta patrimonio
         return Optional.of(query.from(recommendationFeedback)
                 .select(recommendationFeedback)
                 .leftJoin(recommendationFeedback.recommendation, recommendation).fetchJoin()
