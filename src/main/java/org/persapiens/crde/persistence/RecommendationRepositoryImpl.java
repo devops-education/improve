@@ -24,7 +24,6 @@ public class RecommendationRepositoryImpl implements RecommendationRepositoryCus
         QRecommendation recommendation = QRecommendation.recommendation;
         JPQLQueryFactory query = new JPAQueryFactory(this.entityManager);
 
-        // soma todos os lancamentos de credito do dono na conta patrimonio
         return query.from(recommendation)
                 .select(recommendation)
                 .leftJoin(recommendation.links).fetchJoin()

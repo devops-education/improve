@@ -57,27 +57,27 @@ public class RecommendationFeedback implements Serializable, Comparable<Recommen
     private Boolean known;
 
     @Column
-    private Boolean willUse;
+    private Boolean usedAlready;
 
     @Column
-    private Boolean alreadUsed;
+    private Boolean willUse;
 
     @Column(length = LENGTH)
     private String knownComment;
 
     @Column(length = LENGTH)
-    private String willUseComment;
+    private String usedAlreadyComment;
 
     @Column(length = LENGTH)
-    private String alreadyUsedComment;
+    private String willUseComment;
 
     @Override
     public int compareTo(RecommendationFeedback o) {
         return Comparator.comparing(RecommendationFeedback::getRecommendation)
                 .thenComparing(RecommendationFeedback::getUsername)
                 .thenComparing(Comparator.nullsLast(Comparator.comparing(RecommendationFeedback::getKnown)))
+                .thenComparing(Comparator.nullsLast(Comparator.comparing(RecommendationFeedback::getUsedAlready)))
                 .thenComparing(Comparator.nullsLast(Comparator.comparing(RecommendationFeedback::getWillUse)))
-                .thenComparing(Comparator.nullsLast(Comparator.comparing(RecommendationFeedback::getAlreadUsed)))
                 .compare(this, o);
     }
 

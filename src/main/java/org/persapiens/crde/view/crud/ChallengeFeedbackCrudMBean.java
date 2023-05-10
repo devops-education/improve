@@ -22,7 +22,6 @@ import org.persapiens.crde.domain.Link;
 import org.persapiens.crde.domain.Recommendation;
 import org.persapiens.crde.domain.RecommendationFeedback;
 import org.persapiens.crde.persistence.ChallengeRepository;
-import org.primefaces.PrimeFaces;
 import org.primefaces.util.LangUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -136,17 +135,5 @@ getBean().getChallenge().getLinkSortedByRecommendationAmountOfInterviewsList().s
         }
         setLinkRecommendationFeedbackList(newLinkRecommendationFeedbackList);
     }    
-
-    @Override
-    public void commentListener() {
-        challengeFeedbackRepository.save(getBean());
-    }
-
-    @Override
-    public void onSelectRecommendationFeedback(RecommendationFeedback recommendationFeedback) {
-        super.onSelectRecommendationFeedback(recommendationFeedback);
-        
-        PrimeFaces.current().executeScript("PF('recommendationComment"+recommendationFeedback.getRecommendation().getId()+"').show()");
-    }
     
 }

@@ -22,7 +22,6 @@ import org.persapiens.crde.domain.Link;
 import org.persapiens.crde.domain.Recommendation;
 import org.persapiens.crde.domain.RecommendationFeedback;
 import org.persapiens.crde.persistence.RecommendationRepository;
-import org.primefaces.PrimeFaces;
 import org.primefaces.util.LangUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -137,17 +136,5 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
         
         setLinkChallengeFeedbackList(newLinkChallengeFeedbackList);
     }    
-
-    @Override
-    public void commentListener() {
-        recommendationFeedbackRepository.save(getBean());
-    }
-
-    @Override
-    public void onSelectChallengeFeedback(ChallengeFeedback challengeFeedback) {
-        super.onSelectChallengeFeedback(challengeFeedback);
-        
-        PrimeFaces.current().executeScript("PF('challengeComment"+challengeFeedback.getChallenge().getId()+"').show()");
-    }
         
 }

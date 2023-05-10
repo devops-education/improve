@@ -3,8 +3,6 @@ package org.persapiens.crde.view.crud;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.faces.view.ViewScoped;
 import java.util.Locale;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.persapiens.crde.domain.ChallengeFeedback;
 import org.persapiens.crde.domain.RecommendationFeedback;
@@ -12,6 +10,7 @@ import org.persapiens.crde.persistence.ChallengeFeedbackRepository;
 
 import org.persapiens.crde.persistence.LinkRepository;
 import org.persapiens.crde.persistence.RecommendationFeedbackRepository;
+import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -34,14 +33,6 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
     @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
     protected RecommendationFeedbackRepository recommendationFeedbackRepository;
-
-    @Getter
-    @Setter
-    private ChallengeFeedback selectedChallengeFeedback;
-
-    @Getter
-    @Setter
-    private RecommendationFeedback selectedRecommendationFeedback;
     
     @Override
     public boolean isCheckStartInsert(T bean) {
@@ -59,39 +50,48 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
 
     public abstract boolean globalFilterFunction(Object value, Object filter, Locale locale);
  
-    public void onSelectRecommendationFeedback(RecommendationFeedback recommendationFeedback) {
+    public void saveRecommendationFeedbackKnownDialog(RecommendationFeedback recommendationFeedback) {
+        saveRecommendationFeedbackDialog(recommendationFeedback, recommendationFeedback.getKnown() != null);
+    }
+ 
+    public void saveRecommendationFeedbackUsedAlreadyDialog(RecommendationFeedback recommendationFeedback) {
+        saveRecommendationFeedbackDialog(recommendationFeedback, recommendationFeedback.getUsedAlready()!= null);
+    }
+ 
+    public void saveRecommendationFeedbackWillUseDialog(RecommendationFeedback recommendationFeedback) {
+        saveRecommendationFeedbackDialog(recommendationFeedback, recommendationFeedback.getWillUse()!= null);
+    }
+ 
+    private void saveRecommendationFeedbackDialog(RecommendationFeedback recommendationFeedback, Boolean openDialog) {
+        saveRecommendationFeedback(recommendationFeedback);
+        
+        if (openDialog) {
+            PrimeFaces.current().executeScript("PF('recommendationDialog"+recommendationFeedback.getRecommendation().getId()+"').show()");
+        }
+    }
+
+    public void saveRecommendationFeedback(RecommendationFeedback recommendationFeedback) {
         recommendationFeedbackRepository.save(recommendationFeedback);
-        setSelectedRecommendationFeedback(recommendationFeedback);
     }
+ 
     
-    public void oncancelRecommendationFeedback(RecommendationFeedback recommendationFeedback) {
-        if (recommendationFeedback.getId() != null) {
-            recommendationFeedbackRepository.delete(recommendationFeedback);
-        }
-        recommendationFeedback.setKnown(null);
-        recommendationFeedback.setId(null);
-    }
-
-    public void selectRecommendationFeedbackCommentListener() {
-        recommendationFeedbackRepository.save(getSelectedRecommendationFeedback());
-    }
-
-    public void onSelectChallengeFeedback(ChallengeFeedback challengeFeedback) {
+    public void saveChallengeFeedback(ChallengeFeedback challengeFeedback) {
         challengeFeedbackRepository.save(challengeFeedback);
-        setSelectedChallengeFeedback(challengeFeedback);
     }
     
-    public void oncancelChallengeFeedback(ChallengeFeedback challengeFeedback) {
-        if (challengeFeedback.getId() != null) {
-            challengeFeedbackRepository.delete(challengeFeedback);
+    private void saveChallengeFeedbackDialog(ChallengeFeedback challengeFeedback, Boolean openDialog) {
+        saveChallengeFeedback(challengeFeedback);
+
+        if (openDialog) {
+            PrimeFaces.current().executeScript("PF('challengeDialog"+challengeFeedback.getChallenge().getId()+"').show()");
         }
-        challengeFeedback.setKnown(null);
-        challengeFeedback.setId(null);
     }
 
-    public void selectChallengeFeedbackCommentListener() {
-        challengeFeedbackRepository.save(getSelectedChallengeFeedback());
+    public void saveChallengeFeedbackKnownDialog(ChallengeFeedback challengeFeedback) {
+        saveChallengeFeedbackDialog(challengeFeedback, challengeFeedback.getKnown() != null);
     }
-    
-    public abstract void commentListener();
+
+    public void saveChallengeFeedbackWillMitigateDialog(ChallengeFeedback challengeFeedback) {
+        saveChallengeFeedbackDialog(challengeFeedback, challengeFeedback.getWillMitigate() != null);
+    }
 }

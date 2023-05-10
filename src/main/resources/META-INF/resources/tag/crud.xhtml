@@ -60,6 +60,7 @@
                 <p:dataTable id="datatable" var="bean"
                 			 style="#{dataTableStyle}"
                              rows="#{dataTableRows}"
+                             rowIndexVar="rowIdx"
                              paginator="true"
                              rowsPerPageTemplate="#{dataTableRowsPerPageTemplate}"
                              paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
