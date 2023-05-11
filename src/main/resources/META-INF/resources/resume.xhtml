@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="crde.persapiens.org"
+    xmlns:fn="jakarta.tags.functions"
+    template="/layout/template.xhtml">
+    <ui:define name="content" >
+        <p:dataTable id="datatable"
+                     widgetVar="datatable"
+                     value="#{resumeMBean.find()}"
+                     var="recommendationFeedback"
+                     emptyMessage="Sem Registros"
+                     rows="5"
+                     paginator="true"
+                     rowsPerPageTemplate="5,10,20,50"
+                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+                     paginatorPosition="bottom"
+                     stripedRows="true"
+                     rowIndexVar="rowIdx"
+                     >
+            <f:facet name="header">
+                Recommendations that you will use, but not used already. 
+            </f:facet>
+            <p:column responsivePriority="1" headerText="Main Idea" field="recommendation.mainIdea" sortable="true" filterable="false" />
+            <p:column responsivePriority="3" headerText="Interviews" field="recommendation.amountOfInterviews" style="width: 70px;" sortable="true" filterable="false" />
+            <p:column responsivePriority="3" headerText="Challenges" field="recommendation.links.size()" style="width: 80px;" sortable="true" filterable="false"/>
+            <p:column responsivePriority="4" headerText="Theme" field="recommendation.theme" style="width: 125px;" sortable="true" filterable="false" >
+                #{recommendationFeedback.recommendation.theme.value}
+            </p:column>
+
+            <p:column responsivePriority="2" 
+                      headerText="Known" 
+                      field="recommendationFeedback.known"
+                      filterable="true" 
+                      style="width: 120px;" >
+                <f:facet name="filter">
+                    <p:selectOneMenu onchange="PF('datatable').filter()" >
+                        <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                    </p:selectOneMenu>
+                </f:facet>
+                <p:selectOneButton value="#{recommendationFeedback.known}">
+                    <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                    <p:ajax listener="#{challengeFeedbackCrudMBean.saveRecommendationFeedbackKnownDialog(recommendationFeedback)}"/>
+                </p:selectOneButton>
+
+                <p:dialog header="Recommendation" widgetVar="recommendationDialog#{recommendationFeedback.recommendation.id}" showEffect="fade" dynamic="true" >
+                    <h:form>
+                        <p:panelGrid columns="2" layout="flex">
+                            <c:text readonly="true" value="#{recommendationFeedback.recommendation.mainIdea}" label="Main Idea" />
+
+                            <p:outputPanel>
+                                <c:label label="Known" />
+                                <p:spacer width="20"/>
+                                <p:selectOneButton value="#{recommendationFeedback.known}">
+                                    <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                                    <p:ajax listener="#{challengeFeedbackCrudMBean.saveRecommendationFeedback(recommendationFeedback)}"/>
+                                </p:selectOneButton>
+                            </p:outputPanel>
+
+                            <c:label id="recommendationKnownComment" label="Known Comment" />
+                            <p:inputTextarea value="#{recommendationFeedback.knownComment}"
+                                             placeholder="Comment your known about this recommendation. It is optional."
+                                             rows="3" cols="70">
+                                <p:ajax listener="#{challengeFeedbackCrudMBean.saveRecommendationFeedback(recommendationFeedback)}" />
+                            </p:inputTextarea>
+
+                            <p:outputPanel>
+                                <c:label label="Used Already" />
+                                <p:spacer width="20"/>
+                                <p:selectOneButton value="#{recommendationFeedback.usedAlready}">
+                                    <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                                    <p:ajax listener="#{challengeFeedbackCrudMBean.saveRecommendationFeedback(recommendationFeedback)}"/>
+                                </p:selectOneButton>
+                            </p:outputPanel>
+
+                            <c:label id="recommendationUsedAlreadyComment" label="Known Comment" />
+                            <p:inputTextarea value="#{recommendationFeedback.usedAlreadyComment}"
+                                             placeholder="Comment how you used already this recommendation. It is optional."
+                                             rows="3" cols="70">
+                                <p:ajax listener="#{challengeFeedbackCrudMBean.saveRecommendationFeedback(recommendationFeedback)}" />
+                            </p:inputTextarea>
+
+                            <p:outputPanel>
+                                <c:label label="Will Use" />
+                                <p:spacer width="20"/>
+                                <p:selectOneButton value="#{recommendationFeedback.willUse}">
+                                    <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                                    <p:ajax listener="#{challengeFeedbackCrudMBean.saveRecommendationFeedback(recommendationFeedback)}"/>
+                                </p:selectOneButton>
+                            </p:outputPanel>
+
+                            <c:label id="recommendationWillUseComment" label="Will Use Comment" />
+                            <p:inputTextarea value="#{recommendationFeedback.willUseComment}"
+                                             placeholder="Comment how you will use this recommendation. It is optional."
+                                             rows="3" cols="70">
+                                <p:ajax listener="#{challengeFeedbackCrudMBean.saveRecommendationFeedback(recommendationFeedback)}" />
+                            </p:inputTextarea>
+
+                            <p:commandButton value="Ok" update="recommendationFeedbackAccordionPanel:datatable"/>
+                        </p:panelGrid>
+                    </h:form>
+                </p:dialog>
+            </p:column>
+        </p:dataTable>
+    </ui:define>
+</ui:composition>
