@@ -12,7 +12,6 @@ import org.persapiens.crde.persistence.LinkRepository;
 import org.persapiens.crde.persistence.RecommendationFeedbackRepository;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -42,10 +41,6 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
     @Override
     public boolean isCheckStartUpdate(T bean) {
         return false;
-    }
- 
-    protected String username() {
-        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
     public abstract boolean globalFilterFunction(Object value, Object filter, Locale locale);
