@@ -18,5 +18,5 @@ public interface RecommendationFeedbackRepository extends CrudRepository<Recomme
      * @param username usuario
      * @return lista de recomendacoes
      */
-    List<RecommendationFeedback> findByUsernameAndUsedAlreadyIsFalseAndWillUseIsTrueOrderByKnownAsc(String username);
+    List<RecommendationFeedback> findByUsernameAndUsedAlreadyIsFalseAndWillUseIsTrueOrderByKnownAsc(String username);    
 }

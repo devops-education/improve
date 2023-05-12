@@ -12,14 +12,15 @@
 
         <ui:define name="afterTitle">
 
+            <c:set var="crudId"          value="#{empty crudId ? '' : crudId}" />
             <c:set var="showInsert"          value="#{empty showInsert ? true : showInsert}" />
             <c:set var="showList"            value="#{empty showList ? true : showList}" />
 
-            <p:focus context="startInsertCommandButton" id="focusInsertCommandButton"/>
+            <p:focus context="startInsertCommandButton" id="focusInsertCommandButton#{crudId}"/>
 
             <span style="float:left;">
                 <p:commandButton
-                    rendered="#{(managedBean.visualizationMode == 'LIST') and showInsert}" id="startInsertCommandButton"
+                    rendered="#{(managedBean.visualizationMode == 'LIST') and showInsert}" id="startInsertCommandButton#{crudId}"
                     title="Incluir" icon="pi pi-plus"
                     style="padding: 4px 4px 4px 4px; width: 38px;"
                     action="#{managedBean.startInsertAction}"
@@ -52,12 +53,12 @@
             <c:set var="insertButtonLabel"            value="#{empty insertButtonLabel ? 'Incluir' : insertButtonLabel}" />
             <c:set var="updateButtonLabel"            value="#{empty updateButtonLabel ? 'Salvar' : updateButtonLabel}" />
 
-            <p:growl id="messages" showDetail="true" showSummary="false" escape="false" life="1500"/>
+            <p:growl id="messages#{crudId}" showDetail="true" showSummary="false" escape="false" life="1500"/>
 
-            <p:outputPanel id="listPanel" rendered="#{managedBean.visualizationMode == 'LIST' and showList}" >
+            <p:outputPanel id="listPanel#{crudId}" rendered="#{managedBean.visualizationMode == 'LIST' and showList}" >
                 <ui:insert name="listBeforeDatatable"></ui:insert>                
 
-                <p:dataTable id="datatable" 
+                <p:dataTable id="datatable#{crudId}" 
                              var="bean"
                              style="#{dataTableStyle}"
                              rows="#{dataTableRows}"
@@ -148,11 +149,11 @@
 
             </p:outputPanel>
 
-            <p:focus context="insertPanel" id="focusInsert"/>
+            <p:focus context="insertPanel#{crudId}"/>
 
             <c:set var="showInsert" value="#{empty showInsert ? managedBean.isCheckStartInsert(managedBean.bean) : (showInsert and managedBean.isCheckStartInsert(managedBean.bean))}" />
 
-            <p:panel id="insertPanel" rendered="#{managedBean.visualizationMode == 'INSERT' and showInsert}" 
+            <p:panel id="insertPanel#{crudId}" rendered="#{managedBean.visualizationMode == 'INSERT' and showInsert}" 
                      style="padding: 10px 10px 10px 10px !important">
                 <ui:insert name="insert"></ui:insert>
 
@@ -162,7 +163,7 @@
                     <p:commandButton 
                         title="#{insertButtonLabel}" value="#{insertButtonLabel}" 
                         update="@form" ajax="true"
-                        process=":contentForm:insertPanel :contentForm:messages"
+                        process=":contentForm:insertPanel#{crudId} :contentForm:messages#{crudId}"
                         accesskey="i"                        
                         action="#{managedBean.insertAction(visualizationModeAfterInsert)}" 
                         disabled="#{managedBean.disabledInsertButton}" 
@@ -181,9 +182,9 @@
                 </p:outputPanel>
             </p:panel>
 
-            <p:focus context="updatePanel" id="focusUpdate"/>
+            <p:focus context="updatePanel#{crudId}"/>
 
-            <p:panel id="updatePanel" rendered="#{managedBean.visualizationMode == 'UPDATE' and managedBean.isCheckStartUpdate(managedBean.bean)}" 
+            <p:panel id="updatePanel#{crudId}" rendered="#{managedBean.visualizationMode == 'UPDATE' and managedBean.isCheckStartUpdate(managedBean.bean)}" 
                      style="padding: 10px 10px 10px 10px !important">
                 <ui:insert name="update"></ui:insert>
 
@@ -193,7 +194,7 @@
                     <p:commandButton 
                         title="#{updateButtonLabel}" value="#{updateButtonLabel}" 
                         update="@form" ajax="true"
-                        process=":contentForm:updatePanel :contentForm:messages"
+                        process=":contentForm:updatePanel :contentForm:messages#{crudId}"
                         accesskey="a"
                         action="#{managedBean.updateAction(visualizationModeAfterUpdate)}"
                         disabled="#{managedBean.disabledUpdateButton}" 
@@ -213,7 +214,7 @@
 
             </p:panel>
 
-            <p:panel id="detailPanel" rendered="#{managedBean.visualizationMode == 'DETAIL' and (managedBean.isDetailable(managedBean.bean))}" 
+            <p:panel id="detailPanel#{crudId}" rendered="#{managedBean.visualizationMode == 'DETAIL' and (managedBean.isDetailable(managedBean.bean))}" 
                      style="padding: 10px 10px 10px 10px !important">
                 <ui:insert name="detail"></ui:insert>
 
@@ -240,23 +241,23 @@
 
             <ui:insert name="custom"></ui:insert>
 
-            <p:confirmDialog id="confirmDialogDelete"
+            <p:confirmDialog id="confirmDialogDelete#{crudId}"
                              message="#{managedBean.deleteAlertMessage(bean)}"
                              rendered="#{showDeleteActionLink}"
                              header="Ativação" severity="alert"
                              widgetVar="confirmationDelete">
                 <br />
 
-                <p:commandButton id="confirmDelete" value="Sim"
-                                 update=":contentForm:contentLayoutPanel"
+                <p:commandButton id="confirmDelete#{crudId}" value="Sim"
+                                 update="@this"
                                  process="@this"
-                                 oncomplete="PF('confirmationDelete').hide()"
+                                 oncomplete="PF('confirmationDelete#{crudId}').hide()"
                                  action="#{managedBean.deleteAction(visualizationModeAfterDelete)}"
                                  ajax="true" >
                 </p:commandButton>
 
-                <p:commandButton id="declineDelete" value="Não"
-                                 onclick="PF('confirmationDelete').hide()"
+                <p:commandButton id="declineDelete#{crudId}" value="Não"
+                                 onclick="PF('confirmationDelete#{crudId}').hide()"
                                  type="button" />
             </p:confirmDialog>
         </ui:define>
