@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition
-                xmlns:ui="jakarta.faces.facelets"
-                xmlns:h="jakarta.faces.html"
-                xmlns:f="jakarta.faces.core"
-                xmlns:c="jakarta.tags.core"
-                xmlns:p="http://primefaces.org/ui"
-                xmlns:m="crde.persapiens.org"
-                >
+    xmlns:ui="jakarta.faces.facelets"
+    xmlns:h="jakarta.faces.html"
+    xmlns:f="jakarta.faces.core"
+    xmlns:c="jakarta.tags.core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:m="crde.persapiens.org"
+    >
     <m:contentLayout titleText="#{titleText}" titleStyle="#{titleStyle}" titleStyleClass="#{titleStyleClass}">
 
         <ui:define name="afterTitle">
@@ -16,7 +16,7 @@
             <c:set var="showList"            value="#{empty showList ? true : showList}" />
 
             <p:focus context="startInsertCommandButton" id="focusInsertCommandButton"/>
-            
+
             <span style="float:left;">
                 <p:commandButton
                     rendered="#{(managedBean.visualizationMode == 'LIST') and showInsert}" id="startInsertCommandButton"
@@ -56,11 +56,13 @@
 
             <p:outputPanel id="listPanel" rendered="#{managedBean.visualizationMode == 'LIST' and showList}" >
                 <ui:insert name="listBeforeDatatable"></ui:insert>                
-                
-                <p:dataTable id="datatable" var="bean"
-                			 style="#{dataTableStyle}"
+
+                <p:dataTable id="datatable" 
+                             var="bean"
+                             style="#{dataTableStyle}"
                              rows="#{dataTableRows}"
                              rowIndexVar="rowIdx"
+                             rowKey="#{bean.id}"
                              paginator="true"
                              rowsPerPageTemplate="#{dataTableRowsPerPageTemplate}"
                              paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
@@ -79,7 +81,7 @@
                     <p:ajax event="sort" oncomplete="applyStyleLine()" />
                     <p:ajax event="filter" oncomplete="applyStyleLine()" />
                     <p:ajax event="page" oncomplete="applyStyleLine()" />
-                    
+
                     <ui:insert name="listColumns"></ui:insert>                
 
                     <p:column headerText="Detail" styleClass="#{listActionLinksStyleClass}" rendered="#{showActionLinksColumn}" exportable="false">
@@ -141,9 +143,9 @@
                         </p:commandButton>
                     </p:column>
                 </p:dataTable>
-                
+
                 <ui:insert name="listAfterDatatable"></ui:insert>                
-                
+
             </p:outputPanel>
 
             <p:focus context="insertPanel" id="focusInsert"/>
@@ -155,7 +157,7 @@
                 <ui:insert name="insert"></ui:insert>
 
                 <br />
-                
+
                 <p:outputPanel rendered="#{showInsert}">
                     <p:commandButton 
                         title="#{insertButtonLabel}" value="#{insertButtonLabel}" 
@@ -164,7 +166,7 @@
                         accesskey="i"                        
                         action="#{managedBean.insertAction(visualizationModeAfterInsert)}" 
                         disabled="#{managedBean.disabledInsertButton}" 
-                    />
+                        />
 
                     <p:spacer width="10px"/>
 
@@ -178,9 +180,9 @@
                         />
                 </p:outputPanel>
             </p:panel>
-            
+
             <p:focus context="updatePanel" id="focusUpdate"/>
-            
+
             <p:panel id="updatePanel" rendered="#{managedBean.visualizationMode == 'UPDATE' and managedBean.isCheckStartUpdate(managedBean.bean)}" 
                      style="padding: 10px 10px 10px 10px !important">
                 <ui:insert name="update"></ui:insert>
@@ -195,7 +197,7 @@
                         accesskey="a"
                         action="#{managedBean.updateAction(visualizationModeAfterUpdate)}"
                         disabled="#{managedBean.disabledUpdateButton}" 
-                    />
+                        />
 
                     <p:spacer width="10px"/>
 
@@ -237,25 +239,25 @@
             </p:panel>
 
             <ui:insert name="custom"></ui:insert>
-            
+
             <p:confirmDialog id="confirmDialogDelete"
-                message="#{managedBean.deleteAlertMessage(bean)}"
-                rendered="#{showDeleteActionLink}"
-                header="Ativação" severity="alert"
-                widgetVar="confirmationDelete">
+                             message="#{managedBean.deleteAlertMessage(bean)}"
+                             rendered="#{showDeleteActionLink}"
+                             header="Ativação" severity="alert"
+                             widgetVar="confirmationDelete">
                 <br />
-                
+
                 <p:commandButton id="confirmDelete" value="Sim"
-                    update=":contentForm:contentLayoutPanel"
-                    process="@this"
-                    oncomplete="PF('confirmationDelete').hide()"
-                    action="#{managedBean.deleteAction(visualizationModeAfterDelete)}"
-                    ajax="true" >
+                                 update=":contentForm:contentLayoutPanel"
+                                 process="@this"
+                                 oncomplete="PF('confirmationDelete').hide()"
+                                 action="#{managedBean.deleteAction(visualizationModeAfterDelete)}"
+                                 ajax="true" >
                 </p:commandButton>
-                
+
                 <p:commandButton id="declineDelete" value="Não"
-                    onclick="PF('confirmationDelete').hide()"
-                    type="button" />
+                                 onclick="PF('confirmationDelete').hide()"
+                                 type="button" />
             </p:confirmDialog>
         </ui:define>
     </m:contentLayout>

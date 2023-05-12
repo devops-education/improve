@@ -32,16 +32,6 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
     @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
     protected RecommendationFeedbackRepository recommendationFeedbackRepository;
-    
-    @Override
-    public boolean isCheckStartInsert(T bean) {
-        return false;
-    }
-
-    @Override
-    public boolean isCheckStartUpdate(T bean) {
-        return false;
-    }
 
     public abstract boolean globalFilterFunction(Object value, Object filter, Locale locale);
  

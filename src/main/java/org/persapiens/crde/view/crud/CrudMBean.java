@@ -169,7 +169,7 @@ public abstract class CrudMBean<T extends Object, ID extends Serializable>
     }
 
     public boolean isCheckStartInsert(T bean) {
-        return true;
+        return false;
     }
 
     public final String insertAction(String visualizationMode) {
@@ -221,7 +221,7 @@ public abstract class CrudMBean<T extends Object, ID extends Serializable>
     }
 
     public boolean isCheckStartUpdate(T bean) {
-        return true;
+        return false;
     }
 
     public final String updateAction(String visualizationMode) {
