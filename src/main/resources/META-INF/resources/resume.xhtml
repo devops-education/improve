@@ -66,5 +66,62 @@
                 </p:rowExpansion>
             </ui:define>
         </c:crud>
+        
+        
+        <c:crud crudId="challenge"
+                titleText="Challenges that you will mitigate, but not used linked recommendation."
+                titleStyleClass="challenge"
+                managedBean="#{challengeFeedbackResumeCrudMBean}"
+                showInsert="false"
+                showUpdateActionLink="false"
+                dataTableLazy="false"
+                showActionLinksColumn="false">
+            <ui:define name="listColumns">
+                <p:column style="width:2rem">
+                    <p:rowToggler/>
+                </p:column>
+
+                <p:column responsivePriority="1" headerText="Main Idea" field="challenge.mainIdea" sortable="true" filterable="false" />
+                <p:column responsivePriority="3" headerText="Interviews" field="challenge.amountOfInterviews" style="width: 110px;" sortable="true" filterable="false" />
+                <p:column responsivePriority="3" headerText="Recommendations" field="challenge.links.size()" style="width: 170px;" sortable="true" filterable="false"/>
+                <p:column responsivePriority="4" headerText="Theme" field="challenge.theme" style="width: 125px;" sortable="true" filterable="false" >
+                    #{bean.challenge.theme.value}
+                </p:column>
+
+                <p:column responsivePriority="2" 
+                          headerText="Known" 
+                          field="known"
+                          sortable="true"
+                          filterable="false"
+                          style="width: 80px;" >
+                    #{booleanOptions.label(bean.known)}
+                </p:column>
+
+                <p:rowExpansion>                
+                    <h:panelGrid columns="2" cellpadding="3">
+                        <c:label id="knownCommentChallenge" label="Known Comment" />
+                        <h:outputText value="#{fn:replace(bean.knownComment, '\\n', '&lt;br/&gt;')}" escape="false" />
+
+                        <c:label id="willMitigateCommentChallenge" label="Will Mitigate Comment" />
+                        <h:outputText value="#{fn:replace(bean.willMitigateComment, '\\n', '&lt;br/&gt;')}" escape="false" />
+                    </h:panelGrid>
+
+                    <p:accordionPanel multiple="true" activeIndex="0,1">
+                        <p:tab title="Abstracts">
+                            <h:outputText readonly="true" value="#{fn:replace(bean.challenge.abstracts, '\\n', '&lt;br/&gt;')}" escape="false" />
+                        </p:tab>
+
+                        <p:tab title="Interviews Quotes">
+                            <h:outputText readonly="true" value="#{fn:replace(bean.challenge.interviewQuotes, '\\n', '&lt;br/&gt;')}" escape="false" />
+                        </p:tab>
+
+                        <p:tab title="Tags">
+                            <h:outputText readonly="true" value="#{fn:replace(bean.challenge.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
+                        </p:tab>
+                    </p:accordionPanel>
+                </p:rowExpansion>
+            </ui:define>
+        </c:crud>
+        
     </ui:define>
 </ui:composition>
