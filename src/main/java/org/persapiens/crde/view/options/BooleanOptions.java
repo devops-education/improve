@@ -13,7 +13,11 @@ public class BooleanOptions extends Options<Boolean, Boolean> {
 
     @Override
     public String label(Boolean e) {
-        return e ? "Yes" : "No";
+        String result = "";
+        if (e != null) {
+            result = e ? "Yes" : "No";
+        }
+        return result;
     }
 
     @Override

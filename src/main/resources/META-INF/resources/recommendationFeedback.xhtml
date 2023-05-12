@@ -9,7 +9,11 @@
     xmlns:fn="jakarta.tags.functions"
     template="/layout/template.xhtml">
     <ui:define name="content" >
-        <c:crud titleText="Recommendations on DevOps Education" titleStyleClass="recommendation" managedBean="#{recommendationFeedbackCrudMBean}" showInsert="false" showUpdateActionLink="false">
+        <c:crud titleText="Recommendations on DevOps Education"
+                titleStyleClass="recommendation"
+                managedBean="#{recommendationFeedbackCrudMBean}"
+                showInsert="false"
+                showUpdateActionLink="false">
             <ui:define name="listColumns">
                 <f:facet name="header">
                     <p:inputText id="globalFilter" onkeyup="PF('dataTable').filter()" style="width:305px"
@@ -94,7 +98,7 @@
                                     </p:selectOneButton>
                                 </p:outputPanel>
 
-                                <c:label id="recommendationWillUseComment" label="Used Already Comment" />
+                                <c:label id="recommendationWillUseComment" label="Will Use Comment" />
                                 <p:inputTextarea value="#{bean.willUseComment}"
                                                  placeholder="Comment your about if you will use this recommendation. It is optional."
                                                  rows="4" cols="70">

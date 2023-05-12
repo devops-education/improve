@@ -54,63 +54,12 @@ function ajustarTamanhoSelectOneMenu(){
     });
 }
 
-
-function applyMaskDate(classElement, pattern){
-    $(classElement).mask(pattern);
-}
-
-function applyMaskNumber(classElement, symbolParam, allowNegativeParam, maxFractionDigitsParam, allowZeroParam){
-	$(classElement).maskMoney({
-		symbol: symbolParam,
-		symbolStay: false,
-		thousands: '.',
-		decimal: ',',
-		precision: maxFractionDigitsParam,
-		defaultZero: true,
-		allowZero: allowZeroParam,
-		allowNegative: allowNegativeParam
-	});
-}
-
 function onblurInput(el, texto){
     if(el.value=='') el.value = texto;
 }
 
 function onfocusInput(el, texto){
     if(el.value==texto) el.value='';
-}
-
-function completaComZero(numero, tamanho, aEsquerda) {
-	var numComplete = "0";
-	var maskZeros = new Array(1 + tamanho).join(numComplete);
-	var strNum = String(numero);
-	var orientacao = typeof aEsquerda !== 'undefined' ? true : false;
-	var qtdZeros = maskZeros.substring(0, maskZeros.length - strNum.length);
-	
-	if(orientacao){
-		resultado = qtdZeros + strNum;
-	}else{
-		resultado = strNum + qtdZeros;
-	}
-	
-	return resultado;
-}
-
-function checkCep(el){
-	var cepSemTraco = el.value.replace(/[-_]/g,"");
-	var cep = completaComZero(cepSemTraco, 8);
-	var result = formataCep(cep);
-	
-	if(result == "00000-000"){
-		el.value = "";
-	}else{
-		el.value = formataCep(cep);
-	}
-}
-
-function formataCep(cep){
-	var result = cep.substring(0,5)+"-"+cep.substring(5,8);
-	return result;
 }
 
 // INTERCEPTADOR DE REQUISIÇÕES AJAX
