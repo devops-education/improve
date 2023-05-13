@@ -1,0 +1,387 @@
+Tag,Description
+1,A/B
+2,academy
+3,actions
+4,activity
+5,adoption
+6,advance
+7,agile
+8,analogy
+9,analyse
+10,ansible
+11,answer
+12,application
+13,approach
+14,architecture
+15,argo cd
+16,artifact
+17,artifactory
+18,assessment
+19,attention
+20,audio
+21,automation
+22,aws
+23,background
+24,backlog
+25,balance
+26,bamboo
+27,benefit
+28,block
+29,blog
+30,bluemix
+31,board
+32,book
+33,branch
+34,break
+35,bug
+36,build
+37,business
+38,buzzword
+39,case study
+40,cd
+41,cdl
+42,change
+43,choice
+44,ci
+45,circle ci
+46,class
+47,classroom
+48,cloud
+49,coach
+50,code coverage
+51,coding
+52,collaboration
+53,combination
+54,command
+55,communication
+56,comparison
+57,compilation
+58,comprehensive distance learning
+59,computing resource
+60,concept
+61,conciliation
+62,configuration
+63,container
+64,content
+65,context
+66,continuous
+67,continuous delivery
+68,continuous deployment
+69,continuous improvement
+70,continuous integration
+71,contribution
+72,convention
+73,conversation
+74,course
+75,criteria
+76,critical thinking
+77,cross validation
+78,culture
+79,curriculum
+80,customization
+81,database
+82,dealing
+83,debug
+84,decision-making
+85,delegation
+86,deliberable
+87,delivery
+88,demonstration
+89,deployment
+90,description
+91,development
+92,DevOps Handbook
+93,difficulty
+94,discipline
+95,discussion
+96,diversity
+97,division
+98,docker
+99,documentation
+100,dynamic
+101,educational
+102,elective
+103,engagement
+104,environment
+105,essay
+106,evaluation
+107,evolution
+108,exam
+109,example
+110,execution
+111,exercise
+112,experience
+113,experimentation
+114,extra-class
+115,failure
+116,fear
+117,feature
+118,feedback
+119,flexibility
+120,flow
+121,focus
+122,forum
+123,freedom
+124,fun
+125,gist
+126,git
+127,github
+128,gitlab
+129,gns3
+130,google docs
+131,google meet
+132,grade
+133,gradle
+134,gradual
+135,grafana
+136,gray literature
+137,group
+138,guideline
+139,hands-on
+140,hardware
+141,hierarchy
+142,history
+143,iac
+144,ibm
+145,image
+146,improvement
+147,incremental
+148,independence
+149,industry
+150,infrastructure
+151,infrastructure as code
+152,installation
+153,institution
+154,integration
+155,interaction
+156,interconnection
+157,inverted class
+158,issue
+159,iteration
+160,java
+161,jenkins
+162,jira
+163,jmeter
+164,justification
+165,kaisen
+166,kanban
+167,katacoda
+168,knowledge
+169,kubernetes
+170,lab
+171,language
+172,lean
+173,learning
+174,learning process
+175,lecture
+176,level
+177,licence
+178,lifecycle
+179,limitation
+180,linking
+181,linux
+182,literature
+183,local machine
+184,management
+185,mandatory
+186,mapping
+187,marathon
+188,markdown
+189,market
+190,material
+191,maven
+192,mentor
+193,merge
+194,mesos
+195,methodology
+196,metric
+197,migration
+198,mindset
+199,minimal
+200,minimum viable product
+201,mission
+202,mistake
+203,model
+204,modular
+205,monitor
+206,monitoring
+207,motivation
+208,multidisciplinary
+209,multiple choice
+210,mutation
+211,mvp
+212,net promoter score
+213,network
+214,non-functional
+215,notion
+216,novel
+217,nps
+218,objective
+219,observability
+220,open source
+221,operation
+222,operational system
+223,opinion
+224,optional
+225,orchestration
+226,organization
+227,owasp
+228,pair programming
+229,paper
+230,participation
+231,particular
+232,partnership
+233,pause
+234,pbl
+235,performance
+236,permission
+237,personalization
+238,phoenix
+239,pipeline
+240,planning
+241,platform
+242,popular
+243,portable
+244,post mortem
+245,practice
+246,preparation
+247,prerequisite
+248,presentation
+249,principle
+250,problem
+251,problem based learning
+252,process
+253,product
+254,production
+255,professional
+256,profile
+257,programming
+258,progress
+259,project
+260,prometheus
+261,promotion
+262,provisioning
+263,publication
+264,pull request
+265,quality
+266,quantitative
+267,question
+268,quiz
+269,realistic
+270,record
+271,reference
+272,relation
+273,relevant
+274,remote
+275,report
+276,repository
+277,representative
+278,requirement
+279,requisite
+280,research
+281,resource
+282,respect
+283,responsibility
+284,restriction
+285,rule
+286,running
+287,sample
+288,sas
+289,scalability
+290,scale
+291,scenario
+292,schedule
+293,scope
+294,score
+295,script
+296,security
+297,selection
+298,selenium
+299,self-taught
+300,seminar
+301,service
+302,session
+303,setup
+304,sharing
+305,silo
+306,simple
+307,simulation
+308,site reliability engineering
+309,size
+310,skill
+311,slack
+312,social
+313,software
+314,solution
+315,sonarqube
+316,sotrytelling
+317,speaker
+318,specialization course
+319,spring
+320,sprint
+321,SRE
+322,stack
+323,stackholder
+324,staff
+325,standard
+326,star
+327,state of the art
+328,story
+329,strategy
+330,streaming
+331,stress
+332,structure
+333,student
+334,study
+335,subject
+336,subjectivity
+337,supervision
+338,support
+339,swarm
+340,syllabus
+341,system
+342,ta
+343,task
+344,taxonomy
+345,teacher assistant
+346,teaching
+347,teaching method
+348,team
+349,technique
+350,technology
+351,telemetry
+352,terraform
+353,test
+354,theory
+355,time
+356,tool
+357,tracking
+358,tradeoff
+359,traditional
+360,training
+361,travis
+362,trello
+363,tuleap
+364,tutorial
+365,understanding
+366,unicorn
+367,university
+368,up-to-date
+369,update
+370,use case
+371,vagrant
+372,validation
+373,value stream
+374,versioning
+375,video
+376,virtual machine
+377,virtualbox
+378,virtualization
+379,vm
+380,voice
+381,webex
+382,workflow
+383,workload
+384,writing
+385,zap
+386,zoom

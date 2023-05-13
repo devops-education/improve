@@ -18,6 +18,12 @@
                 <f:facet name="header">
                     <p:inputText id="globalFilter" onkeyup="PF('dataTable').filter()" style="width:305px"
                                  placeholder="Search main idea, abstracts, quotes, tags" />
+                    
+                    <p:spacer width="20px" />
+                    <p:commandButton value="Recommendation Tags" onclick="PF('recommendationTagDialog').show()"/>
+                    <p:dialog header="Recommendation Tags" widgetVar="recommendationTagDialog" showEffect="fade" closeOnEscape="true" closable="true">
+                        <p:graphicImage value="#{resource['images/crde/recommendation-tag-tag.jpg']}" library="crde" width="600" height="600" />
+                    </p:dialog>
                 </f:facet>
 
                 <p:column responsivePriority="1" headerText="Main Idea" field="recommendation.mainIdea" filterable="false"/>

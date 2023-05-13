@@ -14,6 +14,12 @@
                 <f:facet name="header">
                     <p:inputText id="globalFilter" onkeyup="PF('dataTable').filter()" style="width:305px"
                                  placeholder="Search main idea, abstracts, quotes, tags" />
+                    
+                    <p:spacer width="20px" />
+                    <p:commandButton value="Challenge Tags" onclick="PF('challengeTagDialog').show()"/>
+                    <p:dialog header="Challenge Tags" widgetVar="challengeTagDialog" showEffect="fade" closeOnEscape="true" closable="true">
+                        <p:graphicImage value="#{resource['images/crde/challenge-tag-tag.jpg']}" width="600" height="600" />
+                    </p:dialog>
                 </f:facet>
 
                 <p:column responsivePriority="1" headerText="Main Idea" field="challenge.mainIdea" filterable="false"/>
