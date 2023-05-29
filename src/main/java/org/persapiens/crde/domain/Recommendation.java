@@ -28,8 +28,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Getter
 @Setter
-@ToString(exclude = {"recommendationTags", "links"})
-@EqualsAndHashCode(of = {"id"})
+@ToString(exclude = {"recommendationTags", "links", "recommendationInterviews"})
+@EqualsAndHashCode(of = {"mainIdea"})
 @SuperBuilder
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -42,10 +42,6 @@ public class Recommendation implements Serializable, Comparable<Recommendation> 
     @Id
     private Long id;
 
-    @Column(nullable = false, length = LENGTH)
-    private String interviewQuotes;
-    @Column(nullable = false, length = LENGTH)
-    private String abstracts;
     @Column(length = LENGTH)
     private String mainIdea;
     @Column(nullable = false, length = LENGTH)
@@ -56,12 +52,19 @@ public class Recommendation implements Serializable, Comparable<Recommendation> 
     private Theme theme;
     @Column(nullable = false)
     private boolean specific;
+    @Column(nullable = false, length = LENGTH)
+    private String tags;
+
+    /* to be removed
+    @Column(nullable = false, length = LENGTH)
+    private String interviewQuotes;
+    @Column(nullable = false, length = LENGTH)
+    private String abstracts;
     @Column(nullable = false)
     private long amountOfInterviews;
     @Column(nullable = false, length = LENGTH)
-    private String tags;
-    @Column(nullable = false, length = LENGTH)
     private String allText;
+    */
 
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Singular
@@ -73,21 +76,23 @@ public class Recommendation implements Serializable, Comparable<Recommendation> 
     @OneToMany(mappedBy = "recommendation")
     private Set<Link> links;
 
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Singular
+    @OneToMany(mappedBy = "recommendation")
+    private Set<RecommendationInterview> recommendationInterviews;
+
     @Override
     public int compareTo(Recommendation o) {
         return Comparator.comparing(Recommendation::getMainIdea)
                 .thenComparing(Recommendation::getTheme)
                 .thenComparing(Recommendation::isSpecific)
-                .thenComparing(Recommendation::getAbstracts)
-                .thenComparing(Recommendation::getInterviewQuotes)
-                .thenComparing(Recommendation::getAmountOfInterviews)
                 .compare(this, o);
     }
 
-    public List<Link> getLinkSortedByChallengeAmountOfInterviewsList() {
+    public List<Link> getLinkSortedByChallengeChallengeInterviewsSizeList() {
         List<Link> result = new ArrayList<>();
         result.addAll(getLinks());
-        Collections.sort(result, Comparator.comparing(Link::getChallenge, (s1, s2) -> { return Long.valueOf(s1.getAmountOfInterviews() - s2.getAmountOfInterviews()).intValue();}).reversed());
+        Collections.sort(result, Comparator.comparing(Link::getChallenge, (s1, s2) -> { return Long.valueOf(s1.getChallengeInterviews().size()- s2.getChallengeInterviews().size()).intValue();}).reversed());
         return result;
     }
     

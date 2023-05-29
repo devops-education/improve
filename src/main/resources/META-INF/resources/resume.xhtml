@@ -22,7 +22,7 @@
                 </p:column>
 
                 <p:column responsivePriority="1" headerText="Main Idea" field="recommendation.mainIdea" sortable="true" filterable="false" />
-                <p:column responsivePriority="3" headerText="Interviews" field="recommendation.amountOfInterviews" style="width: 110px;" sortable="true" filterable="false" />
+                <p:column responsivePriority="3" headerText="Interviews" field="recommendation.recommendationInterviews.size()" style="width: 110px;" sortable="true" filterable="false" />
                 <p:column responsivePriority="3" headerText="Challenges" field="recommendation.links.size()" style="width: 110px;" sortable="true" filterable="false"/>
                 <p:column responsivePriority="4" headerText="Theme" field="recommendation.theme" style="width: 125px;" sortable="true" filterable="false" >
                     #{bean.recommendation.theme.value}
@@ -82,7 +82,7 @@
                 </p:column>
 
                 <p:column responsivePriority="1" headerText="Main Idea" field="challenge.mainIdea" sortable="true" filterable="false" />
-                <p:column responsivePriority="3" headerText="Interviews" field="challenge.amountOfInterviews" style="width: 110px;" sortable="true" filterable="false" />
+                <p:column responsivePriority="3" headerText="Interviews" field="challenge.challengeInterviews.size()" style="width: 110px;" sortable="true" filterable="false" />
                 <p:column responsivePriority="3" headerText="Recommendations" field="challenge.links.size()" style="width: 170px;" sortable="true" filterable="false"/>
                 <p:column responsivePriority="4" headerText="Theme" field="challenge.theme" style="width: 125px;" sortable="true" filterable="false" >
                     #{bean.challenge.theme.value}
