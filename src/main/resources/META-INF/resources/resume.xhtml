@@ -50,13 +50,17 @@
                     </h:panelGrid>
 
 
-                    <p:accordionPanel multiple="true" activeIndex="0,1">
-                        <p:tab title="Abstracts">
-                            <h:outputText readonly="true" value="#{fn:replace(bean.recommendation.abstracts, '\\n', '&lt;br/&gt;')}" escape="false" />
-                        </p:tab>
-
-                        <p:tab title="Interviews Quotes">
-                            <h:outputText readonly="true" value="#{fn:replace(bean.recommendation.interviewQuotes, '\\n', '&lt;br/&gt;')}" escape="false" />
+                    <p:accordionPanel multiple="true" activeIndex="0">
+                        <p:tab title="Interviews">
+                            <p:dataTable var="recommendationInterview" value="#{bean.recommendation.recommendationInterviews}">
+                                <p:column headerText="P" field="recommendationInterview.interview.interviewee" />
+                                <p:column headerText="Resume">
+                                    <h:outputText readonly="true" value="#{fn:replace(recommendationInterview.resume, '\\n', '&lt;br/&gt;')}" escape="false" />
+                                </p:column>
+                                <p:column headerText="Quote">
+                                    <h:outputText readonly="true" value="#{fn:replace(recommendationInterview.quote, '\\n', '&lt;br/&gt;')}" escape="false" />
+                                </p:column>
+                            </p:dataTable>
                         </p:tab>
 
                         <p:tab title="Tags">
@@ -106,13 +110,17 @@
                         <h:outputText value="#{fn:replace(bean.willMitigateComment, '\\n', '&lt;br/&gt;')}" escape="false" />
                     </h:panelGrid>
 
-                    <p:accordionPanel multiple="true" activeIndex="0,1">
-                        <p:tab title="Abstracts">
-                            <h:outputText readonly="true" value="#{fn:replace(bean.challenge.abstracts, '\\n', '&lt;br/&gt;')}" escape="false" />
-                        </p:tab>
-
-                        <p:tab title="Interviews Quotes">
-                            <h:outputText readonly="true" value="#{fn:replace(bean.challenge.interviewQuotes, '\\n', '&lt;br/&gt;')}" escape="false" />
+                    <p:accordionPanel multiple="true" activeIndex="0">
+                        <p:tab title="Interviews">
+                            <p:dataTable var="challengeInterview" value="#{bean.challenge.challengeInterviews}">
+                                <p:column headerText="P" field="challengeInterview.interview.interviewee" />
+                                <p:column headerText="Resume">
+                                    <h:outputText readonly="true" value="#{fn:replace(challengeInterview.resume, '\\n', '&lt;br/&gt;')}" escape="false" />
+                                </p:column>
+                                <p:column headerText="Quote">
+                                    <h:outputText readonly="true" value="#{fn:replace(challengeInterview.quote, '\\n', '&lt;br/&gt;')}" escape="false" />
+                                </p:column>
+                            </p:dataTable>
                         </p:tab>
 
                         <p:tab title="Tags">
