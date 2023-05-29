@@ -1,5 +1,6 @@
 package org.persapiens.crde.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import java.io.Serializable;
 import jakarta.persistence.Entity;
@@ -23,33 +24,39 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"challenge", "recommendation"})
+@EqualsAndHashCode(of = {"interview", "challenge"})
 @SuperBuilder
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Link implements Serializable, Comparable<Link> {
+public class ChallengeInterview implements Serializable, Comparable<ChallengeInterview> {
 
     private static final long serialVersionUID = 1L;
+    private static final int LENGTH = 40000;
 
     @EmbeddedId
-    private LinkId id;
+    private ChallengeInterviewId id;
+
+    @Column(nullable = false, length = LENGTH)
+    private String quote;
+    @Column(nullable = false, length = LENGTH)
+    private String resume;
     
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @ManyToOne
-    @JoinColumn(name= "challenge", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_link_challenge"))
-    private Challenge challenge;
-
+    @JoinColumn(name= "interview", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_challengeinterview_interview"))
+    private Interview interview;
+    
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @ManyToOne
-    @JoinColumn(name = "recommendation", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_link_recommendation"))
-    private Recommendation recommendation;
+    @JoinColumn(name= "challenge", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_challengeinterview_challenge"))
+    private Challenge challenge;
 
     @Override
-    public int compareTo(Link o) {
-        return Comparator.comparing(Link::getChallenge)
-                .thenComparing(Link::getRecommendation)
+    public int compareTo(ChallengeInterview o) {
+        return Comparator.comparing(ChallengeInterview::getChallenge)
+                .thenComparing(ChallengeInterview::getInterview)
+                .thenComparing(ChallengeInterview::getQuote)
                 .compare(this, o);
     }
-
 }

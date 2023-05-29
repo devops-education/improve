@@ -7,6 +7,7 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import java.util.List;
 import org.persapiens.crde.domain.QRecommendation;
+import org.persapiens.crde.domain.QRecommendationInterview;
 import org.persapiens.crde.domain.Recommendation;
 
 public class RecommendationRepositoryImpl implements RecommendationRepositoryCustom {
@@ -20,14 +21,29 @@ public class RecommendationRepositoryImpl implements RecommendationRepositoryCus
     }
 
     @Override
-    public List<Recommendation> findByLeftJoinLinksOrderByAmountOfInterviewsDesc() {
+    public List<Recommendation> findByOrderByRecommendationInterviewsSizeDesc() {
         QRecommendation recommendation = QRecommendation.recommendation;
+        QRecommendationInterview recommendationInterview = QRecommendationInterview.recommendationInterview;
+        JPQLQueryFactory query = new JPAQueryFactory(this.entityManager);
+
+        return query.from(recommendation)
+                .select(recommendation)
+                .leftJoin(recommendation.recommendationInterviews, recommendationInterview).fetchJoin()
+                .orderBy(recommendation.recommendationInterviews.size().desc())
+                .fetch();
+    }
+
+    @Override
+    public List<Recommendation> findByLeftJoinLinksOrderByRecommendationInterviewsSizeDesc() {
+        QRecommendation recommendation = QRecommendation.recommendation;
+        QRecommendationInterview recommendationInterview = QRecommendationInterview.recommendationInterview;
         JPQLQueryFactory query = new JPAQueryFactory(this.entityManager);
 
         return query.from(recommendation)
                 .select(recommendation)
                 .leftJoin(recommendation.links).fetchJoin()
-                .orderBy(recommendation.amountOfInterviews.desc())
+                .leftJoin(recommendation.recommendationInterviews, recommendationInterview).fetchJoin()
+                .orderBy(recommendation.recommendationInterviews.size().desc())
                 .fetch();
     }
 }

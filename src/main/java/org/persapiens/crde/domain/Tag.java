@@ -24,7 +24,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Getter
 @Setter
 @ToString(of = {"id", "descricao"})
-@EqualsAndHashCode(of = {"id", "descricao"})
+@EqualsAndHashCode(of = "descricao")
 @SuperBuilder
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

@@ -34,7 +34,7 @@ public class RecommendationFeedbackRepositoryImpl implements RecommendationFeedb
                 .select(recommendationFeedback)
                 .leftJoin(recommendationFeedback.recommendation, recommendation).fetchJoin()
                 .leftJoin(recommendation.links, link).fetchJoin()
-                //.leftJoin(link.challenge).fetchJoin()
+                .leftJoin(recommendation.recommendationInterviews).fetchJoin()
                 .where(recommendationFeedback.username.eq(username))
                 .fetch();
     }
@@ -49,6 +49,7 @@ public class RecommendationFeedbackRepositoryImpl implements RecommendationFeedb
                 .select(recommendationFeedback)
                 .leftJoin(recommendationFeedback.recommendation, recommendation).fetchJoin()
                 .leftJoin(recommendation.links).fetchJoin()
+                .leftJoin(recommendation.recommendationInterviews).fetchJoin()
                 .where(recommendationFeedback.id.eq(id))
                 .fetchOne());
     }

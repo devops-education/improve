@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -21,6 +22,8 @@ import org.persapiens.crde.domain.Link;
 
 import org.persapiens.crde.domain.Recommendation;
 import org.persapiens.crde.domain.RecommendationFeedback;
+import org.persapiens.crde.domain.RecommendationInterview;
+import org.persapiens.crde.persistence.ChallengeInterviewRepository;
 import org.persapiens.crde.persistence.RecommendationRepository;
 import org.primefaces.util.LangUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +39,10 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
     @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
     private RecommendationRepository recommendationRepository;
+
+    @SuppressFBWarnings("SE_BAD_FIELD")
+    @Autowired
+    private ChallengeInterviewRepository challengeInterviewRepository;
     
     @Getter
     @Setter
@@ -61,7 +68,7 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
         
         // create all recommendationFeedback from recommendation and previous feedback
         List<RecommendationFeedback> result = new ArrayList<>();
-        for(Recommendation recommendation : recommendationRepository.findByOrderByAmountOfInterviewsDesc()) {
+        for(Recommendation recommendation : recommendationRepository.findByOrderByRecommendationInterviewsSizeDesc()) {
             RecommendationFeedback recommendationFeedback = recommendationFeedbackMap.get(recommendation);
             if (recommendationFeedback == null) {
                 recommendationFeedback = RecommendationFeedback.builder()
@@ -100,11 +107,30 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
         }
 
         Recommendation recommendation = ((RecommendationFeedback) value).getRecommendation();
-        return recommendation.getMainIdea().toLowerCase().contains(filterText)
-                || recommendation.getAbstracts().toLowerCase().contains(filterText)
-                || recommendation.getInterviewQuotes().toLowerCase().contains(filterText)
+        boolean result = recommendation.getMainIdea().toLowerCase().contains(filterText)
                 || recommendation.getTags().toLowerCase().contains(filterText);
+
+        if (!result) {
+            for(RecommendationInterview ri : recommendation.getRecommendationInterviews()) {
+                result = ri.getResume().toLowerCase().contains(filterText)
+                    || ri.getQuote().toLowerCase().contains(filterText);
+                if (result) {
+                    break;
+                }
+            }
+        }
+        return result;
     }
+
+    @Override
+    protected RecommendationFeedback getDetailBean(RecommendationFeedback bean) {
+        for(Link link : bean.getRecommendation().getLinks()) {
+            Challenge challenge = link.getChallenge();
+            challenge.setChallengeInterviews(new TreeSet<>(challengeInterviewRepository.findByChallenge(challenge)));
+        }
+        return bean;
+    }
+    
 
     @Override
     public void startDetailAction() {
@@ -114,11 +140,11 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
         
         // recuperando os recommendation feedback dos links do desafio
         Map<Challenge, ChallengeFeedback> challengeChallengeFeedbackMap = challengeFeedbackRepository.findByChallengeInAndUsername(
-            getBean().getRecommendation().getLinkSortedByChallengeAmountOfInterviewsList().stream().map(Link::getChallenge).collect(Collectors.toList()), username())
+            getBean().getRecommendation().getLinkSortedByChallengeChallengeInterviewsSizeList().stream().map(Link::getChallenge).collect(Collectors.toList()), username())
                 .stream().collect(Collectors.toMap(ChallengeFeedback::getChallenge, Function.identity()));
         
         // varrendo os links do desafio
-        for (Link link : getBean().getRecommendation().getLinkSortedByChallengeAmountOfInterviewsList()) {
+        for (Link link : getBean().getRecommendation().getLinkSortedByChallengeChallengeInterviewsSizeList()) {
             Challenge challenge = link.getChallenge();
             ChallengeFeedback challengeFeedback = challengeChallengeFeedbackMap.get(challenge);
             if (challengeFeedback == null) {

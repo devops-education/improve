@@ -24,7 +24,7 @@
 
                 <p:column responsivePriority="1" headerText="Main Idea" field="challenge.mainIdea" filterable="false"/>
 
-                <p:column responsivePriority="3" headerText="Interviews" field="challenge.amountOfInterviews" style="width: 110px;"/>
+                <p:column responsivePriority="3" headerText="Interviews" field="challenge.challengeInterviews.size()" style="width: 110px;"/>
 
                 <p:column responsivePriority="3" headerText="Recommendations" field="challenge.links.size()" style="width: 170px;"/>
 
@@ -118,17 +118,21 @@
             <ui:define name="detail">
                 <h:panelGrid columns="2" cellpadding="3">
                     <c:text readonly="true" value="#{challengeFeedbackCrudMBean.bean.challenge.mainIdea}" label="Main Idea" />
-                    <c:text readonly="true" value="#{challengeFeedbackCrudMBean.bean.challenge.amountOfInterviews}" label="Interviews" />
+                    <c:text readonly="true" value="#{challengeFeedbackCrudMBean.bean.challenge.challengeInterviews.size()}" label="Interviews" />
                     <c:text readonly="true" value="#{challengeFeedbackCrudMBean.bean.challenge.theme.value}" label="Theme" />
                 </h:panelGrid>
 
                 <p:accordionPanel multiple="true" activeIndex="">
-                    <p:tab title="Abstracts">
-                        <h:outputText readonly="true" value="#{fn:replace(challengeFeedbackCrudMBean.bean.challenge.abstracts, '\\n', '&lt;br/&gt;')}" escape="false" />
-                    </p:tab>
-
-                    <p:tab title="Interviews Quotes">
-                        <h:outputText readonly="true" value="#{fn:replace(challengeFeedbackCrudMBean.bean.challenge.interviewQuotes, '\\n', '&lt;br/&gt;')}" escape="false" />
+                    <p:tab title="Interviews">
+                        <p:dataTable var="challengeInterview" value="#{challengeFeedbackCrudMBean.bean.challenge.challengeInterviews}">
+                            <p:column headerText="P" field="challengeInterview.interview.interviewee" />
+                            <p:column headerText="Resume">
+                                <h:outputText readonly="true" value="#{fn:replace(challengeInterview.resume, '\\n', '&lt;br/&gt;')}" escape="false" />
+                            </p:column>
+                            <p:column headerText="Quote">
+                                <h:outputText readonly="true" value="#{fn:replace(challengeInterview.quote, '\\n', '&lt;br/&gt;')}" escape="false" />
+                            </p:column>
+                        </p:dataTable>
                     </p:tab>
 
                     <p:tab title="Tags">
@@ -182,7 +186,7 @@
                                      rowIndexVar="rowIdx"
                                      >
                             <p:column responsivePriority="1" headerText="Main Idea" field="link.recommendation.mainIdea" sortable="true" filterable="false" />
-                            <p:column responsivePriority="3" headerText="Interviews" field="link.recommendation.amountOfInterviews" style="width: 70px;" sortable="true" filterable="false" />
+                            <p:column responsivePriority="3" headerText="Interviews" field="link.recommendation.recommendationInterviews.size()" style="width: 70px;" sortable="true" filterable="false" />
                             <p:column responsivePriority="3" headerText="Challenges" field="link.recommendation.links.size()" style="width: 80px;" sortable="true" filterable="false"/>
                             <p:column responsivePriority="4" headerText="Theme" field="link.recommendation.theme" style="width: 125px;" sortable="true" filterable="false" >
                                 #{linkRecommendationFeedback.link.recommendation.theme.value}
