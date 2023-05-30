@@ -162,7 +162,7 @@
                 <p:accordionPanel multiple="true" activeIndex="">
                     <p:tab title="Interviews">
                         <p:dataTable var="recommendationInterview" value="#{recommendationFeedbackCrudMBean.bean.recommendation.recommendationInterviews}">
-                            <p:column headerText="P" field="recommendationInterview.interview.interviewee" />
+                            <p:column headerText="P" field="interview.interviewee" />
                             <p:column headerText="Resume">
                                 <h:outputText readonly="true" value="#{fn:replace(recommendationInterview.resume, '\\n', '&lt;br/&gt;')}" escape="false" />
                             </p:column>

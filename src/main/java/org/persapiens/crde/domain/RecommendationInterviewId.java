@@ -18,8 +18,8 @@ public class RecommendationInterviewId implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private long interview;
-
     private long recommendation;
+
+    private long interview;
 
 }

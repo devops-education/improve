@@ -18,8 +18,8 @@ public class ChallengeInterviewId implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private long interview;
-
     private long challenge;
+
+    private long interview;
 
 }
