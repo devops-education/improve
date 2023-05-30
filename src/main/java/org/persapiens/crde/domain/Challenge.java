@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -55,17 +56,6 @@ public class Challenge implements Serializable, Comparable<Challenge> {
     @Column(nullable = false, length = LENGTH)
     private String tags;
 
-    /* to be removed
-    @Column(nullable = false, length = LENGTH)
-    private String interviewQuotes;
-    @Column(nullable = false, length = LENGTH)
-    private String abstracts;
-    @Column(nullable = false)
-    private long amountOfInterviews;
-    @Column(nullable = false, length = LENGTH)
-    private String allText;
-    */
-
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Singular
     @OneToMany(mappedBy = "challenge")
@@ -79,7 +69,7 @@ public class Challenge implements Serializable, Comparable<Challenge> {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Singular
     @OneToMany(mappedBy = "challenge")
-    private Set<ChallengeInterview> challengeInterviews;
+    private SortedSet<ChallengeInterview> challengeInterviews;
 
     @Override
     public int compareTo(Challenge o) {

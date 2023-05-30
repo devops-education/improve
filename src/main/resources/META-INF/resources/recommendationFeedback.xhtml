@@ -6,6 +6,7 @@
     xmlns:h="jakarta.faces.html"
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="crde.persapiens.org"
+    xmlns:d="jakarta.faces.composite/crde"
     xmlns:fn="jakarta.tags.functions"
     template="/layout/template.xhtml">
     <ui:define name="content" >
@@ -159,17 +160,9 @@
                     <c:text readonly="true" value="#{recommendationFeedbackCrudMBean.bean.recommendation.theme.value}" label="Theme" />
                 </h:panelGrid>
 
-                <p:accordionPanel multiple="true" activeIndex="">
+                <p:accordionPanel multiple="true" activeIndex="0">
                     <p:tab title="Interviews">
-                        <p:dataTable var="recommendationInterview" value="#{recommendationFeedbackCrudMBean.bean.recommendation.recommendationInterviews}">
-                            <p:column headerText="P" field="interview.interviewee" />
-                            <p:column headerText="Resume">
-                                <h:outputText readonly="true" value="#{fn:replace(recommendationInterview.resume, '\\n', '&lt;br/&gt;')}" escape="false" />
-                            </p:column>
-                            <p:column headerText="Quote">
-                                <h:outputText readonly="true" value="#{fn:replace(recommendationInterview.quote, '\\n', '&lt;br/&gt;')}" escape="false" />
-                            </p:column>
-                        </p:dataTable>
+                        <d:recommendationInterviews value="#{recommendationFeedbackCrudMBean.bean.recommendation.recommendationInterviews}" />
                     </p:tab>
 
                     <p:tab title="Tags">

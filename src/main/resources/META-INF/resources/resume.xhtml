@@ -6,6 +6,7 @@
     xmlns:h="jakarta.faces.html"
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="crde.persapiens.org"
+    xmlns:d="jakarta.faces.composite/crde"
     xmlns:fn="jakarta.tags.functions"
     template="/layout/template.xhtml">
     <ui:define name="content" >
@@ -52,15 +53,7 @@
 
                     <p:accordionPanel multiple="true" activeIndex="0">
                         <p:tab title="Interviews">
-                            <p:dataTable var="recommendationInterview" value="#{bean.recommendation.recommendationInterviews}">
-                                <p:column headerText="P" field="recommendationInterview.interview.interviewee" />
-                                <p:column headerText="Resume">
-                                    <h:outputText readonly="true" value="#{fn:replace(recommendationInterview.resume, '\\n', '&lt;br/&gt;')}" escape="false" />
-                                </p:column>
-                                <p:column headerText="Quote">
-                                    <h:outputText readonly="true" value="#{fn:replace(recommendationInterview.quote, '\\n', '&lt;br/&gt;')}" escape="false" />
-                                </p:column>
-                            </p:dataTable>
+                            <d:recommendationInterviews value="#{bean.recommendation.recommendationInterviews}" />
                         </p:tab>
 
                         <p:tab title="Tags">
@@ -112,15 +105,7 @@
 
                     <p:accordionPanel multiple="true" activeIndex="0">
                         <p:tab title="Interviews">
-                            <p:dataTable var="challengeInterview" value="#{bean.challenge.challengeInterviews}">
-                                <p:column headerText="P" field="challengeInterview.interview.interviewee" />
-                                <p:column headerText="Resume">
-                                    <h:outputText readonly="true" value="#{fn:replace(challengeInterview.resume, '\\n', '&lt;br/&gt;')}" escape="false" />
-                                </p:column>
-                                <p:column headerText="Quote">
-                                    <h:outputText readonly="true" value="#{fn:replace(challengeInterview.quote, '\\n', '&lt;br/&gt;')}" escape="false" />
-                                </p:column>
-                            </p:dataTable>
+                            <d:challengeInterviews value="#{bean.challenge.challengeInterviews}" />
                         </p:tab>
 
                         <p:tab title="Tags">

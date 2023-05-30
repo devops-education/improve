@@ -29,9 +29,9 @@
         <findsecbugs-plugin.version>1.12.0</findsecbugs-plugin.version>
         <findbugs-annotations.version>3.0.1</findbugs-annotations.version>
         <jdepend-maven-plugin.version>2.0</jdepend-maven-plugin.version>
-        <maven-pmd-plugin.version>3.20.0</maven-pmd-plugin.version>
-        <maven-checkstyle-plugin.version>3.2.2</maven-checkstyle-plugin.version>
-        <checkstyle.version>10.10.0</checkstyle.version>
+        <maven-pmd-plugin.version>3.21.0</maven-pmd-plugin.version>
+        <maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
+        <checkstyle.version>10.12.0</checkstyle.version>
 
         <check.dir>src/static-analysis</check.dir>
         <checkstyle.dir>${check.dir}/checkstyle</checkstyle.dir>
@@ -44,7 +44,7 @@
         <checkstyle.suppressionsLocation>${checkstyle.dir}/checkstyle-suppressions.xml</checkstyle.suppressionsLocation>
         <checkstyle.headerLocation>${checkstyle.dir}/checkstyle-header.txt</checkstyle.headerLocation>
         <checkstyle.excludes/>
-        <duplicate-finder-maven-plugin.version>1.5.1</duplicate-finder-maven-plugin.version>
+        <duplicate-finder-maven-plugin.version>2.0.1</duplicate-finder-maven-plugin.version>
         <duplicate.ignoredResourcePattern>(application.yml)</duplicate.ignoredResourcePattern>
         <duplicate.ignoredClassPattern>()</duplicate.ignoredClassPattern>
 

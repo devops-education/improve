@@ -6,10 +6,12 @@
     xmlns:h="jakarta.faces.html"
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="crde.persapiens.org"
+    xmlns:d="jakarta.faces.composite/crde"
     xmlns:fn="jakarta.tags.functions"
     template="/layout/template.xhtml">
     <ui:define name="content" >
-        <c:crud titleText="Challenges on DevOps Education" titleStyleClass="challenge" managedBean="#{challengeFeedbackCrudMBean}" showInsert="false" showUpdateActionLink="false">
+        <c:crud titleText="Challenges on DevOps Education" titleStyleClass="challenge" 
+                managedBean="#{challengeFeedbackCrudMBean}" showInsert="false" showUpdateActionLink="false">
             <ui:define name="listColumns">
                 <f:facet name="header">
                     <p:inputText id="globalFilter" onkeyup="PF('dataTable').filter()" style="width:305px"
@@ -17,14 +19,16 @@
                     
                     <p:spacer width="20px" />
                     <p:commandButton value="Challenge Tags" onclick="PF('challengeTagDialog').show()"/>
-                    <p:dialog header="Challenge Tags" widgetVar="challengeTagDialog" showEffect="fade" closeOnEscape="true" closable="true">
+                    <p:dialog header="Challenge Tags" widgetVar="challengeTagDialog" showEffect="fade" 
+                              closeOnEscape="true" closable="true">
                         <p:graphicImage value="#{resource['images/crde/challenge-tag-tag.jpg']}" width="600" height="600" />
                     </p:dialog>
                 </f:facet>
 
                 <p:column responsivePriority="1" headerText="Main Idea" field="challenge.mainIdea" filterable="false"/>
 
-                <p:column responsivePriority="3" headerText="Interviews" field="challenge.challengeInterviews.size()" style="width: 110px;"/>
+                <p:column responsivePriority="3" headerText="Interviews" field="challenge.challengeInterviews.size()" 
+                          style="width: 110px;"/>
 
                 <p:column responsivePriority="3" headerText="Recommendations" field="challenge.links.size()" style="width: 170px;"/>
 
@@ -122,17 +126,9 @@
                     <c:text readonly="true" value="#{challengeFeedbackCrudMBean.bean.challenge.theme.value}" label="Theme" />
                 </h:panelGrid>
 
-                <p:accordionPanel multiple="true" activeIndex="">
+                <p:accordionPanel multiple="true" activeIndex="0">
                     <p:tab title="Interviews">
-                        <p:dataTable var="challengeInterview" value="#{challengeFeedbackCrudMBean.bean.challenge.challengeInterviews}">
-                            <p:column headerText="P" field="interview.interviewee" />
-                            <p:column headerText="Resume">
-                                <h:outputText readonly="true" value="#{fn:replace(challengeInterview.resume, '\\n', '&lt;br/&gt;')}" escape="false" />
-                            </p:column>
-                            <p:column headerText="Quote">
-                                <h:outputText readonly="true" value="#{fn:replace(challengeInterview.quote, '\\n', '&lt;br/&gt;')}" escape="false" />
-                            </p:column>
-                        </p:dataTable>
+                        <d:challengeInterviews value="#{challengeFeedbackCrudMBean.bean.challenge.challengeInterviews}" />
                     </p:tab>
 
                     <p:tab title="Tags">
