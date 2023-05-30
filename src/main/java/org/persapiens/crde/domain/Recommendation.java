@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -55,17 +56,6 @@ public class Recommendation implements Serializable, Comparable<Recommendation> 
     @Column(nullable = false, length = LENGTH)
     private String tags;
 
-    /* to be removed
-    @Column(nullable = false, length = LENGTH)
-    private String interviewQuotes;
-    @Column(nullable = false, length = LENGTH)
-    private String abstracts;
-    @Column(nullable = false)
-    private long amountOfInterviews;
-    @Column(nullable = false, length = LENGTH)
-    private String allText;
-    */
-
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Singular
     @OneToMany(mappedBy = "recommendation")
@@ -79,7 +69,7 @@ public class Recommendation implements Serializable, Comparable<Recommendation> 
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Singular
     @OneToMany(mappedBy = "recommendation")
-    private Set<RecommendationInterview> recommendationInterviews;
+    private SortedSet<RecommendationInterview> recommendationInterviews;
 
     @Override
     public int compareTo(Recommendation o) {
