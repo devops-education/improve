@@ -125,7 +125,7 @@
                 <p:accordionPanel multiple="true" activeIndex="">
                     <p:tab title="Interviews">
                         <p:dataTable var="challengeInterview" value="#{challengeFeedbackCrudMBean.bean.challenge.challengeInterviews}">
-                            <p:column headerText="P" field="challengeInterview.interview.interviewee" />
+                            <p:column headerText="P" field="interview.interviewee" />
                             <p:column headerText="Resume">
                                 <h:outputText readonly="true" value="#{fn:replace(challengeInterview.resume, '\\n', '&lt;br/&gt;')}" escape="false" />
                             </p:column>

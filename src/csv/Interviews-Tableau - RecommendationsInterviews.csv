@@ -1,0 +1,677 @@
+Interview,Recommendation,Interview Quotes,Abstracts
+1,1,"Amazon sometimes has some agreements, which I think now that the Federal Institute is doing, that it makes this student accounts available that they could test it for a period.","Cloud service companies such as AWS, through a contract with an educational institution, can provide the computing resource for the student's use."
+3,1,"Most of these tools have free layers, in the case of Cloud providers. All three of the main ones have an education-oriented version, and that is very good. This for the teacher is a very great facilitator.",All three main cloud providers have an education-oriented version.
+4,1,"I recommend [...] Moving all teaching to a cloud. [...] contact AWS. They have a student program, or Google, with Ali Baba, Azure, and IBM Cloud.","Use student program cloud services like AWS, Google, Azure or IBM Cloud to eliminate hardware and network limitation for students."
+7,1,"There were times when I combined a set of free services to be used, Heroku. I combined some free services to run these things. I already had a partnership to use closed [...] there is Red Hat Academy, right, where you can use OpenShift and everything else in the context of the effort you want to make. So, this kind of thing helps a lot.",Use private cloud services through academia-industry partnerships such as Red Hat Academy.
+12,1,"They have a real experience with respect to Amazon, it's pretty simple, and you can get a free Amazon, you just have to register. ",Amazon cloud provider has a free plan helpful to students.
+1,2,"Set up scenarios that they can run on their computer.
+
+Sometimes give up certain things you would like to teach [...] to the detriment of the student not having the ability to perform.
+
+Solutions that the student can run on his computer. [...] adapt to something perhaps with less computational demand.","Build scenarios that students can run on their own computer.
+
+Give up teaching content that the student cannot run on their machine.
+
+Take advantage of the student's own computational resource and adapt to something that requires less computational demand."
+1,4,This was somehow harmonized.,Define what are the devops concepts.
+1,5,"You can't evaluate with proof; you have to assess with projects with some activity.
+
+With some practical activity.","You can't assess students' DevOps learning with a test, it's necessary to assess with projects, with some kind of hands-on activity.
+
+DevOps teaching with practical activities."
+2,5,"Taking a test, simply evaluating him, is even a way of doing this, but in this more practical approach, I believe that the student is better prepared and we are able to evaluate, in fact, the most important aspects of his education [.. .] If he is really acquiring that knowledge, what we really wanted to convey in that particular topic, in that particular subject.",Prefer practical assessments to written tests in order to verify student learning on the subject.
+3,5,"We have adopted project-based assessment a lot [...] the assessment of this project puts a student in his context to test in practice or simulate, in practice, a little of what he saw during classes.",Prefer assessment based on practical projects.
+5,5,"From a practical point of view, I simply pass on the exercise.
+
+I think that proof would not be a nice deal, but it would be more or less certification from AWS, for example, from Azure, Google, and that is not the purpose. [...] Taking the test, written, open, I do not like it, I do not like the test model as an assessment, I do not think it is cool, I prefer to work with more practical things.","Evaluate through practical exercises.
+
+The assessment must be practical."
+7,5,You propose a practical challenge to solve a problem. I think the students end up learning more.,Evaluate through practical challenges.
+1,7,I think a potential candidate is GNS3.,The GNS3 tool is a potential candidate as a tool for teaching DevOps.
+1,8,"All the DevOps tooling behind it like [...] the ansible or terraform here, or any of those other flavors of automation and deployment and stuff like that you can use.",Ansible as deployment automation tools can be used in teaching DevOps.
+1,9,"For me, the approach, from the point of view of the teaching method, would be based on projects and practical activities throughout the course.
+
+It will always be project-based.
+
+Being able to evaluate the actions has to be a script of practical actions that the student has to carry out, and you will evaluate while that student is doing that there.","Incremental teaching method based on projects and practical activities.
+
+DevOps teaching should be project-based.
+
+Create script for practical devops activities."
+2,9,"So, I think it's more fruitful, didactically, pedagogically, teaching in this way, with the most practical approach.",Use a practical approach.
+3,9,"Development classes [...] want to understand better the issue of DevOps related to continuous delivery processes or how it translates into practice and into delivery tools and models that streamline application building.
+
+Teach DevOps [...] how it applies in practice.","Teach continuous delivery in a more practical context for development classes, using tools and delivery models.
+
+Teach devops in a practical way by applying it."
+5,9,"I cannot see a discipline, a DevOps teaching that is not hands-on [...] That is not getting hands-on and making people at least exercise the tools.",DevOps disciplines should use hands-on activities.
+6,9,"There is much technology on the market [...] you cannot cover everything, right? However, at the same time, just giving the concept, I do not think it is enough. So you have to make a choice. I will teach this here.
+
+It needed to be some practical project [...] Not to be just in the theory part.","Teaching must be practical, not just theoretical.
+
+Teaching needs a practical project, not just theoretical teaching."
+7,9,"You cannot teach DevOps only in theory. You have to experience it. You have to have practical experimentation for that.
+
+Build this entire journey based on practical, incremental activities or missions that are all correlated so that the lessons learned during these practical activities and revisiting the theory of knowledge can flow into a project that involves a set of decision-making, which also in addition to the subjects theoretically covered in the room.","Teaching devops should be practical, not just theoretical.
+
+Build an incremental teaching journey based on activities and missions, always combining practical activities with theoretical knowledge."
+10,9,"I've tried to be very incremental. Um, first teach the value of tests, then write the script to build everything on your desk. You don't need any you're alone. ... Then break it down into several components and build them one by one, then put an Artifactory in the middle. So you have the dependency. ... So you can imagine that each people in the group is like a different team in the world.",Try to be very incremental. Everything on your desk first. Splits into several components. Build them one by one. Start working in group.
+1,10,"The practice that should occupy eighty percent of the class there, at least.
+
+The practical discipline has a balance between concept and practice, with the practice being the most important.
+
+The concepts need to be objectively presented, but there is not much discussion about.","The practical part must occupy at least 80% of the class.
+
+Balance the presentation of the concepts and the practicals.
+
+Do not delve so deeply into discussions about the theoretical part of devops."
+8,10,"My classes are about an hour lecture. And then the other hour and a half is lab it's hands-on, you know, I give them a concept, let's go do it. And by doing it, that's where it really sticks.",Teach each DevOps concept using one hour lecture followed by one hour and a half lab hands-on.
+10,10,"First year I did a lot of concept on the whiteboard, um, and then went to exercise for the students to practice. It's not efficient.
+
+That's why we build a class where we have a ratio of about one hour of classroom concept teaching on the whiteboard or something at three hours where they actually type on the keyboard of practical session. I think that's important. Otherwise they don't see it.","Is not efficient to have more theoretical part than practice part during the course.
+
+One hour of classrom concept teaching and three hours of practical session."
+11,10,"So all of us, we covered a bit in really in the course, but also the, I mean, the lectures, but also they practice that in the lab.",Make use of labs and lectures.
+1,11,"The strategy we used was to divide the workload in half, divide the workload in half [...] and occupy half of this workload with content that is more suited to the area of networks [...] And half of this with the one with content that has more aptitude for the programming area.",Divide the workload of subjects that are related to networking and programming.
+2,11,"I believe that for DevOps, you have this balance [...] if you go to a course, that the focus is more development [...] Taking students there to see the other side [...] See Ops and the guys over there from Ops when you can have the opportunity to see more of the Dev too.",Seeking balance in teaching development and operation.
+1,12,"I had to delegate this responsibility to the student.
+
+When you do not have resources in the structure you are linked to, as an institution, you have to delegate that the student really finds his ways.","Delegating the responsibility for finding adequate infrastructure for the student when it is not possible to obtain the necessary resources from the institution.
+
+Delegate responsibility to the student."
+2,13,"I like to base it on a textbook because I think a sequence is evident for the students, right? We can even choose some chapters, even making an essential part of this material [...] we research several things to set up our class. Still, having a backbone formed by literature I think it's always important.",Using a textbook as a basis and to give students a better idea of the sequence of the course contents.
+12,13," I was looking for books to use. And, um, you know, I started to look at the books from Jane Kim. Um, and essentially I found this DevOps handbook, which has really not written as a textbook, but it's, it covers it's, it's built around the three ways of DevOps. So the first way is the notion of flow. The second way is the notion of, um, feedback. And the third way is continual learning and experimentation.
+
+So this book [DevOps Handbook] is very well done in this sense [...] it goes to the foundations of devops and gets to the different key ideas, right?
+
+The lectures, um, for the first part it's okay. I think for, until the midterm to have just get essentially through the book.
+
+The book has a lot of case study and examples like Facebook, Google, LinkedIn, uh, Netflix.","Take Gene Kim's book DevOps Handbook as a reference to prepare a DevOps class.
+
+Devops Handbook goes to the foundations of DevOps and gets to the different key ideas.
+
+Use DevOps Handbook to create the lectures.
+
+Find books like DevOps Handbook that have industrial case studies about Facebook, Google, etc."
+2,14,"There are a [...] series of features to be developed, and [...] the student has been trained for this. But other aspects related more to putting the system into production, to be careful [...] after the procedure is operational, not focusing on factors related to the system's functionalities anymore, but directing to non-functional aspects, then the students they need to have a better sense of it.",Work on improving students' skills related to non-functional requirements.
+2,15,"The microservices tool is one of the tools I have been using with them. A device, an environment in which we put the students' solutions there and they can see more of the Continuous Integration part there.
+
+These systems being made available and then with the creation of the DevOps tool from the IFRN cloud, the microservices system there, it was then possible for us to have this more practical view of the process as a whole. So, I have adopted it in all semesters, including, I have always asked students to work with this tool.
+
+Having this system already in the air, I also believe that it is another gain, why? Because as you advance in the themes, you can already put look, this aspect here that we are working on, you will have already contemplated in the system through this, this and this.","Use of a learning tool to facilitate understanding of the concept of Continuous Integration.
+
+Using a learning tool helps in DevOps teaching.
+
+Using a learning tool helps in DevOps teaching."
+6,15,"When it comes to teaching devops concepts, like, continuous integration, there will be a tool.",Use tools while explaining the continuous integration concept.
+2,16,"The importance of actually having a discipline like this in the curriculum talking about these themes.
+
+We are going through a matrix reformulation process,[...] this part of the workload and this discipline, really, the usefulness and one of the defenses that were made, was precisely that the discipline existed in the course, precisely because at another time, these topics would not be considered. So that's why it's important to have a discipline like that in the curriculum talking about these themes.
+
+In a course like ours, in development, having a discipline like this, I think it is important indeed.
+","DevOps deserves a discipline in the curriculum.
+
+Be concerned with the course's curriculum, maintaining and creating DevOps disciplines.
+
+DevOps deserves a discipline in the curriculum of courses focused on software development."
+2,17,"We can assess teamwork in students, like those who are collaborating, those who are more overloaded, those who are perhaps less overloaded, those who develop and deliver more features, those who do not cooperate with teamwork.",Evaluate level of participation and difficulty of students in teamwork.
+6,17,"The evaluation part [...] the recommendation would be to try to come up [...] some project or some challenge in the project itself that involves collaboration between people. Be able to divide the class there, the students into groups and each one will attack a problem and then everything has to come together, right? So, watch them.","Assess students through project and group exercises, more specifically the collaboration of each one within the group."
+2,18,We can monitor this part of the evaluation a lot due to their activity. So part of it is the cloud system tool that allows us to do this monitoring.,Monitoring of students through activities in a learning support environment.
+2,19,"Usually, they already arrive with the system, sometimes deployed in another environment, which is quite common for them to use this environment. Then we have to bring them in, asking them to use ours.",Ask students to adopt the tools used by instructors.
+2,20,"Suppose the course is a development course or one that involves the operation part. In that case, it is essential to have a discipline that centralizes this information, a domain, perhaps, later on, that gathers these concepts, already preparing the student more for the market.[...] a rather considerable workload to have this dynamic with the students.",A discipline must have a considerable workload to centralize and harmonize development and operation information.
+2,21,"They use the system, and I always ask them to socialize. Now, of more remote education, we're doing that they associate what they did.  And when we are at this moment of socialization, the students can take advantage of the gain and knowledge that another team had in an aspect that, at times, they had not noticed.",Socializing knowledge acquired in practical activities is essential for learning.
+8,21," I teach them about social coding.
+
+It's tough to get the students to be more social if you will, in their coding practices and do pair programming, uh, and follow the, get feature branch workflow. ","Teach social coding.
+
+Get the students to be more social in their coding practices and do pair programming."
+2,22,"They choose to [...] put this system on the air for a customer to see, right? In this aspect, the client is the teachers themselves who are evaluating.",Adopt a more professional approach in which teachers act as clients.
+2,23,"The aspects that we address about continuous integration, [...] use of the tools we use in the environment, on a day-to-day basis, facilitate development that speeds up delivery; this is one of the topics we have. In the discipline, I believe that these themes should be part of their curriculum; they should contact this theme there.",The Continuous Integration and industry tools must be in the curricula.
+2,24,"But as there isn't, we find different materials; we have several publications.","Combine the various materials and publications available to make up for the lack of a unified, complete, and high-level material."
+2,25,"[...] With the addition of our Project of Software Development team of professor Sales, he has access, so, more within the tool, he already knows the most diverse aspects. It was already possible for us to solve several difficulties.[...]","When using a tool to help teach, you must have a good command of it and the necessary permissions/accompaniment of someone with such permissions to deal well with the possible difficulties during its use in the discipline."
+3,26,The same DevOps discipline now applies at the institution where I teach concerning classes focused on security and vulnerability management and courses focused on application development and construction.,You can use the same discipline of DevOps for operation groups focused on safety and development groups.
+3,27,"In DevOps [...], the security teams are much more in understanding what it represents from the point of view of vulnerability management and architecture, from the network concerning the cloud.","Teach the part of cloud vulnerability, architecture, and network management to the security classes in DevOps."
+3,29,"The recommendation is to understand the learning context of the class.
+
+Adapt the menu according to the student profile you have.","Identify the most compatible DevOps scope for each class.
+
+Adapt the course according to the profile of students."
+3,30,"Having a unique mechanism and an initial step, the final step you want to reach within this test, makes it much easier when you teach, when you do, especially for examples.
+
+Explain how the methodology can be applied, with examples and even tools.","Make an example to the student in a practical context from the initial stage to the final step.
+
+During the explanation of how to apply devops methodology, make use of example including tools."
+4,30,I am not going to deliver a ready-made recipe. I am going to use different tools. diverse methodologies that are also tools for them to try to apply within their process.,Use different tools and methodologies.
+11,30,"The lab is like in the lab, because it's a very practical ...   we've implemented an application, uh, a web application, which, uh, in, currently we are using the application we use is a banking application. It is the online banking where people can go in and create an account or transfer between accounts and do all those kind of thing.",Provide sample application in the labs.
+12,30,"In some topics, maybe it's introducing a bit more. So say that you're getting in the topic in the, in the lecture where, um, containers are, are relevant and then deployment is relevant. Then maybe the way is to discuss a bit more maybe than use Kubernetes and Docker, give concrete examples and stuff like that that supports the reading that they have done.",Show concrete examples when you are presenting some tool like Kubernetes and Docker.
+3,32,"Present concepts that are well established in the community, such as axes, [...] in the DevOps process.","Introduce well-established concepts by the DevOps community, such as the DevOps pipeline process."
+9,32,I simply want them to be able to set up some kind of a pipeline and understand how it works.,Teach how to set up a pipeline and explain how it works.
+3,33,"Present [...] cases on how this translates, [...] eliminating the silos between operations and development.
+
+Identify the scenarios, Google's case. At Google, they have a solid concept of DevOps and the idea of the role of, for example, the SRE professional in terms of environment resilience within the DevOps framework.","Present the use case of devops, for example, the elimination of silos among the development team.
+
+Identify the market use cases of devops such as the Google case and the relationship between DevOps and the SRE professional to illustrate the importance of DevOps concepts."
+12,33,"The students were still very satisfied with the course [...] we built on the labs of last summer, but may that kind of a case study kind of fixtures case study and the students pretty much like it.
+
+The lectures are more the, you know, sharing the experience and, and zooming in and some of the concepts.","Try to use case study together labs.
+
+Use lectures to show case studies and emphasize in some of the DevOps concepts."
+3,34,Always start with culture before moving on to teaching or tool-based demonstration.,Start teaching DevOps from the culture. Only then demonstrate with tools.
+3,35,"Build a cohesive [...] laboratory in a specific setting that can better demonstrate the concept being taught there.
+
+So, the recommendation is to abuse the use of online solutions, which facilitate this process, but at the same time, stop the journey [...] So, the recommendation is to abuse the use of online solutions, which facilitate this process, but at the same time, stop the journey.","Delimit a specific set of tools to build a scenario in order to demonstrate a concept to be taught.
+
+Standardize the use of tools in a well-defined setting."
+3,36,"If it's a case where I don't have access to almost anything, I need to go to a cloud to take a class with the student, even if it doesn't involve the course itself. I need to do everything remote.","For a scenario with limited resources, it is recommended to make use of public cloud services."
+7,36,"Everyone is already using Google or Amazon, with their Kubernetes environments available for you to use.","Use available cloud services (AWS, Google) with Kubernetes."
+8,36,The environment setup is key. What I would love to do is have an environment in the cloud. That's always consistent. That would kind of be the best.,Do environment setup in the cloud is the best option because they are always consistent.
+9,36,"The recommendation is we just get them off their local machines and get them working off cloud servers or something like that. So that at least a, you can kind of script the stuff be if it gets messed up, there's no risk. You just tear it down and build a new one.",Get students off their local machines and get them working off cloud servers.
+12,36,"The third lab, that's what we do since last winter. We didn't do it last summer, did deploy on, on, on AWS. So we have, we have built accounts on Amazon, so they can go all the way.",Make the students experiment how to use a cloud provider like AWS.
+14,36,"I think maybe the, um, the using external cloud services would give you the better in terms of DevOps philosophy, let's say, because then you're really pushing and you bring stuff outside of the academy ecosystem.","Using external cloud services would give you the better in terms of DevOps philosophy, because then you're really pushing and you bring stuff outside of the academy ecosystem."
+3,37,Put the student in an efficient context: he can see in class a tool that he has probably seen someone using in the company or has heard of. This makes for much better immersion in class.,"Search for references from practical contexts experienced by students to easy the understanding, using popular tools."
+4,37,"So, suppose someone had a more traumatic experience at such a stage of the delivery process. In that case, you know how to use it at the right time with them and impersonate with them, talk, look, as you told me in that part, a solution that might work for you, again, because there is no ready-made solution, it would be to apply this technology to try to mitigate or resolve it.
+
+I prefer to take it out during class to show the day-to-day blocks delivered in the end. However, the recommendation is to use the infrastructure blocks to feed your course, as didactics. Do you speak, look, remember the block we had? The dependency, the software is made in Java 8, and we tried to compile a machine that had Java 15. Do you see this problem? How do we solve it? We analyze, run some process analysis frameworks because we can use any language as a tool, but use it as an experience.","During the explanations, make use of the difficulties, opinions and experiences faced by the students, pointing out solutions using Devops.
+
+Use the difficulties with infrastructure in favor of learning, conducting discussions among students."
+11,37,I spent a couple of discussing about the concepts discussing about the issues.,Promotes discussions about DevOps concepts and related issues.
+3,38,"This menu will have some possibilities to create mutations in this menu because the DevOps concept is very open; right, it encompasses different areas between development, security, and operations.","Create mutations in the menu due to the breadth of DevOps encompassing the development, operation, and security part."
+3,39,"This curriculum, a part of it, do you understand? With about forty percent, about sixty percent fixed, which is culture, main historical characteristics of how it came about, what does culture represent, what it changes about development processes, security operations. The changeable part is the tools, where you will apply them or what matches you to the students within the classroom in the course syllabus.",Half of the curriculum with DevOps concepts/culture. Half the curriculum with tools.
+3,40,"For a project management class [...], I often had to introduce [...] based on direct analogies or analogies with other scenarios he has already encountered in the product management part to understand what I was speaking.","For project management class, it is necessary to introduce DevOps through direct analogies or using scenarios known to them during teaching."
+3,41,"Always focus on culture, the tools are excellent, they attract a student, they create a practical scenario, but oh, DevOps implementation errors in practice are mainly caused by companies and professionals who do not interpret this as a culture.
+
+More important [...] is to understand that concepts such as observability, development culture, communication, sharing are core. They are the core of what is proposed in relation to DevOps.","Emphasize the importance of the DevOps culture and propagate it.
+
+It is important to teach concepts such as observability and other cultural aspects such as sharing and communication."
+4,41,"Teach the DevOps culture: respect the individualities of your team, not looking to blame anyone but for solutions.","Teach the DevOps culture: respect the individualities of your team, not looking for blame, but for solutions."
+8,41,"The only way to teach culture, the only way to experience culture is to immerse the students in the culture. [...] one of the examples I give to my students is I say, you know, I took three years of Spanish in high school and I don't speak a word of Spanish, but I bet if I spent a summer in Spain, I would come back speaking, fluent Spanish. So I tell them: this class is your summer in Spain, right? We are going to live DevOps. We're going to experience DevOps. And that's the only way you can properly teach it.
+
+Working as an agile team and using the DevOps tools, but most importantly, living the DevOps culture.","Live DevOps and its culture is the best way to learn it.
+
+Living DevOps culture is more important than just learning DevOps tools."
+12,41,"Like, what do you teach in a DevOps course? Like, do you teach just technologies like Kubernetes and Docker? And, and I kept saying, no, this is not why I went back to university. I don't want to be just teaching techniques and tools because these will change over time.",Don't teach a DevOps course only focusing on tools and technologies because it changes over time.
+4,43,"And DevOps a lot in seeing this; they have different backgrounds, have other life stories, experiences that marked them in different ways and knowing when to present a new tool, listen to what these people have.","We seek a communication between students and teachers, where attention is paid to the students' opinions."
+8,43,"So I let them know that if you asked me the same question a second time, I promise I won't answer it the same way. I'll try to find some different way to make that connection with you. Right? So that you understand it, given the background that you have. Given the skills that you have. Uh, so again, I try to immerse them in this culture.",Teaching customized based on students background.
+4,44,Nor use VM virtual machines because the virtual machine demands hardware resources. And it's not always that you have availability to upload two virtual machines on the student's device.,"Avoid using virtual machines because they demand hardware resources, which are not always available on the students' devices."
+1,45,"All the devops tooling behind it like [...] the ansible or terraform here, or any of those other flavors of automaters and deployment and stuff like that you can use.",Terraform as a deployment automation tool can be used in teaching devops.
+4,45,"I am going to upload the environment here on AWS using Terraform. So, provision the students' machines with TerraForm, explain to the students what you are doing, at the right time, on schedule, but decouple the need for the infrastructure.",Use Terraform as a provisioning tool (Infrastructure as Code).
+4,46,"To put your hand on something, at least once every, depends a lot [...] on the schedule, but every, I'll put it every eight hours is a very subjective metric, but if you give something practical every eight hours with examples for the student to interact, so you don't stay in a lecture for hours on end talking, it's essential to know how to divide and balance.
+
+He has up to twenty, twenty-five minutes, he has your attention. So, if you cannot break that, alternate the tone of voice you speak, interact with him. If you just talk, you quickly lose the student after twenty minutes.
+
+We need to adapt to the environment and try, every twenty to thirty minutes, to interact with the student so that he does something to keep his attention [...] Always propose challenges.","Use practical examples regularly for the student to interact.
+
+Interact with the student and break the tone of voice every 20 minutes, inhibiting their loss of attention.
+
+Interact with the student to keep him alert, proposing challenges, for example."
+4,48,"So, I think it's essential for you to break both the tone of voice, the didactics you're using, put examples, you'll explain something theoretical, like Lean, for example, does an exercise that simulates the Lean process, not in software, it can even be with software, it can be with blocks, use Trello, interact with the student because if you spend more than twenty minutes talking, anyway, any situation, even in a typical lecture, you lose the student, you lose the audience.","Use examples with students to teach theory. For instance, we are using blocks or Trello to teach Lean."
+4,49,"Suppose it's a class that, specifically, we were given the needs and characteristics before, such as access limitations, limited software installation on the machine. In that case, I prepare the class, and we have the schedule as a whole, which is ready; it has a beginning, middle, and an end.","Seek to know in advance the needs and limitations of the class, such as installing software, for example, to create a more efficient schedule."
+5,49,"If you are going to teach a software build class, for example, or unit testing, you need to assume that your class is in a certain place, let us say. You need to assume that your class is made up of developers, has a bit of knowledge and such, or you need to assume that your class does not have that much experience.","Identify the students' initial level of knowledge to do the course. For example, check if students can run unit tests that will be used in the software build class."
+4,51,"If it's a mixed class, we send students a document that shows them beforehand, right? What are the prerequisites for him to take the course, software, software versions, how to install, well documented.",Share course prerequisites with students in advance.
+4,52,These are documents that we send in separate stages of the course [...]. We break the infrastructure documents to do the Kaisen process within Lean-to unify the documentation so that the student understands the difficulty he faced and the problem he faces daily.,"Create student support examples and guidelines, breaks into parts to go through the steps gradually."
+10,52,"But it's been billed according to the right guidelines that we want them to use. So they can borrow heavily from the sample. They can see sample testifies, sample integration test, sample Docker files, componentization, et cetera.",Create examples and guidelines to help students develop their solution based on it.
+12,52,"We're building a couple of tutorials so that, you know, the ones that have less experience with certainly the testing can look at it.",We're building a couple of tutorials so that the ones that have less experience can look at it.
+4,53,So we break the infrastructure documents to do the Kaisen process within Lean-to unify the documentation so that the student understands the difficulty he faced and the difficulty he will meet daily.,Simulate real problems that the student will likely face in their daily lives.
+11,53,"So we employ someone in our team, a couple of people who work on implementing that, and we created some issues in the application, like some bugs.",Try to simulate a real scenario employing someone in the group to insert issues and bugs in students project.
+4,54,"From a didactic point of view, we leave one or two hours before each day; there is a specific infra team to answer any student's doubts.",There is a specific support team to answer students' questions about the related infrastructure part.
+4,55,"Realize how much you deviate because the student has a particular problem and loses his didactics a little. So, knowing how to limit it too, then work with the student, talk, look, and talk more calmly, because this situation is particular. There has to be a breakpoint because otherwise, you'll lose the other students.","Avoid messing around with specific problems faced by students, dealing in a personalized way at the right time."
+4,56,A task tracking tool. Then it can be Notion or Trello. I think it's essential.,Use a task tracking tool like Trello or Notion.
+4,57,"There must always be two tools, the stream that would be the zoom, Google Meet, any device that does that, Webex I don't know, it depends on the company.","Use a streaming tool like Zoom, Google Meet, or Webex in remote learning scenario."
+8,57,Because of the remote learning  [...] I've been teaching my classes on zoom.,Use Zoom in remote learning scenario.
+4,58,"I prefer Notion even though I work for Trello's company; I prefer Notion for a reason. I can export it in Markdown and directly version all documentation. So, for each day of the course, all the commands that we run or the additional content, I list them, interact with them, and interact together.","The Notion tool allows exporting to Markdown, enabling the versioning of documentation for each day of the course: all executed commands and additional content."
+4,59,"And a code repository, you can GitLab, Github, which you can share with students, this situation.",Use a code repository tool like Gitlab or Github.
+12,59,"They use GitHub. .. The only thing we really need is that the students give us, uh, access to their accounts.",Use Github with access to students accounts repositories.
+13,59,"This course has a very specific structure, which is not usual. Uh, the structure is that, uh, everything. Um, I think you have access to our GitHub repository and everything is, uh, available.
+
+Everything in this course was, uh, was, uh, done through the GitHub repository, there are many issues, there are many pull requests and the discussions between TAs and the students and grading everything is there.","Make public access the content of the course using the GitHub.
+
+Use Github to record grading, pull requests and discussions between teacher assistants and the students."
+14,59,"The student had to have the code that goes so git as a version control system, uh, GitHub GitLab, the, we had a Bitbucket on-premise also, uh, deployed inside the school.","Use github, gitlab or bitbucket as version control system tools adopted by the course."
+4,60,"We usually use Jenkins as an integration tool because it's open-source, it's everywhere, despite having other devices that do the job even better, but it's spread out, it's ancient.
+
+The software [...] built with Jenkins.","Use a Continuous Integration tool. in particular, Jenkins is open source and very widespread. 
+
+Use Jenkins to do continuous integration."
+5,60,"Jenkins, you do not pay anything, you install it on your server, and it has gone.",Use Jenkins.
+10,60,"They need Jenkins. So either you tell them to go install Jenkins, or what I've done is I say, Hey, here's a Docker image for Jenkins.
+
+Now I realize every day that I need testing and continuous, I mean, Jenkins is my friend.","Uses Jenkins through a Docker image.
+
+Jenkins can be chosen as DevOps tool."
+11,60,"And, and, uh, so in terms of the continuous integration server, and there are many different services available, but can we use Jenkins because it is a, it is free and, and a lot of companies are using, but there are some other options that can be used.",Jenkins can be use as continuous integration tool because it is free and lot of companies use it.
+14,60,"Let's go for something that we have more control on, uh, using for tools like Jenkins and and a stuff like Docker or Kubernetes was kind of good in a way to, uh, support the deployment and the, uh, like the building plus deployment stuff.",Use tools like Jenkins to have more control on support the deployment.
+4,61,"Notion or Trello [...], you need to have a two-way tool where you and the student interact. Not a Gist, for example, because the Gist, although you can only release it because the student needs to put their feedback there too. [...] There are some tasks that we set up there, a post mortem of the process that fails; I need a feedback tool that the student can also interact with.",Notion and Trello allow student and teacher interaction in two ways. Gist does not allow it.
+4,62,"So, I usually recommend it to instructors; I recommend it to students when they share it with me. Decrease the FPF rate of screen sharing because that's a lock. Zoom uses what it can if you don't limit it. So, we restrict ten FPS, for example, so that I don't consume too much of my or the student's CPU because I sometimes have to correct the exercise on his side.","Limit the zoom FPS rate to 10, avoiding excessive student and instructor resource consumption."
+4,63,"It would help if you observed each student and, and then, you have to listen a lot, too, what was the difficulty he had and where he arrived. So, then, we do a final assessment per student, but our perception of it. If he did well, if he had a lot of doubt, what was the point that generated the most suspicion for him?
+
+I tell them, I am not going to grade you on what you submit. I'm going to grade you on how you got there because getting there is not the point. It's the journey, right? That's the point. [...] I teach them that every failure is a learning opportunity. If you fail and you learn something, you get credit. It's not a failure because you've learned something, we're here to learn.","Individually assess the student's progress throughout the course.
+
+Grade students based on their learning journey and mistakes, not on what they submit. What's important is how they get there, because every failure is learning opportunity."
+8,63,"You can't just grade what they submit. You have to watch how they're working.
+
+For the assessment, as I said, I give them a lot of leeway in the beginning. Um, they can make mistakes on their Kanban board and still get full credit if they know what the mistakes are that they made. However, in later sprints, if they make the same mistakes, then I start taking points off.  So I give them time to learn, uh, so that they feel that they can make a few mistakes, take a few risks, um, and not get penalized for it.","Grade based how the students working their tasks and not only what they are submitting.
+
+For the assessment, the students can make mistakes in the beginning without fear of being penalized."
+9,63," If there's problems, I'll tell you where there's problems and you can go fix it, go get it, right. Go, go make it, do what it's supposed to do. You know, because in industry we're, we don't just get a one and done shot. We keep at it until it works. And so I bring that to the table and I think that provides a little less pressure on students.
+
+I tend not to get quite as hyper-focused on right versus wrong answers. ... so treating it as, as more of an assessment of maybe architecture, if you will, or an assessment of approach, as opposed to this is right, this is wrong. Uh, I think that's been fairly well received.","Students can fix their code problems. In industry, we keep coding until it works. It also provides a little less pressure on students.
+
+Do not focus your assessment on right versus wrong answers."
+12,63,"So people need to feel comfortable sharing, if they've made a mistake or not thinking that they're gonna have their headquarters. Right. Um, so when talking about that, if students have never worked in the context where, you know, people are blaming each other and stuff, it's difficult to understand I, to, to be concrete. And this is so crucial.",Create an environment that students feel comfortable with sharing about their mistakes and learn how with their teammates.
+4,64,"They also assess the course at the end; we send you a link and recommend you do this, consider some topics to take the NPS; I think the NPS is the universal metric for assessment, I don't know if you put it under the puts under the radar, the Net Promoter Score, from zero to ten, where zero to zero to seven is Detractor, eight is passive, nine to ten is promoter based on a set of questions that you cannot induce the student.
+
+When people come in to do this, this, this feedback with the students, understand, the students also talk to a person who is not me, who on the last day, I leave, it is a recommendation I give, I leave the conference to leave the students at ease, talking to this person, they make a mistake during the training and the person got annoyed, and with you inside, they will be a little, a little afraid to expose, although it is also by email.","Evaluate the course, performing an NPS (Net Promoter Score) with students.
+
+Teachers and monitors must not be present at the time of course evaluation by students."
+12,64,"You need to get the feedback, you don't get the feedback, right? So, and when we, when the students do the student evaluation, of course don't write much. So it's much easier if you can trigger this question.","Do not try to get feedback before a student assessment, as the student may feel fearful."
+4,66,"If possible, record at least one training for an autoscopy at the end. See if you have any language addiction, if there were any process that didn't fit the way you imagined, that would work, because when you're talking and doing, sometimes, there's a detail that it shouldn't.",Record a training for the teacher to assess language addiction and whether the class flowed as planned.
+4,67,"Mixing, theoretical and practical [...] is essential.",It is essential to mix the teaching of the theoretical part and the practical part of DevOps.
+4,68,"We need to talk about the theoretical part about Lean, which is the Toyota method, Kaisen is also very important, Agile which is significantly linked to the DevOps process.","In the theoretical part of DevOps, Lean, Kaisen, and Agile should be taught."
+4,69,"What is practical, from the menu, is to make an end-to-end software, [...] But, end-to-end, and the end, which is monitoring.","Make software from start to finish, going through the DevOps steps to the monitoring step."
+4,70,"Software build [...] deliver this to a VM, somehow, in the best way you understand, which is possible in your suite [...] You can provide it with Docker.",Perform continuous delivery through virtual machines or with Docker.
+4,71,"The software [...] a monitoring tool, in the end, for you to look at. [...] Look at a Grafana, for example, with Prometheus, which is free software, like that.",Use Grafana and Prometheus as monitoring tools.
+4,72,"Of the menu is to make an end-to-end software, to understand the software in its conception. We already deliver this to the student, ready. Because we're not going to create the software from scratch, because the code is already kind of polished, it's a code from a forum in Java, where we have some features that depend on the machine to do the build, so we're going to decouple.",Use a complete example project from places such as a java discussion forum.
+4,73,"So, the first thing, uncouple the database connection that is versioned in the source code. You can still version the String os; although it's not the best practice, you don't have to comment out the code to change the environment because TomCat will read it from there. Versioning in a git, using a continuous integration like Jenkins, for example, and a constant deploy, a continuous delivery with, it can be with an Ansible, it can be with any tool you deliver or in a VM or the Cloud.","Carry out the following practical activities during the course: the first step is to decouple the database connection from the system code, then version the code with Git, insert continuous integration with Jenkins, and finish with constant delivery using public cloud services or tools with Ansible."
+4,74,"Make it very clear, pedagogically, that I think it involves an exemplary sound configuration so that the student can hear you well, always with the camera open, even if the student doesn't open it, because he can't, but let him see you, that he feels this approach as much as possible.","Provide a comfortable learning environment for the student, such as remote teaching, which requires adequate audio and video equipment."
+4,75,"Within the menu, try to avoid making the student dependent on that stack you are teaching. So, if you're going to explain Jenkins, take half an hour to explain the pipeline in another tool, so he can see that it's possible. So he doesn't come out with the recipe ready. As much as we don't deliver it, the student creates a recipe in his head, and it won't fit in all of his daily routines. Then it will generate frustration. So, make it clear, look, can you see what we're doing? We're doing it for that reason, at Jenkins. Today we are going to use Bitbucket, for example, which is how we do it. One, as an example, correct?",Show the student that there are several ways and tools to do the task.
+5,75,"They said: teacher, I can do it in such language, I can do it in such a platform, can I do it like this? [...] So, I am not going to say that there were, I do not know, six, seven, different environments, right? That there was, but let us put two or three, right, different ones. So, for us, professors, we are often not proficient in all of these, right? So, then the person will have to clarify a doubt, then you say: man, I don't know. So, you decided to do it there, you kind of jump up, like, you know? The most we can do is try to convey the concepts, right? And when the person has a very big doubt like that, you say, boy, try to explain to me how this technology is there that you are using see if I can at least translate the things that I know, that is it.","Teach in a way that knowledge can be applied in different tools, but not focus on the possible specific problems of each technology."
+5,76,"I ask the students to implement a straightforward system, which will serve the entire subject. In this minor system, we're going to have tested; there's going to be built, there's going to be continuous integration, there's going to be deployment, you know?
+
+This part of the system, which I ask them to do to monitor the discipline [...] When you go to configure the tools and such, as you were the one who developed the system, it becomes easier, I believe for you to understand all the automation and such. However, at the same time, I see that the guys have much difficulty in doing it.","Use a simple example system made by students.
+
+Students build their own systems during the course in order to increase their understanding of automation."
+5,77,The point is to try to exercise as many tools as possible to provide everyone [...] with a range of things to apply in your daily life when you see the need.,Exercise as many tools as possible.
+5,78,"Because you have to have the mentality that you will have to get materials from different sources, right? ... you'll have to resort to gray literature, right, which is this literature from the blog, the medium, the Nubank or Netflix blog, which are sensational articles, but that don't have that scientific rigor, peer review, and such. So, like, I think the DevOps teacher needs to understand that he's in this environment, right?
+
+Material heterogeneity is the biggest challenge [...] you have to set up a class sewing the fonts. So, sometimes, for example, in my integration course, I have to give several concepts, right? For you to talk about continuous integration, you need to talk about version control. You need to talk about build. You need to talk about testing. There are several things that are part of continuous integration, right? So, git-flow is not in the book, you know? Branch, development models, that's not in the book.","Use various sources of DevOps study materials, such as gray literature, blog (medium, Nubank, Netflix).
+
+It is necessary to make use of several sources when creating the course."
+7,78,"Most of the references, the most interesting cases that I considered bringing to the room are posts on INFO2, on Metzone, Hacker News, Twitter posts, Airbnb case study, Glitch, Orbitz, and such; other cases of those that are much more interesting than necessarily, books or scientific academic articles.","Information in gray literature is more interesting to illustrate DevOps use cases: posts on INFO2, Metzone, Hacker News, Twitter, Airbnb case studies, Glitch, Orbitz."
+5,79,"This part of the system, which I ask them to do to follow the discipline, [...] I'm seriously thinking about the idea of ​​simply giving them a system.
+
+If I make this system, I can pass it on to people in a much simpler way, right? How do they do things and such.","Deliver a ready-made sample system for students to use.
+
+Using an example system designed by the teacher will give more confidence in supporting students during the course."
+5,80,"Maybe it makes sense for you to provide the environment for the students, right? And this provision, you can use a docker of life, which comes already, right?",Provide initial environment setup for students.
+10,80,"I ended up doing was to give each group a big virtual machine. And on that machine, they run three or four Docker images. Uh, one with Artifactory, one with Jenkins.","Give each group a big virtual machine. And on that machine, run three or four Docker images. One with Artifactory, other with Jenkins."
+5,81,"You need to talk about version control; you need to talk about build; you need to talk about testing; several things are part of continuous integration. So, git-flow is not in the book, you know? Branch, development models, that's not in the book. Then you start going to blogs and such, you know? Then, you will talk about software testing; if you were a software engineering book, this part of testing is extremely weak, so it is highly conceptual; there is nothing. Then you can get the articles.","Version control with git feature branch workflow, build, continuous integration, and software testing content should be taught."
+8,81, I teach them about the git feature branch workflow.,Teach git feature branch workflow.
+9,81,"Some of this even goes down to git right, because a lot of people coming in know something about git a lot don't um, in many ways, my opinion, which I realize is, is probably not widely shared is that even if we were restricted from a software engineering department perspective, almost everything we're teaching should be retooled along devops lines, uh.",Use git to teach how to manage the code.
+10,81,"We've introduced recently is a notion of digital branches and feature branches, for example, uh, linked to stories, but we try to just give them small individual tools.",Introduce the notion of digital branches and feature branches using small individual tools.
+5,82,"Something I don't do. I realize that I will need to do it, but it's precisely documenting, right? Those fonts, in case you need to revisit, eh, eh, because it's so easy, right? You open a blog and stuff, you close the tab, and it died like that. So, somehow you, you are always documenting, where you got it, where you got it from, keep these links, if you have to, if you need to revisit there in future versions of the course, I don't know.","Document the consulted material, facilitating future access."
+5,83,"For this part of continuous integration, [...] When you talk about continuous integration, there are several tools you can use. So, you can use Jenkins; you can use Travis; you can use Circle CI, now Github Actions is here, you know?","Use Jenkins, Travis CI, Circle CI and Github Actions in teaching continuous integration."
+8,83,"And then I teach them, CI continuous integration. I show them how to use Travis to automatically run the test cases.",Teach continuous integration using travis to automatically run the test cases.
+12,83,"From a tooling point of view, um, for the pipeline, we, we recommend Travis CI.",Use Travis CI for the pipeline.
+13,83,"There are many checks in this course, we had to make sure that the students had done this and that, and that these, uh, checks could be, uh, automatized by your students. And they had, they added some GitHub actions and to the repository.",Do automation with Github actions.
+14,83,I want the code to go through a pipeline. It could be Jenkins. It could be github actions. It could be gitlab workflow. It could be GitHub action.,"Use Jenkins, GitLab, or Github Actions as pipeline orchestration tools adopted by the course."
+5,84,"Jenkins, let's put it this way, he, even though he's challenging because he's not the easiest thing in the world to set up. These pains, I also think it's essential for the guys [...] Jenkins you don't pay anything [...] These pains, I also believe it is necessary for the guys when you get something a CI that works in the cloud and such, notice, hey, look how easy.","The difficulties of configuring CI tools like Jenkins are essential to student learning, facilitating a future transition to cloud CI tools."
+5,85,"The recommendation would be that it would be to get tools that are minimally relevant, right? And so that you can present the different cost-benefits of each one.",Introduce students to minimal relevant tools and their tradeoffs.
+9,85,I try to pick a few key ones.,Use few key tools.
+5,86,I always pass some written evaluation of the basic concepts [...] I like the students to express in their own words what they understood [...] mainly from the cultural part.,Use assessment writing of basic concepts and DevOps culture so that students can express what they understand in their own words.
+8,86," And the final exam, I keep, I keep the questions mostly conceptual, right. Because let's face it. If you understand the concepts, you can Google the details, right. But you don't know the concepts, you don't know what the Google, right. ... I do put some questions in that they would have only learned had they participated in the project.",Keep the exam questions mostly conceptual and about participation in the project in the final exam.
+9,86,"The exams are really more the conceptual or philosophical elements stuff, where there is a little more of a, a cut and dry response, or at least I try to structure them that way.",The exams have more conceptual or philosophical elements.
+5,87,DevOps [...] In the specialization course [...] you can break all this content into more extensive disciplines.,It is possible to break the teaching of DevOps into various disciplines in a DevOps specialization course.
+5,88,"So, there are some things that you cannot miss. All, if you see the cute little DevOps cycle figure there, right? All that part of compiling, testing, making, monitoring, and evaluating, I think all of this needs to be charged in some way; it has to come in somehow.","The basics of building, testing, deploying, and monitoring should be present in a DevOps course."
+13,88,"I would have some more, uh, time for, uh, for basics of, uh, basics of DevOps and the old technologies, and not only focus on the things that are, uh, that are very novel and very being developed right now. So, uh, because that would give students a better opportunity to, uh, understand the, uh, the other things as well.","Not just focus on the current, but teach the basics of DevOps and older technologies to a better understanding."
+6,89,"During creation [...] Everything is already prepared, and the groups are always the same [...] it is the same booklet, the same content, the same teaching didactics, so there is no preparation for each class, you know? It was just an initial preparation.",Standardize the teaching material for all classes.
+6,90,"Training is limited [...] we will have to cut it, right? Focuses on tools, but which tools. So, this was a big challenge, so to think about which themes are essential, which means to teach, within each piece, right?",It is necessary to choose which topics and tools are essential as the course time is limited.
+6,91,"the recommendation is to look at the market, search, see on Twitter, discussion groups, see what's hot on Google Trends. To know how to choose a tool that is more popular, right? That it is used more and that more people can enjoy the content there, right? Because they are tools they are already used to using.","Research market tools on Twitter, discussion groups, Google Trends, as they are probably the tools that students are used to using and will take advantage of in their work."
+7,91,"The recommendation is to see what the market is using, right? Moreover, trying to go with what is most used, like, it was no use messing with CRIO if everyone uses Docker.",Use the most relevant tools on the market like Docker.
+8,91," I also try to use a set of tools that are popular in the industry.
+
+It is very critical to teach them tools that are relevant and tools that will help them get a job.","Use popular industry tools.
+
+Teach tools that will help to get a job."
+9,91,"Setting up good logging monitoring notifications, some of these other open source tools that provide that kind of those kinds of capabilities. ... So I try to pick a representative sample open source, always cause I don't want people to be buying things.",Use representative open source industrial tools.
+11,91, I try to use as much as possible with tools that people use in industry and companies.,Use as much as possible relevant industry tools.
+12,91,I wanted to go with open source technologies so I can explain later how we build the labs.,Prefer to use open source technologies.
+6,94,"Which tool to choose, which one had to see, which was more standard in the market, which was more straightforward, which is even easier to teach, and how to fit it in, right?
+
+You don't know what is Docker yet, but here's a common line. Just run it. And then here's a common line to run. Artifactory you don't know what it means, just type it like this. Um, it will give you an Artifactory that's running.","Use the simplest tools chosen by the market as a method of selecting the tools that will be adopted during the course.
+
+Use the tools like Docker and Artifactory in simplest way."
+6,92,"Of first showing the history, showing the motivation, showing the problem, and making some hooks with possible solutions that Devops was bringing, suitable?","The assembly of classes should follow the following steps to use DevOps: history, motivation, problems that can be solved, and possible solutions with DevOps."
+6,93,"So, we ended up choosing Java because it is the greatest strength; ours, that was Java.",Use a programming language that the teacher knows.
+6,95,"We don't evaluate, [...] but we keep observing, right, the students, and such throughout the training.",Monitor student progress throughout training by conducting a traditional assessment.
+6,96,"One important thing for me, which became apparent during my studies, is that I had to show the background, the motivation somehow, so I wanted to fit it in any way in the curriculum at the beginning, showing the history of software development [...] include these topics, like, more historical, which are not good, are not technical, right? But in a way that isn't too boring, you also [...] have to fit this with the technical part [...] With concepts of continuous integration, continuous delivery, continuous deployment, tools, automation, anyway.","Contextualize the historical aspects and definition of continuous integration, continuous delivery, continuous deployment, and automation concepts."
+6,97," I had to show the history somehow... the history of software development, showing about the processes. Cascade, RUP, agile, talk a lot about agile, because it's related and fit these topics, so, more historical, not sound, not technical... And make a parallel, there, with the agile world with the problems that DevOps came to solve, right?","It is important to show the relationship of DevOps with software development models, notably Agile."
+9,97,"I'm trying to tie the application of the devops principles and techniques and technologies, and to, and to link that together with agile approaches, for example.","Tie application of DevOps principles, techniques and technologies with Agile approaches."
+10,97,"We help them manage stories, backlog. Uh, so it's more on the front of, we give you requirements.",Help students manage stories and backlog.
+12,97,"If you want to be able to experiment and, and to, to, to do the postmortem so that you can learn and you can solve issues and stuff.
+
+I have to do more of this, um, story telling. ... I'm trying to share my experience with the students.","Make post mortem with the students to solve problems.
+
+Use storytelling to share experience with the students."
+6,98,To get Everything ready to avoid problems and lose the focus and essence of the group.,Start a class with a pre-organized structure.
+7,100,"Working so hard on the theoretical aspects needed to understand why things in DevOps are in SRE as a whole [...] you have to have that.
+
+Thus, DevOps and SRE are concepts that were born much more strongly in practice than in state of the art, that is, much more in the industry than necessarily in the university. So for you to deal with these concepts without making a real explanation, or bringing the main players about how they did it and why they did it, it is essential.","Relate devops to site reliability engineering (sre) for students.
+
+Show the historical importance of DevOps and SRE concepts from the main players in the industry."
+7,103,"To bring the concept applied, then use a CDL approach, or PBL, that helps a lot, because then you have to present the problem and then show the idea behind the resolution of that problem.",Make use of the Comprehensive Distance Learning (CDL) teaching methodology.
+7,104,"DevOps comes very close in these quirks of software architecture-like chairs. You can't just stick to the concepts. In theory, you have to show the realization of these things.",It takes practice to understand DevOps concepts.
+8,104,"You have to learn by doing.
+
+You can't learn the DevOps culture from a book.","It is necessary to practice DevOps knowledge.
+
+You can't learn the DevOps culture from a book."
+10,104,"Once you've been to the exercise session, you have to go back to the concept again and display them again because the, some concept only makes sense when you apply them.
+
+I was saying at the beginning is that when you tell them that they're going to get their hands dirty and things that work one day will not work the other day, they start laughing. They don't take it seriously. Um, and then when they, when they building and they build a script to, I don't know, run some integration tests or to magically build Docker images and deploy them, it works on the machine on one guy of the group because they're working group, right? So they talk together. The one guy actually typing on the keyboard, he commits a script and they go, yes, we're done for the day. Let's go to some of the tasks, right? And then the next day somebody else was in the group wants to use it. And it doesn't work for them because they have a different environment because the script was assuming that the Docker was installed.","DevOps concepts need to be shown in practice so that students can understand.
+
+Students only understand problems of the environment setup when they experiment in the practice."
+13,104,"If we can have a students together working together and, um, working on the projects and developing projects together at the same time while the teachers are there and they, uh, we can, uh, see what they are doing, that would be better. And I think we will, uh, hopefully do this, uh, next year when grown-up situation gets better.",Promote a moment to students practice while teachers are around to help them.
+7,105,I usually study the subject to understand and then see the best way to explain that subject.,Study the subject thoroughly before preparing for classes.
+7,106,"You propose the dynamics and have these things move the group because otherwise, it gets so dull.",Use dynamics to inspire the class.
+7,108,"I try to bring this up: Mesos, Marathon, then Swarm, even to exercise the concepts is more accessible, lighter than Kubernetes, and then after Kubernetes, Rancher, for example.","Initially, adopt more straightforward tools such as Mesos, Marathon, and Docker Swarm before using the Kubernetes tool."
+7,109,"Some settings you can have for us to help, like, oh, you have the monitors team, for example, this allows you to go to a more excellent practical line because you'll have more arms to help you, evaluate and everything else.","If possible, have a team of monitors to assist in the assessment process."
+13,109,"We had to do as TAs and other things I think, uh, we, it's not, uh, only before the lecture, but during the whole, uh, time that this, uh, this course was, uh, going on, we had to check the, uh, check the github. And, um, students had, since they had to make some contributions, uh, we had to make sure that their contributions, uh, could pass all the checks that we had. [...] So we had to check that they were doing what they were supposed to do before the lectures, during the lectures and after it. So that was our, uh, our role in this course.",Teacher assistants check if students contributions pass all the roles of the course.
+14,109,"What we've done in this case was to let the TA grade the projects, um, because then it was way more simple. And as the two props, we were, uh, grading the exams and were like cross validating.",Teacher assistants grade the projects and the professors grade the exams with cross validating.
+7,110,"Because it is based on the assumption in all my disciplines that, right, knowledge is an open work, right? I'm not the holder of all knowledge [...] So they learn to curate what is relevant, necessary or not, is part of my teaching and learning processes.
+
+So, in my activities, I always try to put a decision-making Delta that belongs to the team, right? To the students and who will obviously assess their understanding in all the semester's discussions. So, all decisions are valid, obviously, right?","Instigate students' critical thinking and encourage the self-taught search for extra-class information.
+
+Promote and evaluate students' independent decision-making in the learning process."
+7,111,"I already have mine that has my discipline ready, right? So the challenge, for those who will start one, is less.
+
+I already have mine that has my discipline ready, right? So the challenge, for those who will start one, is less.","You can use the discipline that the interviewee professor Vinicius elaborated as a reference for the elaboration of other DevOps disciplines.
+
+Use other DevOps courses as a reference."
+7,112,"PBL matches very well with, at least like this, how I see the DevOps signals or architecture, or MicroServices, which is another discipline I have; it's cool because you can start from the problem and show why people are using what are you using. So I think it matches perfectly.
+
+Bringing the concept applied, then use an approach like CDL, or PBL, that helps a lot because then you have a way to present the problem and then show the concept behind the resolution of that problem.","Make use of Problem-Based Learning (PBL).
+
+Problem-Based Learning (PBL) is great for teaching DevOps."
+11,112,"Most of the time to give a problem solving questions where I put a problem and say, okay, and push a student to critically think. ... , I put a problem and then we'll come up with the solutions for the problem. And I haven't been able to find a good way to do that with DevOps, in, uh, in terms of assessment.",Use problem solving questions in DevOps assessment. It pushs student to critically think.
+14,112,"We decided to go on a problem-based approach. So having like introductory lecture, giving the context, giving the leads to follow, then getting a problem based on, on, uh, like a long-term project for the whole semester.",Use problem-based approach on the projects of the students.
+7,113,"Today, I don't use it; I use not only PBL; there is an inverted classroom, right? I think this translation is into Portuguese; I work with missions, right? So, the execution itself is Agile; we always have a post-mortem for each task. My methodology today, at work, is a combination of a series of different good practices that come from my professional experience and part of what I learned, seeing that it worked and didn't work while teaching.","Merge good practices of Problem-Based Learning (PBL), inverted class and Agile, through classroom experimentation."
+8,114,I break them up into nine teams of five students each.,Organize the students into teams of five.
+9,114,"For this course, I haven't done as much in terms of team projects, although I'm rolling that around to every, because everybody loves team projects.",Students like to work on team projects.
+10,114, There was something like 17 groups.,Students organized by groups.
+11,114,"I put them by a team of four, six per group, and then we work together and, and that's good also because it may be working in a team.",Put students to work by a team of four to six per group.
+8,115,"And then I tell them, I am not going to grade you on what you submit. I'm going to grade you on how you got there because getting there is not the point. It's the journey, right? That's the point. It's how you got there. And so, um, I teach my class in sprints. We do five, two weeks sprints in a 15-week course. And I give them the requirements for each sprint, what I need them to build. And I teach them how to do agile planning. And then they go build an agile plan.
+
+So I try to force them into these situations that really drive home the message of how to work as a DevOps team, how to work agile, but you've got to live it.","I teach my class in sprints. We do five, two weeks sprints in a 15-week course. I give them the requirements for each sprint, what I need them to build and I teach them how to do agile planning. Then they go build an agile plan.
+
+Make students experiment situations where they can learn how to work as a DevOps team, how to work agile."
+9,115,"So we do things in sort of an iterative and incremental model where every week or every sprint, if you will build on the previous one.",Use an incremental models with sprints.
+8,116,"Those are the ones you remember, right? Not just read, right? If you learn in the abstract, you'll soon forget it. But if you learn in context, then you'll remember it because you understood why you did it. So I try to teach them just enough to get them going.",Teach just enough to get them going so they can learn in the right context.
+9,116," I used to have people stand up during Jenkins instances to do the work, but that just at the end of the day, that's a distraction. My goal is not to teach them how to administer Jenkins.
+
+I'm having conversations with the university about trying to take the devops course and essentially converting it to a three course sequence one for agile, one for kind of the dev part of devops and one for the ops part of devops.So second one is about establishing the pipeline and then they finish the second one by, uh, building the Docker images. But it's not in depth about containers or, or kubernetes, but that's easily touch it. Okay.","Do not focus on unnecessary features of tools like avoid administering Jenkins if you want to practice continuous integration.
+
+You cannot possibly get through everything in details."
+12,116,"So second one is about establishing the pipeline and then they finish the second one by, uh, building the Docker images. But it's not in depth about containers or, or kubernetes, but that's easily touch it. Okay.
+
+They need to do concrete things ... it's to be able to traverse the whole thing without necessarily going in depth about all of these things.
+
+I need very solid, uh, research. It's a sorry, a lab assistance. The people responsible for the labs of course, assistants that that can actually deal with the students. So I'm lucky to have students and have good industrial experience, uh, to do that.","Teach how to use tools like Docker and Kubernetes but do not much depth.
+
+Do concrete things without necessarily going in depth about all.
+
+Do not teach deeply some hard technologies like Kubernetes."
+8,117,"I teach them how to work as a DevOps team. And we create a slack channel. , and I create a channel for each one of the teams. And they're all collaborating in their channel. They have 24/7 access to me. They can ping me at any time on slack.
+
+You have a question, ask me the question in the moment, right? Because that's when the answer is important to you.","I teach them how to work as a DevOps team. And they're all collaborating in their channel. They have 24/7 access to me. They can ping me at any time on slack.
+
+The student's question should be answered in the moment.
+
+Incentive professor-students interaction, easing fast solving questions."
+12,117,"Whenever they have a problem they can come to me. And I tell them, don't spend too much time Googling stuff. If you don't understand something, ask me if, if you don't understand what I presented, then I didn't present it in a way that you could connect with it. [...] Everybody learns differently.",Take time to hear student's feedbacks very openly and give them your feedback too.
+13,117,"I'm always asking you the last factor. I'm always taking almost an hour to, as a student. Just give me your feedback. Like, like very openly, right? That's you should all give me a feedback again.
+
+Each week we had, uh, four hours of, uh, lectures and answering questions from students and, and, uh, making, making some points about the course more clear.","Separate time to answer students questions, each week, four hours, lectures and answering questions, making some points about the course more clear.
+
+Do not teach deeply some hard technologies like Kubernetes."
+8,118,I like to make them feel a little bit of pain before I give them the solution. So I will have them to run their test cases.,"Don't give the solution right away, let them reach it first for themselves."
+10,118,The thing I've done to try to avoid a little bit of the mess is I want to go gradual. I want to be gradual in the class. So first I teach compilation and testing. Then I teach continuous integration. team A is going to build one piece team B is going to build another piece that depends upon what team is built.,"Teach DevOps giving the content gradually, like first teach compilation and testing, then continuous integration; do not give everything right away so easily."
+8,119,"I'll have them run their test cases manually. And then when someone makes a pull request, I'm like, well, you need to clone that, run the test case. [...] And then [.. ] I show them how to [...] automatically run the test cases. [...] And so they write all the test cases. And then, and then I, I teach them about code coverage. I said, it's not about the test passing. If the code coverage go down, then somebody code it without writing a test case, don't merge that pull-request, right? So I'm teaching this whole culture, right? This way of working. [...] Then finally we push it to the cloud. We set up CD pipelines to deploy things in the cloud","Write some tests cases manually, do pull requests, do test automation with CI, write all test cases, teach code coverage. Then finally setup CD pipeline to deploy the application in the cloud."
+8,120,"So sometimes a student will say to me: professor, what do I do if another student is like not pulling their weight on the team?, And I say: when you go to a job interview, you're going to be asked the question, tell me about a time when a member of your team wasn't pulling their weight. And what did you do to get them excited and to contribute again, today's the day to go write that story. Today's the data to write the answer to that question.
+
+You need to sit together and experience because if you can't work as a team, you're not gonna make it right out in industry because we want team players. I don't want heroes. I don't want people who saved the day. I want people who mentor each other.","Make the group motivation a responsibility of themselves, students should motivate each other.
+
+Teaching how to students mentor each other is one of the most important things and must be a priority."
+8,121,"Do they understand what the cloud is? It'd be great if there was a cloud course before mine, but there isn't.",It'd be great if there was a Cloud course before DevOps course.
+10,121,It's an option that we give them the year before too preparing them.,Prepare students with previous courses.
+8,122,"so I don't care if you using windows or using Mac or whatever you're using. We're all going to learn a bunch of Linux and we're going to deploy all our stuff, using a bunch of it and use all the tools in a bunch of.",Use Linux operational system.
+8,123,"We use Vagrant and VirtualBox. And so I don't care if you using windows or using Mac or whatever you're using.
+
+I selected Vagrant and virtualbox because they're both free. ... so I had to change the class for them to use Docker and VirtualBox. 
+
+They call my repo, Vagrant up and they're up and running. And so that's how I solve that problem. Bigger. It does a very good job of solving that consistent environments for students.","Vagrant and VirtualBox are useful to create consistent development environment.
+
+I selected Vagrant and virtualbox because they're free.
+
+Make environment setup consistent between students using Vagrant."
+8,124,I selected Vagrant and virtualbox because they're both free. ... so I had to change the class for them to use Docker and VirtualBox.,I selected docker docker because it is free.
+10,124,We build Docker images.,Docker can be chosen as DevOps tool.
+14,124,"Let's go for something that we have more control on, uh, using for tools like Jenkins and and a stuff like Docker or Kubernetes was kind of good in a way to, uh, support the deployment and the, uh, like the building plus deployment stuff.
+
+I want to be able to deploy it with containers. So it can be, um, through Kubernetes, it can be through Docker.","Use tools like Docker to have more control on support the deployment.
+
+Use Docker as container deployment tool adopted by the course."
+8,125,"We use selenium to, to work on the, uh, on the UI, as a browser.",Use Selenium to automate UI tests.
+11,125,We use Selenium for test automation.,Use Selenium for test automation.
+8,126,"Students will ask me, can I use a different test suite? Can I use, you know, something different? And I'll say, well, you can, but then it's up to you to figure out how it integrates back into everything.",Students could use other tools non-taught without professor support.
+12,126," So it's rather simple that we, we let them, of course use the programming language. They want to develop the application. So, you know, the department, I think traditional were quite open with respect to that in the department. Yes. Java is still used, but students, these days, don't like Java. Um, they prefer Python. They prefer different things. So for us, we don't care, right? The application we give them when we gave them the HVAC application, we give them, uh, I think they have, I should even look myself, but I think we, we created two versions, one, it says Java version.
+
+So we support them to the Travis CI. We support them with a certain number of things, but if they want to choose something else, it's okay. I mean, but you know, they have to understand that we won't necessarily support them.","Do not force students to use a single language like Java.
+
+Give students the freedom to choose other tools they want, but make it clear that these tools will not be supported by teachers during the class"
+13,126,"We asked them to choose a tool, uh, on internet and new tool, and then use that tool and show other students how that works. So, uh, we didn't have some predefined, uh, projects.
+
+Just find whatever they want to find and work on whatever they want to work on and let them be free since that was our goal in this course, uh, we let them choose, um, novel technologies, the technologies and the tools that are being used, uh, today and the tools that are being developed today. ","The students choose the tools and the projects freely on internet.
+
+Let the students be free about the used tools and technologies."
+14,126,"We decided to let the student choose and said, okay, you have your option and do what you want, but you're responsible of doing it.
+
+It was a graduate course, I started not to, uh, enforce given tools ... I want you to have a version control system that should be git, but git up, gitlab Bitbucket, Bitbucket on premises. ...  you can justify and defend each step of what's happening to your code in the context of devops.","Give the responsibility to the student to chose the system and also the responsibility of what they are doing.
+
+Do not enforce given tools on a graduate course. The students should justify and defend each step of what's happening to their code in the context of devops."
+8,127,"   People use an Argo CD to do continuous delivery. They used to be using Jenkins. So do you still teach Jenkins? Do you teach them Argo? Um, so it's a constant, um, improvement on the tools are what tools are popular, what tools are going to get them a job in the industry, right? ",Argo CD is a more current continuous delivery tool than Jenkins.
+8,128,"I'm going to watch your Kanban board every week.
+
+ I don't give quizzes because I'm grading them every day, watching their Kanban boards, seeing how they're working, interacting with them on slack. ","Teach Kanban board.
+
+You don't need quizzes if you grade the students continuously watching their Kanban boards."
+12,128," I built kind of a fictitious company [...] based on my experience [...]  the students work in groups of three [...]  in the first lab, they have to set up their environment [...] We bring them also to, to build, uh, two small applications that actually extract, um, data from the Kanban, uh, in GitHub using the GitHub APIs, because I want the students to one that very important aspect of DevOps is the continuous improvement. So if you want, you have to apply the same principles to the process that you're applying to your product.
+
+We enforce the usage of, of the, of the Kanban, because it's an important practice in devops to make the work visible and stuff.
+
+Make the students realize that the Kanban has certain information for a certain purpose. Um, if I want to analyze my process, I may extract information from the Kanban that will tell me about, you know, the time that I spent in the development phase or in the, in the review phase and things like that.","Create a fictitious company based on experience for students to practice continuous improvement, creating applications, extracting data from Kanban.
+
+Use Kanban to make the work visible in devops.
+
+Make the students realize that the Kanban has certain information for analyzing the overall process."
+8,129,"I actually last semester I prepared something on Sunday. And when I got Wednesday, when we had the class and I went to the cloud, the cloud had changed. [...] we're pushing to the IBM cloud the other night and it said there's an, there's a new update available for the tool. Uh, you know, version two, it may have breaking changes. And I said, timeout, nobody press, yes, everybody press no, because that's not the version I used on the weekend.",Check if the the labs work well always before start the class.
+9,129,"I'm usually maybe a couple of weeks out verifying something for an upcoming, an upcoming session.",Verify if labs exercises are working before classes.
+10,129,"The second recommendation is update your exercises often. ... you can get everything set up.
+
+So you have to have your stack ready, but you have to update it with the current version of the software that you intend the students to use fairly close to the beginning of the session, if you don't want to be surprised.","Update your exercises often to get everything set up.
+
+Update your exercises frequently."
+8,130,"So without having, uh, physically having a technical assistance in the class and I do have TA's on with my zoom and they do help students over slack, uh, to get things going.",Teacher assistence help students over slack managing questions.
+13,130,"We had a long Google doc that the students during the lectures and after the lectures, students could add their questions there. And then we, the TAs could answer the questions, uh, in the doc. ",Use Google Docs during the lectures so students could add their questions. Teacher Assistants could answer the questions in the doc.
+8,131,"Then I give them two exams. So the team is 40% of their grade. The exams are 60% a midterm that's 30 and a, and a final that's 30.","So the team is 40% of their grade. The exams are 60% a midterm that's 30 and a, and a final that's 30."
+8,132,"I try to get the student more engaged.... If they're not having fun, then we're, we're doing it wrong. So, so I'm making sure they're having fun.",Try to get the student having fun in order to keep them engaged.
+8,133,"In that assessment, you know, that they're, um, there are 50 multiple choice questions in each exam, no partial credit. Um, and, and so, and I give, and it's an hour, uh, you know, to go do that exam. ...  we're remote now.",50 multiple choice questions in one hour each exam if you are remote.
+12,133,"The book I have quiz, uh, again, it could be translated and adjusted, but that's the way to, to test in the exams. ...  one part is exactly quiz questions. So they have multiple choices.
+
+If I was asking you the question and say, give me the three benefits of this thought of this, uh, concept, then it's memorization. But if I give them five, if I give you five choices and they could be between zero and five, that are true statements with respect to this concept, it's not about memorization. It's about understanding.
+
+If the exam is in presence, then I don't care that much if, if they do the control that before, because ultimately they have to understand, I think that these quizzes to me have a specific objective.","Use quiz in the book to test in the exams with multiple choices.
+
+Multiple-choice format questions about DevOps concepts favor the understanding instead of memorization of the students.
+
+Quizzes forces students to understand the concepts."
+8,134,"the exams are open book, right? I, I, when I'm in the classroom, they're not open book, but for, for the remote learning, they have to be open book. I just can't enforce it.",Exams in remote class format are with the open book.
+9,136,"we had cloud computing, where can easily stand up virtual machines for people and things like that.",Cloud computing make easier to stand up virtual machines.
+9,137,"People coming through the programs want to play with technology. That's half the reason we got into this field in the first place, and it's a really fun thing to be able to do, but it's not sufficient. And trying to change that mindset to emphasize more the idea of devops as a means of continuous improvement, as a means of organizational change. As a, to some extent I use this phrase guardedly, but to some extent, a philosophy around how the organization is going to go from concept to implementation, that's a much harder set of skills to pick up.
+
+The global approach made sure the students not associated with devops with a CI/CD pipeline, because in my opinion, it's all about continuous improvement.","Make clear the importance of the DevOps mindset like continuous improvement in constrast to using the tools.
+
+Continuous improvement is a key DevOps concept."
+12,137,"This mindset of thinking of continuous improvement is so important, right?  ... the improvement of the daily work is more important than the work itself.
+
+What should I improve to make my process more efficient? So to me, this is the most important thing of DevOps. And, and, and then you do it through automation, automation of, of the deployment process, automation of, of, you know, the testing process automation later of the security, uh, thing and so on.","The mindset of thinking of continuous improvement is so important because the improvement of the daily work is more important than the work itself.
+
+The most importart thing of DevOps is to improve my process continuously through automation of the deployment process."
+9,138,"I'm starting to do is to just build out images, for example, that contain everything that I want them to have. Uh, and that way I can tell them to spin up a virtual machine. ",Use imagens that contain everything that the teacher wants to teach to clone virtual machines.
+9,139,"I use GitHub and they have options for professors, you know, for academic use, where you can set up these GitHub classrooms. I use those constantly, um, and they work very, very well because again, I can kind of control who gets what I can see, everything I can help individuals through things works great.",Use Github for academic use where you can set up GitHub classrooms.
+9,140,"I will pick one, usually one, although I'll usually compare and contrast against a couple of others, something in the around of automated builds.",Compare and contrast the tools before to choice.
+9,141,"I try to use cloud providers, you know, kind of cloud SAS providers for that sort of thing, because I don't want people to spend a lot of time getting the stuff stood up.",Use cloud SAS providers to avoid spending a lot of time installations and configurations.
+9,142,"I tend to focus on gradle, but I also will link that to say a comparison against Maven and ant to provide some context for how we got here, why we got here",Show the evolution of the tools like exposing from ant and maven to gradle tool in build managment.
+9,143,"I'm having conversations with the university about trying to take the devops course and essentially converting it to a three course sequence one for agile, one for kind of the dev part of devops and one for the ops part of devops.",separate the dev and ops part into different courses.
+9,144,"And that level of what you're trying to do is to build a business case for why you want that at all. And now you're starting to get a little bit around of the computer science and into around of business and being able to tie those two things together in such a way that you can sell it to an organization that would have to spend resources, people, time, energy, money, building out that kind of a technical pipeline, right? 
+ ... you have to somehow sell them on why you should spend your sources doing that versus building a new feature or adding a new product or any one of a number of other competing priorities that the business has.","Teach students to know how to sell DevOps benefits to their directors who are from the business area. For example, pipeline reduce developers work time and save money. You can also build a new feature or add a new product that the business has."
+9,145,"I don't think the basic skeleton of the class has really changed significantly, maybe a few places, but over the last two or three years, the, the basic structure, the scaffolding I think has held fairly true where we focus on some devops principles. We focus on concepts. We focus on goals.",The basic skeleton of the class does not change significantly because we focus on concepts and we focus on goals.
+9,146,So I try to give folks one or two small projects.,Specify what projects the students will work and provide one or two small projects.
+10,146,"We will also build a sample, which is on github. I'll send you the link. If you want. We build a sample that is called a cookie factory. Um, it's, it's a system to handle a cookie factory where you can order cookie pay for them, and you get a shopping cart with cookies, et cetera, right? So it's just a small sample.",Use small projects with students.
+12,146,"We have built a little simulator that is quite simple, but that's easy to traverse the whole, essentially the main phases of DevOps.",Use a simple application to walk through all DevOps concepts.
+9,147,"I will try to provide, uh, some kind of, of jump-starting as far as people learning at technology. So for example, here's commonly used commands. Here's why you use them. Here's how you use them.",Provide jump-starting examples of commonly used commands of tools.
+9,148,"So being a little bit more forgiving, a lot of the tools that we're using are brand new. For many people, getting them all to work together can be particularly challenging. And so making it a little less stressful, uh, can be helpful.","Be a little bit more forgivable, understanding that for some people getting all the brand new technologies to work together can be really hard, so make it less stressful"
+9,149,"Our particular curriculum tends to allow out of, some degree of necessity and amount of interest based learning. You know, I care about software architecture. And so that's where I want to focus.",Our curriculum allows some degree of freedom according to the teacher's preferences.
+10,150,"We let the students build only one project, one code base, which is evaluated both on the standpoint of the architecture. ... but also from the angle of continuous integration, do they include build plan?",Evaluate the single project of the students on the standpoint of the architecture and also from the angle of continuous integration.
+10,151,"So we built a curriculum in just very innovative way, the two classes together, a single project, a single teaching team, but we evaluate on two angles.","Built a curriculum with DevOps and Software Architecture classes together, a single project, a single teaching team, but we evaluate on two angles."
+14,151,"The course about, uh, software architecture and DevOps, or we're talking about a different way of architecting software, um, mainly distributed system, because it was easier for the DevOps parts who were triggered challenges was a distributed system.  ... And they had one, one lecture in the morning lecture slash lab and one lecture slash lab in the afternoon. And they were really like Friday was dedicated to DevOps slash uh, architecture.",The courses of software architecture and DevOps taught in the same day.
+10,152,"And then another team uses in a 13 deploys to environment that the first team cannot get to because it's a production environment that the coder will not get access to it. So in real life, you have different teams of people that talk only through some channels.",Show the operational constraints to students like coder will not get access to production environment.
+10,153,"And then as we go into more concept, like what is Jenkins and what is Artifactory and what is Docker, then we can go back on those things.","Study the tools more when you go into the concepts. For example, deep Docker when you teach containers."
+10,154,what helps is to build something that is portable and something that can be broken down into several pieces where one student runs one bit and then another students runs the rest. It's also good because it forces them to work as a group.,Build something that is portable and something that can be broken down into several pieces where one student runs one bit and then another students runs the rest.
+10,155,"In this year, if you do that, it's too early and it's going to be too hard for you as a teacher to, to know what's going on. So by forcing the technology stack and telling them.
+
+I mean, they're free to do what they want from a functional standpoint in the project.
+
+But from a tools and technology, we force just on them to avoid too many variation between the groups.","Force students to use technology stack used on course.
+
+It is necessary to give freedom to student develop their functional solution.
+
+We force tools and tecnology and alert them to avoid too many variation between the groups."
+11,155,"We use a very specific language. This is to just make it easy. I mean, sometimes we give it a bit too flexible. So right now we use a Java and Javascript because we are targeting web application. But, uh, when we students are implementing, uh, new features, so we give them the flexibility. We say, okay, parents, if you want to implement in Python, you can do it as long as you can wrap it in, uh, integrated in the new code.
+
+We give some kind of rough summary of what the application is supposed to do.","It is important to give flexibility to students to develop their solution although some things are determined.
+
+Give students a rough summary of what their application are supposed to do."
+10,156,"Go gradually. Um, so tha t,that was part of my strategy. The other thing is I've built a few, what I called a, um, whiteboard free session. So I go something like every week we have half a day, one hour of, uh, formal teaching. And then two hours exercise and we do that for like three weeks in a row. [...] So I do like three classrooms, one free session inspired by what they fail on and I continue.
+",Build whiteboard free sessions inspired by what students have failed and the two hours exercise.
+10,157,"We've done live presentation, where they have something that 20 minutes to describe the architecture, to describe their build strategy, that test strategy and demonstrate it on the screen. Um, and that is evaluated by a jury of one representative from the software architecture class and one representative from the DevOps class.","The students have something that 20 minutes to describe the architecture of the project, to describe their build strategy, that test strategy and demonstrate it on the screen. That is evaluated by a jury of one representative from the software architecture class and one representative from the DevOps class."
+13,157,"Students have to choose some topic and say, okay, we want to do a presentation on this topic. And that topic can be anything related to DevOps.
+
+Everyone who wanted to present a tool or to do a demo or anything else they could give, uh, get some feedback from other students.","Make students prepare a presentation about topics related to DevOps.
+
+Students can present a tool or do a demo to get some feedback from others during the classes."
+10,158," we also do two evaluations, one in the middle and one at the end. So the one in the middle, we call it MVP evaluation. And we tell them, at this point, you should have reached an MVP, which is basically a walking skeleton for your code. We don't care if when you call the API, the only code of the API is return true, or which are 12, but we care that you have the components in place. You can build them independently and they can talk to each other. Right? So at this, we validate that your componentization and your architecture is good even before you start building algorithms and the functional code. Um, so we do that and that's, again, that's to catch early, um, architecture mistakes.
+",Use MVP (Minimum viable product) evaluation to validate components of the project. Make an evaluation in the middle and the final course.
+10,159,"we also have a lot of evaluation during the exercise. When group after group, where we, we give them flags if week green, yellow, or red, based on where we think they are, uh, regarding the objectives.","Do many evaluations of students project along with the discipline. Use green, yellow or red flags to evaluate the group."
+10,160,"we cannot make assumption on what they know. So we're trying to work without any assumption.
+",Do not make assumption about the learning level of the students when you have students with different levels.
+10,161,We show them Kubernetes.,Kubernetes can be chosen as DevOps tool.
+14,161,"Let's go for something that we have more control on, uh, using for tools like Jenkins and and a stuff like Docker or Kubernetes was kind of good in a way to, uh, support the deployment and the, uh, like the building plus deployment stuff.
+
+I want to be able to deploy it with containers. So it can be, um, through Kubernetes, it can be through Docker.","Use tools like Kubernetes to have more control on support the deployment.
+
+Uses Kubernetes as container deployment tool adopted by the course."
+11,162,"I covered it is a few lectures, like on, on DevOps and, um, which look at DevOps from a kind of generic perspective, like introducing the concept of DevOps and the challenges related to DevOps and, and, and so on. And then introducing them some of the basic tools, like for instance, so using things like continuous integration tools, like Jenkins SIM swollen. And, uh, so I tried to introduce, uh, between maybe spending about a couple of weeks doing that, like the course was about 12 weeks. And so in Zen App there, I focus more on specialized issues. So we spent some time on performance and scalability testing and things like the good testing and so on.","Start with a generic perspective of DevOps, basic concepts, and after a few weeks start to focus on specialized issues."
+11,163,"what I do is that after introducing a concept and so on, I started really looking at very specific issues ... so in the lab we students learn, uh, in our, to be able to, for instance, to create a pipeline currency, DevOps pipeline, and, and, um, very, uh, set up A B tests, create test cases and do automated test, uh, test automation.","Introduce a concept and do labs with creating DevOps pipeline, setup A/B tests, and automated tests."
+11,164,"The students have to do in the projects is to start by coming up with the requirements of the obvious application, and then start setting up their own environment and provide some additional functionalities that we want to implement.",Students start setting up their own DevOps environment and provide additional feature using simple application in the project.
+12,164," So they have set up their environment.
+
+The second one is to, we give them an application. It's an actually an HVAC humidity, air conditioning and ventilation, um, and they don't develop the application, but they have to build the pipeline to support this existing application.","Let students setup their environment for themselves.
+
+Give students an application that they have to build the pipeline to support it."
+11,165,"Also making the project interesting is important because it, you can, it's very easy when you are teaching to just take a very small project, which is not very, uh, challenging in all with students.
+",The project of the class should not be very small and must be challenging.
+11,166,for exam can be to use an open source application that we can use,For exam can be to use an open source application that we can use.
+11,167,we use also SonarQube to help us on the automation,Use SonarQube to help on the automation.
+11,168,for performance testing we use JMeter,Use JMeter for performance testing.
+11,169,"we also security platform like, uh, Zap",Use OWASP Zap as security platform.
+11,170,"So in terms of the tools, I feel better. I think one of the good aspect in DevOps is that there are a lot of tools [...] DevOps tools are available and where a lot of them are free and some of them are conscious of those. So a lot of them are free. And, and then, so, so far, I think it has been good.",There are many free DevOps tools available.
+11,171,"Quite often, what we do is have someone in our team to implement the application.",Someone from teacher staff implements the sample application.
+11,172,"So in the course I split, but so about 80% of presentation is just a regular, uh, concepts and so on and about 20% is about concrete applications.
+
+ And so if we can find a way to be able to, to compress the experience or expertise in the practical experience and expertise in the context of lectures and so on.","Divide the course into 80% of concepts and 20% of applications.
+
+Conciliate the experience in labs and the context of lectures."
+11,173,"We presented as a lab project [...] So the students start initially by defining the requirements and then after they start a secondary pipeline, and then they do at least a couple of weeks iterations cycle and develop cycle. And then after they go to do performance testing to do a security testing and all those kinds of things, and for each of these deliverables, we submit something, every report. And, and, uh, so that's very easy to map because it's a very practical.","We presented as a lab project with five deliverables. The students start by defining the requirements and then after they start a secondary pipeline, and then they do at least a couple of weeks iterations cycle and develop cycle. And then after they go to do performance testing to do a security testing, and for each of these deliverables, we submit something, every report."
+12,175,"I had a different assistant for the labs who was the next student. So the first time, and the labs were quite well received.
+
+If you have lab assistants that are, you know, good, it's pretty easy to manage.","Qualified teacher assistant is important to setup the labs.
+
+It is good to have teacher assistants with labs."
+12,176,"the unicorn [project book] who was just, just published last year is more about the Dev stuff, but it really brings it into the mindset of, of, okay, what are the issues concretely that we face.",The Unicorn project book is a novel which covers the Dev side issues of DevOps.
+12,177,"The Phoenix project ...  it's written also by essentially Jean Kim ... , it's written as a novel ... you get into the, the life of people that are facing issues that's are essentially DevOps issues ... he Phoenix project is more about the Ops side of things.",The Phoenix book by Jean Kim is a novel that covers the Ops side of DevOps.
+12,178,"I need very solid, uh, research. It's a sorry, a lab assistance. The people responsible for the labs of course, assistants that that can actually deal with the students. So I'm lucky to have students and have good industrial experience, uh, to do that.",The teacher assistants need to be very qualified.
+12,179,"So I chose, um, tuleap, which is an open source that was missing in mainly DevOps in France.",Use Tuleap for lifecycle management.
+12,180,We try to make it minimal,Try to make the environment setup minimal.
+12,181,"initially we were relying the, uh, admin, uh, personnel in our department, not admin, sorry, the, the engineering, uh, the, yeah, the, the infrastructure, the people that are responsible for the labs and so on. And now, since all of the students have their laptop, we try to make it as industrial as possible in lightweight as possible. So we don't need any internal support. [...] You just need this use to create their, uh, GitHub accounts. And, uh, you have to register to be able to get some AWS, uh, credits so that you can share with the students, but it's quite, it's quite easy.",You do not need to worry about university infrastruture when the students have Github and AWS accounts and you make the environment as industrial as lightweight as possible in all of the students laptops.
+12,183,"First define the objectives of your course and making sure you stick to it.
+
+But with respect to the technologies, I think that knowledge is, will change [...] I think like one of the, uh, not too good to give it giving advices or, but I can share my experience and my thoughts. Um, I think that that's important to remember one thing as important as what is the objectives of your course. ","Define clearly the objectives of your course and make sure you stick to it.
+
+Constantly remember the students about the objective of the course."
+13,183,"I think if we lay the rooms, uh, maybe it's more clearly and more specifically, I think students, we know better what they will get from what they do. [...]
+I think we will have, uh, we will, um, uh, rewrite some of the rules to make sure that, uh, students know how many points they get for what they do, uh, beforehand we should do it because, uh, it will not be perfect because students can choose many different things.",Make sure the students know the rules of the course. For example how many points they get for what they do.
+12,184,"I give them two case studies, uh, so to see if they can analyze a given situation.",Give case studies to see if the students can analyze a given situation in the exams.
+14,184,"Like theoretical exam point of view, we use the case studies. ... you have three hours explain what you do in this situation. ...  we were really grading half of the description and half of the justification.
+
+He grade scale was half description, half justification, and that's helped a lot, but it's always, um, qualitative in this way.","We use the case studies in theoretical exam. Students have three hours to explain what they do in this situation. We were really grading half of the description and half of the justification.
+
+It is helpful to use the description and the justification of case studies on qualitative grade scale."
+12,185,"we use one of the topics in DevOps that becomes quite important is value stream mapping. So to be able to capture your process is pretty simple in terms of modeling as a flow of activities, value stream mapping is a technique that has been used for quite a long time and in production.",Be able to capture your DevOps process in terms of modeling as a flow of activities using value stream mapping technique.
+12,186,"it's not an analysis course, but I tried to bring it back regularly and say, okay, if you want to improve a process, whether you do so, it's one of the, one of the section in the book. And so it's okay. [...] you go from there to identify the, the points that could be improved, right. And then how do you want to improve it, then the techniques that are described in the book?",constantly try to figure out how to improve the quality of the course
+12,187,"I'm thinking of bringing a couple of, um, industrial speakers as well to share their experience.",Try to bring industrial speakers to share their experience.
+13,187,"We can have people, uh, there, there are, uh, there are everywhere that we can invite and, uh, let the students know what is going on in practice, not just some, uh, theoretical, uh, problem.
+
+The lectures were not, uh, were not presented by the teachers. They were presented by the people who are, who were from the industry and invited to the, uh, to the course to present something for students.","Invite people to show students what's going on in practice, not only in theoretical problems.
+
+The lectures could be presented by people who were from the industry."
+14,187,"I think the course we've built in France was successful because we've done it with a software architect from IBM or the guy who was building, um, like as part of his industrial practice, he was building huge, uh, systems.
+
+You need to have people interacting with the students that are practitioners and that really, uh, well know their in a way.
+
+So we thought we were doing right, but after having discussed with industrial partners and practitioners, like not just discussed, you know, conference or attending a meetup, like really discussing for hours.
+
+To carefully select the, um, I, I have a lot of industrial, uh, practitioners, guest lectures. Uh, we, we, we had the one prof that wasn't industrial.
+
+The bigger mistake I've made was to, uh, use a coach. Uh, and we invited him and the guy was, uh, setting himself running himself as a DevOps coach, but the guy just had written books and, uh, had no idea what he was talking about.","It is important to have industrial partnership to share skills to contribute to the course.
+
+You need to have DevOps practitioners interacting with the students.
+
+Discuss the course with industrial partners and practitioners.
+
+You should be careful about selecting guest lectures. Prefer industrial practitioners.
+
+Do not invite a DevOps coach to do DevOps lectures."
+12,188,"So that, I think it's one of our job to, to, to communicate with the student that it's not about the buzzword, this is something extremely serious.","It's important to communicate with students that DevOps is not buzzword, it is extremely serious."
+13,189,"Then do, um, do some research about it, write an essay or, uh, or if there is, um, there is a tool available, uh, on GitHub it's, if it's open source, they can contribute to that, uh, to that tool and maybe fix some issues and report it to the teachers.
+
+Many of them did was to engage in the, uh, in the development process of the, uh, of the large projects that other people are working on. And, uh, they could choose a project, I think with more than a hundred stars. ...  And they had to make sure that they pass all the, uh, all the steps and they had to do some contributions, but to there, to those for repositories. And, uh, and they had to also engage in a conversation with other people from other teams, uh, in the process that, uh, they were, uh, making those contributions.
+
+They could contribute to some open source projects that are large projects and they are being used. So it's something that I'm looking for. Something we had some stats, uh, on github.","Do some research about DevOps topic, write an essay, and if the tool is open source, contribute to that tool and fix some issues and report it to the teachers.
+
+The students should contribute and engage in the development process of the large projects with more than a hundred stars on Github.
+
+Students could contribute to some open source projects that are large and being used and had more than one hundred stars."
+13,190,"So, uh, we didn't have some predefined, uh, projects, and as we can, yes, this was a bigger problem for us.",Predefined project is important for the organization of the course.
+13,191,"In fact, some of them, we asked them to, um, to, if they wanted to do a tutorial on a tool, we ask them to upload that tutorial on, uh, Katacoda.
+
+So we asked the students, uh, to, uh, use another tool if they want to present something that doesn't work on katacoda. So, uh, the way that we solved it was to change the requirements and to change the, uh, change the environment and the tools that they had to use.
+
+So that's the course automation and executable tutorial was, uh, chatter, katacoda, um, website. They use the katacoda that website to, uh, to write a tutorial on a tool for them DevOps.","Use the Katacoda website to students create tutorials about tools.
+
+Change the requirements and the tools to solve the issues in environment setup on Katacoda.
+
+The students write a tutorial about a DevOps tool on katacoda to describe the course automation."
+13,192,"And they had to also engage in a conversation with other people from other teams, uh, in the process that, uh, they were, uh, making those contributions.
+
+Other task that we ask them to do something for our own course, and, uh, then, uh, engage in a conversation with TAs and other students to make sure everything's more work well.
+","Make students engage with people from other teams in the classes.
+
+Engage in a conversation with teacher assistants and other students to make sure everything's more work well."
+13,193,"if it was up to me, I would put some time to laying the background. And I'm talking about basics of DevOps and basics of some tools that are mainly used by everyone.",Teacher assistants help students with basics of DevOps concepts and tools.
+13,194,"I think the time that we had was actually enough, it was, I think about two months ... Students had, uh, four hours in each week and they had to work on the projects, um, as well.  ...  they had some information, some background about software engineering.",Two months with four hours in each week is enough to students with some background about software engineering.
+14,195,"So I had to find one that was dying and, uh, hopefully the colleague who was handling his dying course forgot to answer to an email.",Look for a dying course to include a DevOps one in the curriculum.
+14,196,"So it's constantly discussing and constantly sharing in an open way, uh, what's happening, how it's teach, uh, how it's story telling and how, how things are going.",Constantly discuss and share the DevOps teaching in an open way.
+14,197,So this guy was really half time IBM and half time in the faculty of engineering.,Teachers could be half time industrial and half time faculty.
+14,198,"we use the bluemix, uh, platform from, uh, IBM, that was really, everything was integrated and those kinds of things that was really good in a way,",DevOps tools are well integrated in Bluemix platform from IBM.
+14,199,"And it was selected by 80% of the cohort, which usually an elective course is like 20%. So is it like we had a lot of students inside these insights because they all wanted to learn about devops.",DevOps course as elective course have students that wanted to learn about DevOps.
+14,200,"what we've done was first to, um, continuously evaluate the teams are they were working on the project.",Make a continuous evaluation of the projects of the students.
