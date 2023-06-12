@@ -59,7 +59,7 @@
                     </p:selectOneButton>
 
                     <p:dialog header="Challenge" widgetVar="challengeDialog#{bean.challenge.id}" 
-                              showEffect="fade" dynamic="false" >
+                              showEffect="fade" dynamic="true" >
                         <h:form>
                             <p:panelGrid columns="2" layout="flex">
                                 <c:text readonly="true" value="#{bean.challenge.mainIdea}" label="Main Idea" />
@@ -159,7 +159,7 @@
                                 </p:selectOneButton>
 
                                 <p:dialog header="Recommendation" widgetVar="recommendationDialog#{linkRecommendationFeedback.recommendationFeedback.recommendation.id}"
-                                          showEffect="fade" dynamic="false" >
+                                          showEffect="fade" dynamic="true" >
                                     <h:form>
                                         <p:panelGrid columns="2" layout="flex">
                                             <c:text readonly="true" value="#{linkRecommendationFeedback.recommendationFeedback.recommendation.mainIdea}" label="Main Idea" />
