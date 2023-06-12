@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @ViewScoped
 @Component
-public class ChallengeFeedbackResumeCrudMBean extends CrudMBean<ChallengeFeedback, Long> {
+public class ChallengeFeedbackSummaryCrudMBean extends CrudMBean<ChallengeFeedback, Long> {
 
     private static final long serialVersionUID = 1L;
     

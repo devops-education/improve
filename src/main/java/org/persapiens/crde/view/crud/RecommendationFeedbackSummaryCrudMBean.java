@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @ViewScoped
 @Component
-public class RecommendationFeedbackResumeCrudMBean extends CrudMBean<RecommendationFeedback, Long> {
+public class RecommendationFeedbackSummaryCrudMBean extends CrudMBean<RecommendationFeedback, Long> {
 
     private static final long serialVersionUID = 1L;
 

@@ -12,7 +12,7 @@
     <ui:define name="content" >
         <c:crud titleText="Recommendations that you will use, but not used already."
                 titleStyleClass="recommendation"
-                managedBean="#{recommendationFeedbackResumeCrudMBean}"
+                managedBean="#{recommendationFeedbackSummaryCrudMBean}"
                 showInsert="false"
                 showUpdateActionLink="false"
                 dataTableLazy="false"
@@ -28,23 +28,23 @@
             </ui:define>
             <ui:define name="detail">
                 <h:panelGrid columns="2" cellpadding="3">
-                    <c:text readonly="true" value="#{recommendationFeedbackResumeCrudMBean.bean.recommendation.mainIdea}" label="Main Idea" />
-                    <c:text readonly="true" value="#{recommendationFeedbackResumeCrudMBean.bean.recommendation.theme.value}" label="Theme" />
+                    <c:text readonly="true" value="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.mainIdea}" label="Main Idea" />
+                    <c:text readonly="true" value="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.theme.value}" label="Theme" />
 
                     <c:label label="Used Already Comment" />
-                    <h:outputText id="usedAlreadyComment" value="#{fn:replace(recommendationFeedbackResumeCrudMBean.bean.usedAlreadyComment, '\\n', '&lt;br/&gt;')}" escape="false" />
+                    <h:outputText id="usedAlreadyComment" value="#{fn:replace(recommendationFeedbackSummaryCrudMBean.bean.usedAlreadyComment, '\\n', '&lt;br/&gt;')}" escape="false" />
 
                     <c:label label="Will Use Comment" />
-                    <h:outputText id="willUseComment" value="#{fn:replace(recommendationFeedbackResumeCrudMBean.bean.willUseComment, '\\n', '&lt;br/&gt;')}" escape="false" />
+                    <h:outputText id="willUseComment" value="#{fn:replace(recommendationFeedbackSummaryCrudMBean.bean.willUseComment, '\\n', '&lt;br/&gt;')}" escape="false" />
                 </h:panelGrid>
 
                 <p:accordionPanel multiple="true" activeIndex="0">
                     <p:tab title="Interviews">
-                        <d:recommendationInterviews value="#{recommendationFeedbackResumeCrudMBean.bean.recommendation.recommendationInterviews}" />
+                        <d:recommendationInterviews value="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.recommendationInterviews}" />
                     </p:tab>
 
                     <p:tab title="Tags">
-                        <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackResumeCrudMBean.bean.recommendation.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
+                        <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackSummaryCrudMBean.bean.recommendation.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
                     </p:tab>
                 </p:accordionPanel>
             </ui:define>
@@ -54,7 +54,7 @@
         <c:crud crudId="challenge"
                 titleText="Challenges that you will mitigate, but not used linked recommendation."
                 titleStyleClass="challenge"
-                managedBean="#{challengeFeedbackResumeCrudMBean}"
+                managedBean="#{challengeFeedbackSummaryCrudMBean}"
                 showInsert="false"
                 showUpdateActionLink="false"
                 dataTableLazy="false"
@@ -69,20 +69,20 @@
             </ui:define>
             <ui:define name="detail">
                 <h:panelGrid columns="2" cellpadding="3">
-                    <c:text readonly="true" value="#{challengeFeedbackResumeCrudMBean.bean.challenge.mainIdea}" label="Main Idea" id="mainIdea"/>
-                    <c:text readonly="true" value="#{challengeFeedbackResumeCrudMBean.bean.challenge.theme.value}" label="Theme" id="theme"/>
+                    <c:text readonly="true" value="#{challengeFeedbackSummaryCrudMBean.bean.challenge.mainIdea}" label="Main Idea" id="mainIdea"/>
+                    <c:text readonly="true" value="#{challengeFeedbackSummaryCrudMBean.bean.challenge.theme.value}" label="Theme" id="theme"/>
 
                     <c:label id="willMitigateCommentChallenge" label="Will Mitigate Comment" />
-                    <h:outputText value="#{fn:replace(challengeFeedbackResumeCrudMBean.bean.willMitigateComment, '\\n', '&lt;br/&gt;')}" escape="false" />
+                    <h:outputText value="#{fn:replace(challengeFeedbackSummaryCrudMBean.bean.willMitigateComment, '\\n', '&lt;br/&gt;')}" escape="false" />
                 </h:panelGrid>
 
                 <p:accordionPanel multiple="true" activeIndex="0">
                     <p:tab title="Interviews">
-                        <d:challengeInterviews value="#{challengeFeedbackResumeCrudMBean.bean.challenge.challengeInterviews}" />
+                        <d:challengeInterviews value="#{challengeFeedbackSummaryCrudMBean.bean.challenge.challengeInterviews}" />
                     </p:tab>
 
                     <p:tab title="Tags">
-                        <h:outputText readonly="true" value="#{fn:replace(challengeFeedbackResumeCrudMBean.bean.challenge.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
+                        <h:outputText readonly="true" value="#{fn:replace(challengeFeedbackSummaryCrudMBean.bean.challenge.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
                     </p:tab>
                 </p:accordionPanel>
             </ui:define>
