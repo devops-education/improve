@@ -43,8 +43,8 @@
                 </p:column>
 
                 <p:column responsivePriority="2" 
-                          headerText="Known" 
-                          field="known"
+                          headerText="Will mitigate" 
+                          field="willMitigate"
                           filterMatchMode="exact" 
                           style="width: 120px;" >
                     <f:facet name="filter">
@@ -53,31 +53,16 @@
                             <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
                         </p:selectOneMenu>
                     </f:facet>
-                    <p:selectOneButton value="#{bean.known}">
+                    <p:selectOneButton value="#{bean.willMitigate}">
                         <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                        <p:ajax listener="#{challengeFeedbackCrudMBean.saveChallengeFeedbackKnownDialog(bean)}"/>
+                        <p:ajax listener="#{challengeFeedbackCrudMBean.saveChallengeFeedbackWillMitigateDialog(bean)}"/>
                     </p:selectOneButton>
 
-                    <p:dialog header="Challenge" widgetVar="challengeDialog#{bean.challenge.id}" showEffect="fade" dynamic="true" >
+                    <p:dialog header="Challenge" widgetVar="challengeDialog#{bean.challenge.id}" 
+                              showEffect="fade" dynamic="false" >
                         <h:form>
                             <p:panelGrid columns="2" layout="flex">
                                 <c:text readonly="true" value="#{bean.challenge.mainIdea}" label="Main Idea" />
-
-                                <p:outputPanel>
-                                    <c:label label="Known" />
-                                    <p:spacer width="20"/>
-                                    <p:selectOneButton value="#{bean.known}">
-                                        <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                                        <p:ajax listener="#{challengeFeedbackCrudMBean.saveChallengeFeedback(bean)}"/>
-                                    </p:selectOneButton>
-                                </p:outputPanel>
-
-                                <c:label id="challengeKnownComment" label="Known Comment" />
-                                <p:inputTextarea value="#{bean.knownComment}"
-                                                 placeholder="Comment your known about this challenge. It is optional."
-                                                 rows="4" cols="70">
-                                    <p:ajax listener="#{challengeFeedbackCrudMBean.saveChallengeFeedback(bean)}" />
-                                </p:inputTextarea>
 
                                 <p:outputPanel>
                                     <c:label label="Will mitigate" />
@@ -100,23 +85,6 @@
                         </h:form>
                     </p:dialog>
                 </p:column>
-
-                <p:column responsivePriority="2" 
-                          headerText="Will mitigate" 
-                          field="willMitigate"
-                          filterMatchMode="exact" 
-                          style="width: 120px;" >
-                    <f:facet name="filter">
-                        <p:selectOneMenu onchange="PF('dataTable').filter()" >
-                            <f:selectItem itemLabel="" itemValue="#{null}"/>
-                            <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                        </p:selectOneMenu>
-                    </f:facet>
-                    <p:selectOneButton value="#{bean.willMitigate}">
-                        <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                        <p:ajax listener="#{challengeFeedbackCrudMBean.saveChallengeFeedbackWillMitigateDialog(bean)}"/>
-                    </p:selectOneButton>
-                </p:column>
             </ui:define>
 
             <ui:define name="detail">
@@ -137,20 +105,6 @@
                 </p:accordionPanel>
 
                 <h:panelGrid columns="2" cellpadding="3">
-                    <c:label label="Known" />
-                    <p:selectOneButton value="#{challengeFeedbackCrudMBean.bean.known}">
-                        <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                        <p:ajax listener="#{challengeFeedbackCrudMBean.saveChallengeFeedback(challengeFeedbackCrudMBean.bean)}" update="knownComment"/>
-                    </p:selectOneButton>
-
-                    <c:label label="Known Comment" />
-                    <p:inputTextarea id="knownComment" value="#{challengeFeedbackCrudMBean.bean.knownComment}"
-                                     placeholder="Comment how you know this challenge. It is optional."
-                                     rows="4" cols="80"
-                                     disabled="#{challengeFeedbackCrudMBean.bean.known eq null}">
-                        <p:ajax listener="#{challengeFeedbackCrudMBean.saveChallengeFeedback(challengeFeedbackCrudMBean.bean)}" />
-                    </p:inputTextarea>
-
                     <c:label label="Will Mitigate" />
                     <p:selectOneButton value="#{challengeFeedbackCrudMBean.bean.willMitigate}" >
                         <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
@@ -189,8 +143,8 @@
                             </p:column>
 
                             <p:column responsivePriority="2" 
-                                      headerText="Known" 
-                                      field="recommendationFeedback.known"
+                                      headerText="Used Already" 
+                                      field="recommendationFeedback.usedAlready"
                                       filterable="true" 
                                       style="width: 120px;" >
                                 <f:facet name="filter">
@@ -199,31 +153,16 @@
                                         <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
                                     </p:selectOneMenu>
                                 </f:facet>
-                                <p:selectOneButton value="#{linkRecommendationFeedback.recommendationFeedback.known}">
+                                <p:selectOneButton value="#{linkRecommendationFeedback.recommendationFeedback.usedAlready}">
                                     <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                                    <p:ajax listener="#{challengeFeedbackCrudMBean.saveRecommendationFeedbackKnownDialog(linkRecommendationFeedback.recommendationFeedback)}"/>
+                                    <p:ajax listener="#{challengeFeedbackCrudMBean.saveRecommendationFeedbackUsedAlreadyDialog(linkRecommendationFeedback.recommendationFeedback)}"/>
                                 </p:selectOneButton>
 
-                                <p:dialog header="Recommendation" widgetVar="recommendationDialog#{linkRecommendationFeedback.recommendationFeedback.recommendation.id}" showEffect="fade" dynamic="true" >
+                                <p:dialog header="Recommendation" widgetVar="recommendationDialog#{linkRecommendationFeedback.recommendationFeedback.recommendation.id}"
+                                          showEffect="fade" dynamic="false" >
                                     <h:form>
                                         <p:panelGrid columns="2" layout="flex">
                                             <c:text readonly="true" value="#{linkRecommendationFeedback.recommendationFeedback.recommendation.mainIdea}" label="Main Idea" />
-
-                                            <p:outputPanel>
-                                                <c:label label="Known" />
-                                                <p:spacer width="20"/>
-                                                <p:selectOneButton value="#{linkRecommendationFeedback.recommendationFeedback.known}">
-                                                    <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                                                    <p:ajax listener="#{challengeFeedbackCrudMBean.saveRecommendationFeedback(linkRecommendationFeedback.recommendationFeedback)}"/>
-                                                </p:selectOneButton>
-                                            </p:outputPanel>
-
-                                            <c:label id="recommendationKnownComment" label="Known Comment" />
-                                            <p:inputTextarea value="#{linkRecommendationFeedback.recommendationFeedback.knownComment}"
-                                                             placeholder="Comment your known about this recommendation. It is optional."
-                                                             rows="3" cols="70">
-                                                <p:ajax listener="#{challengeFeedbackCrudMBean.saveRecommendationFeedback(linkRecommendationFeedback.recommendationFeedback)}" />
-                                            </p:inputTextarea>
 
                                             <p:outputPanel>
                                                 <c:label label="Used Already" />
@@ -234,7 +173,7 @@
                                                 </p:selectOneButton>
                                             </p:outputPanel>
 
-                                            <c:label id="recommendationUsedAlreadyComment" label="Known Comment" />
+                                            <c:label id="recommendationUsedAlreadyComment" label="Used Already Comment" />
                                             <p:inputTextarea value="#{linkRecommendationFeedback.recommendationFeedback.usedAlreadyComment}"
                                                              placeholder="Comment how you used already this recommendation. It is optional."
                                                              rows="3" cols="70">
@@ -261,23 +200,6 @@
                                         </p:panelGrid>
                                     </h:form>
                                 </p:dialog>
-                            </p:column>
-
-                            <p:column responsivePriority="2" 
-                                      headerText="Used Already" 
-                                      field="recommendationFeedback.usedAlready"
-                                      filterable="true" 
-                                      style="width: 120px;" >
-                                <f:facet name="filter">
-                                    <p:selectOneMenu onchange="PF('linkDatatable').filter()" >
-                                        <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
-                                        <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                                    </p:selectOneMenu>
-                                </f:facet>
-                                <p:selectOneButton value="#{linkRecommendationFeedback.recommendationFeedback.usedAlready}">
-                                    <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                                    <p:ajax listener="#{challengeFeedbackCrudMBean.saveRecommendationFeedbackUsedAlreadyDialog(linkRecommendationFeedback.recommendationFeedback)}"/>
-                                </p:selectOneButton>
                             </p:column>
 
                             <p:column responsivePriority="2" 

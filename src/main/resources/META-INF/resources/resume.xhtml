@@ -16,12 +16,8 @@
                 showInsert="false"
                 showUpdateActionLink="false"
                 dataTableLazy="false"
-                showActionLinksColumn="false">
+                showActionLinksColumn="true">
             <ui:define name="listColumns">
-                <p:column style="width:2rem">
-                    <p:rowToggler/>
-                </p:column>
-
                 <p:column responsivePriority="1" headerText="Main Idea" field="recommendation.mainIdea" sortable="true" filterable="false" />
                 <p:column responsivePriority="3" headerText="Interviews" field="recommendation.recommendationInterviews.size()" style="width: 110px;" sortable="true" filterable="false" />
                 <p:column responsivePriority="3" headerText="Challenges" field="recommendation.links.size()" style="width: 110px;" sortable="true" filterable="false"/>
@@ -29,38 +25,28 @@
                     #{bean.recommendation.theme.value}
                 </p:column>
 
-                <p:column responsivePriority="2" 
-                          headerText="Known" 
-                          field="known"
-                          sortable="true"
-                          filterable="false"
-                          style="width: 80px;" >
-                    #{booleanOptions.label(bean.known)}
-                </p:column>
+            </ui:define>
+            <ui:define name="detail">
+                <h:panelGrid columns="2" cellpadding="3">
+                    <c:text readonly="true" value="#{recommendationFeedbackResumeCrudMBean.bean.recommendation.mainIdea}" label="Main Idea" />
+                    <c:text readonly="true" value="#{recommendationFeedbackResumeCrudMBean.bean.recommendation.theme.value}" label="Theme" />
 
-                <p:rowExpansion>                
-                    <h:panelGrid columns="2" cellpadding="3">
-                        <c:label label="Known Comment" />
-                        <h:outputText  id="knownComment" value="#{fn:replace(bean.knownComment, '\\n', '&lt;br/&gt;')}" escape="false" />
+                    <c:label label="Used Already Comment" />
+                    <h:outputText id="usedAlreadyComment" value="#{fn:replace(recommendationFeedbackResumeCrudMBean.bean.usedAlreadyComment, '\\n', '&lt;br/&gt;')}" escape="false" />
 
-                        <c:label label="Used Already Comment" />
-                        <h:outputText id="usedAlreadyComment" value="#{fn:replace(bean.usedAlreadyComment, '\\n', '&lt;br/&gt;')}" escape="false" />
+                    <c:label label="Will Use Comment" />
+                    <h:outputText id="willUseComment" value="#{fn:replace(recommendationFeedbackResumeCrudMBean.bean.willUseComment, '\\n', '&lt;br/&gt;')}" escape="false" />
+                </h:panelGrid>
 
-                        <c:label label="Will Use Comment" />
-                        <h:outputText id="willUseComment" value="#{fn:replace(bean.willUseComment, '\\n', '&lt;br/&gt;')}" escape="false" />
-                    </h:panelGrid>
+                <p:accordionPanel multiple="true" activeIndex="0">
+                    <p:tab title="Interviews">
+                        <d:recommendationInterviews value="#{recommendationFeedbackResumeCrudMBean.bean.recommendation.recommendationInterviews}" />
+                    </p:tab>
 
-
-                    <p:accordionPanel multiple="true" activeIndex="0">
-                        <p:tab title="Interviews">
-                            <d:recommendationInterviews value="#{bean.recommendation.recommendationInterviews}" />
-                        </p:tab>
-
-                        <p:tab title="Tags">
-                            <h:outputText readonly="true" value="#{fn:replace(bean.recommendation.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
-                        </p:tab>
-                    </p:accordionPanel>
-                </p:rowExpansion>
+                    <p:tab title="Tags">
+                        <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackResumeCrudMBean.bean.recommendation.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
+                    </p:tab>
+                </p:accordionPanel>
             </ui:define>
         </c:crud>
         
@@ -72,47 +58,33 @@
                 showInsert="false"
                 showUpdateActionLink="false"
                 dataTableLazy="false"
-                showActionLinksColumn="false">
+                showActionLinksColumn="true">
             <ui:define name="listColumns">
-                <p:column style="width:2rem">
-                    <p:rowToggler/>
-                </p:column>
-
                 <p:column responsivePriority="1" headerText="Main Idea" field="challenge.mainIdea" sortable="true" filterable="false" />
                 <p:column responsivePriority="3" headerText="Interviews" field="challenge.challengeInterviews.size()" style="width: 110px;" sortable="true" filterable="false" />
                 <p:column responsivePriority="3" headerText="Recommendations" field="challenge.links.size()" style="width: 170px;" sortable="true" filterable="false"/>
                 <p:column responsivePriority="4" headerText="Theme" field="challenge.theme" style="width: 125px;" sortable="true" filterable="false" >
                     #{bean.challenge.theme.value}
                 </p:column>
+            </ui:define>
+            <ui:define name="detail">
+                <h:panelGrid columns="2" cellpadding="3">
+                    <c:text readonly="true" value="#{challengeFeedbackResumeCrudMBean.bean.challenge.mainIdea}" label="Main Idea" id="mainIdea"/>
+                    <c:text readonly="true" value="#{challengeFeedbackResumeCrudMBean.bean.challenge.theme.value}" label="Theme" id="theme"/>
 
-                <p:column responsivePriority="2" 
-                          headerText="Known" 
-                          field="known"
-                          sortable="true"
-                          filterable="false"
-                          style="width: 80px;" >
-                    #{booleanOptions.label(bean.known)}
-                </p:column>
+                    <c:label id="willMitigateCommentChallenge" label="Will Mitigate Comment" />
+                    <h:outputText value="#{fn:replace(challengeFeedbackResumeCrudMBean.bean.willMitigateComment, '\\n', '&lt;br/&gt;')}" escape="false" />
+                </h:panelGrid>
 
-                <p:rowExpansion>                
-                    <h:panelGrid columns="2" cellpadding="3">
-                        <c:label id="knownCommentChallenge" label="Known Comment" />
-                        <h:outputText value="#{fn:replace(bean.knownComment, '\\n', '&lt;br/&gt;')}" escape="false" />
+                <p:accordionPanel multiple="true" activeIndex="0">
+                    <p:tab title="Interviews">
+                        <d:challengeInterviews value="#{challengeFeedbackResumeCrudMBean.bean.challenge.challengeInterviews}" />
+                    </p:tab>
 
-                        <c:label id="willMitigateCommentChallenge" label="Will Mitigate Comment" />
-                        <h:outputText value="#{fn:replace(bean.willMitigateComment, '\\n', '&lt;br/&gt;')}" escape="false" />
-                    </h:panelGrid>
-
-                    <p:accordionPanel multiple="true" activeIndex="0">
-                        <p:tab title="Interviews">
-                            <d:challengeInterviews value="#{bean.challenge.challengeInterviews}" />
-                        </p:tab>
-
-                        <p:tab title="Tags">
-                            <h:outputText readonly="true" value="#{fn:replace(bean.challenge.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
-                        </p:tab>
-                    </p:accordionPanel>
-                </p:rowExpansion>
+                    <p:tab title="Tags">
+                        <h:outputText readonly="true" value="#{fn:replace(challengeFeedbackResumeCrudMBean.bean.challenge.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
+                    </p:tab>
+                </p:accordionPanel>
             </ui:define>
         </c:crud>
         
