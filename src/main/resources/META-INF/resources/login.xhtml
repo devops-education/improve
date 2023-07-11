@@ -13,62 +13,33 @@
             <ui:include src="layout/headLayout.xhtml" />
         </h:head>
 
-        <h:body>            
+        <h:body styleClass="login-body">            
             <h:form id="contentForm" prependId="false" enctype="#{enctype}">
-                <div class="card login-panel ui-fluid">
+                <div class="ui-fluid login-panel ui-fluid">
                     <div class="login-panel-content">
-                        <div class="grid">
-                            <div class="col-3" style="text-align:left;">
-                                <p:graphicImage name="images/login/icon-login.svg" library="avalon-layout" />
-                            </div>
-                            <div class="col-9" style="text-align:left;">
-                                <h2 class="welcome-text">Welcome Guest</h2>
-                                <span class="guest-sign-in">Sign in to Avalon Network</span>
-                            </div>
-                            <div class="col-12" style="text-align:left;">
-                                <h:panelGroup>
-                                    <label class="login-label">Username</label>
-                                    <div class="login-input">
-                                        <p:inputText />
-                                    </div>
-                                </h:panelGroup>
-                            </div>
-                            <div class="col-12" style="text-align:left;">
-                                <h:panelGroup>
-                                    <label class="login-label">Password</label>
-                                    <div class="login-input">
-                                        <p:password />
-                                    </div>
-                                </h:panelGroup>
-                            </div>
-                            <div class="col-12 md:col-6 button-pane">
-                                <p:commandButton id="submit" value="Login" ajax="false" />
-                            </div>
-
-                            <div class="col-12 md:col-6 flex align-items-center justify-content-center">
-                                <p:link styleClass="forget-password">Forget Password?</p:link>
-                            </div>
-                        </div>
+                        <p:panelGrid columns="2">
+                            <p:graphicImage value="#{resource['images/icon-login.svg']}" />
+                            <h:outputText class="welcome-text" value="Welcome to Recommend" />
+                        </p:panelGrid>
+                        <p:panelGrid columns="1" layout="grid">
+                            <p:outputLabel value="Connection failed: user and/or password are wrong." 
+                                           rendered="${!empty param['error']}"/>
+                        </p:panelGrid>
+                        <p:focus />
+                        <p:panelGrid columns="1" layout="grid">
+                            <h:outputText value="Username" />
+                            <p:inputText id="username" placeholder="put the provided username"/>
+                        </p:panelGrid>
+                        <p:panelGrid columns="1" layout="grid">
+                            <h:outputText value="Password" />
+                            <p:password id="password" placeholder="put the provided password"/>
+                        </p:panelGrid>
+                        <p:commandButton id="submit2" value="Sign In" ajax="false" />
                     </div>
                 </div>
-
-                <div id="mainDiv" class="ui-fluid center">
-                    <p:panelGrid columns="1" layout="grid">
-                        <p:outputLabel value="Connection failed: user and/or password are wrong." 
-                                       rendered="${!empty param['error']}"/>
-                    </p:panelGrid>
-                    <p:focus />
-                    <p:panelGrid columns="2" layout="grid">
-                        <h:outputText value="username" />
-                        <p:inputText id="username" />
-                        <h:outputText value="password" />
-                        <p:password id="password" />
-                    </p:panelGrid>
-                    <p:commandButton id="submit2" value="Login" ajax="false" />
-                </div>
+                <!--
+                -->
             </h:form>
-
-            <ui:include src="layout/footerLayout.xhtml" />
         </h:body>
     </f:view>
 </html>
