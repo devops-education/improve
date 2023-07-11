@@ -11,7 +11,8 @@
     template="/layout/template.xhtml">
     <ui:define name="content" >
         <c:crud titleText="Recommendations that you will use, but not used already."
-                titleStyleClass="recommendation"
+                titleStyleClass="recommendation"                
+                titleIcon="#{resource['images/ok.jpg']}"
                 managedBean="#{recommendationFeedbackSummaryCrudMBean}"
                 showInsert="false"
                 showUpdateActionLink="false"
@@ -54,6 +55,7 @@
         <c:crud crudId="challenge"
                 titleText="Challenges that you will mitigate, but not used linked recommendation."
                 titleStyleClass="challenge"
+                titleIcon="#{resource['images/warning.png']}" 
                 managedBean="#{challengeFeedbackSummaryCrudMBean}"
                 showInsert="false"
                 showUpdateActionLink="false"
