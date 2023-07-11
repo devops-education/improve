@@ -48,7 +48,7 @@ body .ui-menu.ui-menubar {
 }
 
 .challenge {
-    color: red !important;
+    color: orange !important;
 }
 
 .recommendation {
@@ -82,6 +82,11 @@ body .ui-menu.ui-menubar {
 }
 
 .login-body .ui-panelgrid .ui-panelgrid-cell {
+    padding: 0.5rem !important;
+    border: 0px hidden #1f2d40;
+}
+
+.title-panelgrid .ui-panelgrid .ui-panelgrid-cell {
     padding: 0.5rem !important;
     border: 0px hidden #1f2d40;
 }
