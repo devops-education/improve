@@ -12,7 +12,7 @@
     <ui:define name="content" >
         <c:crud titleText="Recommendations on DevOps Education"
                 titleStyleClass="recommendation"
-                titleIcon="#{resource['images/ok.jpg']}"
+                titleIcon="#{resource['images/ok.png']}"
                 managedBean="#{recommendationFeedbackCrudMBean}"
                 showInsert="false"
                 showUpdateActionLink="false">
@@ -129,8 +129,8 @@
                     <c:text readonly="true" value="#{recommendationFeedbackCrudMBean.bean.recommendation.theme.value}" label="Theme" />
                 </h:panelGrid>
 
-                <p:accordionPanel multiple="true" activeIndex="0">
-                    <p:tab title="Interviews">
+                <p:accordionPanel multiple="true" activeIndex="-1">
+                    <p:tab title="Interviews Resume and Quotes">
                         <d:recommendationInterviews value="#{recommendationFeedbackCrudMBean.bean.recommendation.recommendationInterviews}" />
                     </p:tab>
 
@@ -162,7 +162,7 @@
 
                     <c:label label="Will Use Comment" />
                     <p:inputTextarea id="willUseComment" value="#{recommendationFeedbackCrudMBean.bean.willUseComment}"
-                                     placeholder="Comment how you used already this recommendation. It is optional."
+                                     placeholder="Comment how you will use this recommendation. It is optional."
                                      rows="4" cols="80"
                                      disabled="#{recommendationFeedbackCrudMBean.bean.willUse eq null}">
                         <p:ajax listener="#{recommendationFeedbackCrudMBean.saveRecommendationFeedback(recommendationFeedbackCrudMBean.bean)}" />

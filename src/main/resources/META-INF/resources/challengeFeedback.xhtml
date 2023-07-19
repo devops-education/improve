@@ -77,7 +77,7 @@
 
                                 <c:label id="challengeWillMitigateComment" label="Will Mitigate Comment" />
                                 <p:inputTextarea value="#{bean.willMitigateComment}"
-                                                 placeholder="Comment your about how you will mitigate challenge. It is optional."
+                                                 placeholder="Comment how you will mitigate challenge. It is optional."
                                                  rows="4" cols="70">
                                     <p:ajax listener="#{challengeFeedbackCrudMBean.saveChallengeFeedback(bean)}" />
                                 </p:inputTextarea>
@@ -96,8 +96,8 @@
                     <c:text readonly="true" value="#{challengeFeedbackCrudMBean.bean.challenge.theme.value}" label="Theme" />
                 </h:panelGrid>
 
-                <p:accordionPanel multiple="true" activeIndex="0">
-                    <p:tab title="Interviews">
+                <p:accordionPanel multiple="true" activeIndex="-1">
+                    <p:tab title="Interviews Resume and Quotes">
                         <d:challengeInterviews value="#{challengeFeedbackCrudMBean.bean.challenge.challengeInterviews}" />
                     </p:tab>
 
@@ -115,7 +115,7 @@
 
                     <c:label label="Will Mitigate Comment" />
                     <p:inputTextarea id="willMitigateComment" value="#{challengeFeedbackCrudMBean.bean.willMitigateComment}"
-                                     placeholder="Comment how you know this challenge. It is optional."
+                                     placeholder="Comment how you will mitigate this challenge. It is optional."
                                      rows="4" cols="80"
                                      disabled="#{challengeFeedbackCrudMBean.bean.willMitigate eq null}">
                         <p:ajax listener="#{challengeFeedbackCrudMBean.saveChallengeFeedback(challengeFeedbackCrudMBean.bean)}" />

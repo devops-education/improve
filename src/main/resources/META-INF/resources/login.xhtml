@@ -17,9 +17,10 @@
             <h:form id="contentForm" prependId="false" enctype="#{enctype}">
                 <div class="ui-fluid login-panel ui-fluid">
                     <div class="login-panel-content">
-                        <p:panelGrid columns="2">
+                        <p:panelGrid columns="3">
                             <p:graphicImage value="#{resource['images/icon-login.svg']}" />
-                            <h:outputText class="welcome-text" value="Welcome to Recommend" />
+                            <h:outputText class="welcome-text" value="Welcome to " />
+                            <p:graphicImage value="#{resource['images/devops-branco.png']}" />
                         </p:panelGrid>
                         <p:panelGrid columns="1" layout="grid">
                             <p:outputLabel value="Connection failed: user and/or password are wrong." 

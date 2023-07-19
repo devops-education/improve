@@ -10,9 +10,9 @@
     xmlns:fn="jakarta.tags.functions"
     template="/layout/template.xhtml">
     <ui:define name="content" >
-        <c:crud titleText="Recommendations that you will use, but not used already."
+        <c:crud titleText="Recommendations that you should apply to your course."
                 titleStyleClass="recommendation"                
-                titleIcon="#{resource['images/ok.jpg']}"
+                titleIcon="#{resource['images/ok.png']}"
                 managedBean="#{recommendationFeedbackSummaryCrudMBean}"
                 showInsert="false"
                 showUpdateActionLink="false"
@@ -39,8 +39,8 @@
                     <h:outputText id="willUseComment" value="#{fn:replace(recommendationFeedbackSummaryCrudMBean.bean.willUseComment, '\\n', '&lt;br/&gt;')}" escape="false" />
                 </h:panelGrid>
 
-                <p:accordionPanel multiple="true" activeIndex="0">
-                    <p:tab title="Interviews">
+                <p:accordionPanel multiple="true" activeIndex="-1">
+                    <p:tab title="Interviews Resumes and Quotes">
                         <d:recommendationInterviews value="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.recommendationInterviews}" />
                     </p:tab>
 
@@ -53,7 +53,7 @@
         
         
         <c:crud crudId="challenge"
-                titleText="Challenges that you will mitigate, but not used linked recommendation."
+                titleText="Challenges that you will mitigate, but you use no linked recommendation."
                 titleStyleClass="challenge"
                 titleIcon="#{resource['images/warning.png']}" 
                 managedBean="#{challengeFeedbackSummaryCrudMBean}"
@@ -78,8 +78,8 @@
                     <h:outputText value="#{fn:replace(challengeFeedbackSummaryCrudMBean.bean.willMitigateComment, '\\n', '&lt;br/&gt;')}" escape="false" />
                 </h:panelGrid>
 
-                <p:accordionPanel multiple="true" activeIndex="0">
-                    <p:tab title="Interviews">
+                <p:accordionPanel multiple="true" activeIndex="-1">
+                    <p:tab title="Interviews Resumes and Quotes">
                         <d:challengeInterviews value="#{challengeFeedbackSummaryCrudMBean.bean.challenge.challengeInterviews}" />
                     </p:tab>
 
