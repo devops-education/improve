@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="crde.persapiens.org"
+    xmlns:d="jakarta.faces.composite/crde"
+    xmlns:fn="jakarta.tags.functions"
+    xmlns:m="crde.persapiens.org"
+    template="/layout/template.xhtml"
+    >
+    <ui:define name="content" >
+        <m:contentLayout 
+            titleText="Improve your DevOps course!" 
+            titleIcon="#{resource['images/devops-branco.png']}" 
+            titleIconWidth="199px"
+            titleIconHeight="63px"
+            titleStyleClass="home" >
+
+            <ui:define name="layoutContent" >
+                <p:panelGrid columns="1">
+                    <p:card styleClass="cardChallenge">
+                        <f:facet name="title" >Challenges</f:facet>
+                        Use Challenges menu link to browse through challenges on DevOps Education.
+                    </p:card>
+                        <p:card styleClass="cardRecommendation">
+                        <f:facet name="title" >Recommendations</f:facet>
+                        Use Recommendations menu link to browse through recommendations on DevOps Education.
+                    </p:card>
+                    <p:card >
+                        <f:facet name="title" >Summary</f:facet>
+                        Use Summary menu link to see the recommendations that you should apply to your course.
+                    </p:card>
+                </p:panelGrid>
+            </ui:define>
+        </m:contentLayout>
+    </ui:define>
+</ui:composition>

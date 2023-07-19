@@ -4,13 +4,16 @@
                 xmlns:ui="jakarta.faces.facelets"
                 xmlns:h="jakarta.faces.html"                
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:c="jakarta.tags.core"
                 xmlns:m="crde.persapiens.org">
+    <c:set var="titleIconWidth"          value="#{empty titleIconWidth ? '50px' : titleIconWidth}" />
+    <c:set var="titleIconHeight"         value="#{empty titleIconHeight ? '50px' : titleIconHeight}" />
 
     <p:outputPanel>
 
         <p:panel styleClass="title-panelgrid">
             <p:panelGrid columns="2">
-                <p:graphicImage value="#{titleIcon}" width="50px" height="50px"/>
+                <p:graphicImage value="#{titleIcon}" width="#{titleIconWidth}" height="#{titleIconHeight}"/>
                 <h:outputText value="#{titleText}" style="float:left;padding-right: 10px;font-size:2em;font-weight:bold;#{titleStyle}" styleClass="#{titleStyleClass}"/>
             </p:panelGrid>
         </p:panel>

@@ -1,58 +1,58 @@
 /* body > contentForm > page */
 
 #page {
-    width: auto;
-    margin: 0 3px;
-    background: #FFFFFF;
-    padding: 0px;
+  width: auto;
+  margin: 0 3px;
+  background: #FFFFFF;
+  padding: 0px;
 }
 
 #page table{
-    font-size: 16px !important;
-    font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 16px !important;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* body > contentForm > page > layout > tituloAtividade > title */
 
 .title {
-    height: 45px;
-    margin-left: 0px;
-    margin-bottom: 3px;
-    padding: 0px 0 0 0px;
-    text-align: center;
+  height: 45px;
+  margin-left: 0px;
+  margin-bottom: 3px;
+  padding: 0px 0 0 0px;
+  text-align: center;
 }
 
 .title a {
-    border-bottom: none;
-    color: #FFFFFF;
+  border-bottom: none;
+  color: #FFFFFF;
 }
 
 .title a:hover {
-    border-bottom: 1px dotted #000000;
+  border-bottom: 1px dotted #000000;
 }
 
 .nomeSistema {
-    top: 20px;
-    color: darkblue;
-    font-size: 50px;
-    text-align: left;
-    width: 100%;
+  top: 20px;
+  color: darkblue;
+  font-size: 50px;
+  text-align: left;
+  width: 100%;
 }
 
 body .ui-menu.ui-menubar {
-    padding: 0px;
+  padding: 0px;
 }
 
 .listActionLinksStyleClassOne {
-    width: 40px !important;
+  width: 40px !important;
 }
 
 .challenge {
-    color: orange !important;
+  color: orange !important;
 }
 
 .recommendation {
-    color: limegreen !important;
+  color: limegreen !important;
 }
 
 .login-body {
@@ -60,7 +60,7 @@ body .ui-menu.ui-menubar {
 }
 
 .login-body .login-panel .login-panel-content {
-  width: 400px;
+  width: 450px;
   position: relative;
   margin-left: -200px;
   top: 100px;
@@ -73,7 +73,7 @@ body .ui-menu.ui-menubar {
   margin-top: 5px;
 }
 .login-body .login-panel .login-panel-content .guest-sign-in {
-  font-size: 12px;
+  font-size: 16px;
 }
 .login-body .login-panel .login-panel-content .welcome-text {
   margin-bottom: 0;
@@ -82,15 +82,37 @@ body .ui-menu.ui-menubar {
 }
 
 .login-body .ui-panelgrid .ui-panelgrid-cell {
-    padding: 0.5rem !important;
-    border: 0px hidden #1f2d40;
+  padding: 0.5rem !important;
+  border: 0px hidden #1f2d40;
 }
 
 .title-panelgrid .ui-panelgrid .ui-panelgrid-cell {
-    padding: 0.5rem !important;
-    border: 0px hidden #1f2d40;
+  padding: 0.5rem !important;
+  border: 0px hidden #1f2d40;
 }
 
 .welcome-text {
   font-size: x-large !important;
+}
+
+.menu .ui-menuitem.ui-widget.ui-corner-all:last-child {
+  float: right;
+}
+
+.home-icon {
+  background: url(images/devops-branco-menu.png.faces) no-repeat !important;
+  height: 40px;
+  width: 128px;
+}
+
+.home {
+  color: aqua !important;
+}
+
+.cardChallenge .ui-card-title {
+  color: orange !important;    
+}
+
+.cardRecommendation .ui-card-title {
+  color: limegreen !important;    
 }

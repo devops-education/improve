@@ -22,7 +22,6 @@ public class SecurityConfig {
 
     /**
      * Configure security.
-     *
      */
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) {
