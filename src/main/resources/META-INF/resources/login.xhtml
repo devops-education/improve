@@ -18,9 +18,8 @@
                 <div class="ui-fluid login-panel ui-fluid">
                     <div class="login-panel-content">
                         <p:panelGrid columns="3">
-                            <p:graphicImage value="#{resource['images/icon-login.svg']}" />
-                            <h:outputText class="welcome-text" value="Welcome to " />
-                            <p:graphicImage value="#{resource['images/devops-branco.png']}" />
+                            <p:graphicImage value="#{resource['images/improve-white.png']}" height="100" width="100"/>
+                            <h:outputText class="welcome-text" value="Sign in to Improve" />
                         </p:panelGrid>
                         <p:panelGrid columns="1" layout="grid">
                             <p:outputLabel value="Connection failed: user and/or password are wrong." 
@@ -35,7 +34,7 @@
                             <h:outputText value="Password" />
                             <p:password id="password" placeholder="put the provided password"/>
                         </p:panelGrid>
-                        <p:commandButton id="submit" value="Sign In" ajax="false" />
+                        <p:commandButton id="submit" value="Sign in" ajax="false" />
                     </div>
                 </div>
             </h:form>
