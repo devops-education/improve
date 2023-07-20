@@ -28,20 +28,7 @@
 
             </ui:define>
             <ui:define name="detail">
-                <h:panelGrid columns="2" cellpadding="3">
-                    <c:text readonly="true" value="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.mainIdea}" label="Main Idea" />
-                    <c:text readonly="true" value="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.theme.value}" label="Theme" />
-                </h:panelGrid>
-
-                <p:accordionPanel multiple="true" activeIndex="-1">
-                    <p:tab title="Interviews Resumes and Quotes (#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.recommendationInterviews.size()})">
-                        <d:recommendationInterviews value="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.recommendationInterviews}" />
-                    </p:tab>
-
-                    <p:tab title="Tags (#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.recommendationTags.size()})">
-                        <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackSummaryCrudMBean.bean.recommendation.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
-                    </p:tab>
-                </p:accordionPanel>
+                <d:recommendationDetail crudMBean="#{recommendationFeedbackSummaryCrudMBean}" />
 
                 <h:panelGrid columns="2" cellpadding="3">
                     <c:label label="Used Already Comment" />
@@ -72,20 +59,7 @@
                 </p:column>
             </ui:define>
             <ui:define name="detail">
-                <h:panelGrid columns="2" cellpadding="3">
-                    <c:text readonly="true" value="#{challengeFeedbackSummaryCrudMBean.bean.challenge.mainIdea}" label="Main Idea" id="mainIdea"/>
-                    <c:text readonly="true" value="#{challengeFeedbackSummaryCrudMBean.bean.challenge.theme.value}" label="Theme" id="theme"/>
-                </h:panelGrid>
-
-                <p:accordionPanel multiple="true" activeIndex="-1">
-                    <p:tab title="Interviews Resumes and Quotes (#{challengeFeedbackSummaryCrudMBean.bean.challenge.challengeInterviews.size()})">
-                        <d:challengeInterviews value="#{challengeFeedbackSummaryCrudMBean.bean.challenge.challengeInterviews}" />
-                    </p:tab>
-
-                    <p:tab title="Tags (#{challengeFeedbackSummaryCrudMBean.bean.challenge.challengeTags.size()})">
-                        <h:outputText readonly="true" value="#{fn:replace(challengeFeedbackSummaryCrudMBean.bean.challenge.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
-                    </p:tab>
-                </p:accordionPanel>
+                <d:challengeDetail crudMBean="#{challengeFeedbackSummaryCrudMBean}" />
                 
                 <h:panelGrid columns="2" cellpadding="3">
                     <c:label id="willMitigateCommentChallenge" label="Will Mitigate Comment" />

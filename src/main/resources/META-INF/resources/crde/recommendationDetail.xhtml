@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+    xmlns:cc="jakarta.faces.composite"
+    xmlns:h="jakarta.faces.html"
+    xmlns:fn="jakarta.tags.functions"
+    xmlns:c="crde.persapiens.org"
+    xmlns:d="jakarta.faces.composite/crde"
+    xmlns:p="http://primefaces.org/ui">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="crudMBean"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:panelGrid columns="2" cellpadding="3">
+            <c:text readonly="true" value="#{cc.attrs.crudMBean.bean.recommendation.mainIdea}" label="Main Idea" />
+            <c:text readonly="true" value="#{cc.attrs.crudMBean.bean.recommendation.theme.value}" label="Theme" />
+        </h:panelGrid>
+
+        <p:accordionPanel multiple="true" activeIndex="-1">
+            <p:tab title="Interviews Resumes and Quotes (#{cc.attrs.crudMBean.bean.recommendation.recommendationInterviews.size()})">
+                <d:recommendationInterviews value="#{cc.attrs.crudMBean.bean.recommendation.recommendationInterviews}" />
+            </p:tab>
+
+            <p:tab title="Tags (#{cc.attrs.crudMBean.bean.recommendation.recommendationTags.size()})">
+                <h:outputText readonly="true" value="#{fn:replace(cc.attrs.crudMBean.bean.recommendation.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
+            </p:tab>
+        </p:accordionPanel>
+    </cc:implementation>
+</html>

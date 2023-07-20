@@ -123,20 +123,7 @@
             </ui:define>
 
             <ui:define name="detail">
-                <h:panelGrid columns="2" cellpadding="3">
-                    <c:text readonly="true" value="#{recommendationFeedbackCrudMBean.bean.recommendation.mainIdea}" label="Main Idea" />
-                    <c:text readonly="true" value="#{recommendationFeedbackCrudMBean.bean.recommendation.theme.value}" label="Theme" />
-                </h:panelGrid>
-
-                <p:accordionPanel multiple="true" activeIndex="-1">
-                    <p:tab title="Interviews Resume and Quotes (#{recommendationFeedbackCrudMBean.bean.recommendation.recommendationInterviews.size()})">
-                        <d:recommendationInterviews value="#{recommendationFeedbackCrudMBean.bean.recommendation.recommendationInterviews}" />
-                    </p:tab>
-
-                    <p:tab title="Tags (#{recommendationFeedbackCrudMBean.bean.recommendation.recommendationTags.size()})">
-                        <h:outputText readonly="true" value="#{fn:replace(recommendationFeedbackCrudMBean.bean.recommendation.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
-                    </p:tab>
-                </p:accordionPanel>
+                <d:recommendationDetail crudMBean="#{recommendationFeedbackCrudMBean}" />
 
                 <h:panelGrid columns="2" cellpadding="3">
                     <c:label label="Used Already" />
