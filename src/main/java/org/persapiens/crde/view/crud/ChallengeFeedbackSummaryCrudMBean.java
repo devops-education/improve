@@ -3,6 +3,7 @@ package org.persapiens.crde.view.crud;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.faces.view.ViewScoped;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.persapiens.crde.domain.Link;
 import org.persapiens.crde.domain.Recommendation;
 import org.persapiens.crde.domain.RecommendationFeedback;
 import org.persapiens.crde.persistence.ChallengeFeedbackRepository;
+import org.persapiens.crde.persistence.ChallengeTagRepository;
 import org.persapiens.crde.persistence.LinkRepository;
 import org.persapiens.crde.persistence.RecommendationFeedbackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,10 @@ public class ChallengeFeedbackSummaryCrudMBean extends CrudMBean<ChallengeFeedba
     @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
     private RecommendationFeedbackRepository recommendationFeedbackRepository;
+    
+    @SuppressFBWarnings("SE_BAD_FIELD")
+    @Autowired
+    private ChallengeTagRepository challengeTagRepository;
     
     private List<Recommendation> recommendations(ChallengeFeedback challengeFeedback) {
         return linkRepository.findByChallenge(challengeFeedback.getChallenge())
@@ -72,4 +78,11 @@ public class ChallengeFeedbackSummaryCrudMBean extends CrudMBean<ChallengeFeedba
         return ChallengeFeedback.builder().build();
     }
 
+    @Override
+    public void startDetailAction() {
+        super.startDetailAction(); 
+        
+        getBean().getChallenge().setChallengeTags(new HashSet<>(challengeTagRepository.findByChallenge(
+            getBean().getChallenge())));        
+    }
 }
