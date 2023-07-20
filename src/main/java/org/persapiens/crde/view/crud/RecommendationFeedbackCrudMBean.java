@@ -25,6 +25,7 @@ import org.persapiens.crde.domain.RecommendationFeedback;
 import org.persapiens.crde.domain.RecommendationInterview;
 import org.persapiens.crde.persistence.ChallengeInterviewRepository;
 import org.persapiens.crde.persistence.RecommendationRepository;
+import org.persapiens.crde.persistence.RecommendationTagRepository;
 import org.primefaces.util.LangUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -43,6 +44,10 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
     @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
     private ChallengeInterviewRepository challengeInterviewRepository;
+    
+    @SuppressFBWarnings("SE_BAD_FIELD")
+    @Autowired
+    private RecommendationTagRepository recommendationTagRepository;
     
     @Getter
     @Setter
@@ -129,8 +134,7 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
             challenge.setChallengeInterviews(new TreeSet<>(challengeInterviewRepository.findByChallenge(challenge)));
         }
         return bean;
-    }
-    
+    }    
 
     @Override
     public void startDetailAction() {
@@ -161,6 +165,9 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
         }
         
         setLinkChallengeFeedbackList(newLinkChallengeFeedbackList);
+        
+        getBean().getRecommendation().setRecommendationTags(new HashSet<>(recommendationTagRepository.findByRecommendation(
+            getBean().getRecommendation())));
     }    
         
 }

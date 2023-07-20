@@ -92,16 +92,15 @@
             <ui:define name="detail">
                 <h:panelGrid columns="2" cellpadding="3">
                     <c:text readonly="true" value="#{challengeFeedbackCrudMBean.bean.challenge.mainIdea}" label="Main Idea" />
-                    <c:text readonly="true" value="#{challengeFeedbackCrudMBean.bean.challenge.challengeInterviews.size()}" label="Interviews" />
                     <c:text readonly="true" value="#{challengeFeedbackCrudMBean.bean.challenge.theme.value}" label="Theme" />
                 </h:panelGrid>
 
                 <p:accordionPanel multiple="true" activeIndex="-1">
-                    <p:tab title="Interviews Resume and Quotes">
+                    <p:tab title="Interviews Resume and Quotes (#{challengeFeedbackCrudMBean.bean.challenge.challengeInterviews.size()})">
                         <d:challengeInterviews value="#{challengeFeedbackCrudMBean.bean.challenge.challengeInterviews}" />
                     </p:tab>
 
-                    <p:tab title="Tags">
+                    <p:tab title="Tags (#{challengeFeedbackCrudMBean.bean.challenge.challengeTags.size()})">
                         <h:outputText readonly="true" value="#{fn:replace(challengeFeedbackCrudMBean.bean.challenge.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
                     </p:tab>
                 </p:accordionPanel>

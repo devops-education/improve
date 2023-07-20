@@ -24,6 +24,7 @@ import org.persapiens.crde.domain.Link;
 import org.persapiens.crde.domain.Recommendation;
 import org.persapiens.crde.domain.RecommendationFeedback;
 import org.persapiens.crde.persistence.ChallengeRepository;
+import org.persapiens.crde.persistence.ChallengeTagRepository;
 import org.persapiens.crde.persistence.RecommendationInterviewRepository;
 import org.primefaces.util.LangUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,10 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
     @Autowired
     private RecommendationInterviewRepository recommendationInterviewRepository;
     
+    @SuppressFBWarnings("SE_BAD_FIELD")
+    @Autowired
+    private ChallengeTagRepository challengeTagRepository;
+    
     @Getter
     @Setter
     private List<LinkRecommendationFeedback> linkRecommendationFeedbackList;
@@ -63,8 +68,10 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
 
         Iterable<Link> iterable = linkRepository.findAll();
         
-        Map<Recommendation, List<Link>> recommendationLinkMap = StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.groupingBy(Link::getRecommendation));
-        Map<Challenge, List<Link>> challengeLinkMap = StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.groupingBy(Link::getChallenge));
+        Map<Recommendation, List<Link>> recommendationLinkMap = StreamSupport.stream(
+    iterable.spliterator(), false).collect(Collectors.groupingBy(Link::getRecommendation));
+        Map<Challenge, List<Link>> challengeLinkMap = StreamSupport.stream(
+    iterable.spliterator(), false).collect(Collectors.groupingBy(Link::getChallenge));
         
         // create all challengeFeedback from challenge and previous feedback
         List<ChallengeFeedback> result = new ArrayList<>();
@@ -159,6 +166,9 @@ getBean().getChallenge().getLinkSortedByRecommendationRecommendationInterviewsSi
                     .build());                    
         }
         setLinkRecommendationFeedbackList(newLinkRecommendationFeedbackList);
+        
+        getBean().getChallenge().setChallengeTags(new HashSet<>(challengeTagRepository.findByChallenge(
+    getBean().getChallenge())));
     }    
     
 }
