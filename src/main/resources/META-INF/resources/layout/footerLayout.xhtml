@@ -8,12 +8,10 @@
                 >
 
     <div id="footer" class="ui-widget">
-        <h:form id="themeForm">
-            <h:outputLink value="#{environment.getProperty('info.url')}" target="_blank">
-                <h:outputText styleClass="copyright"
-                              value="&copy;&nbsp;&nbsp;2023 &nbsp;&bull;&nbsp; Marcelo Romulo Fernandes &nbsp;&bull;&nbsp; Versão #{environment.getProperty('info.version')}" />
-            </h:outputLink>
-        </h:form>
+        <h:outputLink id="copyrightLink" value="#{environment.getProperty('info.url')}" target="_blank">
+            <h:outputText styleClass="copyright"
+                          value="&copy;&nbsp;&nbsp;2023 &nbsp;&bull;&nbsp; Marcelo Romulo Fernandes &nbsp;&bull;&nbsp; Versão #{environment.getProperty('info.version')}" />
+        </h:outputLink>
     </div>
     
 </ui:composition>

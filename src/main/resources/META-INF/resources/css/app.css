@@ -116,3 +116,16 @@ body .ui-menu.ui-menubar {
 .cardRecommendation .ui-card-title {
   color: limegreen !important;    
 }
+
+.copyright {
+  color: gray;
+  font-size: 12px;
+}
+
+#copyrightLink {
+  text-decoration: none;
+}
+
+#copyrightLink:hover {
+  text-decoration: underline;
+}
