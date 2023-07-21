@@ -3,7 +3,6 @@ package org.persapiens.crde.view.crud;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.faces.view.ViewScoped;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
@@ -79,10 +78,7 @@ public class ChallengeFeedbackSummaryCrudMBean extends CrudMBean<ChallengeFeedba
     }
 
     @Override
-    public void startDetailAction() {
-        super.startDetailAction(); 
-        
-        getBean().getChallenge().setChallengeTags(new HashSet<>(challengeTagRepository.findByChallenge(
-            getBean().getChallenge())));        
+    protected ChallengeFeedback getDetailBean(ChallengeFeedback bean) {
+        return challengeFeedbackRepository.findDetailById(bean.getId()).get(); 
     }
 }

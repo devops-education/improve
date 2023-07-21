@@ -6,5 +6,5 @@ import org.persapiens.crde.domain.RecommendationFeedback;
 
 public interface RecommendationFeedbackRepositoryCustom {
     List<RecommendationFeedback> findByUsernameLeftJoinRecommendationLinks(String username);
-    Optional<RecommendationFeedback> findById(Long id);
+    Optional<RecommendationFeedback> findDetailById(Long id);
 }

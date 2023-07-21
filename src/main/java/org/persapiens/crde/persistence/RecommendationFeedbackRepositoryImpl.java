@@ -7,6 +7,7 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
+import org.persapiens.crde.domain.QChallenge;
 import org.persapiens.crde.domain.QLink;
 import org.persapiens.crde.domain.QRecommendation;
 import org.persapiens.crde.domain.QRecommendationFeedback;
@@ -40,16 +41,21 @@ public class RecommendationFeedbackRepositoryImpl implements RecommendationFeedb
     }
 
     @Override
-    public Optional<RecommendationFeedback> findById(Long id) {
+    public Optional<RecommendationFeedback> findDetailById(Long id) {
         QRecommendationFeedback recommendationFeedback = QRecommendationFeedback.recommendationFeedback;
         QRecommendation recommendation = QRecommendation.recommendation;
+        QLink link = QLink.link;
+        QChallenge challenge = QChallenge.challenge;
         JPQLQueryFactory query = new JPAQueryFactory(this.entityManager);
 
         return Optional.of(query.from(recommendationFeedback)
                 .select(recommendationFeedback)
                 .leftJoin(recommendationFeedback.recommendation, recommendation).fetchJoin()
-                .leftJoin(recommendation.links).fetchJoin()
+                .leftJoin(recommendation.links, link).fetchJoin()
+                .leftJoin(link.challenge, challenge).fetchJoin()
+                .leftJoin(challenge.challengeInterviews).fetchJoin()
                 .leftJoin(recommendation.recommendationInterviews).fetchJoin()
+                .leftJoin(recommendation.recommendationTags).fetchJoin()
                 .where(recommendationFeedback.id.eq(id))
                 .fetchOne());
     }
