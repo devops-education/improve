@@ -37,6 +37,32 @@
                     <c:label label="Will Use Comment" />
                     <h:outputText id="willUseComment" value="#{fn:replace(recommendationFeedbackSummaryCrudMBean.bean.willUseComment, '\\n', '&lt;br/&gt;')}" escape="false" />
                 </h:panelGrid>
+
+                <p:accordionPanel multiple="true" activeIndex="0" id="linkChallengeFeedbackAccordionPanel">
+                    <p:tab title="Challenge Links (#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.links.size()})" titleStyleClass="challenge" >
+                        <p:dataTable id="linkDatatable"
+                                     widgetVar="linkDatatable"
+                                     value="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.linkSortedByChallengeChallengeInterviewsSizeList}"
+                                     var="link"
+                                     emptyMessage="Sem Registros"
+                                     rows="5"
+                                     paginator="true"
+                                     rowsPerPageTemplate="5,10,20,50"
+                                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+                                     paginatorPosition="bottom"
+                                     stripedRows="true"
+                                     rowIndexVar="rowIdx"
+                                     >
+                            <p:column responsivePriority="1" headerText="Main Idea" field="challenge.mainIdea" sortable="true" filterable="false" />
+                            <p:column responsivePriority="3" headerText="Interviews" field="challenge.challengeInterviews.size()" style="width: 70px;" sortable="true" filterable="false" />
+                            <p:column responsivePriority="3" headerText="Recommendations" field="challenge.links.size()" style="width: 130px;" sortable="true" filterable="false" />
+                            <p:column responsivePriority="4" headerText="Theme" field="challenge.theme" style="width: 125px;" sortable="true" filterable="false" >
+                                #{link.challenge.theme.value}
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:tab>
+                </p:accordionPanel>
             </ui:define>
         </c:crud>
         
@@ -65,6 +91,32 @@
                     <c:label id="willMitigateCommentChallenge" label="Will Mitigate Comment" />
                     <h:outputText value="#{fn:replace(challengeFeedbackSummaryCrudMBean.bean.willMitigateComment, '\\n', '&lt;br/&gt;')}" escape="false" />
                 </h:panelGrid>
+
+                <p:accordionPanel multiple="true" activeIndex="0" id="linkRecommendationFeedbackAccordionPanel">
+                    <p:tab title="Recommendation Links (#{challengeFeedbackSummaryCrudMBean.bean.challenge.links.size()})" titleStyleClass="recommendation" >
+                        <p:dataTable id="linkDatatable"
+                                     widgetVar="linkDatatable"
+                                     value="#{challengeFeedbackSummaryCrudMBean.bean.challenge.linkSortedByRecommendationRecommendationInterviewsSizeList}"
+                                     var="link"
+                                     emptyMessage="Sem Registros"
+                                     rows="5"
+                                     paginator="true"
+                                     rowsPerPageTemplate="5,10,20,50"
+                                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+                                     paginatorPosition="bottom"
+                                     stripedRows="true"
+                                     rowIndexVar="rowIdx"
+                                     >
+                            <p:column responsivePriority="1" headerText="Main Idea" field="recommendation.mainIdea" sortable="true" filterable="false" />
+                            <p:column responsivePriority="3" headerText="Interviews" field="recommendation.recommendationInterviews.size()" style="width: 70px;" sortable="true" filterable="false" />
+                            <p:column responsivePriority="3" headerText="Challenges" field="recommendation.links.size()" style="width: 80px;" sortable="true" filterable="false"/>
+                            <p:column responsivePriority="4" headerText="Theme" field="link.recommendation.theme" style="width: 125px;" sortable="true" filterable="false" >
+                                #{link.recommendation.theme.value}
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:tab>
+                </p:accordionPanel>
             </ui:define>
         </c:crud>
         
