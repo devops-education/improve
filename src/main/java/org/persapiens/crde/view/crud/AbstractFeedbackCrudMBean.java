@@ -2,8 +2,10 @@ package org.persapiens.crde.view.crud;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.faces.view.ViewScoped;
+import java.io.IOException;
 import java.util.Locale;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.lucene.queryparser.classic.ParseException;
 import org.persapiens.crde.domain.ChallengeFeedback;
 import org.persapiens.crde.domain.RecommendationFeedback;
 import org.persapiens.crde.persistence.ChallengeFeedbackRepository;
@@ -33,7 +35,7 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
     @Autowired
     protected RecommendationFeedbackRepository recommendationFeedbackRepository;
 
-    public abstract boolean globalFilterFunction(Object value, Object filter, Locale locale);
+    public abstract boolean globalFilterFunction(Object value, Object filter, Locale locale) throws ParseException, IOException ;
  
     public void saveRecommendationFeedbackKnownDialog(RecommendationFeedback recommendationFeedback) {
         saveRecommendationFeedbackDialog(recommendationFeedback, recommendationFeedback.getKnown() != null);
