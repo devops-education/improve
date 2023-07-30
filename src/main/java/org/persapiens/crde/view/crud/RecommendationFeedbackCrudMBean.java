@@ -2,6 +2,7 @@ package org.persapiens.crde.view.crud;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.faces.view.ViewScoped;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,16 +17,17 @@ import java.util.stream.StreamSupport;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.lucene.queryparser.classic.ParseException;
 import org.persapiens.crde.domain.Challenge;
 import org.persapiens.crde.domain.ChallengeFeedback;
 import org.persapiens.crde.domain.Link;
 
 import org.persapiens.crde.domain.Recommendation;
 import org.persapiens.crde.domain.RecommendationFeedback;
-import org.persapiens.crde.domain.RecommendationInterview;
 import org.persapiens.crde.persistence.ChallengeInterviewRepository;
 import org.persapiens.crde.persistence.RecommendationRepository;
 import org.persapiens.crde.persistence.RecommendationTagRepository;
+import org.persapiens.crde.service.RecommendationSearchService;
 import org.primefaces.util.LangUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -52,6 +54,9 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
     @Getter
     @Setter
     private List<LinkChallengeFeedback> linkChallengeFeedbackList;
+    
+    @Autowired
+    private RecommendationSearchService recommendationSearchService;
     
     @Override
     protected RecommendationFeedback createBean() {
@@ -105,13 +110,16 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
     }
 
     @Override
-    public boolean globalFilterFunction(Object value, Object filter, Locale locale) {
+    public boolean globalFilterFunction(Object value, Object filter, Locale locale) throws ParseException, IOException {
         String filterText = (filter == null) ? null : filter.toString().trim().toLowerCase();
         if (LangUtils.isBlank(filterText)) {
             return true;
         }
 
         Recommendation recommendation = ((RecommendationFeedback) value).getRecommendation();
+
+        return recommendationSearchService.search(filterText, recommendation.getId());
+        /*
         boolean result = recommendation.getMainIdea().toLowerCase().contains(filterText)
                 || recommendation.getTags().toLowerCase().contains(filterText);
 
@@ -125,6 +133,7 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
             }
         }
         return result;
+        */
     }
 
     @Override
