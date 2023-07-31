@@ -13,6 +13,7 @@ import org.persapiens.crde.persistence.ChallengeFeedbackRepository;
 import org.persapiens.crde.persistence.LinkRepository;
 import org.persapiens.crde.persistence.RecommendationFeedbackRepository;
 import org.primefaces.PrimeFaces;
+import org.primefaces.util.LangUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -35,8 +36,23 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
     @Autowired
     protected RecommendationFeedbackRepository recommendationFeedbackRepository;
 
-    public abstract boolean globalFilterFunction(Object value, Object filter, Locale locale) throws ParseException, IOException ;
- 
+    public boolean globalFilterFunction(T value, Object filter, Locale locale) {
+        boolean result = false;
+        try {
+            String filterText = (filter == null) ? null : filter.toString().trim().toLowerCase();
+            if (LangUtils.isBlank(filterText)) {
+                return true;
+            } else {
+                result = doGlobalFilterFunction(value, filterText, locale);
+            }
+        } catch (ParseException | IOException ex) {
+            result = false;
+        }
+        return result;
+    }
+
+    protected abstract boolean doGlobalFilterFunction(T value, String filter, Locale locale) throws ParseException, IOException;
+    
     public void saveRecommendationFeedbackKnownDialog(RecommendationFeedback recommendationFeedback) {
         saveRecommendationFeedbackDialog(recommendationFeedback, recommendationFeedback.getKnown() != null);
     }

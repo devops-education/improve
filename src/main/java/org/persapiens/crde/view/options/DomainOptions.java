@@ -4,8 +4,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.Serializable;
 import java.util.List;
 
-import jakarta.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 
 public abstract class DomainOptions<T, ID extends Serializable> extends Options <T, ID> {
@@ -14,7 +13,7 @@ public abstract class DomainOptions<T, ID extends Serializable> extends Options 
     private CrudRepository<T, ID> service;
 
     @SuppressFBWarnings(EI_EXPOSE_REP)
-    @Inject
+    @Autowired
     public void setService(CrudRepository<T, ID> service) {
         this.service = service;
     }

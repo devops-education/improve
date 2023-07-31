@@ -2,6 +2,7 @@ package org.persapiens.crde.view.crud;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.faces.view.ViewScoped;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,9 +17,9 @@ import java.util.stream.StreamSupport;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.lucene.queryparser.classic.ParseException;
 import org.persapiens.crde.domain.Challenge;
 import org.persapiens.crde.domain.ChallengeFeedback;
-import org.persapiens.crde.domain.ChallengeInterview;
 import org.persapiens.crde.domain.Link;
 
 import org.persapiens.crde.domain.Recommendation;
@@ -26,7 +27,7 @@ import org.persapiens.crde.domain.RecommendationFeedback;
 import org.persapiens.crde.persistence.ChallengeRepository;
 import org.persapiens.crde.persistence.ChallengeTagRepository;
 import org.persapiens.crde.persistence.RecommendationInterviewRepository;
-import org.primefaces.util.LangUtils;
+import org.persapiens.crde.service.ChallengeSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -52,6 +53,10 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
     @Getter
     @Setter
     private List<LinkRecommendationFeedback> linkRecommendationFeedbackList;
+    
+    @SuppressFBWarnings("SE_BAD_FIELD")
+    @Autowired
+    private ChallengeSearchService challengeSearchService;
     
     @Override
     protected ChallengeFeedback createBean() {
@@ -107,26 +112,8 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
     }
 
     @Override
-    public boolean globalFilterFunction(Object value, Object filter, Locale locale) {
-        String filterText = (filter == null) ? null : filter.toString().trim().toLowerCase();
-        if (LangUtils.isBlank(filterText)) {
-            return true;
-        }
-
-        Challenge challenge = ((ChallengeFeedback) value).getChallenge();
-        boolean result = challenge.getMainIdea().toLowerCase().contains(filterText)
-                || challenge.getTags().toLowerCase().contains(filterText);
-        
-        if (!result) {
-            for(ChallengeInterview ci : challenge.getChallengeInterviews()) {
-                result = ci.getResume().toLowerCase().contains(filterText)
-                         || ci.getQuote().toLowerCase().contains(filterText);
-                if (result) {
-                    break;
-                }
-            }
-        }
-        return result;
+    protected boolean doGlobalFilterFunction(ChallengeFeedback value, String filterText, Locale locale) throws ParseException, IOException {
+        return challengeSearchService.search(filterText, value.getChallenge().getId());
     }
 
     @Override

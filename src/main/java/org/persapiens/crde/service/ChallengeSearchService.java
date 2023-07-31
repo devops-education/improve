@@ -1,39 +1,39 @@
 package org.persapiens.crde.service;
 
 import java.util.List;
-import org.persapiens.crde.domain.Recommendation;
-import org.persapiens.crde.domain.RecommendationInterview;
-import org.persapiens.crde.persistence.RecommendationRepository;
+import org.persapiens.crde.domain.Challenge;
+import org.persapiens.crde.domain.ChallengeInterview;
+import org.persapiens.crde.persistence.ChallengeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RecommendationSearchService extends SearchService<Recommendation>{
+public class ChallengeSearchService extends SearchService<Challenge> {
     
     @Autowired
-    private RecommendationRepository recommendationRepository;
+    private ChallengeRepository challengeRepository;
 
     @Override
     protected long count() {
-        return recommendationRepository.count();
+        return challengeRepository.count();
     }
 
     @Override
-    protected List<Recommendation> findAll() {
-        return recommendationRepository.findByLeftJoinLinksOrderByRecommendationInterviewsSizeDesc();
+    protected List<Challenge> findAll() {
+        return challengeRepository.findByOrderByChallengeInterviewsSizeDesc();
     }
 
     @Override
-    protected Long id(Recommendation t) {
+    protected Long id(Challenge t) {
         return t.getId();
     }
 
     @Override
-    protected String description(Recommendation t) {
+    protected String description(Challenge t) {
         StringBuilder sb = new StringBuilder();
         StringBuilder riquotes = new StringBuilder();
         StringBuilder riresumes = new StringBuilder();
-        for (RecommendationInterview ri : t.getRecommendationInterviews()) {
+        for (ChallengeInterview ri : t.getChallengeInterviews()) {
             riquotes = riquotes.append(' ').append(ri.getQuote());
             riresumes = riresumes.append(' ').append(ri.getResume());
         }

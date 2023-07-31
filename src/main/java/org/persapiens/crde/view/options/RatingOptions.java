@@ -1,13 +1,13 @@
 package org.persapiens.crde.view.options;
 
 import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Named;
 import java.util.Arrays;
 import java.util.List;
 import org.persapiens.crde.domain.Rating;
+import org.springframework.stereotype.Component;
 
 @ViewScoped
-@Named
+@Component
 public class RatingOptions extends Options<Rating, Rating> {
 
     private static final long serialVersionUID = 1L;
