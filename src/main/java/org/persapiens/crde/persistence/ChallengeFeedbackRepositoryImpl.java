@@ -3,7 +3,6 @@ package org.persapiens.crde.persistence;
 import com.querydsl.jpa.JPQLQueryFactory;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import java.util.Optional;
 import org.persapiens.crde.domain.ChallengeFeedback;
@@ -11,6 +10,7 @@ import org.persapiens.crde.domain.QChallenge;
 import org.persapiens.crde.domain.QChallengeFeedback;
 import org.persapiens.crde.domain.QLink;
 import org.persapiens.crde.domain.QRecommendation;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 public class ChallengeFeedbackRepositoryImpl implements ChallengeFeedbackRepositoryCustom {
@@ -18,7 +18,7 @@ public class ChallengeFeedbackRepositoryImpl implements ChallengeFeedbackReposit
     private final EntityManager entityManager;
 
     @SuppressFBWarnings("EI_EXPOSE_REP2")
-    @Inject
+    @Autowired
     public ChallengeFeedbackRepositoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }

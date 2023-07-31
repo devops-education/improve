@@ -28,7 +28,6 @@ import org.persapiens.crde.persistence.ChallengeInterviewRepository;
 import org.persapiens.crde.persistence.RecommendationRepository;
 import org.persapiens.crde.persistence.RecommendationTagRepository;
 import org.persapiens.crde.service.RecommendationSearchService;
-import org.primefaces.util.LangUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -55,6 +54,7 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
     @Setter
     private List<LinkChallengeFeedback> linkChallengeFeedbackList;
     
+    @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
     private RecommendationSearchService recommendationSearchService;
     
@@ -110,30 +110,8 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
     }
 
     @Override
-    public boolean globalFilterFunction(Object value, Object filter, Locale locale) throws ParseException, IOException {
-        String filterText = (filter == null) ? null : filter.toString().trim().toLowerCase();
-        if (LangUtils.isBlank(filterText)) {
-            return true;
-        }
-
-        Recommendation recommendation = ((RecommendationFeedback) value).getRecommendation();
-
-        return recommendationSearchService.search(filterText, recommendation.getId());
-        /*
-        boolean result = recommendation.getMainIdea().toLowerCase().contains(filterText)
-                || recommendation.getTags().toLowerCase().contains(filterText);
-
-        if (!result) {
-            for(RecommendationInterview ri : recommendation.getRecommendationInterviews()) {
-                result = ri.getResume().toLowerCase().contains(filterText)
-                    || ri.getQuote().toLowerCase().contains(filterText);
-                if (result) {
-                    break;
-                }
-            }
-        }
-        return result;
-        */
+    protected boolean doGlobalFilterFunction(RecommendationFeedback value, String filterText, Locale locale) throws ParseException, IOException {
+        return recommendationSearchService.search(filterText, value.getRecommendation().getId());
     }
 
     @Override

@@ -6,13 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import jakarta.inject.Inject;
-
 import org.persapiens.crde.view.AbstractMBean;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.PrimeFaces;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -50,7 +49,7 @@ public abstract class CrudMBean<T extends Object, ID extends Serializable>
     private CrudRepository<T, ID> repository;
 
     @SuppressFBWarnings("EI_EXPOSE_REP2")
-    @Inject
+    @Autowired
     public void setService(CrudRepository<T, ID> service) {
         this.repository = service;
     }
@@ -249,7 +248,7 @@ public abstract class CrudMBean<T extends Object, ID extends Serializable>
                     }
                 }
                 if (indexOfBean > -1) {
-                    List<T> newBeanList = new ArrayList<T>();
+                    List<T> newBeanList = new ArrayList<>();
                     newBeanList.addAll(this.beanList.subList(0, indexOfBean));
                     newBeanList.add(updateBean);
                     newBeanList.addAll(this.beanList.subList(indexOfBean + 1, this.beanList.size()));
@@ -357,4 +356,7 @@ public abstract class CrudMBean<T extends Object, ID extends Serializable>
         return false;
     }
 
+    public String getDatabaseFilterProcess() {
+        return "";
+    }
 }

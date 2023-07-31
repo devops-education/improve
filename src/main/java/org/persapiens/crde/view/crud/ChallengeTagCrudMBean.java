@@ -1,12 +1,12 @@
 package org.persapiens.crde.view.crud;
 
 import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Named;
 
 import org.persapiens.crde.domain.ChallengeTag;
+import org.springframework.stereotype.Component;
 
 @ViewScoped
-@Named
+@Component
 public class ChallengeTagCrudMBean extends CrudMBean<ChallengeTag, Long> {
 
 	private static final long serialVersionUID = 1L;

@@ -1,14 +1,14 @@
 package org.persapiens.crde.view.converter;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.convert.Converter;
-import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
 import org.persapiens.crde.domain.Rating;
+import org.springframework.stereotype.Component;
 
-@ApplicationScoped
-@Named
+@ViewScoped
+@Component
 public class RatingConverter implements Converter<Rating> {
 
     private static final long serialVersionUID = 1L;
