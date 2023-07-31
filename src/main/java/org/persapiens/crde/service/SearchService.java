@@ -4,7 +4,7 @@ import jakarta.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.lucene.analysis.br.BrazilianAnalyzer;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StoredField;
@@ -47,7 +47,7 @@ public abstract class SearchService <T> {
 
         max = count();
         
-        try (IndexWriter directoryWriter = new IndexWriter(directory, new IndexWriterConfig(new BrazilianAnalyzer())); ) {
+        try (IndexWriter directoryWriter = new IndexWriter(directory, new IndexWriterConfig(new EnglishAnalyzer())); ) {
             for (T line : findAll()) {
                 Document doc = new Document();
                 doc.add(new StoredField(ID, id(line)));
@@ -61,7 +61,7 @@ public abstract class SearchService <T> {
     }
 
     private Query query(String keyword) throws ParseException {
-        QueryParser parser = new QueryParser(DESCRIPTION, new BrazilianAnalyzer());
+        QueryParser parser = new QueryParser(DESCRIPTION, new EnglishAnalyzer());
         return parser.parse(keyword);        
     }
     
