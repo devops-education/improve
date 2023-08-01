@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:c="jakarta.tags.core" xmlns:f="jakarta.faces.core"
                 xmlns:h="jakarta.faces.html" xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui"
-                xmlns:ui="jakarta.faces.facelets" xmlns:m="crde.persapiens.org">
+                xmlns:ui="jakarta.faces.facelets">
 
     <c:set var="id" value="${empty id ? fn:replace(label,' ', '_') : id}" />
     <c:set var="rendered" value="#{empty rendered ? true : rendered}" />

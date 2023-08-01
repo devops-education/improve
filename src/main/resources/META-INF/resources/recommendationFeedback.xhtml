@@ -5,8 +5,8 @@
     xmlns:f="jakarta.faces.core"
     xmlns:h="jakarta.faces.html"
     xmlns:p="http://primefaces.org/ui"
-    xmlns:c="crde.persapiens.org"
-    xmlns:d="jakarta.faces.composite/crde"
+    xmlns:c="improve.persapiens.org"
+    xmlns:d="jakarta.faces.composite/improve"
     xmlns:fn="jakarta.tags.functions"
     template="/layout/template.xhtml">
     <ui:define name="content" >
@@ -30,7 +30,7 @@
                     <p:spacer width="20px" />
                     <p:commandButton value="Recommendation Tags" onclick="PF('recommendationTagDialog').show()"/>
                     <p:dialog header="Recommendation Tags" widgetVar="recommendationTagDialog" showEffect="fade" closeOnEscape="true" closable="true">
-                        <p:graphicImage value="#{resource['images/crde/recommendation-tag-tag.jpg']}" library="crde" width="600" height="600" />
+                        <p:graphicImage value="#{resource['images/improve/recommendation-tag-tag.jpg']}" library="improve" width="600" height="600" />
                     </p:dialog>
                     
                     <p:spacer width="20px" />
