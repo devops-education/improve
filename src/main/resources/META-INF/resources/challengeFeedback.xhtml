@@ -18,7 +18,7 @@
                 <f:facet name="header">
                     <span class="ui-input-icon-left">
                         <i class="pi pi-search" />
-                        <p:inputText id="globalFilter" onkeyup="PF('dataTable').filter()" style="width:330px"
+                        <p:inputText id="globalFilter" onkeyup="PF('dataTable').filter()" style="width:340px"
                                      placeholder="Search main idea, abstracts, quotes, tags" >
                             <f:validator binding="#{challengeSearchValidator}" />
                             <p:ajax event="valueChange" update="searchMessage" />
@@ -26,26 +26,53 @@
                     </span>
                     
                     <p:spacer width="20px" />
-                    <p:commandButton value="Challenge Tags" onclick="PF('challengeTagDialog').show()"/>
+                    <p:commandButton value="Challenge Tags" 
+                                     onclick="PF('challengeTagDialog').show()"
+                                     title="Open challenge tags map image" />
                     <p:dialog header="Challenge Tags" widgetVar="challengeTagDialog" showEffect="fade" 
                               closeOnEscape="true" closable="true">
-                        <p:graphicImage value="#{resource['images/improve/challenge-tag-tag.jpg']}" width="600" height="600" />
+                        <p:graphicImage value="#{resource['images/improve/challenge-tag-tag.jpg']}" 
+                                        width="600" 
+                                        height="600" />
                     </p:dialog>
 
                     <p:spacer width="20px" />
-                    <p:link id="searchLink" value="Search Syntax" target="_blank" href="https://lucene.apache.org/core/2_9_4/queryparsersyntax.html#Terms"/>
+                    <p:link id="searchLink" 
+                            value="Search Syntax" 
+                            target="_blank" 
+                            title="Open new page describing syntax for creating search queries"
+                            href="https://lucene.apache.org/core/2_9_4/queryparsersyntax.html#Terms"/>
 
                     <p:message id="searchMessage" for="globalFilter" styleClass="ui-state-error"/>
                 </f:facet>
 
-                <p:column responsivePriority="1" headerText="Main Idea" field="challenge.mainIdea" filterable="false"/>
+                <p:column field="challenge.mainIdea"
+                          responsivePriority="1" 
+                          filterable="false">
+                    <f:facet name="header">
+                        <h:outputText value="Main Idea" title="Challenge main idea (description)" />
+                    </f:facet>
+                </p:column>
 
-                <p:column responsivePriority="3" headerText="Interviews" field="challenge.challengeInterviews.size()" 
-                          style="width: 110px;"/>
+                <p:column field="challenge.challengeInterviews.size()"
+                          responsivePriority="3" 
+                          style="width: 110px;">
+                    <f:facet name="header">
+                        <h:outputText value="Interviews" title="Number of interviews that cited the challenge" />
+                    </f:facet>
+                </p:column>
 
-                <p:column responsivePriority="3" headerText="Recommendations" field="challenge.links.size()" style="width: 170px;"/>
+                <p:column field="challenge.links.size()" 
+                          responsivePriority="3" 
+                          style="width: 170px;">
+                    <f:facet name="header">
+                        <h:outputText value="Recommendations" title="Number of linked recommendations" />
+                    </f:facet>
+                </p:column>
 
-                <p:column responsivePriority="4" headerText="Theme" field="challenge.theme" style="width: 125px;" >
+                <p:column field="challenge.theme" 
+                          responsivePriority="4" 
+                          style="width: 125px;" >
                     #{bean.challenge.theme.value}
                     <f:facet name="filter">
                         <p:selectOneMenu onchange="PF('dataTable').filter()">
@@ -53,18 +80,23 @@
                             <f:selectItems value="#{themeOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.value}"/>
                         </p:selectOneMenu>
                     </f:facet>
+                    <f:facet name="header">
+                        <h:outputText value="Theme" title="Theme of the challenge" />
+                    </f:facet>
                 </p:column>
 
-                <p:column responsivePriority="2" 
-                          headerText="Will mitigate" 
-                          field="willMitigate"
+                <p:column field="willMitigate"
                           filterMatchMode="exact" 
+                          responsivePriority="2" 
                           style="width: 120px;" >
                     <f:facet name="filter">
                         <p:selectOneMenu onchange="PF('dataTable').filter()" >
                             <f:selectItem itemLabel="" itemValue="#{null}"/>
                             <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
                         </p:selectOneMenu>
+                    </f:facet>
+                    <f:facet name="header">
+                        <h:outputText value="Will mitigate" title="Inform if the user wants to mitigate the challenge" />
                     </f:facet>
                     <p:selectOneButton value="#{bean.willMitigate}">
                         <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>

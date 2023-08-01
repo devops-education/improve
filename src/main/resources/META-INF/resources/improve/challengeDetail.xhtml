@@ -23,11 +23,13 @@
         </h:panelGrid>
 
         <p:accordionPanel multiple="true" activeIndex="-1">
-            <p:tab title="Interviews Resumes and Quotes (#{cc.attrs.crudMBean.bean.challenge.challengeInterviews.size()})">
+            <p:tab titletip="Click to show and hide the Interviews Resumens and Quotes of this challenge"
+                   title="Interviews Resumes and Quotes (#{cc.attrs.crudMBean.bean.challenge.challengeInterviews.size()})">
                 <d:challengeInterviews value="#{cc.attrs.crudMBean.bean.challenge.challengeInterviews}" />
             </p:tab>
 
-            <p:tab title="Tags (#{cc.attrs.crudMBean.bean.challenge.challengeTags.size()})">
+            <p:tab titletip="Click to show and hide the tags of this challenge"
+                   title="Tags (#{cc.attrs.crudMBean.bean.challenge.challengeTags.size()})">
                 <h:outputText readonly="true" value="#{fn:replace(cc.attrs.crudMBean.bean.challenge.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
             </p:tab>
         </p:accordionPanel>        
