@@ -4,8 +4,8 @@
     xmlns="https://jakarta.ee/xml/ns/jakartaee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-facelettaglibrary_4_0.xsd">
-    <namespace>crde.persapiens.org</namespace>
-    <composite-library-name>crde</composite-library-name>
+    <namespace>improve.persapiens.org</namespace>
+    <composite-library-name>improve</composite-library-name>
     <tag>
         <description>Título do conteúdo. &lt;br/&gt;
             Para customização, utilize ui:define para afterTitle 
@@ -108,7 +108,7 @@
             </description>
             <name>managedBean</name>
             <required>true</required>
-            <type>org.persapiens.crde.view.crud.CrudMBean</type>
+            <type>org.persapiens.improve.view.crud.CrudMBean</type>
         </attribute>
         <attribute>
             <description>Define se o botão de incluir será renderizado. &lt;br/&gt;
@@ -523,7 +523,7 @@
         <attribute>
             <description>Options para montar um selectOneMenu</description>
             <name>options</name>
-            <type>org.persapiens.crde.view.options.Options</type>
+            <type>org.persapiens.improve.view.options.Options</type>
         </attribute>
         <attribute>
             <description>id do(s) componente(s) para ser atualizado via ajax.

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+    xmlns:cc="jakarta.faces.composite"
+    xmlns:h="jakarta.faces.html"
+    xmlns:fn="jakarta.tags.functions"
+    xmlns:c="improve.persapiens.org"
+    xmlns:d="jakarta.faces.composite/improve"
+    xmlns:p="http://primefaces.org/ui">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="crudMBean"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:panelGrid columns="2" cellpadding="3">
+            <c:text readonly="true" value="#{cc.attrs.crudMBean.bean.challenge.mainIdea}" label="Main Idea" id="mainIdea"/>
+            <c:text readonly="true" value="#{cc.attrs.crudMBean.bean.challenge.theme.value}" label="Theme" id="theme"/>
+        </h:panelGrid>
+
+        <p:accordionPanel multiple="true" activeIndex="-1">
+            <p:tab title="Interviews Resumes and Quotes (#{cc.attrs.crudMBean.bean.challenge.challengeInterviews.size()})">
+                <d:challengeInterviews value="#{cc.attrs.crudMBean.bean.challenge.challengeInterviews}" />
+            </p:tab>
+
+            <p:tab title="Tags (#{cc.attrs.crudMBean.bean.challenge.challengeTags.size()})">
+                <h:outputText readonly="true" value="#{fn:replace(cc.attrs.crudMBean.bean.challenge.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
+            </p:tab>
+        </p:accordionPanel>        
+    </cc:implementation>
+</html>
