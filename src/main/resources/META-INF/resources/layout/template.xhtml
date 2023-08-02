@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html
+      xmlns:p="http://primefaces.org/ui"
       xmlns:h="jakarta.faces.html"
       xmlns:f="jakarta.faces.core"
       xmlns:ui="jakarta.faces.facelets">
@@ -12,6 +13,8 @@
 
         <h:body>            
             <h:form id="contentForm" prependId="false" enctype="#{enctype}">
+                <p:tooltip autoHide="true"/>
+
                 <ui:include src="menuLayout.xhtml" />
 
                 <ui:include src="contentLayout.xhtml" />

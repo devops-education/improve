@@ -13,12 +13,14 @@
         <c:crud titleText="Challenges on DevOps Education" 
                 titleIcon="#{resource['images/warning.png']}" 
                 titleStyleClass="challenge" 
-                managedBean="#{challengeFeedbackCrudMBean}" showInsert="false" showUpdateActionLink="false">
+                managedBean="#{challengeFeedbackCrudMBean}" 
+                showInsert="false" 
+                showUpdateActionLink="false">
             <ui:define name="listColumns">
                 <f:facet name="header">
                     <span class="ui-input-icon-left">
                         <i class="pi pi-search" />
-                        <p:inputText id="globalFilter" onkeyup="PF('dataTable').filter()" style="width:340px"
+                        <p:inputText id="globalFilter" onkeyup="PF('dataTable').filter()" style="width:330px"
                                      placeholder="Search main idea, abstracts, quotes, tags" >
                             <f:validator binding="#{challengeSearchValidator}" />
                             <p:ajax event="valueChange" update="searchMessage" />
@@ -29,9 +31,10 @@
                     <p:commandButton value="Challenge Tags" 
                                      onclick="PF('challengeTagDialog').show()"
                                      title="Open challenge tags map image" />
-                    <p:dialog header="Challenge Tags" widgetVar="challengeTagDialog" showEffect="fade" 
-                              closeOnEscape="true" closable="true">
+                    <p:dialog header="Challenge Tags" widgetVar="challengeTagDialog" 
+                              showEffect="fade" closeOnEscape="true" closable="true">
                         <p:graphicImage value="#{resource['images/improve/challenge-tag-tag.jpg']}" 
+                                        library="improve"
                                         width="600" 
                                         height="600" />
                     </p:dialog>
@@ -50,7 +53,10 @@
                           responsivePriority="1" 
                           filterable="false">
                     <f:facet name="header">
-                        <h:outputText value="Main Idea" title="Challenge main idea (description)" />
+                        <h:outputText id="mainIdea" value="Main Idea" />
+                        <p:tooltip for="mainIdea" 
+                                   value="Sort by challenge main idea (description)"
+                                   position="top"/>
                     </f:facet>
                 </p:column>
 
@@ -58,45 +64,57 @@
                           responsivePriority="3" 
                           style="width: 110px;">
                     <f:facet name="header">
-                        <h:outputText value="Interviews" title="Number of interviews that cited the challenge" />
-                    </f:facet>
+                        <h:outputText id="interviews" value="Interviews" /> 
+                        <p:tooltip for="interviews" 
+                                   value="Sort / Filter by the number of interviews that cited the challenge" 
+                                   position="top"/>
+                    </f:facet>                    
                 </p:column>
 
                 <p:column field="challenge.links.size()" 
                           responsivePriority="3" 
                           style="width: 170px;">
                     <f:facet name="header">
-                        <h:outputText value="Recommendations" title="Number of linked recommendations" />
+                        <h:outputText id="recommendations" value="Recommendations" />
+                        <p:tooltip for="recommendations" 
+                                   value="Sort / Filter by the number of linked recommendations" 
+                                   position="top"/>
                     </f:facet>
                 </p:column>
 
                 <p:column field="challenge.theme" 
                           responsivePriority="4" 
                           style="width: 125px;" >
-                    #{bean.challenge.theme.value}
+                    <f:facet name="header">
+                        <h:outputText id="theme" value="Theme" />
+                        <p:tooltip for="theme" 
+                                   value="Sort / Filter by the theme of the challenge" 
+                                   position="top"/>
+                    </f:facet>
                     <f:facet name="filter">
                         <p:selectOneMenu onchange="PF('dataTable').filter()">
                             <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
                             <f:selectItems value="#{themeOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.value}"/>
                         </p:selectOneMenu>
                     </f:facet>
-                    <f:facet name="header">
-                        <h:outputText value="Theme" title="Theme of the challenge" />
-                    </f:facet>
+                    #{bean.challenge.theme.value}
                 </p:column>
 
                 <p:column field="willMitigate"
                           filterMatchMode="exact" 
                           responsivePriority="2" 
                           style="width: 120px;" >
+                    <f:facet name="header">
+                        <h:outputText id="willMitigate" value="Will mitigate" />
+                        <p:tooltip for="willMitigate" 
+                                   value="Inform if the you want to mitigate the challenge" 
+                                   position="top"/>
+                    </f:facet>
                     <f:facet name="filter">
                         <p:selectOneMenu onchange="PF('dataTable').filter()" >
                             <f:selectItem itemLabel="" itemValue="#{null}"/>
                             <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
                         </p:selectOneMenu>
-                    </f:facet>
-                    <f:facet name="header">
-                        <h:outputText value="Will mitigate" title="Inform if the user wants to mitigate the challenge" />
                     </f:facet>
                     <p:selectOneButton value="#{bean.willMitigate}">
                         <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
@@ -112,10 +130,11 @@
                                 <p:outputPanel>
                                     <c:label label="Will mitigate" />
                                     <p:spacer width="20"/>
-                                    <p:selectOneButton value="#{bean.willMitigate}">
+                                    <p:selectOneButton id="willMitigateSelectOneButton" value="#{bean.willMitigate}">
                                         <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
                                         <p:ajax listener="#{challengeFeedbackCrudMBean.saveChallengeFeedback(bean)}"/>
                                     </p:selectOneButton>
+                                    <p:tooltip for="willMitigateSelectOneButton" value="Inform if the you want to mitigate the challenge"/>
                                 </p:outputPanel>
 
                                 <c:label id="challengeWillMitigateComment" label="Will Mitigate Comment" />
@@ -137,10 +156,13 @@
 
                 <h:panelGrid columns="2" cellpadding="3">
                     <c:label label="Will Mitigate" />
-                    <p:selectOneButton value="#{challengeFeedbackCrudMBean.bean.willMitigate}" >
-                        <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                        <p:ajax listener="#{challengeFeedbackCrudMBean.saveChallengeFeedback(challengeFeedbackCrudMBean.bean)}" update="willMitigateComment"/>
-                    </p:selectOneButton>
+                    <div>
+                        <p:selectOneButton id="willMitigateSelectOneButton" value="#{challengeFeedbackCrudMBean.bean.willMitigate}" >
+                            <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                            <p:ajax listener="#{challengeFeedbackCrudMBean.saveChallengeFeedback(challengeFeedbackCrudMBean.bean)}" update="willMitigateComment"/>
+                        </p:selectOneButton>
+                        <p:tooltip for="willMitigateSelectOneButton" value="Inform if the you want to mitigate the challenge"/>
+                    </div>
 
                     <c:label label="Will Mitigate Comment" />
                     <p:inputTextarea id="willMitigateComment" value="#{challengeFeedbackCrudMBean.bean.willMitigateComment}"
@@ -152,7 +174,9 @@
                 </h:panelGrid>
 
                 <p:accordionPanel multiple="true" activeIndex="0" id="linkRecommendationFeedbackAccordionPanel">
-                    <p:tab title="Recommendation Links (#{challengeFeedbackCrudMBean.linkRecommendationFeedbackList.size()})" titleStyleClass="recommendation" >
+                    <p:tab title="Recommendation Links (#{challengeFeedbackCrudMBean.linkRecommendationFeedbackList.size()})"
+                           titleStyleClass="recommendation" 
+                           titletip="Show / hide the list of linked recommendations">
                         <p:dataTable id="linkDatatable"
                                      widgetVar="linkDatatable"
                                      value="#{challengeFeedbackCrudMBean.linkRecommendationFeedbackList}"
@@ -166,18 +190,69 @@
                                      stripedRows="true"
                                      rowIndexVar="rowIdx"
                                      >
-                            <p:column responsivePriority="1" headerText="Main Idea" field="link.recommendation.mainIdea" sortable="true" filterable="false" />
-                            <p:column responsivePriority="3" headerText="Interviews" field="link.recommendation.recommendationInterviews.size()" style="width: 70px;" sortable="true" filterable="false" />
-                            <p:column responsivePriority="3" headerText="Challenges" field="link.recommendation.links.size()" style="width: 80px;" sortable="true" filterable="false"/>
-                            <p:column responsivePriority="4" headerText="Theme" field="link.recommendation.theme" style="width: 125px;" sortable="true" filterable="false" >
+
+                            <p:column field="link.recommendation.mainIdea"
+                                      sortable="true"
+                                      filterable="false" 
+                                      responsivePriority="1">
+                                <f:facet name="header">
+                                    <h:outputText id="mainIdea" value="Main Idea" />
+                                    <p:tooltip for="mainIdea"
+                                               value="Sort by recommendation main idea (description)"
+                                               position="top"/>
+                                </f:facet>
+                            </p:column>
+                            
+                            <p:column field="link.recommendation.recommendationInterviews.size()"
+                                      style="width: 70px;"
+                                      sortable="true"
+                                      filterable="false" 
+                                      responsivePriority="3">
+                                <f:facet name="header">
+                                    <h:outputText id="interviews" value="Interviews" />
+                                    <p:tooltip for="interviews"
+                                               value="Sort / Filter by the number of interviews that cited the recommendation"
+                                               position="top"/>
+                                </f:facet>
+                            </p:column>
+                            
+                            <p:column field="link.recommendation.links.size()" 
+                                      style="width: 80px;" 
+                                      sortable="true" 
+                                      filterable="false"
+                                      responsivePriority="3">
+                                <f:facet name="header">
+                                    <h:outputText id="challenges" value="Challenges" />
+                                    <p:tooltip for="challenges"
+                                               value="Sort / Filter by the number of linked recommendations"
+                                               position="top"/>
+                                </f:facet>
+                            </p:column>
+                            
+                            <p:column field="link.recommendation.theme" 
+                                      style="width: 125px;" 
+                                      sortable="true" 
+                                      filterable="false" 
+                                      responsivePriority="4" >
+                                <f:facet name="header">
+                                    <h:outputText id="theme" value="Theme" />
+                                    <p:tooltip for="theme"
+                                               value="Sort / Filter by the theme of the recommendation"
+                                               position="top"/>
+                                </f:facet>
                                 #{linkRecommendationFeedback.link.recommendation.theme.value}
                             </p:column>
 
-                            <p:column responsivePriority="2" 
-                                      headerText="Used Already" 
-                                      field="recommendationFeedback.usedAlready"
+                            <p:column field="recommendationFeedback.usedAlready"
                                       filterable="true" 
-                                      style="width: 120px;" >
+                                      style="width: 130px;" 
+                                      responsivePriority="2" >
+                                <f:facet name="header">
+                                    <h:outputText id="usedAlready" value="Used Already" />
+                                    <p:tooltip for="usedAlready"
+                                               value="Inform if you used already this recommendation"
+                                               position="top"/>
+                                </f:facet>
                                 <f:facet name="filter">
                                     <p:selectOneMenu onchange="PF('linkDatatable').filter()" >
                                         <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
@@ -198,10 +273,13 @@
                                             <p:outputPanel>
                                                 <c:label label="Used Already" />
                                                 <p:spacer width="20"/>
-                                                <p:selectOneButton value="#{linkRecommendationFeedback.recommendationFeedback.usedAlready}">
+                                                <p:selectOneButton id="usedAlready" value="#{linkRecommendationFeedback.recommendationFeedback.usedAlready}">
                                                     <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
                                                     <p:ajax listener="#{challengeFeedbackCrudMBean.saveRecommendationFeedback(linkRecommendationFeedback.recommendationFeedback)}"/>
                                                 </p:selectOneButton>
+                                                <p:tooltip for="usedAlready"
+                                                           value="Inform if you used already this recommendation"
+                                                           position="right"/>
                                             </p:outputPanel>
 
                                             <c:label id="recommendationUsedAlreadyComment" label="Used Already Comment" />
@@ -214,10 +292,13 @@
                                             <p:outputPanel>
                                                 <c:label label="Will Use" />
                                                 <p:spacer width="20"/>
-                                                <p:selectOneButton value="#{linkRecommendationFeedback.recommendationFeedback.willUse}">
+                                                <p:selectOneButton id="willUse" value="#{linkRecommendationFeedback.recommendationFeedback.willUse}">
                                                     <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
                                                     <p:ajax listener="#{challengeFeedbackCrudMBean.saveRecommendationFeedback(linkRecommendationFeedback.recommendationFeedback)}"/>
                                                 </p:selectOneButton>
+                                                <p:tooltip for="willUse"
+                                                           value="Inform if you want to use this recommendation"
+                                                           position="right"/>
                                             </p:outputPanel>
 
                                             <c:label id="recommendationWillUseComment" label="Will Use Comment" />
@@ -233,11 +314,17 @@
                                 </p:dialog>
                             </p:column>
 
-                            <p:column responsivePriority="2" 
-                                      headerText="Will Use" 
+                            <p:column headerText="Will Use" 
                                       field="recommendationFeedback.willUse"
                                       filterable="true" 
-                                      style="width: 120px;" >
+                                      style="width: 120px;" 
+                                      responsivePriority="2" >
+                                <f:facet name="header">
+                                    <h:outputText id="willUse" value="Will Use" />
+                                    <p:tooltip for="willUse"
+                                               value="Inform if you want to use this recommendation"
+                                               position="top"/>
+                                </f:facet>
                                 <f:facet name="filter">
                                     <p:selectOneMenu onchange="PF('linkDatatable').filter()" >
                                         <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>

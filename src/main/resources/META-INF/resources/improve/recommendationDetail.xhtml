@@ -23,11 +23,24 @@
         </h:panelGrid>
 
         <p:accordionPanel multiple="true" activeIndex="-1">
-            <p:tab title="Interviews Resumes and Quotes (#{cc.attrs.crudMBean.bean.recommendation.recommendationInterviews.size()})">
-                <d:recommendationInterviews value="#{cc.attrs.crudMBean.bean.recommendation.recommendationInterviews}" />
+            <p:tab titletip="Click to show / hide the interviews Resumes and Quotes of this recommendation"
+                   title="Interviews Resumes and Quotes (#{cc.attrs.crudMBean.bean.recommendation.recommendationInterviews.size()})">
+                <p:dataTable var="recommendationInterview" value="#{cc.attrs.crudMBean.bean.recommendation.recommendationInterviews}"
+                             rows="3" stripedRows="true" paginator="true" paginatorPosition="bottom"
+                             rowsPerPageTemplate='3,4,5,10'
+                             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}">
+                    <p:column headerText="P" field="interview.interviewee" style="width: 35px;" filterable="false" sortable="false"/>
+                    <p:column headerText="Resume">
+                        <h:outputText readonly="true" value="#{fn:replace(recommendationInterview.resume, '\\n', '&lt;br/&gt;')}" escape="false" />
+                    </p:column>
+                    <p:column headerText="Quote">
+                        <h:outputText readonly="true" value="#{fn:replace(recommendationInterview.quote, '\\n', '&lt;br/&gt;')}" escape="false" />
+                    </p:column>
+                </p:dataTable>
             </p:tab>
 
-            <p:tab title="Tags (#{cc.attrs.crudMBean.bean.recommendation.recommendationTags.size()})">
+            <p:tab titletip="Click to show / hide the tags of this recommendation"
+                   title="Tags (#{cc.attrs.crudMBean.bean.recommendation.recommendationTags.size()})">
                 <h:outputText readonly="true" value="#{fn:replace(cc.attrs.crudMBean.bean.recommendation.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
             </p:tab>
         </p:accordionPanel>

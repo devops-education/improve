@@ -129,3 +129,7 @@ body .ui-menu.ui-menubar {
 #copyrightLink:hover {
   text-decoration: underline;
 }
+
+.ui-tooltip {
+    font-size: 12px !important;
+}
