@@ -77,12 +77,22 @@
                 dataTableLazy="false"
                 showActionLinksColumn="true">
             <ui:define name="listColumns">
-                <p:column responsivePriority="1" headerText="Main Idea" field="challenge.mainIdea" sortable="true" filterable="false" />
-                <p:column responsivePriority="3" headerText="Interviews" field="challenge.challengeInterviews.size()" style="width: 110px;" sortable="true" filterable="false" />
-                <p:column responsivePriority="3" headerText="Recommendations" field="challenge.links.size()" style="width: 170px;" sortable="true" filterable="false"/>
-                <p:column responsivePriority="4" headerText="Theme" field="challenge.theme" style="width: 125px;" sortable="true" filterable="false" >
-                    #{bean.challenge.theme.value}
-                </p:column>
+                <c:columnChallengeMainIdea field="challenge.mainIdea" />
+
+                <c:columnChallengeInterviews field="challenge.challengeInterviews.size()"
+                                             style="width: 110px;"
+                                             sortable="true"
+                                             filterable="false" />
+
+                <c:columnChallengeLinks field="challenge.links.size()"
+                                        style="width: 170px;"
+                                        sortable="true"
+                                        filterable="false" />
+
+                <c:columnChallengeTheme field="challenge.theme" 
+                                        value="#{bean.challenge.theme.value}"
+                                        sortable="true" 
+                                        filterable="false"/>
             </ui:define>
             <ui:define name="detail">
                 <d:challengeDetail crudMBean="#{challengeFeedbackSummaryCrudMBean}" />

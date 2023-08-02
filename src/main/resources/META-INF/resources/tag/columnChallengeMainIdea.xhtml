@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+                xmlns:c="jakarta.tags.core"
+                xmlns:f="jakarta.faces.core"
+                xmlns:h="jakarta.faces.html"
+                xmlns:fn="jakarta.tags.functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="jakarta.faces.facelets">
+
+    <p:column field="#{field}"
+              responsivePriority="1" 
+              sortable="true"
+              filterable="false">
+        <f:facet name="header">
+            <h:outputText id="mainIdea" value="Main Idea" />
+            <p:tooltip for="mainIdea" 
+                       value="Sort by challenge main idea (description)"
+                       position="top"/>
+        </f:facet>
+    </p:column>
+    
+</ui:composition>

@@ -250,57 +250,22 @@
                                      rowIndexVar="rowIdx"
                                      >
                             
-                            <p:column field="link.challenge.mainIdea" 
-                                      responsivePriority="1" 
-                                      sortable="true" 
-                                      filterable="false" >
-                                <f:facet name="header">
-                                    <h:outputText id="mainIdea" value="Main Idea" />
-                                    <p:tooltip for="mainIdea"
-                                               value="Sort by challenge main idea (description)"
-                                               position="top"/>
-                                </f:facet>
-                            </p:column>
+                            <c:columnChallengeMainIdea field="link.challenge.mainIdea" />
                             
-                            <p:column field="link.challenge.challengeInterviews.size()" 
-                                      responsivePriority="3" 
-                                      style="width: 70px;" 
-                                      sortable="true" 
-                                      filterable="false" >
-                                <f:facet name="header">
-                                    <h:outputText id="interviews" value="Interviews" />
-                                    <p:tooltip for="interviews"
-                                               value="Sort / Filter by the number of interviews that cited the challenge"
-                                               position="top"/>
-                                </f:facet>
-                            </p:column>
+                            <c:columnChallengeInterviews field="link.challenge.challengeInterviews.size()" 
+                                                         style="width: 70px;"
+                                                         sortable="true"
+                                                         filterable="false" />
+
+                            <c:columnChallengeLinks field="link.challenge.links.size()"
+                                                    style="width: 130px;" 
+                                                    sortable="true"
+                                                    filterable="false" />
                             
-                            <p:column field="link.challenge.links.size()" 
-                                      responsivePriority="3" 
-                                      style="width: 130px;" 
-                                      sortable="true" 
-                                      filterable="false">
-                                <f:facet name="header">
-                                    <h:outputText id="recommendations" value="Recommendations" />
-                                    <p:tooltip for="recommendations"
-                                               value="Sort / Filter by the number of linked challenges"
-                                               position="top"/>
-                                </f:facet>
-                            </p:column>
-                            
-                            <p:column field="link.challenge.theme" 
-                                      responsivePriority="4" 
-                                      style="width: 125px;" 
-                                      sortable="true" 
-                                      filterable="false" >
-                                <f:facet name="header">
-                                    <h:outputText id="theme" value="Theme" />
-                                    <p:tooltip for="theme"
-                                               value="Sort / Filter by the theme of the challenge"
-                                               position="top"/>
-                                </f:facet>
-                                #{linkChallengeFeedback.link.challenge.theme.value}
-                            </p:column>
+                            <c:columnChallengeTheme field="link.challenge.theme" 
+                                                    value="#{linkChallengeFeedback.link.challenge.theme.value}"
+                                                    sortable="true" 
+                                                    filterable="false"/>
 
                             <p:column responsivePriority="2" 
                                       headerText="Will Mitigate" 

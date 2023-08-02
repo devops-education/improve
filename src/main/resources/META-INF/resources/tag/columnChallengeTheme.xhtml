@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+                xmlns:c="jakarta.tags.core"
+                xmlns:f="jakarta.faces.core"
+                xmlns:h="jakarta.faces.html"
+                xmlns:fn="jakarta.tags.functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="jakarta.faces.facelets">
+
+    <p:column field="#{field}" 
+              responsivePriority="4" 
+              style="width: 125px;"
+              sortable="#{sortable}" 
+              filterable="#{filterable}">
+        <f:facet name="header">
+            <h:outputText id="theme" value="Theme" />
+            <p:tooltip for="theme" 
+                       value="Sort / Filter by the theme of the challenge" 
+                       position="top"/>
+        </f:facet>
+        <f:facet name="filter">
+            <p:selectOneMenu onchange="PF('dataTable').filter()">
+                <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
+                <f:selectItems value="#{themeOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.value}"/>
+            </p:selectOneMenu>
+        </f:facet>
+        #{value}
+    </p:column>
+    
+</ui:composition>
