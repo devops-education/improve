@@ -49,56 +49,22 @@
                     <p:message id="searchMessage" for="globalFilter" styleClass="ui-state-error"/>
                 </f:facet>
 
-                <p:column field="challenge.mainIdea"
-                          responsivePriority="1" 
-                          filterable="false">
-                    <f:facet name="header">
-                        <h:outputText id="mainIdea" value="Main Idea" />
-                        <p:tooltip for="mainIdea" 
-                                   value="Sort by challenge main idea (description)"
-                                   position="top"/>
-                    </f:facet>
-                </p:column>
+                <c:columnChallengeMainIdea field="challenge.mainIdea" />
 
-                <p:column field="challenge.challengeInterviews.size()"
-                          responsivePriority="3" 
-                          style="width: 110px;">
-                    <f:facet name="header">
-                        <h:outputText id="interviews" value="Interviews" /> 
-                        <p:tooltip for="interviews" 
-                                   value="Sort / Filter by the number of interviews that cited the challenge" 
-                                   position="top"/>
-                    </f:facet>                    
-                </p:column>
+                <c:columnChallengeInterviews field="challenge.challengeInterviews.size()"
+                                             style="width: 110px;"
+                                             sortable="true"
+                                             filterable="true" />
 
-                <p:column field="challenge.links.size()" 
-                          responsivePriority="3" 
-                          style="width: 170px;">
-                    <f:facet name="header">
-                        <h:outputText id="recommendations" value="Recommendations" />
-                        <p:tooltip for="recommendations" 
-                                   value="Sort / Filter by the number of linked recommendations" 
-                                   position="top"/>
-                    </f:facet>
-                </p:column>
+                <c:columnChallengeLinks field="challenge.links.size()"
+                                        style="width: 170px;"
+                                        sortable="true"
+                                        filterable="true" />
 
-                <p:column field="challenge.theme" 
-                          responsivePriority="4" 
-                          style="width: 125px;" >
-                    <f:facet name="header">
-                        <h:outputText id="theme" value="Theme" />
-                        <p:tooltip for="theme" 
-                                   value="Sort / Filter by the theme of the challenge" 
-                                   position="top"/>
-                    </f:facet>
-                    <f:facet name="filter">
-                        <p:selectOneMenu onchange="PF('dataTable').filter()">
-                            <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
-                            <f:selectItems value="#{themeOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.value}"/>
-                        </p:selectOneMenu>
-                    </f:facet>
-                    #{bean.challenge.theme.value}
-                </p:column>
+                <c:columnChallengeTheme field="challenge.theme" 
+                                        value="#{bean.challenge.theme.value}"
+                                        sortable="true" 
+                                        filterable="true"/>
 
                 <p:column field="willMitigate"
                           filterMatchMode="exact" 

@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+                xmlns:c="jakarta.tags.core"
+                xmlns:f="jakarta.faces.core"
+                xmlns:h="jakarta.faces.html"
+                xmlns:fn="jakarta.tags.functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="jakarta.faces.facelets">
+
+    <p:column field="${field}" 
+              responsivePriority="3" 
+              style="${style}"
+              sortable="#{sortable}"
+              filterable="#{filterable}">
+        <f:facet name="header">
+            <h:outputText id="recommendations" value="Recommendations" />
+            <p:tooltip for="recommendations" 
+                       value="Sort / Filter by the number of linked recommendations" 
+                       position="top"/>
+        </f:facet>
+    </p:column>
+    
+</ui:composition>
