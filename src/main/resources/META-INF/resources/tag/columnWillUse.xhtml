@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+                xmlns:f="jakarta.faces.core"
+                xmlns:h="jakarta.faces.html"
+                xmlns:fn="jakarta.tags.functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="jakarta.faces.facelets">
+
+    <p:column headerText="Will Use" 
+              field="#{field}"
+              filterable="true" 
+              filterMatchMode="exact" 
+              style="width: 120px;" 
+              responsivePriority="2" >
+        <f:facet name="header">
+            <h:outputText id="willUse" value="Will Use" />
+            <p:tooltip for="willUse"
+                       value="Inform if you want to use this recommendation"
+                       position="top"/>
+        </f:facet>
+        <f:facet name="filter">
+            <p:selectOneMenu onchange="PF(#{datatableId}).filter()" >
+                <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
+                <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+            </p:selectOneMenu>
+        </f:facet>
+        <p:selectOneButton value="#{recommendationFeedback.willUse}">
+            <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+            <p:ajax listener="#{feedbackCrudMBean.saveRecommendationFeedbackWillUseDialog(recommendationFeedback)}"/>
+        </p:selectOneButton>
+    </p:column>
+    
+</ui:composition>
