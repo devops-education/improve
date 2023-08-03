@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+                xmlns:c="improve.persapiens.org"
+                xmlns:f="jakarta.faces.core"
+                xmlns:h="jakarta.faces.html"
+                xmlns:fn="jakarta.tags.functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="jakarta.faces.facelets">
+
+    <p:column field="#{field}"
+              filterable="true" 
+              filterMatchMode="exact" 
+              style="width: 130px;" 
+              responsivePriority="2" >
+        <f:facet name="header">
+            <h:outputText id="usedAlready" value="Used Already" />
+            <p:tooltip for="usedAlready"
+                       value="Inform if you used already this recommendation"
+                       position="top"/>
+        </f:facet>
+        <f:facet name="filter">
+            <p:selectOneMenu onchange="PF(#{datatableId}).filter()" >
+                <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
+                <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+            </p:selectOneMenu>
+        </f:facet>
+        <p:selectOneButton value="#{recommendationFeedback.usedAlready}">
+            <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+            <p:ajax listener="#{feedbackCrudMBean.saveRecommendationFeedbackUsedAlreadyDialog(recommendationFeedback)}"/>
+        </p:selectOneButton>
+
+        <p:dialog header="Recommendation" widgetVar="recommendationDialog#{recommendationFeedback.recommendation.id}"
+                  showEffect="fade" dynamic="true" >
+            <h:form>
+                <p:panelGrid columns="2" layout="flex">
+                    <c:text readonly="true" value="#{recommendationFeedback.recommendation.mainIdea}" label="Main Idea" />
+
+                    <p:outputPanel>
+                        <c:label label="Used Already" />
+                        <p:spacer width="20"/>
+                        <p:selectOneButton id="usedAlready" value="#{recommendationFeedback.usedAlready}">
+                            <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                            <p:ajax listener="#{feedbackCrudMBean.saveRecommendationFeedback(recommendationFeedback)}"/>
+                        </p:selectOneButton>
+                        <p:tooltip for="usedAlready"
+                                   value="Inform if you used already this recommendation"
+                                   position="right"/>
+                    </p:outputPanel>
+
+                    <c:label id="recommendationUsedAlreadyComment" label="Used Already Comment" />
+                    <p:inputTextarea value="#{recommendationFeedback.usedAlreadyComment}"
+                                     placeholder="Comment how you used already this recommendation. It is optional."
+                                     rows="3" cols="70">
+                        <p:ajax listener="#{feedbackCrudMBean.saveRecommendationFeedback(recommendationFeedback)}" />
+                    </p:inputTextarea>
+
+                    <p:outputPanel>
+                        <c:label label="Will Use" />
+                        <p:spacer width="20"/>
+                        <p:selectOneButton id="willUse" value="#{recommendationFeedback.willUse}">
+                            <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                            <p:ajax listener="#{feedbackCrudMBean.saveRecommendationFeedback(recommendationFeedback)}"/>
+                        </p:selectOneButton>
+                        <p:tooltip for="willUse"
+                                   value="Inform if you want to use this recommendation"
+                                   position="right"/>
+                    </p:outputPanel>
+
+                    <c:label id="recommendationWillUseComment" label="Will Use Comment" />
+                    <p:inputTextarea value="#{recommendationFeedback.willUseComment}"
+                                     placeholder="Comment how you will use this recommendation. It is optional."
+                                     rows="3" cols="70">
+                        <p:ajax listener="#{feedbackCrudMBean.saveRecommendationFeedback(recommendationFeedback)}" />
+                    </p:inputTextarea>
+
+                    <p:commandButton value="Ok" update="#{commandButtonUpdate}"/>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+    </p:column>
+    
+</ui:composition>

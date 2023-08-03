@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+                xmlns:c="improve.persapiens.org"
+                xmlns:f="jakarta.faces.core"
+                xmlns:h="jakarta.faces.html"
+                xmlns:fn="jakarta.tags.functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="jakarta.faces.facelets">
+
+    <p:column field="#{field}"
+              filterMatchMode="exact" 
+              responsivePriority="2" 
+              style="width: 120px;" >
+        <f:facet name="header">
+            <h:outputText id="willMitigate" value="Will mitigate" />
+            <p:tooltip for="willMitigate" 
+                       value="Inform if the you want to mitigate the challenge" 
+                       position="top"/>
+        </f:facet>
+        <f:facet name="filter">
+            <p:selectOneMenu onchange="PF(#{dataTableId}).filter()" >
+                <f:selectItem itemLabel="" itemValue="#{null}"/>
+                <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+            </p:selectOneMenu>
+        </f:facet>
+        <p:selectOneButton value="#{challengeFeedback.willMitigate}">
+            <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+            <p:ajax listener="#{feedbackCrudMBean.saveChallengeFeedbackWillMitigateDialog(challengeFeedback)}"/>
+        </p:selectOneButton>
+
+        <p:dialog header="Challenge" widgetVar="challengeDialog#{challengeFeedback.challenge.id}" 
+                  showEffect="fade" dynamic="true" >
+            <h:form>
+                <p:panelGrid columns="2" layout="flex">
+                    <c:text readonly="true" value="#{challengeFeedback.challenge.mainIdea}" label="Main Idea" />
+
+                    <p:outputPanel>
+                        <c:label label="Will mitigate" />
+                        <p:spacer width="20"/>
+                        <p:selectOneButton id="willMitigateSelectOneButton" value="#{challengeFeedback.willMitigate}">
+                            <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                            <p:ajax listener="#{feedbackCrudMBean.saveChallengeFeedback(challengeFeedback)}"/>
+                        </p:selectOneButton>
+                        <p:tooltip for="willMitigateSelectOneButton" value="Inform if the you want to mitigate the challenge"/>
+                    </p:outputPanel>
+
+                    <c:label id="challengeWillMitigateComment" label="Will Mitigate Comment" />
+                    <p:inputTextarea value="#{challengeFeedback.willMitigateComment}"
+                                     placeholder="Comment how you will mitigate challenge. It is optional."
+                                     rows="4" cols="70">
+                        <p:ajax listener="#{feedbackCrudMBean.saveChallengeFeedback(challengeFeedback)}" />
+                    </p:inputTextarea>
+
+                    <p:commandButton value="Ok" update="#{commandButtonUpdate}"/>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+    </p:column>
+    
+</ui:composition>

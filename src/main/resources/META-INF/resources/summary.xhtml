@@ -19,14 +19,25 @@
                 dataTableLazy="false"
                 showActionLinksColumn="true">
             <ui:define name="listColumns">
-                <p:column responsivePriority="1" headerText="Main Idea" field="recommendation.mainIdea" sortable="true" filterable="false" />
-                <p:column responsivePriority="3" headerText="Interviews" field="recommendation.recommendationInterviews.size()" style="width: 110px;" sortable="true" filterable="false" />
-                <p:column responsivePriority="3" headerText="Challenges" field="recommendation.links.size()" style="width: 110px;" sortable="true" filterable="false"/>
-                <p:column responsivePriority="4" headerText="Theme" field="recommendation.theme" style="width: 125px;" sortable="true" filterable="false" >
-                    #{bean.recommendation.theme.value}
-                </p:column>
+                <c:columnMainIdea field="recommendation.mainIdea" />
+
+                <c:columnInterviews field="recommendation.recommendationInterviews.size()"
+                                             style="width: 110px;"
+                                             sortable="true"
+                                             filterable="false" />
+
+                <c:columnLinks field="recommendation.links.size()"
+                                        style="width: 110px;"
+                                        sortable="true"
+                                        filterable="false" />
+
+                <c:columnTheme field="recommendation.theme" 
+                                        value="#{bean.recommendation.theme.value}"
+                                        sortable="true" 
+                                        filterable="false"/>
 
             </ui:define>
+            
             <ui:define name="detail">
                 <d:recommendationDetail crudMBean="#{recommendationFeedbackSummaryCrudMBean}" />
 
@@ -39,7 +50,9 @@
                 </h:panelGrid>
 
                 <p:accordionPanel multiple="true" activeIndex="0" id="linkChallengeFeedbackAccordionPanel">
-                    <p:tab title="Challenge Links (#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.links.size()})" titleStyleClass="challenge" >
+                    <p:tab title="Challenge Links (#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.links.size()})"
+                           titleStyleClass="challenge"
+                           titletip="Show / hide the list of linked challenges">
                         <p:dataTable id="linkDatatable"
                                      widgetVar="linkDatatable"
                                      value="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.linkSortedByChallengeChallengeInterviewsSizeList}"
@@ -53,12 +66,23 @@
                                      stripedRows="true"
                                      rowIndexVar="rowIdx"
                                      >
-                            <p:column responsivePriority="1" headerText="Main Idea" field="challenge.mainIdea" sortable="true" filterable="false" />
-                            <p:column responsivePriority="3" headerText="Interviews" field="challenge.challengeInterviews.size()" style="width: 70px;" sortable="true" filterable="false" />
-                            <p:column responsivePriority="3" headerText="Recommendations" field="challenge.links.size()" style="width: 130px;" sortable="true" filterable="false" />
-                            <p:column responsivePriority="4" headerText="Theme" field="challenge.theme" style="width: 125px;" sortable="true" filterable="false" >
-                                #{link.challenge.theme.value}
-                            </p:column>
+                            
+                            <c:columnMainIdea field="challenge.mainIdea" />
+
+                            <c:columnInterviews field="challenge.challengeInterviews.size()"
+                                                         style="width: 110px;"
+                                                         sortable="true"
+                                                         filterable="false" />
+
+                            <c:columnLinks field="challenge.links.size()"
+                                                    style="width: 170px;"
+                                                    sortable="true"
+                                                    filterable="false" />
+
+                            <c:columnTheme field="challenge.theme" 
+                                                    value="#{link.challenge.theme.value}"
+                                                    sortable="true" 
+                                                    filterable="false"/>
 
                         </p:dataTable>
                     </p:tab>
@@ -77,23 +101,24 @@
                 dataTableLazy="false"
                 showActionLinksColumn="true">
             <ui:define name="listColumns">
-                <c:columnChallengeMainIdea field="challenge.mainIdea" />
+                <c:columnMainIdea field="challenge.mainIdea" />
 
-                <c:columnChallengeInterviews field="challenge.challengeInterviews.size()"
+                <c:columnInterviews field="challenge.challengeInterviews.size()"
                                              style="width: 110px;"
                                              sortable="true"
                                              filterable="false" />
 
-                <c:columnChallengeLinks field="challenge.links.size()"
+                <c:columnLinks field="challenge.links.size()"
                                         style="width: 170px;"
                                         sortable="true"
                                         filterable="false" />
 
-                <c:columnChallengeTheme field="challenge.theme" 
+                <c:columnTheme field="challenge.theme" 
                                         value="#{bean.challenge.theme.value}"
                                         sortable="true" 
                                         filterable="false"/>
             </ui:define>
+            
             <ui:define name="detail">
                 <d:challengeDetail crudMBean="#{challengeFeedbackSummaryCrudMBean}" />
                 
@@ -103,7 +128,9 @@
                 </h:panelGrid>
 
                 <p:accordionPanel multiple="true" activeIndex="0" id="linkRecommendationFeedbackAccordionPanel">
-                    <p:tab title="Recommendation Links (#{challengeFeedbackSummaryCrudMBean.bean.challenge.links.size()})" titleStyleClass="recommendation" >
+                    <p:tab title="Recommendation Links (#{challengeFeedbackSummaryCrudMBean.bean.challenge.links.size()})"
+                           titleStyleClass="recommendation"
+                           titletip="Show / hide the list of linked recommendations">
                         <p:dataTable id="linkDatatable"
                                      widgetVar="linkDatatable"
                                      value="#{challengeFeedbackSummaryCrudMBean.bean.challenge.linkSortedByRecommendationRecommendationInterviewsSizeList}"
@@ -117,12 +144,23 @@
                                      stripedRows="true"
                                      rowIndexVar="rowIdx"
                                      >
-                            <p:column responsivePriority="1" headerText="Main Idea" field="recommendation.mainIdea" sortable="true" filterable="false" />
-                            <p:column responsivePriority="3" headerText="Interviews" field="recommendation.recommendationInterviews.size()" style="width: 70px;" sortable="true" filterable="false" />
-                            <p:column responsivePriority="3" headerText="Challenges" field="recommendation.links.size()" style="width: 80px;" sortable="true" filterable="false"/>
-                            <p:column responsivePriority="4" headerText="Theme" field="link.recommendation.theme" style="width: 125px;" sortable="true" filterable="false" >
-                                #{link.recommendation.theme.value}
-                            </p:column>
+                            
+                            <c:columnMainIdea field="recommendation.mainIdea" />
+
+                            <c:columnInterviews field="recommendation.recommendationInterviews.size()"
+                                                         style="width: 110px;"
+                                                         sortable="true"
+                                                         filterable="false" />
+
+                            <c:columnLinks field="recommendation.links.size()"
+                                                    style="width: 110px;"
+                                                    sortable="true"
+                                                    filterable="false" />
+
+                            <c:columnTheme field="recommendation.theme" 
+                                                    value="#{link.recommendation.theme.value}"
+                                                    sortable="true" 
+                                                    filterable="false"/>
 
                         </p:dataTable>
                     </p:tab>

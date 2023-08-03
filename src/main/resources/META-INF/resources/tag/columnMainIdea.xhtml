@@ -8,17 +8,19 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="jakarta.faces.facelets">
 
+    <c:set var="challenge" value="#{field.contains('challenge')}" />
+    <c:set var="text" value="#{challenge ? 'challenge' : 'recommendation'}" />
+
     <p:column field="#{field}"
-              responsivePriority="3" 
-              style="#{style}"
-              sortable="#{sortable}" 
-              filterable="#{filterable}">
+              responsivePriority="1" 
+              sortable="true"
+              filterable="false">
         <f:facet name="header">
-            <h:outputText id="interviews" value="Interviews" /> 
-            <p:tooltip for="interviews" 
-                       value="Sort / Filter by the number of interviews that cited the challenge" 
+            <h:outputText id="mainIdea" value="Main Idea" />
+            <p:tooltip for="mainIdea" 
+                       value="Sort by #{text} main idea (description)"
                        position="top"/>
-        </f:facet>                    
-    </p:column>    
+        </f:facet>
+    </p:column>
     
 </ui:composition>

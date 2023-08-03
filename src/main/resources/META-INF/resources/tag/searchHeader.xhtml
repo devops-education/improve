@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+                xmlns:c="jakarta.tags.core"
+                xmlns:f="jakarta.faces.core"
+                xmlns:h="jakarta.faces.html"
+                xmlns:fn="jakarta.tags.functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="jakarta.faces.facelets">
+
+    <c:set var="challenge" value="#{searchValidator.getClass().getName().contains('hallenge')}" />
+    <c:set var="text" value="#{challenge ? 'challenge' : 'recommendation'}" />
+    <c:set var="Text" value="#{challenge ? 'Challenge' : 'Recommendation'}" />
+    <c:set var="image" value="images/improve/#{text}-tag-tag.jpg" />
+    
+    <f:facet name="header">
+        <span class="ui-input-icon-left">
+            <i class="pi pi-search" />
+            <p:inputText id="globalFilter" onkeyup="PF('dataTable').filter()" style="width:330px"
+                         placeholder="Search main idea, abstracts, quotes, tags" >
+                <f:validator binding="#{searchValidator}" />
+                <p:ajax event="valueChange" update="searchMessage" />
+            </p:inputText>
+        </span>
+
+        <p:spacer width="20px" />
+        <p:commandButton value="#{Text} Tags" 
+                         onclick="PF('tagDialog').show()"
+                         title="Open #{text}tags map image" />
+        <p:dialog header="#{Text} Tags" widgetVar="tagDialog" 
+                  showEffect="fade" closeOnEscape="true" closable="true">
+            <p:graphicImage value="#{resource[image]}" 
+                            library="improve"
+                            width="600" 
+                            height="600" />
+        </p:dialog>
+
+        <p:spacer width="20px" />
+        <p:link id="searchLink" 
+                value="Search Syntax" 
+                target="_blank" 
+                title="Open new page describing syntax for creating search queries"
+                href="https://lucene.apache.org/core/2_9_4/queryparsersyntax.html#Terms"/>
+
+        <p:message id="searchMessage" for="globalFilter" styleClass="ui-state-error"/>
+    </f:facet>
+    
+</ui:composition>

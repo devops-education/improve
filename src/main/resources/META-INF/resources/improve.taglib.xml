@@ -734,10 +734,10 @@
     </tag>
     <tag>
         <description>
-            Column challenge main idea.
+            Column main idea.
         </description>
-        <tag-name>columnChallengeMainIdea</tag-name>
-        <source>tag/columnChallengeMainIdea.xhtml</source>
+        <tag-name>columnMainIdea</tag-name>
+        <source>tag/columnMainIdea.xhtml</source>
         <attribute>
             <description>field of the column</description>
             <name>field</name>
@@ -746,10 +746,10 @@
     </tag>
     <tag>
         <description>
-            Column challenge main idea.
+            Column interviews.
         </description>
-        <tag-name>columnChallengeMainIdea</tag-name>
-        <source>tag/columnChallengeMainIdea.xhtml</source>
+        <tag-name>columnInterviews</tag-name>
+        <source>tag/columnInterviews.xhtml</source>
         <attribute>
             <description>field of the column</description>
             <name>field</name>
@@ -758,10 +758,10 @@
     </tag>
     <tag>
         <description>
-            Column challenge interviews.
+            Column links
         </description>
-        <tag-name>columnChallengeInterviews</tag-name>
-        <source>tag/columnChallengeInterviews.xhtml</source>
+        <tag-name>columnLinks</tag-name>
+        <source>tag/columnLinks.xhtml</source>
         <attribute>
             <description>field of the column</description>
             <name>field</name>
@@ -770,10 +770,10 @@
     </tag>
     <tag>
         <description>
-            Column challenge links
+            Column theme
         </description>
-        <tag-name>columnChallengeLinks</tag-name>
-        <source>tag/columnChallengeLinks.xhtml</source>
+        <tag-name>columnTheme</tag-name>
+        <source>tag/columnTheme.xhtml</source>
         <attribute>
             <description>field of the column</description>
             <name>field</name>
@@ -782,10 +782,46 @@
     </tag>
     <tag>
         <description>
-            Column challenge theme
+            Search header
         </description>
-        <tag-name>columnChallengeTheme</tag-name>
-        <source>tag/columnChallengeTheme.xhtml</source>
+        <tag-name>searchHeader</tag-name>
+        <source>tag/searchHeader.xhtml</source>
+        <attribute>
+            <description>field of the column</description>
+            <name>field</name>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <description>
+            Column will mitigate
+        </description>
+        <tag-name>columnWillMitigate</tag-name>
+        <source>tag/columnWillMitigate.xhtml</source>
+        <attribute>
+            <description>field of the column</description>
+            <name>field</name>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <description>
+            Column will use
+        </description>
+        <tag-name>columnWillUse</tag-name>
+        <source>tag/columnWillUse.xhtml</source>
+        <attribute>
+            <description>field of the column</description>
+            <name>field</name>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <description>
+            Column used already
+        </description>
+        <tag-name>columnUsedAlready</tag-name>
+        <source>tag/columnUsedAlready.xhtml</source>
         <attribute>
             <description>field of the column</description>
             <name>field</name>
