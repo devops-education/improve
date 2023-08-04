@@ -11,13 +11,14 @@
     <m:contentLayout titleText="#{titleText}" 
                      titleStyle="#{titleStyle}" 
                      titleStyleClass="#{titleStyleClass}" 
-                     titleIcon="#{titleIcon}">
+                     titleIcon="#{titleIcon}" 
+                     titleTextId="#{titleTextId}">
 
         <ui:define name="afterTitle">
 
             <c:set var="crudId"          value="#{empty crudId ? '' : crudId}" />
-            <c:set var="showInsert"          value="#{empty showInsert ? true : showInsert}" />
-            <c:set var="showList"            value="#{empty showList ? true : showList}" />
+            <c:set var="showInsert"      value="#{empty showInsert ? true : showInsert}" />
+            <c:set var="showList"        value="#{empty showList ? true : showList}" />
 
             <p:focus context="startInsertCommandButton" id="focusInsertCommandButton#{crudId}"/>
 

@@ -64,6 +64,13 @@
         <attribute>
             <description>Titulo da página.
             </description>
+            <name>titleTextId</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Titulo da página.
+            </description>
             <name>titleIcon</name>
             <required>false</required>
             <type>java.lang.String</type>
@@ -108,6 +115,13 @@
             </description>
             <name>titleText</name>
             <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Titulo da página.
+            </description>
+            <name>titleTextId</name>
+            <required>false</required>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
