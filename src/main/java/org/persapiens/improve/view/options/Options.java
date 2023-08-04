@@ -9,7 +9,6 @@ import jakarta.faces.convert.Converter;
 import jakarta.faces.model.SelectItem;
 
 import org.persapiens.improve.view.AbstractMBean;
-import org.omnifaces.converter.ListConverter;
 
 public abstract class Options<T, ID extends Serializable> extends AbstractMBean {
 

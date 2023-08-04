@@ -3,11 +3,11 @@
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html 
-    xmlns:cc="jakarta.faces.composite"
-    xmlns:h="jakarta.faces.html"
-    xmlns:fn="jakarta.tags.functions"
+    xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
     xmlns:c="improve.persapiens.org"
-    xmlns:d="jakarta.faces.composite/improve"
+    xmlns:d="http://xmlns.jcp.org/jsf/composite/improve"
     xmlns:p="http://primefaces.org/ui">
 
     <!-- INTERFACE -->
@@ -31,17 +31,17 @@
                              paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}">
                     <p:column headerText="P" field="interview.interviewee" style="width: 35px;" filterable="false" sortable="false"/>
                     <p:column headerText="Resume">
-                        <h:outputText readonly="true" value="#{fn:replace(recommendationInterview.resume, '\\n', '&lt;br/&gt;')}" escape="false" />
+                        <h:outputText value="#{fn:replace(recommendationInterview.resume, '\\n', '&lt;br/&gt;')}" escape="false" />
                     </p:column>
                     <p:column headerText="Quote">
-                        <h:outputText readonly="true" value="#{fn:replace(recommendationInterview.quote, '\\n', '&lt;br/&gt;')}" escape="false" />
+                        <h:outputText value="#{fn:replace(recommendationInterview.quote, '\\n', '&lt;br/&gt;')}" escape="false" />
                     </p:column>
                 </p:dataTable>
             </p:tab>
 
             <p:tab titletip="Click to show / hide the tags of this recommendation"
                    title="Tags (#{cc.attrs.crudMBean.bean.recommendation.recommendationTags.size()})">
-                <h:outputText readonly="true" value="#{fn:replace(cc.attrs.crudMBean.bean.recommendation.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
+                <h:outputText value="#{fn:replace(cc.attrs.crudMBean.bean.recommendation.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
             </p:tab>
         </p:accordionPanel>
     </cc:implementation>
