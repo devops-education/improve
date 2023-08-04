@@ -2,7 +2,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="improve.persapiens.org"
@@ -15,19 +14,20 @@
         function chartExtender() {
             var options = {
                plugins: [ChartDataLabels],
-               options: {
-                  plugins: {
-                     // Change options for ALL labels of THIS CHART
-                     datalabels: {
-                        color: 'green'
-                     }
-                  }
-               },
                data: {
                   datasets: [{
                      // Change options only for labels of THIS DATASET
                      datalabels: {
-                        color: 'blue'
+                        formatter: (value, ctx) => {
+                           let sum = 0;
+                           let dataArr = ctx.chart.data.datasets[0].data;
+                           dataArr.map(data => {
+                               sum += data;
+                           });
+                           let percentage = (value*100 / sum).toFixed(2)+"%";
+                           return percentage;
+                        },
+                        color: 'white'
                      }
                   }]
                }
@@ -37,9 +37,10 @@
             $.extend(true, this.cfg.config, options);
         };
         </h:outputScript>
-        <div style="width: 300px !important; height: 300px !important;">
+        
+        <p:panel style="width: 300px !important; height: 300px !important;">
             <p:pieChart model="#{recommendationFeedbackSummaryCrudMBean.pieModel}" />
-        </div>        
+        </p:panel>>        
         
         <c:crud titleText="Recommendations that you should apply to your course."
                 titleStyleClass="recommendation"                
@@ -121,6 +122,10 @@
             </ui:define>
         </c:crud>
         
+        
+        <p:panel style="width: 300px !important; height: 300px !important;">
+            <p:pieChart model="#{challengeFeedbackSummaryCrudMBean.pieModel}" />
+        </p:panel>>        
         
         <c:crud crudId="challenge"
                 titleText="Challenges that you will mitigate, but you use no linked recommendation."

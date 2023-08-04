@@ -113,6 +113,13 @@
         <attribute>
             <description>Titulo da página.
             </description>
+            <name>crudId</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Titulo da página.
+            </description>
             <name>titleIcon</name>
             <required>false</required>
             <type>java.lang.String</type>
