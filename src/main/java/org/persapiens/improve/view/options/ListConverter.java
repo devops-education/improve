@@ -1,5 +1,6 @@
 package org.persapiens.improve.view.options;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.convert.Converter;
@@ -36,6 +37,7 @@ public class ListConverter implements Converter<Object> {
      *
      * @param list The list of available items.
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public void setList(List<?> list) {
         this.list = list;
     }
