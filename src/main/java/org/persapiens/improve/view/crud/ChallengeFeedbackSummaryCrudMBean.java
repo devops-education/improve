@@ -5,6 +5,7 @@ import jakarta.faces.view.ViewScoped;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.persapiens.improve.domain.ChallengeFeedback;
@@ -87,7 +88,10 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
     protected List<Number> values() {
         List<ChallengeFeedback> feedbacks = challengeFeedbackRepository.findByUsername(username());
         
-        Long notWillMitigateCount = feedbacks.stream().filter(cf -> !cf.getWillMitigate()).count();
+        Long notWillMitigateCount = feedbacks.stream()
+            .filter(cf -> Objects.nonNull(cf.getWillMitigate()))
+            .filter(cf -> !cf.getWillMitigate())
+            .count();
         Long willMitigateCount = feedbacks.size() - notWillMitigateCount;
         Integer willMitigateAndNoRecommendation = find().size();
         Long willMitigateAndHasRecommendation = willMitigateCount - willMitigateAndNoRecommendation;
