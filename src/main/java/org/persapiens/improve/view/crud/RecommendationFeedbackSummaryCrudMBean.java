@@ -4,6 +4,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.faces.view.ViewScoped;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.persapiens.improve.domain.RecommendationFeedback;
 import org.persapiens.improve.persistence.RecommendationFeedbackRepository;
@@ -41,9 +42,19 @@ public class RecommendationFeedbackSummaryCrudMBean extends AbstractFeedbackSumm
     protected List<Number> values() {
         List<RecommendationFeedback> feedbacks = recommendationFeedbackRepository.findByUsername(username());
         
-        Number usedAlreadyCount = feedbacks.stream().filter(RecommendationFeedback::getUsedAlready).count();
-        Number notUsedAndWillUseCount = feedbacks.stream().filter(rf -> !rf.getUsedAlready() && rf.getWillUse()).count();
-        Number notUsedAndNotWillUseCount = feedbacks.stream().filter( rf -> !rf.getUsedAlready() && !rf.getWillUse()).count();
+        Number usedAlreadyCount = feedbacks.stream()
+            .map(RecommendationFeedback::getUsedAlready)
+            .filter(Objects::nonNull)
+            .filter(b -> b)
+            .count();
+        Number notUsedAndWillUseCount = feedbacks.stream()
+            .filter(rf -> Objects.nonNull(rf.getUsedAlready()) && Objects.nonNull(rf.getWillUse()))
+            .filter(rf -> !rf.getUsedAlready() && rf.getWillUse())
+            .count();
+        Number notUsedAndNotWillUseCount = feedbacks.stream()
+            .filter(rf -> Objects.nonNull(rf.getUsedAlready()) && Objects.nonNull(rf.getWillUse()))
+            .filter(rf -> !rf.getUsedAlready() && !rf.getWillUse())
+            .count();
         return Arrays.asList(notUsedAndWillUseCount, usedAlreadyCount, notUsedAndNotWillUseCount);
     }
 
