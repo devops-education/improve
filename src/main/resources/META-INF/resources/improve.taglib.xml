@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <facelet-taglib 
-    version="4.0" 
-    xmlns="https://jakarta.ee/xml/ns/jakartaee"
+    version="2.3" 
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-facelettaglibrary_4_0.xsd">
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facelettaglibary_2_3.xsd">
     <namespace>improve.persapiens.org</namespace>
     <composite-library-name>improve</composite-library-name>
     <tag>
@@ -62,6 +62,27 @@
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>Titulo da página.
+            </description>
+            <name>titleIcon</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Titulo da página.
+            </description>
+            <name>titleIconWidth</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Titulo da página.
+            </description>
+            <name>titleIconHeight</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>Estilo do Titulo da página. Default to ''.
             </description>
             <name>titleStyle</name>
@@ -90,6 +111,13 @@
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>Titulo da página.
+            </description>
+            <name>titleIcon</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>Estilo do Titulo da página. Default to ''.
             </description>
             <name>titleStyle</name>
@@ -109,6 +137,14 @@
             <name>managedBean</name>
             <required>true</required>
             <type>org.persapiens.improve.view.crud.CrudMBean</type>
+        </attribute>
+        <attribute>
+            <description>Define se o botão de incluir será renderizado. &lt;br/&gt;
+                Default true
+            </description>
+            <name>dataTableLazy</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
         </attribute>
         <attribute>
             <description>Define se o botão de incluir será renderizado. &lt;br/&gt;
@@ -755,6 +791,21 @@
             <name>field</name>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>style</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>sortable</name>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>filterable</name>
+            <type>java.lang.Boolean</type>
+        </attribute>
     </tag>
     <tag>
         <description>
@@ -766,6 +817,21 @@
             <description>field of the column</description>
             <name>field</name>
             <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>style</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>sortable</name>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>filterable</name>
+            <type>java.lang.Boolean</type>
         </attribute>
     </tag>
     <tag>
@@ -779,6 +845,21 @@
             <name>field</name>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>value</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>sortable</name>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>filterable</name>
+            <type>java.lang.Boolean</type>
+        </attribute>
     </tag>
     <tag>
         <description>
@@ -789,6 +870,11 @@
         <attribute>
             <description>field of the column</description>
             <name>field</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>validator of the column</description>
+            <name>searchValidator</name>
             <type>java.lang.String</type>
         </attribute>
     </tag>
@@ -803,6 +889,26 @@
             <name>field</name>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>datatableId</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>feedbackCrudMBean</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>challengeFeedback</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>commandButtonUpdate</name>
+            <type>java.lang.String</type>
+        </attribute>
     </tag>
     <tag>
         <description>
@@ -815,6 +921,21 @@
             <name>field</name>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>datatableId</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>feedbackCrudMBean</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>recommendationFeedback</name>
+            <type>java.lang.String</type>
+        </attribute>
     </tag>
     <tag>
         <description>
@@ -825,6 +946,26 @@
         <attribute>
             <description>field of the column</description>
             <name>field</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>datatableId</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>feedbackCrudMBean</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>recommendationFeedback</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>commandButtonUpdate</name>
             <type>java.lang.String</type>
         </attribute>
     </tag>
