@@ -7,6 +7,7 @@ import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.persapiens.improve.domain.RecommendationFeedback;
 import org.persapiens.improve.persistence.RecommendationFeedbackRepository;
+import org.primefaces.event.ItemSelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -43,18 +44,23 @@ public class RecommendationFeedbackSummaryCrudMBean extends AbstractFeedbackSumm
         Number usedAlreadyCount = feedbacks.stream().filter(RecommendationFeedback::getUsedAlready).count();
         Number notUsedAndWillUseCount = feedbacks.stream().filter(rf -> !rf.getUsedAlready() && rf.getWillUse()).count();
         Number notUsedAndNotWillUseCount = feedbacks.stream().filter( rf -> !rf.getUsedAlready() && !rf.getWillUse()).count();
-        return Arrays.asList(usedAlreadyCount, notUsedAndWillUseCount, notUsedAndNotWillUseCount);
+        return Arrays.asList(notUsedAndWillUseCount, usedAlreadyCount, notUsedAndNotWillUseCount);
     }
 
     @Override
     protected List<String> backgourndColors() {
-        return Arrays.asList("blue", "green", "orange");
+        return Arrays.asList("green", "blue", "gray");
     }
 
     @Override
     protected List<String> labels() {
-        return Arrays.asList("Used",
-                             "Not used and will use",
+        return Arrays.asList("Not used and will use",
+                             "Used",
                              "Not used and won't use");
+    }
+    
+    public void pieListener(ItemSelectEvent e){
+        // change recommendation data 
+        System.out.println(e.getItemIndex());
     }
 }

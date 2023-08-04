@@ -2,7 +2,6 @@ package org.persapiens.improve.view.crud;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.faces.view.ViewScoped;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.primefaces.model.charts.ChartData;
@@ -46,11 +45,7 @@ public abstract class AbstractFeedbackSummaryCrudMBean<T extends Object> extends
         dataSet.setBackgroundColor(backgourndColors());
 
         data.addChartDataSet(dataSet);
-        List<String> labels = new ArrayList<>();
-        labels.add("No mitigation");
-        labels.add("Will mitigate with links");
-        labels.add("Will mitigate with no links");
-        data.setLabels(labels);
+        data.setLabels(labels());
 
         result.setData(data);
         
