@@ -41,14 +41,17 @@
         <p:panelGrid columns="2" layout="tabular" >
             <p:panel id="recommendationPieChartPanel">
                 <p:pieChart model="#{recommendationFeedbackSummaryCrudMBean.pieModel}" >
-                    <p:ajax event="itemSelect" listener="#{recommendationFeedbackSummaryCrudMBean.pieListener}" process="@this" />
+                    <p:ajax event="itemSelect" listener="#{recommendationFeedbackSummaryCrudMBean.pieListener}" process="@this" update="datatable titleText"/>
                 </p:pieChart>
             </p:panel>
 
-            <c:crud titleText="Recommendations that you should apply to your course."
+            <c:crud titleText="#{recommendationFeedbackSummaryCrudMBean.crudTitleText}"
                     titleStyleClass="recommendation"                
                     titleIcon="#{resource['images/ok.png']}"
+                    titleStyle="color: #{recommendationFeedbackSummaryCrudMBean.crudTitleColor} !important"
                     managedBean="#{recommendationFeedbackSummaryCrudMBean}"
+                    dataTableRows="5"
+                    dataTableRowsPerPageTemplate="5,10,20,50"
                     showInsert="false"
                     showUpdateActionLink="false"
                     dataTableLazy="false"
@@ -128,14 +131,20 @@
         
         <p:panelGrid columns="2" layout="tabular" >
             <p:panel id="challengePieChartPanel">
-                <p:pieChart model="#{challengeFeedbackSummaryCrudMBean.pieModel}" />
+                <p:pieChart model="#{challengeFeedbackSummaryCrudMBean.pieModel}" >
+                    <p:ajax event="itemSelect" listener="#{challengeFeedbackSummaryCrudMBean.pieListener}" process="@this" update="datatablechallenge titleTextchallenge"/>
+                </p:pieChart>
             </p:panel>        
 
             <c:crud crudId="challenge"
-                    titleText="Challenges that you will mitigate, but you use no linked recommendation."
+                    titleText="#{challengeFeedbackSummaryCrudMBean.crudTitleText}"
                     titleStyleClass="challenge"
                     titleIcon="#{resource['images/warning.png']}" 
+                    titleStyle="color: #{challengeFeedbackSummaryCrudMBean.crudTitleColor} !important"
+                    titleTextId="challenge"
                     managedBean="#{challengeFeedbackSummaryCrudMBean}"
+                    dataTableRows="5"
+                    dataTableRowsPerPageTemplate="5,10,20,50"
                     showInsert="false"
                     showUpdateActionLink="false"
                     dataTableLazy="false"

@@ -42,6 +42,16 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
     @Autowired
     private ChallengeTagRepository challengeTagRepository;
 
+    @Override
+    protected ChallengeFeedback createBean() {
+        return ChallengeFeedback.builder().build();
+    }
+
+    @Override
+    protected ChallengeFeedback getDetailBean(ChallengeFeedback bean) {
+        return challengeFeedbackRepository.findDetailById(bean.getId()).get(); 
+    }
+
     private List<Recommendation> recommendations(ChallengeFeedback challengeFeedback) {
         return linkRepository.findByChallenge(challengeFeedback.getChallenge())
                 .stream().map(Link::getRecommendation).collect(Collectors.toList());
@@ -58,49 +68,35 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
         }
         return result;
     }
-    
+
     @Override
-    public List<ChallengeFeedback> find() {
-        List<ChallengeFeedback> result = new ArrayList<>();
+    protected List<List<ChallengeFeedback>> lists() {
+        List<ChallengeFeedback> willMitigateAndNoRecommendation = new ArrayList<>();
+        List<ChallengeFeedback> willMitigateAndHasRecommendation = new ArrayList<>();
+        List<ChallengeFeedback> notWillMitigate = new ArrayList<>();
         
-        for (ChallengeFeedback challengeFeedback : challengeFeedbackRepository.findByUsernameAndWillMitigateIsTrueOrderByKnownAsc(username())) {
-            List<Recommendation> recommendations = recommendations(challengeFeedback);
-            
-            if (!hasRecommendationFeedbackUsedAlreadyOrWillUse(recommendations)) {
-                result.add(challengeFeedback);
+        for(ChallengeFeedback cf : challengeFeedbackRepository.findByUsername(username())) {
+            if (Objects.nonNull(cf.getWillMitigate())) {
+                if (cf.getWillMitigate()) {
+                    List<Recommendation> recommendations = recommendations(cf);
+
+                    if (hasRecommendationFeedbackUsedAlreadyOrWillUse(recommendations)) {
+                        willMitigateAndHasRecommendation.add(cf);
+                    } else {
+                        willMitigateAndNoRecommendation.add(cf);
+                    }
+                } else {
+                    notWillMitigate.add(cf);
+                }
             }
         }
         
-        return result;
+        return Arrays.asList(willMitigateAndNoRecommendation, willMitigateAndHasRecommendation, notWillMitigate);
     }
 
     @Override
-    protected ChallengeFeedback createBean() {
-        return ChallengeFeedback.builder().build();
-    }
-
-    @Override
-    protected ChallengeFeedback getDetailBean(ChallengeFeedback bean) {
-        return challengeFeedbackRepository.findDetailById(bean.getId()).get(); 
-    }
-
-    @Override
-    protected List<Number> values() {
-        List<ChallengeFeedback> feedbacks = challengeFeedbackRepository.findByUsername(username());
-        
-        Long notWillMitigateCount = feedbacks.stream()
-            .filter(cf -> Objects.nonNull(cf.getWillMitigate()))
-            .filter(cf -> !cf.getWillMitigate())
-            .count();
-        Long willMitigateCount = feedbacks.size() - notWillMitigateCount;
-        Integer willMitigateAndNoRecommendation = find().size();
-        Long willMitigateAndHasRecommendation = willMitigateCount - willMitigateAndNoRecommendation;
-        return Arrays.asList(willMitigateAndNoRecommendation, willMitigateAndHasRecommendation, notWillMitigateCount);
-    }
-
-    @Override
-    protected List<String> backgourndColors() {
-        return Arrays.asList("orange", "blue", "gray");
+    protected List<String> backgroundColors() {
+        return Arrays.asList("orange", "dodgerblue", "gray");
     }
 
     @Override
@@ -108,6 +104,13 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
         return Arrays.asList("Will mitigate with no used links",
                              "Will mitigate with used links",
                              "No mitigation");
+    }
+
+    @Override
+    protected List<String> crudTitleTexts() {
+        return Arrays.asList("Challenges that you will mitigate, but you use no linked recommendation.",
+                             "Challenges that you will mitigate and you use linked recommendation.",
+                             "Challenges that you won't mitigate.");
     }
 
 }

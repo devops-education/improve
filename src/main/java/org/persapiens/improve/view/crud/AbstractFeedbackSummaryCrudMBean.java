@@ -2,8 +2,10 @@ package org.persapiens.improve.view.crud;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.faces.view.ViewScoped;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.charts.ChartData;
 import org.primefaces.model.charts.optionconfig.legend.Legend;
 import org.primefaces.model.charts.optionconfig.legend.LegendLabel;
@@ -19,6 +21,8 @@ public abstract class AbstractFeedbackSummaryCrudMBean<T extends Object> extends
 
     private static final long serialVersionUID = 1L;
 
+    private int selectedIndex = 0;
+    
     private PieChartModel pieModel;
 
     @SuppressFBWarnings("EI_EXPOSE_REP")
@@ -28,10 +32,40 @@ public abstract class AbstractFeedbackSummaryCrudMBean<T extends Object> extends
         }
         return pieModel;
     }
-
-    protected abstract List<Number> values();
     
-    protected abstract List<String> backgourndColors();
+    public void pieListener(ItemSelectEvent e){
+        // change recommendation data 
+        System.out.println(e.getItemIndex());
+        selectedIndex = e.getItemIndex();
+        findAction();
+    }
+
+    public String getCrudTitleColor() {
+        return backgroundColors().get(selectedIndex);
+    }
+    
+    public String getCrudTitleText() {
+        return crudTitleTexts().get(selectedIndex);
+    }
+    
+    private List<Number> values() {
+        List<Number> result = new ArrayList<>();
+        for(List<T> list : lists()) {
+            result.add(list.size());
+        }
+        return result;
+    }
+
+    @Override
+    public List<T> find() {
+        return lists().get(selectedIndex);
+    }
+    
+    protected abstract List<String> backgroundColors();
+    
+    protected abstract List<String> crudTitleTexts();
+    
+    protected abstract List<List<T>> lists();
     
     protected abstract List<String> labels();
     
@@ -42,7 +76,7 @@ public abstract class AbstractFeedbackSummaryCrudMBean<T extends Object> extends
         PieChartDataSet dataSet = new PieChartDataSet();
         dataSet.setData(values());
 
-        dataSet.setBackgroundColor(backgourndColors());
+        dataSet.setBackgroundColor(backgroundColors());
 
         data.addChartDataSet(dataSet);
         data.setLabels(labels());
