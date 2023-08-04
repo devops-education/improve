@@ -91,19 +91,19 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
         Long willMitigateCount = feedbacks.size() - notWillMitigateCount;
         Integer willMitigateAndNoRecommendation = find().size();
         Long willMitigateAndHasRecommendation = willMitigateCount - willMitigateAndNoRecommendation;
-        return Arrays.asList(notWillMitigateCount, willMitigateAndHasRecommendation, willMitigateAndNoRecommendation);
+        return Arrays.asList(willMitigateAndNoRecommendation, willMitigateAndHasRecommendation, notWillMitigateCount);
     }
 
     @Override
     protected List<String> backgourndColors() {
-        return Arrays.asList("gray", "green", "orange");
+        return Arrays.asList("orange", "blue", "gray");
     }
 
     @Override
     protected List<String> labels() {
-        return Arrays.asList("No mitigation",
-                             "Will mitigate with links",
-                             "Will mitigate with no links");
+        return Arrays.asList("Will mitigate with no used links",
+                             "Will mitigate with used links",
+                             "No mitigation");
     }
 
 }

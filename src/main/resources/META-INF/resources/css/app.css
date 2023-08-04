@@ -133,3 +133,9 @@ body .ui-menu.ui-menubar {
 .ui-tooltip {
   font-size: 12px !important;
 }
+
+#recommendationPieChartPanel_content, #challengePieChartPanel_content {
+  border: 0px !important;    
+  width: 300px !important; 
+  height: 300px !important;
+}
