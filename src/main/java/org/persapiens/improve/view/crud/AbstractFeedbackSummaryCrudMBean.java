@@ -34,8 +34,6 @@ public abstract class AbstractFeedbackSummaryCrudMBean<T extends Object> extends
     }
     
     public void pieListener(ItemSelectEvent e){
-        // change recommendation data 
-        System.out.println(e.getItemIndex());
         selectedIndex = e.getItemIndex();
         findAction();
     }

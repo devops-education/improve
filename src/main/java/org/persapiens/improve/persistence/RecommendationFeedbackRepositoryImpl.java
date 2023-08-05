@@ -37,6 +37,7 @@ public class RecommendationFeedbackRepositoryImpl implements RecommendationFeedb
                 .leftJoin(recommendation.links, link).fetchJoin()
                 .leftJoin(recommendation.recommendationInterviews).fetchJoin()
                 .where(recommendationFeedback.username.eq(username))
+                .orderBy(recommendation.recommendationInterviews.size().desc())
                 .fetch();
     }
 

@@ -4,6 +4,7 @@ import com.querydsl.jpa.JPQLQueryFactory;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.persistence.EntityManager;
+import java.util.List;
 import java.util.Optional;
 import org.persapiens.improve.domain.ChallengeFeedback;
 import org.persapiens.improve.domain.QChallenge;
@@ -21,6 +22,23 @@ public class ChallengeFeedbackRepositoryImpl implements ChallengeFeedbackReposit
     @Autowired
     public ChallengeFeedbackRepositoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
+    }
+
+    @Override
+    public List<ChallengeFeedback> findByUsernameLeftJoinChallengeLinks(String username) {
+        QChallengeFeedback challengeFeedback = QChallengeFeedback.challengeFeedback;
+        QChallenge challenge = QChallenge.challenge;
+        QLink link = QLink.link;
+        JPQLQueryFactory query = new JPAQueryFactory(this.entityManager);
+
+        return query.from(challengeFeedback)
+                .select(challengeFeedback)
+                .leftJoin(challengeFeedback.challenge, challenge).fetchJoin()
+                .leftJoin(challenge.links, link).fetchJoin()
+                .leftJoin(challenge.challengeInterviews).fetchJoin()
+                .where(challengeFeedback.username.eq(username))
+                .orderBy(challenge.challengeInterviews.size().desc())
+                .fetch();
     }
 
     @Override

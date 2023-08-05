@@ -11,11 +11,4 @@ public interface ChallengeFeedbackRepository extends CrudRepository<ChallengeFee
     List<ChallengeFeedback> findByUsername(String username);
     
     List<ChallengeFeedback> findByChallengeInAndUsername(Collection<Challenge> challenge, String username);
-    
-    /**
-     * lista de desafios filtro que pretende mitigar sem nenhuma recomendação utilizada e não pretende usar.
-     * @param username usuario
-     * @return de challenge feedback
-     */
-    List<ChallengeFeedback> findByUsernameAndWillMitigateIsTrueOrderByKnownAsc(String username);
 }
