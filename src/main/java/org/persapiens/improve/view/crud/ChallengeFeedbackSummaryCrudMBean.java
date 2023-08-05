@@ -70,7 +70,7 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
     }
 
     @Override
-    protected List<List<ChallengeFeedback>> lists() {
+    protected List<List<ChallengeFeedback>> feedbackLists() {
         List<ChallengeFeedback> willMitigateAndNoRecommendation = new ArrayList<>();
         List<ChallengeFeedback> willMitigateAndHasRecommendation = new ArrayList<>();
         List<ChallengeFeedback> notWillMitigate = new ArrayList<>();

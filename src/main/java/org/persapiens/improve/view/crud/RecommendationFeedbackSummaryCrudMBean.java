@@ -34,7 +34,7 @@ public class RecommendationFeedbackSummaryCrudMBean extends AbstractFeedbackSumm
     }
 
     @Override
-    protected List<List<RecommendationFeedback>> lists() {
+    protected List<List<RecommendationFeedback>> feedbackLists() {
         List<RecommendationFeedback> notUsedAndWillUseList = new ArrayList<>();
         List<RecommendationFeedback> usedAlreadyList = new ArrayList<>();
         List<RecommendationFeedback> notUsedAndNotWillUseList = new ArrayList<>();
