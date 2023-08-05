@@ -75,7 +75,7 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
         List<ChallengeFeedback> willMitigateAndHasRecommendation = new ArrayList<>();
         List<ChallengeFeedback> notWillMitigate = new ArrayList<>();
         
-        for(ChallengeFeedback cf : challengeFeedbackRepository.findByUsername(username())) {
+        for(ChallengeFeedback cf : challengeFeedbackRepository.findByUsernameLeftJoinChallengeLinks(username())) {
             if (Objects.nonNull(cf.getWillMitigate())) {
                 if (cf.getWillMitigate()) {
                     List<Recommendation> recommendations = recommendations(cf);
@@ -96,7 +96,7 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
 
     @Override
     protected List<String> backgroundColors() {
-        return Arrays.asList("orange", "dodgerblue", "gray");
+        return Arrays.asList("orange", "dodgerblue", "grey");
     }
 
     @Override

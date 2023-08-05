@@ -5,6 +5,7 @@
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="improve.persapiens.org"
+    xmlns:t="http://xmlns.jcp.org/jsp/jstl/core"
     xmlns:d="http://xmlns.jcp.org/jsf/composite/improve"
     xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
     template="/layout/template.xhtml">
@@ -38,16 +39,21 @@
         };
         </h:outputScript>
         
-        <p:panelGrid columns="2" layout="tabular" >
+        <p:panelGrid columns="2" layout="tabular" columnClasses="align-top">
             <p:panel id="recommendationPieChartPanel">
                 <p:pieChart model="#{recommendationFeedbackSummaryCrudMBean.pieModel}" >
-                    <p:ajax event="itemSelect" listener="#{recommendationFeedbackSummaryCrudMBean.pieListener}" process="@this" update="datatable titleText"/>
+                    <p:ajax event="itemSelect" 
+                            listener="#{recommendationFeedbackSummaryCrudMBean.pieListener}" 
+                            process="@this" 
+                            update="datatable titleText titleIcon"/>
                 </p:pieChart>
             </p:panel>
 
+            <t:set var="image" value="images/ok-#{recommendationFeedbackSummaryCrudMBean.crudTitleColor}.png" />
+                
             <c:crud titleText="#{recommendationFeedbackSummaryCrudMBean.crudTitleText}"
                     titleStyleClass="recommendation"                
-                    titleIcon="#{resource['images/ok.png']}"
+                    titleIcon="#{resource[image]}"
                     titleStyle="color: #{recommendationFeedbackSummaryCrudMBean.crudTitleColor} !important"
                     managedBean="#{recommendationFeedbackSummaryCrudMBean}"
                     dataTableRows="5"
@@ -129,17 +135,22 @@
             </c:crud>
         </p:panelGrid>        
         
-        <p:panelGrid columns="2" layout="tabular" >
+        <p:panelGrid columns="2" layout="tabular" columnClasses="align-top" >
             <p:panel id="challengePieChartPanel">
                 <p:pieChart model="#{challengeFeedbackSummaryCrudMBean.pieModel}" >
-                    <p:ajax event="itemSelect" listener="#{challengeFeedbackSummaryCrudMBean.pieListener}" process="@this" update="datatablechallenge titleTextchallenge"/>
+                    <p:ajax event="itemSelect" 
+                            listener="#{challengeFeedbackSummaryCrudMBean.pieListener}" 
+                            process="@this"
+                            update="datatablechallenge titleTextchallenge titleIconchallenge"/>
                 </p:pieChart>
             </p:panel>        
 
+            <t:set var="imagechallenge" value="images/warning-#{challengeFeedbackSummaryCrudMBean.crudTitleColor}.png" />
+                
             <c:crud crudId="challenge"
                     titleText="#{challengeFeedbackSummaryCrudMBean.crudTitleText}"
                     titleStyleClass="challenge"
-                    titleIcon="#{resource['images/warning.png']}" 
+                    titleIcon="#{resource[imagechallenge]}" 
                     titleStyle="color: #{challengeFeedbackSummaryCrudMBean.crudTitleColor} !important"
                     titleTextId="challenge"
                     managedBean="#{challengeFeedbackSummaryCrudMBean}"

@@ -118,7 +118,7 @@ body .ui-menu.ui-menubar {
 }
 
 .copyright {
-  color: gray;
+  color: grey;
   font-size: 12px;
 }
 
@@ -138,4 +138,8 @@ body .ui-menu.ui-menubar {
   border: 0px !important;    
   width: 300px !important; 
   height: 300px !important;
+}
+
+.align-top {
+  vertical-align: top;
 }

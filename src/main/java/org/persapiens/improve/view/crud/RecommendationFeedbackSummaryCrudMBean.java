@@ -39,7 +39,7 @@ public class RecommendationFeedbackSummaryCrudMBean extends AbstractFeedbackSumm
         List<RecommendationFeedback> usedAlreadyList = new ArrayList<>();
         List<RecommendationFeedback> notUsedAndNotWillUseList = new ArrayList<>();
         
-        for (RecommendationFeedback rf : recommendationFeedbackRepository.findByUsername(username())) {
+        for (RecommendationFeedback rf : recommendationFeedbackRepository.findByUsernameLeftJoinRecommendationLinks(username())) {
             if (Objects.nonNull(rf.getUsedAlready())) {
                 if (rf.getUsedAlready()) {
                     usedAlreadyList.add(rf);
@@ -57,7 +57,7 @@ public class RecommendationFeedbackSummaryCrudMBean extends AbstractFeedbackSumm
 
     @Override
     protected List<String> backgroundColors() {
-        return Arrays.asList("limegreen", "dodgerblue", "gray");
+        return Arrays.asList("limegreen", "dodgerblue", "grey");
     }
 
     @Override

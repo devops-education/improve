@@ -12,8 +12,8 @@
 
         <p:panel styleClass="title-panelgrid">
             <p:panelGrid columns="2" layout="tabular">
-                <p:graphicImage value="#{titleIcon}" width="#{titleIconWidth}" height="#{titleIconHeight}"/>
-                <h:outputText id="titleText#{titleTextId}" 
+                <p:graphicImage id="titleIcon#{titleTextId}" value="#{titleIcon}" width="#{titleIconWidth}" height="#{titleIconHeight}"/>
+                <h:outputText id="titleText#{titleTextId}"
                               value="#{titleText}" 
                               style="float:left;padding-right: 10px;font-size:2em;font-weight:bold;#{titleStyle}" 
                               styleClass="#{titleStyleClass}"/>
