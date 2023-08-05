@@ -24,6 +24,8 @@ public abstract class AbstractFeedbackSummaryCrudMBean<T extends Object> extends
     private int selectedIndex = 0;
     
     private PieChartModel pieModel;
+    
+    private List<List<T>> lists;
 
     @SuppressFBWarnings("EI_EXPOSE_REP")
     public PieChartModel getPieModel() {
@@ -48,7 +50,7 @@ public abstract class AbstractFeedbackSummaryCrudMBean<T extends Object> extends
     
     private List<Number> values() {
         List<Number> result = new ArrayList<>();
-        for(List<T> list : lists()) {
+        for(List<T> list : feedbackLists()) {
             result.add(list.size());
         }
         return result;
@@ -56,14 +58,17 @@ public abstract class AbstractFeedbackSummaryCrudMBean<T extends Object> extends
 
     @Override
     public List<T> find() {
-        return lists().get(selectedIndex);
+        if (lists == null) {
+            lists = feedbackLists();
+        }
+        return lists.get(selectedIndex);
     }
     
     protected abstract List<String> backgroundColors();
     
     protected abstract List<String> crudTitleTexts();
     
-    protected abstract List<List<T>> lists();
+    protected abstract List<List<T>> feedbackLists();
     
     protected abstract List<String> labels();
     
