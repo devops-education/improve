@@ -1,14 +1,25 @@
 package org.persapiens.improve.service;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lombok.Getter;
+import org.persapiens.improve.domain.ChallengeRecommendationConflict;
+import org.persapiens.improve.domain.Link;
 import org.persapiens.improve.domain.Recommendation;
+import org.persapiens.improve.domain.RecommendationInterview;
+import org.persapiens.improve.domain.RecommendationTag;
+import org.persapiens.improve.domain.RecommendationsConflict;
+import org.persapiens.improve.persistence.RecommendationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RecommendationService extends InMemoryCrudService <Recommendation, Long> {
+    @Getter
+    @Autowired
+    private RecommendationRepository repository;
 
     @Autowired
     private RecommendationTagService recommendationTagService;
@@ -24,7 +35,20 @@ public class RecommendationService extends InMemoryCrudService <Recommendation, 
 
     @Autowired
     private RecommendationsConflictService recommendationsConflictService;
+
+    @Autowired
+    private TagService tagService;
+
+    @Autowired
+    private InterviewService interviewService;
     
+    private ChallengeService challengeService;
+
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
+    public void setChallengeService(ChallengeService challengeService) {
+        this.challengeService = challengeService;
+    }
+
     @Override
     protected Recommendation fill(Recommendation result) {
         result = super.fill(result); 
@@ -44,31 +68,53 @@ public class RecommendationService extends InMemoryCrudService <Recommendation, 
 
     private Recommendation fillRecommendationTags(Recommendation result) {
         result.setRecommendationTags(recommendationTagService.findByRecommendation(result));
+        for (RecommendationTag bean: result.getRecommendationTags()) {
+            bean.setRecommendation(result);
+            bean.setTag(tagService.findById(bean.getTag().getId()).get());
+        }
         
         return result;
     }
 
     private Recommendation fillRecommendationInterviews(Recommendation result) {
         result.setRecommendationInterviews(recommendationInterviewService.findByRecommendation(result));
+        for (RecommendationInterview bean: result.getRecommendationInterviews()) {
+            bean.setRecommendation(result);
+            bean.setInterview(interviewService.findById(bean.getInterview().getId()).get());
+        }
         
         return result;
     }
 
     private Recommendation fillLinks(Recommendation result) {
         result.setLinks(linkService.findByRecommendation(result));
+        for (Link bean: result.getLinks()) {
+            bean.setRecommendation(result);
+            bean.setChallenge(challengeService.findById(bean.getChallenge().getId()).get());
+        }
         
         return result;
     }
 
     private Recommendation fillChallengeConflicts(Recommendation result) {
         result.setChallengeConflicts(challengeRecommendationConflictService.findByRecommendation(result));
+        for (ChallengeRecommendationConflict bean: result.getChallengeConflicts()) {
+            bean.setRecommendation(result);
+            bean.setChallenge(challengeService.findById(bean.getChallenge().getId()).get());
+        }
         
         return result;
     }
 
     private Recommendation fillRecommendationConflicts(Recommendation result) {
         result.setRecommendation1Conflicts(recommendationsConflictService.findByRecommendation1(result));
+        for (RecommendationsConflict bean: result.getRecommendation1Conflicts()) {
+            bean.setRecommendation1(result);
+        }
         result.setRecommendation2Conflicts(recommendationsConflictService.findByRecommendation2(result));
+        for (RecommendationsConflict bean: result.getRecommendation2Conflicts()) {
+            bean.setRecommendation2(result);
+        }
         
         return result;
     }

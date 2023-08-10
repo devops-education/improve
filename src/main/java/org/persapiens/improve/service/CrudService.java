@@ -1,34 +1,18 @@
 package org.persapiens.improve.service;
 
+import java.io.Serializable;
 import java.util.Optional;
 import org.persapiens.improve.domain.IdBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Service;
 
-@Service
-public class CrudService<T extends IdBean<ID>, ID extends Object>{
+public interface CrudService<T extends IdBean<ID>, ID extends Serializable> {
     
-    @Autowired
-    private CrudRepository<T, ID> repository;
+    Optional findById(ID id);
     
-    public Optional findById(ID id)  {
-        return repository.findById(id);
-    }
+    long count();
     
-    public long count() {
-        return repository.count();
-    }
-    
-    public Iterable<T> findAll() {
-        return repository.findAll();
-    }
+    Iterable<T> findAll();
 
-    public void save(T bean) {
-        this.repository.save(bean);
-    }
+    void save(T bean);
 
-    public void delete(T bean) {
-        this.repository.delete(bean);
-    }
+    void delete(T bean);
 }
