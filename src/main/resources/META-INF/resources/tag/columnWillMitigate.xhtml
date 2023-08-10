@@ -29,7 +29,7 @@
         </p:selectOneButton>
 
         <p:dialog header="Challenge" widgetVar="challengeDialog#{challengeFeedback.challenge.id}" 
-                  showEffect="fade" dynamic="true" >
+                  showEffect="fade" dynamic="true" modal="true" >
             <h:form>
                 <p:panelGrid columns="2" layout="flex">
                     <c:text readonly="true" value="#{challengeFeedback.challenge.mainIdea}" label="Main Idea" />
