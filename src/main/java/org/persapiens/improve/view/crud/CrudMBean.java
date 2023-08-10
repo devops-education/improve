@@ -11,7 +11,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.persapiens.improve.domain.IdBean;
-import org.persapiens.improve.service.InMemoryCrudService;
+import org.persapiens.improve.service.CrudService;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -47,12 +47,12 @@ public abstract class CrudMBean<T extends IdBean<ID>, ID extends Serializable>
 
     protected static final String INSERT = "INSERT";
 
-    private InMemoryCrudService<T, ID> repository;
+    private CrudService<T, ID> service;
 
     @SuppressFBWarnings("EI_EXPOSE_REP2")
     @Autowired
-    public void setService(InMemoryCrudService<T, ID> service) {
-        this.repository = service;
+    public void setService(CrudService<T, ID> service) {
+        this.service = service;
     }
 
     @Getter
@@ -96,7 +96,7 @@ public abstract class CrudMBean<T extends IdBean<ID>, ID extends Serializable>
     private String keyValue;
 
     public List<T> find() {
-        return toList(this.repository.findAll());
+        return toList(this.service.findAll());
     }
 
     public void startFindAction() {
@@ -152,7 +152,7 @@ public abstract class CrudMBean<T extends IdBean<ID>, ID extends Serializable>
     }
 
     protected void insert(T bean) {
-        this.repository.save(bean);
+        this.service.save(bean);
     }
 
     protected T processBeforeInsertUpdate(T bean) {
@@ -207,7 +207,7 @@ public abstract class CrudMBean<T extends IdBean<ID>, ID extends Serializable>
     }
 
     protected void update(T bean) {
-        this.repository.save(bean);
+        this.service.save(bean);
     }
 
     protected T processBeforeUpdate(T bean) {
@@ -283,7 +283,7 @@ public abstract class CrudMBean<T extends IdBean<ID>, ID extends Serializable>
     }
 
     protected void delete(T bean) {
-        this.repository.delete(bean);
+        this.service.delete(bean);
     }
 
     protected T processBeforeDelete(T bean) {
