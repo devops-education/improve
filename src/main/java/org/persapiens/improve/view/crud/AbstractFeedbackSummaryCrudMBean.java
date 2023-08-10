@@ -5,6 +5,7 @@ import jakarta.faces.view.ViewScoped;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import org.persapiens.improve.domain.IdBean;
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.charts.ChartData;
 import org.primefaces.model.charts.optionconfig.legend.Legend;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @ViewScoped
 @Component
-public abstract class AbstractFeedbackSummaryCrudMBean<T extends Object> extends CrudMBean<T, Long> {
+public abstract class AbstractFeedbackSummaryCrudMBean<T extends IdBean<Long>> extends CrudMBean<T, Long> {
 
     private static final long serialVersionUID = 1L;
 

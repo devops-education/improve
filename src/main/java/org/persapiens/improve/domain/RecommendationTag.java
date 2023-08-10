@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import java.io.Serializable;
 import java.util.Comparator;
 
 import lombok.AccessLevel;
@@ -29,7 +28,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
 @Entity
-public class RecommendationTag implements Serializable, Comparable<RecommendationTag> {
+public class RecommendationTag implements IdBean<RecommendationTagId>, Comparable<RecommendationTag> {
 
     private static final long serialVersionUID = 1L;
 

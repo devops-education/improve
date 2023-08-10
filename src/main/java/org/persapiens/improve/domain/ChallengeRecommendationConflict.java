@@ -1,7 +1,6 @@
 package org.persapiens.improve.domain;
 
 import jakarta.persistence.EmbeddedId;
-import java.io.Serializable;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
@@ -30,7 +29,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
 @Entity
-public class ChallengeRecommendationConflict implements Serializable, Comparable<ChallengeRecommendationConflict> {
+public class ChallengeRecommendationConflict implements IdBean<ChallengeRecommendationConflictId>, 
+        Comparable<ChallengeRecommendationConflict> {
 
     private static final long serialVersionUID = 1L;
 

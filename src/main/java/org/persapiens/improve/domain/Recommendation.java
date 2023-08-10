@@ -1,7 +1,6 @@
 package org.persapiens.improve.domain;
 
 import jakarta.persistence.Column;
-import java.io.Serializable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -10,7 +9,9 @@ import jakarta.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 
@@ -35,10 +36,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Recommendation implements Serializable, Comparable<Recommendation> {
+public class Recommendation implements IdBean<Long>, Comparable<Recommendation> {
 
     private static final long serialVersionUID = 1L;
-    private static final int LENGTH = 40000;
 
     @Id
     private Long id;
@@ -71,6 +71,21 @@ public class Recommendation implements Serializable, Comparable<Recommendation> 
     @OneToMany(mappedBy = "recommendation")
     private SortedSet<RecommendationInterview> recommendationInterviews;
 
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Singular
+    @OneToMany(mappedBy = "recommendation1")
+    private Set<RecommendationsConflict> recommendation1Conflicts;
+
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Singular
+    @OneToMany(mappedBy = "recommendation2")
+    private Set<RecommendationsConflict> recommendation2Conflicts;
+
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Singular
+    @OneToMany(mappedBy = "recommendation")
+    private Set<ChallengeRecommendationConflict> challengeConflicts;
+
     @Override
     public int compareTo(Recommendation o) {
         return Comparator.comparing(Recommendation::getMainIdea)
@@ -86,4 +101,10 @@ public class Recommendation implements Serializable, Comparable<Recommendation> 
         return result;
     }
     
+    public Set<RecommendationsConflict> getRecommendationConflicts() {
+        Set result = new HashSet<>();
+        result.addAll(Objects.requireNonNullElse(recommendation1Conflicts, new HashSet<>()));
+        result.addAll(Objects.requireNonNullElse(recommendation2Conflicts, new HashSet<>()));
+        return result;
+    }
 }

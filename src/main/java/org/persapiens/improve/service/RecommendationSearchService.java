@@ -1,9 +1,8 @@
 package org.persapiens.improve.service;
 
-import java.util.List;
+import java.util.Collection;
 import org.persapiens.improve.domain.Recommendation;
 import org.persapiens.improve.domain.RecommendationInterview;
-import org.persapiens.improve.persistence.RecommendationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,21 +10,16 @@ import org.springframework.stereotype.Service;
 public class RecommendationSearchService extends SearchService<Recommendation>{
     
     @Autowired
-    private RecommendationRepository recommendationRepository;
+    private RecommendationService recommendationService;
 
     @Override
     protected long count() {
-        return recommendationRepository.count();
+        return recommendationService.count();
     }
 
     @Override
-    protected List<Recommendation> findAll() {
-        return recommendationRepository.findByLeftJoinLinksOrderByRecommendationInterviewsSizeDesc();
-    }
-
-    @Override
-    protected Long id(Recommendation t) {
-        return t.getId();
+    protected Collection<Recommendation> findAll() {
+        return recommendationService.findByOrderByRecommendationInterviewsSizeDesc();
     }
 
     @Override
