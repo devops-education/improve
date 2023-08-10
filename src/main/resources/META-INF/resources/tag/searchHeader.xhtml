@@ -27,8 +27,8 @@
         <p:commandButton value="#{Text} Tags" 
                          onclick="PF('tagDialog').show()"
                          title="Open #{text}tags map image" />
-        <p:dialog header="#{Text} Tags" widgetVar="tagDialog" 
-                  showEffect="fade" closeOnEscape="true" closable="true">
+        <p:dialog header="#{Text} Tags" widgetVar="tagDialog" showEffect="fade" 
+                  closeOnEscape="true" closable="true" modal="true">
             <p:graphicImage value="#{resource[image]}" 
                             library="improve"
                             width="600" 
