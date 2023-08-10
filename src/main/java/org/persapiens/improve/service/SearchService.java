@@ -3,6 +3,7 @@ package org.persapiens.improve.service;
 import jakarta.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.document.Document;
@@ -19,11 +20,12 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.ByteBuffersDirectory;
+import org.persapiens.improve.domain.IdBean;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 @Service
-public abstract class SearchService <T> {
+public abstract class SearchService <T extends IdBean<Long>> {
 
     private static final String ID = "id";
     private static final String DESCRIPTION = "description";
@@ -34,9 +36,7 @@ public abstract class SearchService <T> {
     
     protected abstract long count();
     
-    protected abstract List<T> findAll();
-
-    protected abstract Long id(T t);
+    protected abstract Collection<T> findAll();
     
     protected abstract String description(T t);
     
@@ -50,7 +50,7 @@ public abstract class SearchService <T> {
         try (IndexWriter directoryWriter = new IndexWriter(directory, new IndexWriterConfig(new EnglishAnalyzer())); ) {
             for (T line : findAll()) {
                 Document doc = new Document();
-                doc.add(new StoredField(ID, id(line)));
+                doc.add(new StoredField(ID, line.getId()));
                 doc.add(new TextField(DESCRIPTION, description(line), Field.Store.YES));
                 directoryWriter.addDocument(doc);
             }

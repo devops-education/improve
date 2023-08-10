@@ -65,7 +65,55 @@
                     </p:inputTextarea>
                 </h:panelGrid>
 
-                <p:accordionPanel multiple="true" activeIndex="0" id="linkRecommendationFeedbackAccordionPanel">
+                <p:accordionPanel multiple="true" activeIndex="0,1" id="recommendationFeedbackAccordionPanel">
+                    <p:tab title="Recommendation Conflicts (#{challengeFeedbackCrudMBean.conflictRecommendationFeedbackList.size()})"
+                           titleStyleClass="conflict" 
+                           titletip="Show / hide the list of recommendations with conflict"
+                           rendered="#{not empty challengeFeedbackCrudMBean.conflictRecommendationFeedbackList}">
+                        <p:dataTable id="conflictDatatable"
+                                     widgetVar="conflictDatatable"
+                                     value="#{challengeFeedbackCrudMBean.conflictRecommendationFeedbackList}"
+                                     var="conflictRecommendationFeedback"
+                                     emptyMessage="Sem Registros"
+                                     rows="5"
+                                     paginator="true"
+                                     rowsPerPageTemplate="5,10,20,50"
+                                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+                                     paginatorPosition="bottom"
+                                     stripedRows="true"
+                                     rowIndexVar="rowIdx"
+                                     >
+                            <c:columnMainIdea field="recommendationFeedback.recommendation.mainIdea" />
+                            
+                            <c:columnInterviews field="recommendationFeedback.recommendation.recommendationInterviews.size()" 
+                                                style="width: 70px;"
+                                                sortable="true"
+                                                filterable="false" />
+
+                            <c:columnLinks field="recommendationFeedback.recommendation.links.size()"
+                                           style="width: 80px;" 
+                                           sortable="true"
+                                           filterable="false" />
+                            
+                            <c:columnTheme field="recommendationFeedback.recommendation.theme" 
+                                           value="#{conflictRecommendationFeedback.recommendationFeedback.recommendation.theme.value}"
+                                           sortable="true" 
+                                           filterable="false"/>
+
+                            <c:columnUsedAlready field="recommendationFeedback.usedAlready"
+                                                 datatableId='conflictDatatable' 
+                                                 feedbackCrudMBean="#{challengeFeedbackCrudMBean}" 
+                                                 recommendationFeedback="#{conflictRecommendationFeedback.recommendationFeedback}"
+                                                 commandButtonUpdate="recommendationFeedbackAccordionPanel:conflictDatatable" />
+                            
+                            <c:columnWillUse field="recommendationFeedback.willUse"
+                                             datatableId='conflictDatatable'
+                                             feedbackCrudMBean="#{challengeFeedbackCrudMBean}" 
+                                             recommendationFeedback="#{conflictRecommendationFeedback.recommendationFeedback}"
+                                             />
+                        </p:dataTable>
+                    </p:tab>
+
                     <p:tab title="Recommendation Links (#{challengeFeedbackCrudMBean.linkRecommendationFeedbackList.size()})"
                            titleStyleClass="recommendation" 
                            titletip="Show / hide the list of linked recommendations">
@@ -103,7 +151,7 @@
                                                  datatableId='linkDatatable' 
                                                  feedbackCrudMBean="#{challengeFeedbackCrudMBean}" 
                                                  recommendationFeedback="#{linkRecommendationFeedback.recommendationFeedback}"
-                                                 commandButtonUpdate="linkRecommendationFeedbackAccordionPanel:linkDatatable" />
+                                                 commandButtonUpdate="recommendationFeedbackAccordionPanel:linkDatatable" />
                             
                             <c:columnWillUse field="recommendationFeedback.willUse"
                                              datatableId='linkDatatable'

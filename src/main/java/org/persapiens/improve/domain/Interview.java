@@ -1,7 +1,6 @@
 package org.persapiens.improve.domain;
 
 import jakarta.persistence.Column;
-import java.io.Serializable;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -26,7 +25,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
 @Entity
-public class Interview implements Serializable, Comparable<Interview> {
+public class Interview implements IdBean<Long>, Comparable<Interview> {
 
     private static final long serialVersionUID = 1L;
 

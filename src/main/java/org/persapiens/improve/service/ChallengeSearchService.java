@@ -1,9 +1,8 @@
 package org.persapiens.improve.service;
 
-import java.util.List;
+import java.util.Collection;
 import org.persapiens.improve.domain.Challenge;
 import org.persapiens.improve.domain.ChallengeInterview;
-import org.persapiens.improve.persistence.ChallengeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,21 +10,16 @@ import org.springframework.stereotype.Service;
 public class ChallengeSearchService extends SearchService<Challenge> {
     
     @Autowired
-    private ChallengeRepository challengeRepository;
+    private ChallengeService challengeService;
 
     @Override
     protected long count() {
-        return challengeRepository.count();
+        return challengeService.count();
     }
 
     @Override
-    protected List<Challenge> findAll() {
-        return challengeRepository.findByOrderByChallengeInterviewsSizeDesc();
-    }
-
-    @Override
-    protected Long id(Challenge t) {
-        return t.getId();
+    protected Collection<Challenge> findAll() {
+        return challengeService.findAll();
     }
 
     @Override

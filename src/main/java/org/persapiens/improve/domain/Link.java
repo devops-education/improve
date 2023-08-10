@@ -1,7 +1,6 @@
 package org.persapiens.improve.domain;
 
 import jakarta.persistence.EmbeddedId;
-import java.io.Serializable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
@@ -28,7 +27,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Link implements Serializable, Comparable<Link> {
+public class Link implements IdBean<LinkId>, Comparable<Link> {
 
     private static final long serialVersionUID = 1L;
 

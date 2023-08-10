@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -20,14 +19,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.persapiens.improve.domain.Challenge;
 import org.persapiens.improve.domain.ChallengeFeedback;
+import org.persapiens.improve.domain.ChallengeRecommendationConflict;
 import org.persapiens.improve.domain.Link;
 
 import org.persapiens.improve.domain.Recommendation;
 import org.persapiens.improve.domain.RecommendationFeedback;
-import org.persapiens.improve.persistence.ChallengeRepository;
-import org.persapiens.improve.persistence.ChallengeTagRepository;
-import org.persapiens.improve.persistence.RecommendationInterviewRepository;
+import org.persapiens.improve.service.LinkService;
 import org.persapiens.improve.service.ChallengeSearchService;
+import org.persapiens.improve.service.ChallengeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,26 +36,27 @@ import org.springframework.stereotype.Component;
 public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<ChallengeFeedback> {
 
     private static final long serialVersionUID = 1L;
+    private static final String SE_BAD_FIELD = "SE_BAD_FIELD";
 
-    @SuppressFBWarnings("SE_BAD_FIELD")
+    @SuppressFBWarnings(SE_BAD_FIELD)
     @Autowired
-    private ChallengeRepository challengeRepository;
-
-    @SuppressFBWarnings("SE_BAD_FIELD")
-    @Autowired
-    private RecommendationInterviewRepository recommendationInterviewRepository;
+    private ChallengeService challengeService;
     
     @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
-    private ChallengeTagRepository challengeTagRepository;
+    private LinkService linkService;
+    
+    @SuppressFBWarnings(SE_BAD_FIELD)
+    @Autowired
+    private ChallengeSearchService challengeSearchService;
     
     @Getter
     @Setter
     private List<LinkRecommendationFeedback> linkRecommendationFeedbackList;
     
-    @SuppressFBWarnings("SE_BAD_FIELD")
-    @Autowired
-    private ChallengeSearchService challengeSearchService;
+    @Getter
+    @Setter
+    private List<ConflictRecommendationFeedback> conflictRecommendationFeedbackList;
     
     @Override
     protected ChallengeFeedback createBean() {
@@ -64,14 +64,19 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
     }
 
     @Override
+    protected boolean doGlobalFilterFunction(ChallengeFeedback value, String filterText, Locale locale) throws ParseException, IOException {
+        return challengeSearchService.search(filterText, value.getChallenge().getId());
+    }
+    
+    @Override
     public List<ChallengeFeedback> find() {
         // create challengeFeedback map
         Map<Challenge, ChallengeFeedback> challengeFeedbackMap = new HashMap<>();
-        for(ChallengeFeedback challengeFeedback : challengeFeedbackRepository.findByUsername(username())) {
+        for(ChallengeFeedback challengeFeedback : challengeFeedbackService.findByUsername(username())) {
             challengeFeedbackMap.put(challengeFeedback.getChallenge(), challengeFeedback);
         }
 
-        Iterable<Link> iterable = linkRepository.findAll();
+        Iterable<Link> iterable = linkService.findAll();
         
         Map<Recommendation, List<Link>> recommendationLinkMap = StreamSupport.stream(
     iterable.spliterator(), false).collect(Collectors.groupingBy(Link::getRecommendation));
@@ -80,7 +85,7 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
         
         // create all challengeFeedback from challenge and previous feedback
         List<ChallengeFeedback> result = new ArrayList<>();
-        for(Challenge challenge : challengeRepository.findByOrderByChallengeInterviewsSizeDesc()) {
+        for(Challenge challenge : challengeService.findByOrderByChallengeInterviewsSizeDesc()) {
             ChallengeFeedback challengeFeedback = challengeFeedbackMap.get(challenge);
             if (challengeFeedback == null) {
                 challengeFeedback = ChallengeFeedback.builder()
@@ -110,31 +115,19 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
 
         return result;
     }
-
-    @Override
-    protected boolean doGlobalFilterFunction(ChallengeFeedback value, String filterText, Locale locale) throws ParseException, IOException {
-        return challengeSearchService.search(filterText, value.getChallenge().getId());
-    }
-
-    @Override
-    protected ChallengeFeedback getDetailBean(ChallengeFeedback bean) {
-        for(Link link : bean.getChallenge().getLinks()) {
-            Recommendation recommendation = link.getRecommendation();
-            recommendation.setRecommendationInterviews(new TreeSet<>(recommendationInterviewRepository.findByRecommendation(recommendation)));
-        }
-        return bean;
-    }
     
     @Override
     public void startDetailAction() {
         super.startDetailAction(); 
         
-        List<LinkRecommendationFeedback> newLinkRecommendationFeedbackList = new ArrayList<>();
-        
         // recuperando os recommendation feedback dos links do desafio
-        Map<Recommendation, RecommendationFeedback> recommendationRecommendationFeedbackMap = recommendationFeedbackRepository.findByRecommendationInAndUsername(
-getBean().getChallenge().getLinkSortedByRecommendationRecommendationInterviewsSizeList().stream().map(Link::getRecommendation).collect(Collectors.toList()), username())
-                .stream().collect(Collectors.toMap(RecommendationFeedback::getRecommendation, Function.identity()));
+        Map<Recommendation, RecommendationFeedback> recommendationRecommendationFeedbackMap = 
+            recommendationFeedbackService.findByRecommendationInAndUsername(
+    getBean().getChallenge().getLinkSortedByRecommendationRecommendationInterviewsSizeList().stream()
+                    .map(Link::getRecommendation).collect(Collectors.toList()), username())
+                        .stream().collect(Collectors.toMap(RecommendationFeedback::getRecommendation, Function.identity()));
+        
+        List<LinkRecommendationFeedback> newLinkRecommendationFeedbackList = new ArrayList<>();
         
         // varrendo os links do desafio
         for (Link link : getBean().getChallenge().getLinkSortedByRecommendationRecommendationInterviewsSizeList()) {
@@ -154,8 +147,25 @@ getBean().getChallenge().getLinkSortedByRecommendationRecommendationInterviewsSi
         }
         setLinkRecommendationFeedbackList(newLinkRecommendationFeedbackList);
         
-        getBean().getChallenge().setChallengeTags(new HashSet<>(challengeTagRepository.findByChallenge(
-    getBean().getChallenge())));
+        List<ConflictRecommendationFeedback> newConflictRecommendationFeedbackList = new ArrayList<>();
+        
+        // varrendo os conflitos do desafio
+        for (ChallengeRecommendationConflict conflict : getBean().getChallenge().getConflicts()) {
+            Recommendation recommendation = conflict.getRecommendation();
+            RecommendationFeedback recommendationFeedback = recommendationRecommendationFeedbackMap.get(recommendation);
+            if (recommendationFeedback == null) {
+                recommendationFeedback = RecommendationFeedback.builder()
+                    .recommendation(recommendation)
+                    .username(username())
+                    .build();
+            }
+
+            newConflictRecommendationFeedbackList.add(ConflictRecommendationFeedback.builder()
+                    .conflict(conflict)
+                    .recommendationFeedback(recommendationFeedback)
+                    .build());                    
+        }
+        setConflictRecommendationFeedbackList(newConflictRecommendationFeedbackList);
     }    
     
 }

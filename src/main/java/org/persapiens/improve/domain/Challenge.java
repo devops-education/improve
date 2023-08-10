@@ -1,7 +1,6 @@
 package org.persapiens.improve.domain;
 
 import jakarta.persistence.Column;
-import java.io.Serializable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -35,10 +34,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Challenge implements Serializable, Comparable<Challenge> {
+public class Challenge implements IdBean<Long>, Comparable<Challenge> {
 
     private static final long serialVersionUID = 1L;
-    private static final int LENGTH = 40000;
 
     @Id
     private Long id;
@@ -70,6 +68,11 @@ public class Challenge implements Serializable, Comparable<Challenge> {
     @Singular
     @OneToMany(mappedBy = "challenge")
     private SortedSet<ChallengeInterview> challengeInterviews;
+
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Singular
+    @OneToMany(mappedBy = "challenge")
+    private Set<ChallengeRecommendationConflict> conflicts;
 
     @Override
     public int compareTo(Challenge o) {

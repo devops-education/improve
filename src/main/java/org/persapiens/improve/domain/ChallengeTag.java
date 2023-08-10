@@ -1,7 +1,6 @@
 package org.persapiens.improve.domain;
 
 import jakarta.persistence.EmbeddedId;
-import java.io.Serializable;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
@@ -30,7 +29,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
 @Entity
-public class ChallengeTag implements Serializable, Comparable<ChallengeTag> {
+public class ChallengeTag implements IdBean<ChallengeTagId>, Comparable<ChallengeTag> {
 
     private static final long serialVersionUID = 1L;
 

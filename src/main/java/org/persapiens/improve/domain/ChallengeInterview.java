@@ -2,7 +2,6 @@ package org.persapiens.improve.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
-import java.io.Serializable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
@@ -29,10 +28,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class ChallengeInterview implements Serializable, Comparable<ChallengeInterview> {
+public class ChallengeInterview implements IdBean<ChallengeInterviewId>, Comparable<ChallengeInterview> {
 
     private static final long serialVersionUID = 1L;
-    private static final int LENGTH = 40000;
 
     @EmbeddedId
     private ChallengeInterviewId id;

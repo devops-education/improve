@@ -10,9 +10,10 @@ import org.persapiens.improve.view.AbstractMBean;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import org.persapiens.improve.domain.IdBean;
+import org.persapiens.improve.service.InMemoryCrudService;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 
 /**
  * Managed Bean abstrato de crud.
@@ -21,7 +22,7 @@ import org.springframework.data.repository.CrudRepository;
  * @param <ID> tipo da chave do bean
  */
 @Setter
-public abstract class CrudMBean<T extends Object, ID extends Serializable>
+public abstract class CrudMBean<T extends IdBean<ID>, ID extends Serializable>
         extends AbstractMBean {
 
     private static final long serialVersionUID = 1L;
@@ -46,11 +47,11 @@ public abstract class CrudMBean<T extends Object, ID extends Serializable>
 
     protected static final String INSERT = "INSERT";
 
-    private CrudRepository<T, ID> repository;
+    private InMemoryCrudService<T, ID> repository;
 
     @SuppressFBWarnings("EI_EXPOSE_REP2")
     @Autowired
-    public void setService(CrudRepository<T, ID> service) {
+    public void setService(InMemoryCrudService<T, ID> service) {
         this.repository = service;
     }
 

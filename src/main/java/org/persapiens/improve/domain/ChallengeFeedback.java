@@ -1,7 +1,6 @@
 package org.persapiens.improve.domain;
 
 import jakarta.persistence.Column;
-import java.io.Serializable;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
@@ -35,10 +34,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @SuperBuilder
 @Entity
 @SequenceGenerator(sequenceName = "seq_challenge_feedback", name = "ID_SEQUENCE", allocationSize = 1)
-public class ChallengeFeedback implements Serializable, Comparable<ChallengeFeedback> {
+public class ChallengeFeedback implements IdBean<Long>, Comparable<ChallengeFeedback> {
 
     private static final long serialVersionUID = 1L;
-    private static final int LENGTH = 40000;
 
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
     @Id

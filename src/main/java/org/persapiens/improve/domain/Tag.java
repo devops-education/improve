@@ -1,6 +1,5 @@
 package org.persapiens.improve.domain;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -29,7 +28,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Tag implements Serializable, Comparable<Tag> {
+public class Tag implements IdBean<Long>, Comparable<Tag> {
 
     private static final long serialVersionUID = 1L;
 

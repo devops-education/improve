@@ -12,10 +12,9 @@ import org.persapiens.improve.domain.ChallengeFeedback;
 import org.persapiens.improve.domain.Link;
 import org.persapiens.improve.domain.Recommendation;
 import org.persapiens.improve.domain.RecommendationFeedback;
-import org.persapiens.improve.persistence.ChallengeFeedbackRepository;
-import org.persapiens.improve.persistence.ChallengeTagRepository;
-import org.persapiens.improve.persistence.LinkRepository;
-import org.persapiens.improve.persistence.RecommendationFeedbackRepository;
+import org.persapiens.improve.service.RecommendationFeedbackService;
+import org.persapiens.improve.service.ChallengeFeedbackService;
+import org.persapiens.improve.service.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -28,38 +27,29 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
     
     @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
-    private ChallengeFeedbackRepository challengeFeedbackRepository;
+    private ChallengeFeedbackService challengeFeedbackService;
     
     @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
-    private LinkRepository linkRepository;
+    private LinkService linkService;
     
     @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
-    private RecommendationFeedbackRepository recommendationFeedbackRepository;
-    
-    @SuppressFBWarnings("SE_BAD_FIELD")
-    @Autowired
-    private ChallengeTagRepository challengeTagRepository;
+    private RecommendationFeedbackService recommendationFeedbackService;
 
     @Override
     protected ChallengeFeedback createBean() {
         return ChallengeFeedback.builder().build();
     }
 
-    @Override
-    protected ChallengeFeedback getDetailBean(ChallengeFeedback bean) {
-        return challengeFeedbackRepository.findDetailById(bean.getId()).get(); 
-    }
-
     private List<Recommendation> recommendations(ChallengeFeedback challengeFeedback) {
-        return linkRepository.findByChallenge(challengeFeedback.getChallenge())
+        return linkService.findByChallenge(challengeFeedback.getChallenge())
                 .stream().map(Link::getRecommendation).collect(Collectors.toList());
     }
     
     private boolean hasRecommendationFeedbackUsedAlreadyOrWillUse(List<Recommendation> recommendations) {
         boolean result = false;
-        for (RecommendationFeedback recommendationFeedback : recommendationFeedbackRepository.findByRecommendationInAndUsername(recommendations, username())) {
+        for (RecommendationFeedback recommendationFeedback : recommendationFeedbackService.findByRecommendationInAndUsername(recommendations, username())) {
             if (Boolean.TRUE.equals(recommendationFeedback.getUsedAlready())
                     || Boolean.TRUE.equals(recommendationFeedback.getWillUse())) {
                 result = true;
@@ -75,7 +65,7 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
         List<ChallengeFeedback> willMitigateAndHasRecommendation = new ArrayList<>();
         List<ChallengeFeedback> notWillMitigate = new ArrayList<>();
         
-        for(ChallengeFeedback cf : challengeFeedbackRepository.findByUsernameLeftJoinChallengeLinks(username())) {
+        for(ChallengeFeedback cf : challengeFeedbackService.findByUsername(username())) {
             if (Objects.nonNull(cf.getWillMitigate())) {
                 if (cf.getWillMitigate()) {
                     List<Recommendation> recommendations = recommendations(cf);

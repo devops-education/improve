@@ -7,10 +7,10 @@ import java.util.Locale;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.persapiens.improve.domain.ChallengeFeedback;
+import org.persapiens.improve.domain.IdBean;
 import org.persapiens.improve.domain.RecommendationFeedback;
-import org.persapiens.improve.persistence.ChallengeFeedbackRepository;
-import org.persapiens.improve.persistence.LinkRepository;
-import org.persapiens.improve.persistence.RecommendationFeedbackRepository;
+import org.persapiens.improve.service.RecommendationFeedbackService;
+import org.persapiens.improve.service.ChallengeFeedbackService;
 import org.primefaces.PrimeFaces;
 import org.primefaces.util.LangUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,21 +19,17 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @ViewScoped
 @Component
-public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMBean<T, Long> {
+public abstract class AbstractFeedbackCrudMBean<T extends IdBean<Long>> extends CrudMBean<T, Long> {
 
     private static final long serialVersionUID = 1L;
     
     @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
-    protected LinkRepository linkRepository;
+    protected ChallengeFeedbackService challengeFeedbackService;
     
     @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
-    protected ChallengeFeedbackRepository challengeFeedbackRepository;
-    
-    @SuppressFBWarnings("SE_BAD_FIELD")
-    @Autowired
-    protected RecommendationFeedbackRepository recommendationFeedbackRepository;
+    protected RecommendationFeedbackService recommendationFeedbackService;
 
     public boolean globalFilterFunction(T value, Object filter, Locale locale) {
         boolean result = false;
@@ -73,12 +69,11 @@ public abstract class AbstractFeedbackCrudMBean<T extends Object> extends CrudMB
     }
 
     public void saveRecommendationFeedback(RecommendationFeedback recommendationFeedback) {
-        recommendationFeedbackRepository.save(recommendationFeedback);
+        recommendationFeedbackService.save(recommendationFeedback);
     }
  
-    
     public void saveChallengeFeedback(ChallengeFeedback challengeFeedback) {
-        challengeFeedbackRepository.save(challengeFeedback);
+        challengeFeedbackService.save(challengeFeedback);
     }
     
     private void saveChallengeFeedbackDialog(ChallengeFeedback challengeFeedback, Boolean openDialog) {

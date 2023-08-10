@@ -7,10 +7,11 @@ import jakarta.faces.context.FacesContext;
 import jakarta.faces.validator.Validator;
 import jakarta.faces.validator.ValidatorException;
 import java.io.Serializable;
+import org.persapiens.improve.domain.IdBean;
 import org.persapiens.improve.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class SearchValidator <T> implements Validator<String>, Serializable {
+public class SearchValidator <T extends IdBean<Long>> implements Validator<String>, Serializable {
 
     private static final long serialVersionUID = 1L;
 
