@@ -116,19 +116,29 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
         return result;
     }
     
+    private Map<Recommendation, RecommendationFeedback> recommendationRecommendationFeedbackMap() {
+        Set<Recommendation> linkedRecommendations = getBean().getChallenge().getLinks().stream()
+            .map(Link::getRecommendation).collect(Collectors.toSet());
+        Set<Recommendation> recommendations = new HashSet<>(linkedRecommendations);
+
+        Set<Recommendation> conflictRecommendations = getBean().getChallenge().getConflicts().stream()
+            .map(ChallengeRecommendationConflict::getRecommendation).collect(Collectors.toSet());
+        recommendations.addAll(conflictRecommendations);
+        
+        // recuperando os recommendation feedback dos links do desafio
+        return recommendationFeedbackService.findByRecommendationInAndUsername(recommendations, username())
+                .stream().collect(Collectors.toMap(RecommendationFeedback::getRecommendation, Function.identity()));        
+    }
+    
     @Override
     public void startDetailAction() {
         super.startDetailAction(); 
-        
+                        
         // recuperando os recommendation feedback dos links do desafio
         Map<Recommendation, RecommendationFeedback> recommendationRecommendationFeedbackMap = 
-            recommendationFeedbackService.findByRecommendationInAndUsername(
-    getBean().getChallenge().getLinkSortedByRecommendationRecommendationInterviewsSizeList().stream()
-                    .map(Link::getRecommendation).collect(Collectors.toList()), username())
-                        .stream().collect(Collectors.toMap(RecommendationFeedback::getRecommendation, Function.identity()));
+            recommendationRecommendationFeedbackMap();
         
-        List<LinkRecommendationFeedback> newLinkRecommendationFeedbackList = new ArrayList<>();
-        
+        List<LinkRecommendationFeedback> newLinkRecommendationFeedbackList = new ArrayList<>();        
         // varrendo os links do desafio
         for (Link link : getBean().getChallenge().getLinkSortedByRecommendationRecommendationInterviewsSizeList()) {
             Recommendation recommendation = link.getRecommendation();
@@ -147,8 +157,7 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
         }
         setLinkRecommendationFeedbackList(newLinkRecommendationFeedbackList);
         
-        List<ConflictRecommendationFeedback> newConflictRecommendationFeedbackList = new ArrayList<>();
-        
+        List<ConflictRecommendationFeedback> newConflictRecommendationFeedbackList = new ArrayList<>();        
         // varrendo os conflitos do desafio
         for (ChallengeRecommendationConflict conflict : getBean().getChallenge().getConflicts()) {
             Recommendation recommendation = conflict.getRecommendation();
