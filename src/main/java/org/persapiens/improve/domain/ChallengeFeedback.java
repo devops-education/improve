@@ -7,9 +7,11 @@ import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import java.util.Comparator;
 
 import lombok.AccessLevel;
@@ -34,6 +36,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @SuperBuilder
 @Entity
 @SequenceGenerator(sequenceName = "seq_challenge_feedback", name = "ID_SEQUENCE", allocationSize = 1)
+@Table(indexes = @Index(name = "idx_challengefeedback_challenge_usename", unique = true, columnList = "challenge_id, username"))
 public class ChallengeFeedback implements IdBean<Long>, Comparable<ChallengeFeedback> {
 
     private static final long serialVersionUID = 1L;
