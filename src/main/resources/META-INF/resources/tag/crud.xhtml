@@ -53,9 +53,11 @@
             <c:set var="visualizationModeAfterDelete" value="#{empty visualizationModeAfterDelete ? managedBean.visualizationModeAfterDelete : visualizationModeAfterDelete}" />
             <c:set var="dataTableRows"                value="#{empty dataTableRows ? 7 : dataTableRows}" />
             <c:set var="dataTableRowsPerPageTemplate" value="#{empty dataTableRowsPerPageTemplate ? '7,10,20,50' : dataTableRowsPerPageTemplate}" />
-            <c:set var="dataTableStyle" 			  value="#{empty dataTableStyle ? '' : dataTableStyle}" />
+            <c:set var="dataTableStyle"               value="#{empty dataTableStyle ? '' : dataTableStyle}" />
             <c:set var="insertButtonLabel"            value="#{empty insertButtonLabel ? 'Incluir' : insertButtonLabel}" />
             <c:set var="updateButtonLabel"            value="#{empty updateButtonLabel ? 'Salvar' : updateButtonLabel}" />
+            <c:set var="dataTablePaginator"           value="#{empty dataTablePaginator ? true : dataTablePaginator}" />
+            <c:set var="dataTablePaginatorPosition"   value="#{empty dataTablePaginatorPosition ? 'both' : dataTablePaginatorPosition}" />
 
             <p:growl id="messages#{crudId}" showDetail="true" showSummary="false" escape="false" life="1500"/>
 
@@ -68,10 +70,10 @@
                              rows="#{dataTableRows}"
                              rowIndexVar="rowIdx"
                              rowKey="#{bean.id}"
-                             paginator="true"
+                             paginator="#{dataTablePaginator}"
                              rowsPerPageTemplate="#{dataTableRowsPerPageTemplate}"
                              paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
-                             paginatorPosition="bottom"
+                             paginatorPosition="#{dataTablePaginatorPosition}"
                              currentPageReportTemplate="{startRecord} a {endRecord} em {totalRecords} registro(s). {totalPages} página(s)."
                              value="#{managedBean.beanList}"
                              filteredValue="#{managedBean.filteredBeanList}"
