@@ -93,7 +93,73 @@
                         <h:outputText id="willUseComment" value="#{fn:replace(recommendationFeedbackSummaryCrudMBean.bean.willUseComment, '\\n', '&lt;br/&gt;')}" escape="false" />
                     </h:panelGrid>
 
-                    <p:accordionPanel multiple="true" activeIndex="0" id="linkChallengeFeedbackAccordionPanel">
+                    <p:accordionPanel multiple="true" activeIndex="0,1,2" id="challengeFeedbackAccordionPanel">
+                        <p:tab title="Challenge Conflicts (#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.challengeConflicts.size()})"
+                               titleStyleClass="conflict" 
+                               titletip="Show / hide the list of challenges with conflict"
+                               rendered="#{not empty recommendationFeedbackSummaryCrudMBean.bean.recommendation.challengeConflicts}">
+                            <p:dataTable id="conflictDatatable"
+                                         widgetVar="conflictDatatable"
+                                         value="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.challengeConflicts}"
+                                         var="challengeConflict"
+                                         emptyMessage="Sem Registros"
+                                         rows="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.challengeConflicts.size()}"
+                                         paginator="false"
+                                         stripedRows="true"
+                                         rowIndexVar="rowIdx"
+                                         >
+                                <c:columnMainIdea field="challenge.mainIdea" />
+
+                                <c:columnInterviews field="challenge.challengeInterviews.size()" 
+                                                    style="width: 70px;"
+                                                    sortable="true"
+                                                    filterable="false" />
+
+                                <c:columnLinks field="challenge.links.size()"
+                                               style="width: 80px;" 
+                                               sortable="true"
+                                               filterable="false" />
+
+                                <c:columnTheme field="challenge.theme" 
+                                               value="#{challengeConflict.challenge.theme.value}"
+                                               sortable="true" 
+                                               filterable="false"/>
+                            </p:dataTable>
+                        </p:tab>
+
+                        <p:tab title="Recommendation Conflicts (#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.recommendationConflicts.size()})"
+                               titleStyleClass="conflict" 
+                               titletip="Show / hide the list of recommendations with conflict"
+                               rendered="#{not empty recommendationFeedbackSummaryCrudMBean.bean.recommendation.recommendationConflicts}">
+                            <p:dataTable id="conflictRecommendationDatatable"
+                                         widgetVar="conflictDatatable"
+                                         value="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.recommendationConflicts}"
+                                         var="recommendation"
+                                         emptyMessage="Sem Registros"
+                                         rows="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.recommendationConflicts.size()}"
+                                         paginator="false"
+                                         stripedRows="true"
+                                         rowIndexVar="rowIdx"
+                                         >
+                                <c:columnMainIdea field="mainIdea" />
+
+                                <c:columnInterviews field="recommendationInterviews.size()" 
+                                                    style="width: 70px;"
+                                                    sortable="true"
+                                                    filterable="false" />
+
+                                <c:columnLinks field="links.size()"
+                                               style="width: 80px;" 
+                                               sortable="true"
+                                               filterable="false" />
+
+                                <c:columnTheme field="theme" 
+                                               value="#{recommendation.theme.value}"
+                                               sortable="true" 
+                                               filterable="false"/>
+                            </p:dataTable>
+                        </p:tab>
+
                         <p:tab title="Challenge Links (#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.links.size()})"
                                titleStyleClass="challenge"
                                titletip="Show / hide the list of linked challenges">
@@ -187,7 +253,40 @@
                         <h:outputText value="#{fn:replace(challengeFeedbackSummaryCrudMBean.bean.willMitigateComment, '\\n', '&lt;br/&gt;')}" escape="false" />
                     </h:panelGrid>
 
-                    <p:accordionPanel multiple="true" activeIndex="0" id="linkRecommendationFeedbackAccordionPanel">
+                    <p:accordionPanel multiple="true" activeIndex="0,1" id="linkRecommendationFeedbackAccordionPanel">
+                        <p:tab title="Recommendation Conflicts (#{challengeFeedbackSummaryCrudMBean.bean.challenge.conflicts.size()})"
+                               titleStyleClass="conflict" 
+                               titletip="Show / hide the list of recommendations with conflict"
+                               rendered="#{not empty challengeFeedbackSummaryCrudMBean.bean.challenge.conflicts}">
+                            <p:dataTable id="conflictDatatable"
+                                         widgetVar="conflictDatatable"
+                                         value="#{challengeFeedbackSummaryCrudMBean.bean.challenge.conflicts}"
+                                         var="conflict"
+                                         emptyMessage="Sem Registros"
+                                         rows="#{challengeFeedbackSummaryCrudMBean.bean.challenge.conflicts.size()}"
+                                         paginator="false"
+                                         stripedRows="true"
+                                         rowIndexVar="rowIdx"
+                                         >
+                                <c:columnMainIdea field="recommendation.mainIdea" />
+
+                                <c:columnInterviews field="recommendation.recommendationInterviews.size()" 
+                                                    style="width: 70px;"
+                                                    sortable="true"
+                                                    filterable="false" />
+
+                                <c:columnLinks field="recommendation.links.size()"
+                                               style="width: 80px;" 
+                                               sortable="true"
+                                               filterable="false" />
+
+                                <c:columnTheme field="recommendation.theme" 
+                                               value="#{conflict.recommendation.theme.value}"
+                                               sortable="true" 
+                                               filterable="false"/>
+                            </p:dataTable>
+                        </p:tab>
+
                         <p:tab title="Recommendation Links (#{challengeFeedbackSummaryCrudMBean.bean.challenge.links.size()})"
                                titleStyleClass="recommendation"
                                titletip="Show / hide the list of linked recommendations">

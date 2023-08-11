@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
+import java.util.stream.Collectors;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -101,10 +102,10 @@ public class Recommendation implements IdBean<Long>, Comparable<Recommendation> 
         return result;
     }
     
-    public Set<RecommendationsConflict> getRecommendationConflicts() {
+    public Set<Recommendation> getRecommendationConflicts() {
         Set result = new HashSet<>();
-        result.addAll(Objects.requireNonNullElse(recommendation1Conflicts, new HashSet<>()));
-        result.addAll(Objects.requireNonNullElse(recommendation2Conflicts, new HashSet<>()));
+        result.addAll(recommendation1Conflicts.stream().map(RecommendationsConflict::getRecommendation2).collect(Collectors.toSet()));
+        result.addAll(recommendation2Conflicts.stream().map(RecommendationsConflict::getRecommendation1).collect(Collectors.toSet()));
         return result;
     }
 }
