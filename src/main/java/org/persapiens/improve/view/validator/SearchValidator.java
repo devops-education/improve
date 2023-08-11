@@ -1,5 +1,6 @@
 package org.persapiens.improve.view.validator;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
@@ -14,6 +15,7 @@ public class SearchValidator <T extends IdBean<Long>> implements Validator<Strin
 
     private static final long serialVersionUID = 1L;
 
+    @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
     private SearchService<T> searchService;    
     

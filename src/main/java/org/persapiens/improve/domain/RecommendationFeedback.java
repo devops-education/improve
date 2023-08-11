@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 
 import lombok.AccessLevel;
@@ -72,6 +73,12 @@ public class RecommendationFeedback implements IdBean<Long>, Comparable<Recommen
     @Column(length = LENGTH)
     private String willUseComment;
 
+    @Column(nullable = false)
+    private LocalDateTime insertTime;
+    
+    @Column(nullable = false)
+    private LocalDateTime updateTime;
+
     @Override
     public int compareTo(RecommendationFeedback o) {
         return Comparator.comparing(RecommendationFeedback::getRecommendation)
@@ -80,6 +87,15 @@ public class RecommendationFeedback implements IdBean<Long>, Comparable<Recommen
                 .thenComparing(Comparator.nullsLast(Comparator.comparing(RecommendationFeedback::getUsedAlready)))
                 .thenComparing(Comparator.nullsLast(Comparator.comparing(RecommendationFeedback::getWillUse)))
                 .compare(this, o);
+    }
+
+    public void insert() {
+        insertTime = LocalDateTime.now();
+        updateTime = LocalDateTime.now();
+    }
+
+    public void update() {
+        updateTime = LocalDateTime.now();
     }
 
 }

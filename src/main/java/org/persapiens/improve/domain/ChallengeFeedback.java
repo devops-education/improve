@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 
 import lombok.AccessLevel;
@@ -66,6 +67,12 @@ public class ChallengeFeedback implements IdBean<Long>, Comparable<ChallengeFeed
     @Column(length = LENGTH)
     private String willMitigateComment;
 
+    @Column(nullable = false)
+    private LocalDateTime insertTime;
+    
+    @Column(nullable = false)
+    private LocalDateTime updateTime;
+    
     @Override
     public int compareTo(ChallengeFeedback o) {
         return Comparator.comparing(ChallengeFeedback::getChallenge)
@@ -75,4 +82,13 @@ public class ChallengeFeedback implements IdBean<Long>, Comparable<ChallengeFeed
                 .compare(this, o);
     }
 
+    public void insert() {
+        insertTime = LocalDateTime.now();
+        updateTime = LocalDateTime.now();
+    }
+
+    public void update() {
+        updateTime = LocalDateTime.now();
+    }
+    
 }
