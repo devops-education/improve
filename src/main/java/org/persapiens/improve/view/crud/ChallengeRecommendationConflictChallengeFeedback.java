@@ -13,7 +13,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import org.persapiens.improve.domain.ChallengeRecommendationConflict;
-import org.persapiens.improve.domain.RecommendationFeedback;
+import org.persapiens.improve.domain.ChallengeFeedback;
 
 @Getter
 @Setter
@@ -22,18 +22,19 @@ import org.persapiens.improve.domain.RecommendationFeedback;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
-public class ConflictRecommendationFeedback implements Serializable, Comparable<ConflictRecommendationFeedback> {
+public class ChallengeRecommendationConflictChallengeFeedback implements Serializable, 
+        Comparable<ChallengeRecommendationConflictChallengeFeedback> {
 
     private static final long serialVersionUID = 1L;
     
     private ChallengeRecommendationConflict conflict;
     
-    private RecommendationFeedback recommendationFeedback;
+    private ChallengeFeedback challengeFeedback;
     
     @Override
-    public int compareTo(ConflictRecommendationFeedback o) {
-        return Comparator.comparing(ConflictRecommendationFeedback::getRecommendationFeedback)
-                .thenComparing(ConflictRecommendationFeedback::getConflict)
+    public int compareTo(ChallengeRecommendationConflictChallengeFeedback o) {
+        return Comparator.comparing(ChallengeRecommendationConflictChallengeFeedback::getChallengeFeedback)
+                .thenComparing(ChallengeRecommendationConflictChallengeFeedback::getConflict)
                 .compare(this, o);
     }
 

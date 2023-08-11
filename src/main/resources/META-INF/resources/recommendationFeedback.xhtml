@@ -46,8 +46,7 @@
                 <c:columnWillUse field="willUse"
                                  datatableId='datatable'
                                  feedbackCrudMBean="#{recommendationFeedbackCrudMBean}" 
-                                 recommendationFeedback="#{bean}"
-                                 />
+                                 recommendationFeedback="#{bean}" />
                 
             </ui:define>
 
@@ -92,7 +91,96 @@
                     </p:inputTextarea>
                 </h:panelGrid>
 
-                <p:accordionPanel multiple="true" activeIndex="0" id="linkChallengeFeedbackAccordionPanel">
+                <p:accordionPanel multiple="true" activeIndex="0,1,2" id="challengeFeedbackAccordionPanel">
+                    <p:tab title="Challenge Conflicts (#{recommendationFeedbackCrudMBean.conflictChallengeFeedbackList.size()})"
+                           titleStyleClass="conflict" 
+                           titletip="Show / hide the list of challenges with conflict"
+                           rendered="#{not empty recommendationFeedbackCrudMBean.conflictChallengeFeedbackList}">
+                        <p:dataTable id="conflictDatatable"
+                                     widgetVar="conflictDatatable"
+                                     value="#{recommendationFeedbackCrudMBean.conflictChallengeFeedbackList}"
+                                     var="conflictChallengeFeedback"
+                                     emptyMessage="Sem Registros"
+                                     rows="5"
+                                     paginator="true"
+                                     rowsPerPageTemplate="5,10,20,50"
+                                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+                                     paginatorPosition="bottom"
+                                     stripedRows="true"
+                                     rowIndexVar="rowIdx"
+                                     >
+                            <c:columnMainIdea field="challengeFeedback.challenge.mainIdea" />
+                            
+                            <c:columnInterviews field="challengeFeedback.challenge.challengeInterviews.size()" 
+                                                style="width: 70px;"
+                                                sortable="true"
+                                                filterable="false" />
+
+                            <c:columnLinks field="challengeFeedback.challenge.links.size()"
+                                           style="width: 80px;" 
+                                           sortable="true"
+                                           filterable="false" />
+                            
+                            <c:columnTheme field="challengeFeedback.challenge.theme" 
+                                           value="#{conflictChallengeFeedback.challengeFeedback.challenge.theme.value}"
+                                           sortable="true" 
+                                           filterable="false"/>
+
+                            <c:columnWillMitigate field="challengeFeedback.willMitigate"
+                                                 datatableId='conflictDatatable' 
+                                                 feedbackCrudMBean="#{recommendationFeedbackCrudMBean}" 
+                                                 challengeFeedback="#{conflictChallengeFeedback.challengeFeedback}"
+                                                 commandButtonUpdate="challengeFeedbackAccordionPanel:conflictDatatable" />
+                        </p:dataTable>
+                    </p:tab>
+
+                    <p:tab title="Recommendation Conflicts (#{recommendationFeedbackCrudMBean.conflictRecommendationFeedbackList.size()})"
+                           titleStyleClass="conflict" 
+                           titletip="Show / hide the list of recommendations with conflict"
+                           rendered="#{not empty recommendationFeedbackCrudMBean.conflictRecommendationFeedbackList}">
+                        <p:dataTable id="conflictRecommendationDatatable"
+                                     widgetVar="conflictDatatable"
+                                     value="#{recommendationFeedbackCrudMBean.conflictRecommendationFeedbackList}"
+                                     var="conflictRecommendationFeedback"
+                                     emptyMessage="Sem Registros"
+                                     rows="5"
+                                     paginator="true"
+                                     rowsPerPageTemplate="5,10,20,50"
+                                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+                                     paginatorPosition="bottom"
+                                     stripedRows="true"
+                                     rowIndexVar="rowIdx"
+                                     >
+                            <c:columnMainIdea field="recommendationFeedback.recommendation.mainIdea" />
+                            
+                            <c:columnInterviews field="recommendationFeedback.recommendation.recommendationInterviews.size()" 
+                                                style="width: 70px;"
+                                                sortable="true"
+                                                filterable="false" />
+
+                            <c:columnLinks field="recommendationFeedback.recommendation.links.size()"
+                                           style="width: 80px;" 
+                                           sortable="true"
+                                           filterable="false" />
+                            
+                            <c:columnTheme field="recommendationFeedback.recommendation.theme" 
+                                           value="#{conflictRecommendationFeedback.recommendationFeedback.recommendation.theme.value}"
+                                           sortable="true" 
+                                           filterable="false"/>
+
+                            <c:columnUsedAlready field="recommendationFeedback.usedAlready"
+                                                 datatableId='conflictRecommendationDatatable'
+                                                 feedbackCrudMBean="#{recommendationFeedbackCrudMBean}"
+                                                 recommendationFeedback="#{conflictRecommendationFeedback.recommendationFeedback}"
+                                                 commandButtonUpdate="challengeFeedbackAccordionPanel:conflictRecommendationDatatable" />
+
+                            <c:columnWillUse field="recommendationFeedback.willUse"
+                                             datatableId='conflictRecommendationDatatable'
+                                             feedbackCrudMBean="#{recommendationFeedbackCrudMBean}" 
+                                             recommendationFeedback="#{conflictRecommendationFeedback.recommendationFeedback}" />
+                        </p:dataTable>
+                    </p:tab>
+
                     <p:tab title="Challenge Links (#{recommendationFeedbackCrudMBean.linkChallengeFeedbackList.size()})" 
                            titleStyleClass="challenge" 
                            titletip="Show / hide the list of linked challenges">
@@ -131,7 +219,7 @@
                                                   datatableId='linkDatatable'
                                                   feedbackCrudMBean="#{recommendationFeedbackCrudMBean}"
                                                   challengeFeedback="#{linkChallengeFeedback.challengeFeedback}"
-                                                  commandButtonUpdate="linkChallengeFeedbackAccordionPanel:linkDatatable" />
+                                                  commandButtonUpdate="challengeFeedbackAccordionPanel:linkDatatable" />
                             
                         </p:dataTable>
                     </p:tab>

@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.persapiens.improve.domain.Challenge;
 import org.persapiens.improve.domain.ChallengeFeedback;
+import org.persapiens.improve.domain.ChallengeRecommendationConflict;
 import org.persapiens.improve.domain.Link;
 
 import org.persapiens.improve.domain.Recommendation;
@@ -56,7 +57,11 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
     
     @Getter
     @Setter
-    private List<RecommendationsConflict> recommendationsConflictList;
+    private List<ChallengeRecommendationConflictChallengeFeedback> conflictChallengeFeedbackList;
+    
+    @Getter
+    @Setter
+    private List<RecommendationsConflictRecommendationFeedback> conflictRecommendationFeedbackList;
     
     @Override
     protected RecommendationFeedback createBean() {
@@ -64,7 +69,8 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
     }
 
     @Override
-    protected boolean doGlobalFilterFunction(RecommendationFeedback value, String filterText, Locale locale) throws ParseException, IOException {
+    protected boolean doGlobalFilterFunction(RecommendationFeedback value, String filterText, Locale locale)
+            throws ParseException, IOException {
         return recommendationSearchService.search(filterText, value.getRecommendation().getId());
     }
 
@@ -78,8 +84,10 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
 
         Iterable<Link> iterable = linkService.findAll();
         
-        Map<Recommendation, List<Link>> recommendationLinkMap = StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.groupingBy(Link::getRecommendation));
-        Map<Challenge, List<Link>> challengeLinkMap = StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.groupingBy(Link::getChallenge));
+        Map<Recommendation, List<Link>> recommendationLinkMap = StreamSupport.stream(iterable.spliterator(), false)
+            .collect(Collectors.groupingBy(Link::getRecommendation));
+        Map<Challenge, List<Link>> challengeLinkMap = StreamSupport.stream(iterable.spliterator(), false)
+            .collect(Collectors.groupingBy(Link::getChallenge));
         
         // create all recommendationFeedback from recommendation and previous feedback
         List<RecommendationFeedback> result = new ArrayList<>();
@@ -114,20 +122,44 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
         return result;
     }
 
+    private Map<Challenge, ChallengeFeedback> challengeChallengeFeedbackMap() {
+        Set<Challenge> linkedChallenges = getBean().getRecommendation().getLinks().stream().
+            map(Link::getChallenge).collect(Collectors.toSet());
+        Set<Challenge> challenges = new HashSet<>(linkedChallenges);
+        
+        Set<Challenge> conflictChallenges = getBean().getRecommendation().getChallengeConflicts().stream()
+            .map(ChallengeRecommendationConflict::getChallenge).collect(Collectors.toSet());
+        challenges.addAll(conflictChallenges);        
+        
+        // recuperando os challenges feedback dos links do desafio
+        return challengeFeedbackService.findByChallengeInAndUsername(challenges, username())
+            .stream().collect(Collectors.toMap(ChallengeFeedback::getChallenge, Function.identity()));
+    }
+
+    private Map<Recommendation, RecommendationFeedback> recommendationRecommendationFeedbackMap() {
+        Set<Recommendation> conflict1Recommendations = getBean().getRecommendation().getRecommendation1Conflicts().stream()
+            .map(RecommendationsConflict::getRecommendation2).collect(Collectors.toSet());
+        Set<Recommendation> recommendations = new HashSet<>(conflict1Recommendations);
+
+        Set<Recommendation> conflict2Recommendations = getBean().getRecommendation().getRecommendation2Conflicts().stream()
+            .map(RecommendationsConflict::getRecommendation1).collect(Collectors.toSet());
+        recommendations.addAll(conflict2Recommendations);
+
+        // recuperando os challenges feedback dos links do desafio
+        return recommendationFeedbackService.findByRecommendationInAndUsername(recommendations, username())
+            .stream().collect(Collectors.toMap(RecommendationFeedback::getRecommendation, Function.identity()));
+    }
+    
     @Override
     public void startDetailAction() {
         super.startDetailAction(); 
         
-        // recuperando os recommendation feedback dos links do desafio
-        Map<Challenge, ChallengeFeedback> challengeChallengeFeedbackMap = challengeFeedbackService.findByChallengeInAndUsername(
-    getBean().getRecommendation().getLinkSortedByChallengeChallengeInterviewsSizeList().stream().
-                map(Link::getChallenge).collect(Collectors.toList()), username())
-                    .stream().collect(Collectors.toMap(ChallengeFeedback::getChallenge, Function.identity()));
+        // recuperando os challenges feedback dos links da recommendacao
+        Map<Challenge, ChallengeFeedback> challengeChallengeFeedbackMap = challengeChallengeFeedbackMap();
 
-        List<LinkChallengeFeedback> newLinkChallengeFeedbackList = new ArrayList<>();
-        
+        List<LinkChallengeFeedback> newLinkChallengeFeedbackList = new ArrayList<>();        
         // varrendo os links do desafio
-        for (Link link : getBean().getRecommendation().getLinkSortedByChallengeChallengeInterviewsSizeList()) {
+        for (Link link : getBean().getRecommendation().getLinks()) {
             Challenge challenge = link.getChallenge();
             ChallengeFeedback challengeFeedback = challengeChallengeFeedbackMap.get(challenge);
             if (challengeFeedback == null) {
@@ -141,9 +173,64 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
                     .link(link)
                     .challengeFeedback(challengeFeedback)
                     .build());                    
-        }
-        
+        }        
         setLinkChallengeFeedbackList(newLinkChallengeFeedbackList);
+        
+        List<ChallengeRecommendationConflictChallengeFeedback> newConflictChallengeFeedbackList = new ArrayList<>();        
+        // varrendo os conflitos de desafio
+        for (ChallengeRecommendationConflict conflict : getBean().getRecommendation().getChallengeConflicts()) {
+            Challenge challenge = conflict.getChallenge();
+            ChallengeFeedback challengeFeedback = challengeChallengeFeedbackMap.get(challenge);
+            if (challengeFeedback == null) {
+                challengeFeedback = ChallengeFeedback.builder()
+                    .challenge(challenge)
+                    .username(username())
+                    .build();
+            }
+
+            newConflictChallengeFeedbackList.add(ChallengeRecommendationConflictChallengeFeedback.builder()
+                    .conflict(conflict)
+                    .challengeFeedback(challengeFeedback)
+                    .build());                    
+        }
+        setConflictChallengeFeedbackList(newConflictChallengeFeedbackList);
+        
+        // recuperando os recommendations feedback dos conflitos de recomendacao
+        Map<Recommendation, RecommendationFeedback> recommendationRecommendationFeedbackMap = recommendationRecommendationFeedbackMap();
+        
+        List<RecommendationsConflictRecommendationFeedback> newConflictRecommendationFeedbackList = new ArrayList<>();        
+        // varrendo os conflitos de recomendacao
+        for (RecommendationsConflict conflict : getBean().getRecommendation().getRecommendation1Conflicts()) {
+            Recommendation recommendation = conflict.getRecommendation2();
+            RecommendationFeedback recommendationFeedback = recommendationRecommendationFeedbackMap.get(recommendation);
+            if (recommendationFeedback == null) {
+                recommendationFeedback = RecommendationFeedback.builder()
+                    .recommendation(recommendation)
+                    .username(username())
+                    .build();
+            }
+
+            newConflictRecommendationFeedbackList.add(RecommendationsConflictRecommendationFeedback.builder()
+                    .conflict(conflict)
+                    .recommendationFeedback(recommendationFeedback)
+                    .build());                    
+        }
+        for (RecommendationsConflict conflict : getBean().getRecommendation().getRecommendation2Conflicts()) {
+            Recommendation recommendation = conflict.getRecommendation1();
+            RecommendationFeedback recommendationFeedback = recommendationRecommendationFeedbackMap.get(recommendation);
+            if (recommendationFeedback == null) {
+                recommendationFeedback = RecommendationFeedback.builder()
+                    .recommendation(recommendation)
+                    .username(username())
+                    .build();
+            }
+
+            newConflictRecommendationFeedbackList.add(RecommendationsConflictRecommendationFeedback.builder()
+                    .conflict(conflict)
+                    .recommendationFeedback(recommendationFeedback)
+                    .build());                    
+        }
+        setConflictRecommendationFeedbackList(newConflictRecommendationFeedbackList);
     }    
         
 }
