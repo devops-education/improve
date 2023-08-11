@@ -153,8 +153,8 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
         Map<Challenge, ChallengeFeedback> challengeChallengeFeedbackMap = challengeChallengeFeedbackMap();
 
         List<LinkChallengeFeedback> newLinkChallengeFeedbackList = new ArrayList<>();        
-        // varrendo os links do desafio
-        for (Link link : getBean().getRecommendation().getLinks()) {
+        // varrendo os links da recomendacao
+        for (Link link : getBean().getRecommendation().getLinkSortedByChallengeChallengeInterviewsSizeList()) {
             Challenge challenge = link.getChallenge();
             ChallengeFeedback challengeFeedback = challengeChallengeFeedbackMap.get(challenge);
             if (challengeFeedback == null) {
