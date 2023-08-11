@@ -56,7 +56,7 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
     
     @Getter
     @Setter
-    private List<ConflictRecommendationFeedback> conflictRecommendationFeedbackList;
+    private List<ChallengeRecommendationConflictRecommendationFeedback> conflictRecommendationFeedbackList;
     
     @Override
     protected ChallengeFeedback createBean() {
@@ -127,7 +127,7 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
         
         // recuperando os recommendation feedback dos links do desafio
         return recommendationFeedbackService.findByRecommendationInAndUsername(recommendations, username())
-                .stream().collect(Collectors.toMap(RecommendationFeedback::getRecommendation, Function.identity()));        
+            .stream().collect(Collectors.toMap(RecommendationFeedback::getRecommendation, Function.identity()));        
     }
     
     @Override
@@ -157,7 +157,7 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
         }
         setLinkRecommendationFeedbackList(newLinkRecommendationFeedbackList);
         
-        List<ConflictRecommendationFeedback> newConflictRecommendationFeedbackList = new ArrayList<>();        
+        List<ChallengeRecommendationConflictRecommendationFeedback> newConflictRecommendationFeedbackList = new ArrayList<>();        
         // varrendo os conflitos do desafio
         for (ChallengeRecommendationConflict conflict : getBean().getChallenge().getConflicts()) {
             Recommendation recommendation = conflict.getRecommendation();
@@ -169,7 +169,7 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
                     .build();
             }
 
-            newConflictRecommendationFeedbackList.add(ConflictRecommendationFeedback.builder()
+            newConflictRecommendationFeedbackList.add(ChallengeRecommendationConflictRecommendationFeedback.builder()
                     .conflict(conflict)
                     .recommendationFeedback(recommendationFeedback)
                     .build());                    
