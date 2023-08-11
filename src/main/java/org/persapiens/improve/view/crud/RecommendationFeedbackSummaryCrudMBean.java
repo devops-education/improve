@@ -3,6 +3,8 @@ package org.persapiens.improve.view.crud;
 import jakarta.faces.view.ViewScoped;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +47,15 @@ public class RecommendationFeedbackSummaryCrudMBean extends AbstractFeedbackSumm
                 }
             }
         }
+        
+        Comparator<RecommendationFeedback> comparator = (RecommendationFeedback o1, RecommendationFeedback o2) -> 
+            o2.getRecommendation().getRecommendationInterviews().size() - 
+                o1.getRecommendation().getRecommendationInterviews().size();
+        
+        Collections.sort(notUsedAndWillUseList, comparator);
+        Collections.sort(usedAlreadyList, comparator);
+        Collections.sort(notUsedAndNotWillUseList, comparator);
+        
         return Arrays.asList(notUsedAndWillUseList, usedAlreadyList, notUsedAndNotWillUseList);
     }
 
