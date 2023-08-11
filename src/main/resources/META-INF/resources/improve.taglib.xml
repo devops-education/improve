@@ -243,6 +243,22 @@
             <type>java.lang.Integer</type>
         </attribute>
         <attribute>
+            <description>Define se terá paginador da tabela de listagem. &lt;br/&gt;
+                Default true
+            </description>
+            <name>dataTablePaginator</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description>Define se a posicao do paginador da tabela de listagem. &lt;br/&gt;
+                Default both
+            </description>
+            <name>dataTablePaginatorPosition</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>Define se as opções dos números de linhas da tabela de listagem. &lt;br/&gt;
                 Default '10,20,50'
             </description>

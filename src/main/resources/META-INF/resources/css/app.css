@@ -49,14 +49,17 @@ body .ui-menu.ui-menubar {
 
 .challenge {
   color: orange !important;
+  font-size: large !important;
 }
 
 .recommendation {
   color: limegreen !important;
+  font-size: large !important;
 }
 
 .conflict {
   color: chocolate !important;
+  font-size: large !important;
 }
 
 .login-body {
