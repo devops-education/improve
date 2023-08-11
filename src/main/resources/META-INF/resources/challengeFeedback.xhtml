@@ -75,11 +75,8 @@
                                      value="#{challengeFeedbackCrudMBean.conflictRecommendationFeedbackList}"
                                      var="conflictRecommendationFeedback"
                                      emptyMessage="Sem Registros"
-                                     rows="5"
-                                     paginator="true"
-                                     rowsPerPageTemplate="5,10,20,50"
-                                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
-                                     paginatorPosition="bottom"
+                                     rows="#{challengeFeedbackCrudMBean.conflictRecommendationFeedbackList.size()}"
+                                     paginator="false"
                                      stripedRows="true"
                                      rowIndexVar="rowIdx"
                                      >

@@ -1,6 +1,5 @@
 package org.persapiens.improve.view.crud;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.faces.view.ViewScoped;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +18,6 @@ public class RecommendationFeedbackSummaryCrudMBean extends AbstractFeedbackSumm
 
     private static final long serialVersionUID = 1L;
     
-    @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
     private RecommendationFeedbackService recommendationFeedbackService;
 

@@ -1,6 +1,5 @@
 package org.persapiens.improve.view.crud;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.faces.view.ViewScoped;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,17 +36,13 @@ import org.springframework.stereotype.Component;
 public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<RecommendationFeedback> {
 
     private static final long serialVersionUID = 1L;
-    private static final String SE_BAD_FIELD = "SE_BAD_FIELD";
 
-    @SuppressFBWarnings(SE_BAD_FIELD)
     @Autowired
     private RecommendationService recommendationService;
     
-    @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
     private LinkService linkService;
     
-    @SuppressFBWarnings(SE_BAD_FIELD)
     @Autowired
     private RecommendationSearchService recommendationSearchService;
     
