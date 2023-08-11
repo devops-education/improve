@@ -34,5 +34,16 @@ public class RecommendationFeedbackService extends RepositoryCrudService <Recomm
     public List<RecommendationFeedback> findByRecommendationInAndUsername(Collection<Recommendation> recommendation, String username) {
         return fill(repository.findByRecommendationInAndUsername(recommendation, username));
     }
+
+    @Override
+    public void save(RecommendationFeedback bean) {
+        if (bean.getId() == null) {
+            bean.insert();
+        } else {
+            bean.update();
+        }
+
+        super.save(bean);
+    }
     
 }

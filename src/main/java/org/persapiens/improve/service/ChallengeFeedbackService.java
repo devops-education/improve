@@ -34,5 +34,16 @@ public class ChallengeFeedbackService extends RepositoryCrudService <ChallengeFe
     public List<ChallengeFeedback> findByChallengeInAndUsername(Collection<Challenge> challenge, String username) {
         return fill(repository.findByChallengeInAndUsername(challenge, username));
     }
+
+    @Override
+    public void save(ChallengeFeedback bean) {
+        if (bean.getId() == null) {
+            bean.insert();
+        } else {
+            bean.update();
+        }
+
+        super.save(bean);
+    }
     
 }
