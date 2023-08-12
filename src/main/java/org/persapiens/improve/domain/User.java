@@ -21,7 +21,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @ToString
 @EqualsAndHashCode(of = "username")
 @SuperBuilder
-@Entity
+@Entity(name = "users")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class User implements IdBean<Long>, Comparable<User> {
