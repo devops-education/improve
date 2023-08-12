@@ -31,13 +31,13 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"recommendation", "username"})
+@EqualsAndHashCode(of = {"recommendation", "user"})
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
 @Entity
 @SequenceGenerator(sequenceName = "seq_recommendation_feedback", name = "ID_SEQUENCE", allocationSize = 1)
-@Table(indexes = @Index(name = "idx_recommendationfeedback_recommendation_usename", unique = true, columnList = "recommendation_id, username"))
+@Table(indexes = @Index(name = "idx_recommendationfeedback_recommendation_user", unique = true, columnList = "recommendation_id, user_id"))
 public class RecommendationFeedback implements IdBean<Long>, Comparable<RecommendationFeedback> {
 
     private static final long serialVersionUID = 1L;
@@ -52,8 +52,11 @@ public class RecommendationFeedback implements IdBean<Long>, Comparable<Recommen
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_recommendationFeedback_recommendation"))
     private Recommendation recommendation;
     
-    @Column(nullable = false)
-    private String username;
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @NonNull
+    @ManyToOne
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_recommendationFeedback_user"))
+    private User user;
 
     @Column
     private Boolean known;
@@ -82,7 +85,7 @@ public class RecommendationFeedback implements IdBean<Long>, Comparable<Recommen
     @Override
     public int compareTo(RecommendationFeedback o) {
         return Comparator.comparing(RecommendationFeedback::getRecommendation)
-                .thenComparing(RecommendationFeedback::getUsername)
+                .thenComparing(RecommendationFeedback::getUser)
                 .thenComparing(Comparator.nullsLast(Comparator.comparing(RecommendationFeedback::getKnown)))
                 .thenComparing(Comparator.nullsLast(Comparator.comparing(RecommendationFeedback::getUsedAlready)))
                 .thenComparing(Comparator.nullsLast(Comparator.comparing(RecommendationFeedback::getWillUse)))

@@ -30,41 +30,6 @@ joinfaces:
     facelets-refresh-period: 0  
   primefaces:
     theme: vela
-application-users:
-  users-credentials:
-    - username: marcelo
-      password: devops
-      authorities: ROLE_ADMIN
-    - username: p1
-      password: devops
-      authorities: ROLE_ADMIN
-    - username: p2
-      password: devops
-      authorities: ROLE_ADMIN
-    - username: p3
-      password: devops
-      authorities: ROLE_ADMIN
-    - username: p4
-      password: devops
-      authorities: ROLE_ADMIN
-    - username: p5
-      password: devops
-      authorities: ROLE_ADMIN
-    - username: p6
-      password: devops
-      authorities: ROLE_ADMIN
-    - username: p7
-      password: devops
-      authorities: ROLE_ADMIN
-    - username: p8
-      password: devops
-      authorities: ROLE_ADMIN
-    - username: p9
-      password: devops
-      authorities: ROLE_ADMIN
-    - username: p10
-      password: devops
-      authorities: ROLE_ADMIN
 info:
   url: @project.url@
   version: @project.version@

@@ -27,6 +27,7 @@ import org.persapiens.improve.domain.RecommendationsConflict;
 import org.persapiens.improve.service.LinkService;
 import org.persapiens.improve.service.RecommendationSearchService;
 import org.persapiens.improve.service.RecommendationService;
+import org.persapiens.improve.view.bean.UserMBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -45,6 +46,9 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
     
     @Autowired
     private RecommendationSearchService recommendationSearchService;
+
+    @Autowired
+    private UserMBean userMBean;
     
     @Getter
     @Setter
@@ -73,7 +77,7 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
     public List<RecommendationFeedback> find() {
         // create recommendationFeedback map
         Map<Recommendation, RecommendationFeedback> recommendationFeedbackMap = new HashMap<>();
-        for(RecommendationFeedback recommendationFeedback : recommendationFeedbackService.findByUsername(username())) {
+        for(RecommendationFeedback recommendationFeedback : recommendationFeedbackService.findByUser(userMBean.getLoggedUser())) {
             recommendationFeedbackMap.put(recommendationFeedback.getRecommendation(), recommendationFeedback);
         }
 
@@ -91,7 +95,7 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
             if (recommendationFeedback == null) {
                 recommendationFeedback = RecommendationFeedback.builder()
                         .recommendation(recommendation)
-                        .username(username())
+                        .user(userMBean.getLoggedUser())
                         .build();
             } else {
                 log.debug("RecommendationFeedback " + recommendationFeedback.getKnown());
@@ -127,7 +131,7 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
         challenges.addAll(conflictChallenges);        
         
         // recuperando os challenges feedback dos links do desafio
-        return challengeFeedbackService.findByChallengeInAndUsername(challenges, username())
+        return challengeFeedbackService.findByChallengeInAndUser(challenges, userMBean.getLoggedUser())
             .stream().collect(Collectors.toMap(ChallengeFeedback::getChallenge, Function.identity()));
     }
 
@@ -141,7 +145,7 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
         recommendations.addAll(conflict2Recommendations);
 
         // recuperando os challenges feedback dos links do desafio
-        return recommendationFeedbackService.findByRecommendationInAndUsername(recommendations, username())
+        return recommendationFeedbackService.findByRecommendationInAndUser(recommendations, userMBean.getLoggedUser())
             .stream().collect(Collectors.toMap(RecommendationFeedback::getRecommendation, Function.identity()));
     }
     
@@ -160,7 +164,7 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
             if (challengeFeedback == null) {
                 challengeFeedback = ChallengeFeedback.builder()
                     .challenge(challenge)
-                    .username(username())
+                    .user(userMBean.getLoggedUser())
                     .build();
             }
             
@@ -179,7 +183,7 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
             if (challengeFeedback == null) {
                 challengeFeedback = ChallengeFeedback.builder()
                     .challenge(challenge)
-                    .username(username())
+                    .user(userMBean.getLoggedUser())
                     .build();
             }
 
@@ -201,7 +205,7 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
             if (recommendationFeedback == null) {
                 recommendationFeedback = RecommendationFeedback.builder()
                     .recommendation(recommendation)
-                    .username(username())
+                    .user(userMBean.getLoggedUser())
                     .build();
             }
 
@@ -216,7 +220,7 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
             if (recommendationFeedback == null) {
                 recommendationFeedback = RecommendationFeedback.builder()
                     .recommendation(recommendation)
-                    .username(username())
+                    .user(userMBean.getLoggedUser())
                     .build();
             }
 

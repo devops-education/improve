@@ -1,9 +1,9 @@
 package org.persapiens.improve;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.persapiens.improve.service.UserService;
 
 import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -21,7 +21,6 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 @SuppressFBWarnings("SPRING_CSRF_PROTECTION_DISABLED")
 @Configuration
 @EnableWebSecurity
-@EnableConfigurationProperties(ApplicationUsers.class)
 public class SecurityConfig {
 
     /**
@@ -64,19 +63,19 @@ public class SecurityConfig {
     /**
      * UserDetailsService that configures an in-memory users store.
      *
-     * @param applicationUsers - autowired users from the application.yml file
+     * @param userService - autowired users 
      * @return InMemoryUserDetailsManager - a manager that keeps all the users'
      * info in the memory
      */
     @Bean
-    public InMemoryUserDetailsManager userDetailsService(ApplicationUsers applicationUsers) {
+    public InMemoryUserDetailsManager userDetailsService(UserService userService) {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         InMemoryUserDetailsManager result = new InMemoryUserDetailsManager();
-        for (UserCredentials userCredentials : applicationUsers.getUsersCredentials()) {
+        for (org.persapiens.improve.domain.User user : userService.findAll()) {
             result.createUser(User.builder()
-                    .username(userCredentials.getUsername())
-                    .password(encoder.encode(userCredentials.getPassword()))
-                    .authorities(userCredentials.getAuthorities().toArray(new String[0])).build());
+                    .username(user.getUsername())
+                    .password(encoder.encode(user.getPassword()))
+                    .authorities("ROLE_ADMIN").build());
         }
         return result;
     }

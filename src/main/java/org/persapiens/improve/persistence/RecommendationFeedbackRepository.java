@@ -4,11 +4,12 @@ import java.util.Collection;
 import java.util.List;
 import org.persapiens.improve.domain.Recommendation;
 import org.persapiens.improve.domain.RecommendationFeedback;
+import org.persapiens.improve.domain.User;
 
 import org.springframework.data.repository.CrudRepository;
 
 public interface RecommendationFeedbackRepository extends CrudRepository<RecommendationFeedback, Long> {
-    List<RecommendationFeedback> findByUsername(String username);
+    List<RecommendationFeedback> findByUser(User user);
     
-    List<RecommendationFeedback> findByRecommendationInAndUsername(Collection<Recommendation> recommendations, String username);
+    List<RecommendationFeedback> findByRecommendationInAndUser(Collection<Recommendation> recommendations, User user);
 }
