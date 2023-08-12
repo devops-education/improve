@@ -11,6 +11,7 @@ import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.persapiens.improve.domain.RecommendationFeedback;
 import org.persapiens.improve.service.RecommendationFeedbackService;
+import org.persapiens.improve.view.bean.UserMBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +26,9 @@ public class RecommendationFeedbackSummaryCrudMBean extends AbstractFeedbackSumm
     @Autowired
     private RecommendationFeedbackService recommendationFeedbackService;
 
+    @Autowired
+    private UserMBean userMBean;
+
     @Override
     protected RecommendationFeedback createBean() {
         return RecommendationFeedback.builder().build();
@@ -36,7 +40,7 @@ public class RecommendationFeedbackSummaryCrudMBean extends AbstractFeedbackSumm
         List<RecommendationFeedback> usedAlreadyList = new ArrayList<>();
         List<RecommendationFeedback> notUsedAndNotWillUseList = new ArrayList<>();
         
-        for (RecommendationFeedback rf : recommendationFeedbackService.findByUsername(username())) {
+        for (RecommendationFeedback rf : recommendationFeedbackService.findByUser(userMBean.getLoggedUser())) {
             if (Objects.nonNull(rf.getUsedAlready())) {
                 if (rf.getUsedAlready()) {
                     usedAlreadyList.add(rf);

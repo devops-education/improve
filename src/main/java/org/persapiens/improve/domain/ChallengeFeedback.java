@@ -31,13 +31,13 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"challenge", "username"})
+@EqualsAndHashCode(of = {"challenge", "user"})
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
 @Entity
 @SequenceGenerator(sequenceName = "seq_challenge_feedback", name = "ID_SEQUENCE", allocationSize = 1)
-@Table(indexes = @Index(name = "idx_challengefeedback_challenge_usename", unique = true, columnList = "challenge_id, username"))
+@Table(indexes = @Index(name = "idx_challengefeedback_challenge_user", unique = true, columnList = "challenge_id, user_id"))
 public class ChallengeFeedback implements IdBean<Long>, Comparable<ChallengeFeedback> {
 
     private static final long serialVersionUID = 1L;
@@ -52,8 +52,11 @@ public class ChallengeFeedback implements IdBean<Long>, Comparable<ChallengeFeed
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_challengeFeedback_challenge"))
     private Challenge challenge;
     
-    @Column(nullable = false)
-    private String username;
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @NonNull
+    @ManyToOne
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_challengeFeedback_user"))
+    private User user;
 
     @Column
     private Boolean known;
@@ -76,7 +79,7 @@ public class ChallengeFeedback implements IdBean<Long>, Comparable<ChallengeFeed
     @Override
     public int compareTo(ChallengeFeedback o) {
         return Comparator.comparing(ChallengeFeedback::getChallenge)
-                .thenComparing(ChallengeFeedback::getUsername)
+                .thenComparing(ChallengeFeedback::getUser)
                 .thenComparing(Comparator.nullsLast(Comparator.comparing(ChallengeFeedback::getKnown)))
                 .thenComparing(Comparator.nullsLast(Comparator.comparing(ChallengeFeedback::getWillMitigate)))
                 .compare(this, o);

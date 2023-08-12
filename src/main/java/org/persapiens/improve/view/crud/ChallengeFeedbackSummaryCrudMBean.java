@@ -17,6 +17,7 @@ import org.persapiens.improve.domain.RecommendationFeedback;
 import org.persapiens.improve.service.RecommendationFeedbackService;
 import org.persapiens.improve.service.ChallengeFeedbackService;
 import org.persapiens.improve.service.LinkService;
+import org.persapiens.improve.view.bean.UserMBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -39,6 +40,9 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
     @Autowired
     private RecommendationFeedbackService recommendationFeedbackService;
 
+    @Autowired
+    private UserMBean userMBean;
+    
     @Override
     protected ChallengeFeedback createBean() {
         return ChallengeFeedback.builder().build();
@@ -51,7 +55,8 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
     
     private boolean hasRecommendationFeedbackUsedAlreadyOrWillUse(List<Recommendation> recommendations) {
         boolean result = false;
-        for (RecommendationFeedback recommendationFeedback : recommendationFeedbackService.findByRecommendationInAndUsername(recommendations, username())) {
+        for (RecommendationFeedback recommendationFeedback : recommendationFeedbackService.findByRecommendationInAndUser(
+            recommendations, userMBean.getLoggedUser())) {
             if (Boolean.TRUE.equals(recommendationFeedback.getUsedAlready())
                     || Boolean.TRUE.equals(recommendationFeedback.getWillUse())) {
                 result = true;
@@ -67,7 +72,7 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
         List<ChallengeFeedback> willMitigateAndHasRecommendation = new ArrayList<>();
         List<ChallengeFeedback> notWillMitigate = new ArrayList<>();
         
-        for(ChallengeFeedback cf : challengeFeedbackService.findByUsername(username())) {
+        for(ChallengeFeedback cf : challengeFeedbackService.findByUser(userMBean.getLoggedUser())) {
             if (Objects.nonNull(cf.getWillMitigate())) {
                 if (cf.getWillMitigate()) {
                     List<Recommendation> recommendations = recommendations(cf);

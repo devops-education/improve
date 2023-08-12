@@ -26,6 +26,7 @@ import org.persapiens.improve.domain.RecommendationFeedback;
 import org.persapiens.improve.service.LinkService;
 import org.persapiens.improve.service.ChallengeSearchService;
 import org.persapiens.improve.service.ChallengeService;
+import org.persapiens.improve.view.bean.UserMBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -44,6 +45,9 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
     
     @Autowired
     private ChallengeSearchService challengeSearchService;
+
+    @Autowired
+    private UserMBean userMBean;
     
     @Getter
     @Setter
@@ -67,7 +71,7 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
     public List<ChallengeFeedback> find() {
         // create challengeFeedback map
         Map<Challenge, ChallengeFeedback> challengeFeedbackMap = new HashMap<>();
-        for(ChallengeFeedback challengeFeedback : challengeFeedbackService.findByUsername(username())) {
+        for(ChallengeFeedback challengeFeedback : challengeFeedbackService.findByUser(userMBean.getLoggedUser())) {
             challengeFeedbackMap.put(challengeFeedback.getChallenge(), challengeFeedback);
         }
 
@@ -85,7 +89,7 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
             if (challengeFeedback == null) {
                 challengeFeedback = ChallengeFeedback.builder()
                         .challenge(challenge)
-                        .username(username())
+                        .user(userMBean.getLoggedUser())
                         .build();
             } else {
                 log.debug("ChallengeFeedback " + challengeFeedback.getKnown());
@@ -121,7 +125,7 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
         recommendations.addAll(conflictRecommendations);
         
         // recuperando os recommendation feedback dos links do desafio
-        return recommendationFeedbackService.findByRecommendationInAndUsername(recommendations, username())
+        return recommendationFeedbackService.findByRecommendationInAndUser(recommendations, userMBean.getLoggedUser())
             .stream().collect(Collectors.toMap(RecommendationFeedback::getRecommendation, Function.identity()));        
     }
     
@@ -141,7 +145,7 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
             if (recommendationFeedback == null) {
                 recommendationFeedback = RecommendationFeedback.builder()
                     .recommendation(recommendation)
-                    .username(username())
+                    .user(userMBean.getLoggedUser())
                     .build();
             }
 
@@ -160,7 +164,7 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
             if (recommendationFeedback == null) {
                 recommendationFeedback = RecommendationFeedback.builder()
                     .recommendation(recommendation)
-                    .username(username())
+                    .user(userMBean.getLoggedUser())
                     .build();
             }
 

@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.Getter;
 import org.persapiens.improve.domain.Challenge;
 import org.persapiens.improve.domain.ChallengeFeedback;
+import org.persapiens.improve.domain.User;
 import org.persapiens.improve.persistence.ChallengeFeedbackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,20 +20,24 @@ public class ChallengeFeedbackService extends RepositoryCrudService <ChallengeFe
     @Autowired
     private ChallengeService challengeService;
     
+    @Autowired
+    private UserService userService;
+    
     private List<ChallengeFeedback> fill(List<ChallengeFeedback> result) {
         for (ChallengeFeedback bean : result) {
             bean.setChallenge(challengeService.findById(bean.getChallenge().getId()).get());
+            bean.setUser(userService.findById(bean.getUser().getId()).get());
         }
         
         return result;
     }
     
-    public List<ChallengeFeedback> findByUsername(String username) {
-        return fill(repository.findByUsername(username));
+    public List<ChallengeFeedback> findByUser(User user) {
+        return fill(repository.findByUser(user));
     }
     
-    public List<ChallengeFeedback> findByChallengeInAndUsername(Collection<Challenge> challenge, String username) {
-        return fill(repository.findByChallengeInAndUsername(challenge, username));
+    public List<ChallengeFeedback> findByChallengeInAndUser(Collection<Challenge> challenge, User user) {
+        return fill(repository.findByChallengeInAndUser(challenge, user));
     }
 
     @Override
