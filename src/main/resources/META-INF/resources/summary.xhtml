@@ -65,6 +65,10 @@
                     showActionLinksColumn="true">
                 <ui:define name="listColumns">
                     <c:columnMainIdea field="recommendation.mainIdea" />
+                    
+                    <c:columnUsedAlreadyComment field="usedAlreadyComment" />
+                    
+                    <c:columnWillUseComment field="willUseComment" />
 
                     <c:columnInterviews field="recommendation.recommendationInterviews.size()"
                                                  style="width: 110px;"
@@ -230,6 +234,8 @@
                 <ui:define name="listColumns">
                     <c:columnMainIdea field="challenge.mainIdea" />
 
+                    <c:columnWillMitigateComment field="willMitigateComment" />
+                    
                     <c:columnInterviews field="challenge.challengeInterviews.size()"
                                                  style="width: 110px;"
                                                  sortable="true"
