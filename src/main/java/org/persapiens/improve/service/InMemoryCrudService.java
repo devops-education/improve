@@ -59,7 +59,7 @@ public abstract class InMemoryCrudService<T extends IdBean<ID>, ID extends Seria
     @Override
     public void save(T bean) {
         super.save(bean);
-        getBeans().put(bean.getId(), fill(bean));
+        getBeans().put(bean.getId(), bean);
     }
 
     @Override

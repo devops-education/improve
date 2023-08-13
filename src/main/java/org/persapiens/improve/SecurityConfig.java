@@ -1,7 +1,6 @@
 package org.persapiens.improve;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import org.persapiens.improve.service.UserService;
 
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.annotation.Bean;
@@ -9,9 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
@@ -63,20 +59,11 @@ public class SecurityConfig {
     /**
      * UserDetailsService that configures an in-memory users store.
      *
-     * @param userService - autowired users 
      * @return InMemoryUserDetailsManager - a manager that keeps all the users'
      * info in the memory
      */
     @Bean
-    public InMemoryUserDetailsManager userDetailsService(UserService userService) {
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        InMemoryUserDetailsManager result = new InMemoryUserDetailsManager();
-        for (org.persapiens.improve.domain.User user : userService.findAll()) {
-            result.createUser(User.builder()
-                    .username(user.getUsername())
-                    .password(encoder.encode(user.getPassword()))
-                    .authorities("ROLE_ADMIN").build());
-        }
-        return result;
+    public InMemoryUserDetailsManager userDetailsService() {
+        return new InMemoryUserDetailsManager();
     }
 }
