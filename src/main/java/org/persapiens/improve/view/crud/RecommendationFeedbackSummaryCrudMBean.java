@@ -4,14 +4,21 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.faces.view.ViewScoped;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.persapiens.improve.domain.Challenge;
+import org.persapiens.improve.domain.ChallengeFeedback;
+import org.persapiens.improve.domain.Recommendation;
 import org.persapiens.improve.domain.RecommendationFeedback;
+import org.persapiens.improve.service.ChallengeFeedbackService;
 import org.persapiens.improve.service.RecommendationFeedbackService;
-import org.persapiens.improve.view.bean.UserMBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,9 +32,17 @@ public class RecommendationFeedbackSummaryCrudMBean extends AbstractFeedbackSumm
     @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
     private RecommendationFeedbackService recommendationFeedbackService;
-
+    
+    @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
-    private UserMBean userMBean;
+    private ChallengeFeedbackService challengeFeedbackService;
+    
+    @Getter
+    private List<ChallengeFeedback> challengeFeedbackConflictList;
+    @Getter
+    private List<RecommendationFeedback> recommendationFeedbackConflictList;
+    @Getter
+    private List<ChallengeFeedback> challengeFeedbackLinkList;
 
     @Override
     protected RecommendationFeedback createBean() {
@@ -54,13 +69,9 @@ public class RecommendationFeedbackSummaryCrudMBean extends AbstractFeedbackSumm
             }
         }
         
-        Comparator<RecommendationFeedback> comparator = (RecommendationFeedback o1, RecommendationFeedback o2) -> 
-            o2.getRecommendation().getRecommendationInterviews().size() - 
-                o1.getRecommendation().getRecommendationInterviews().size();
-        
-        Collections.sort(notUsedAndWillUseList, comparator);
-        Collections.sort(usedAlreadyList, comparator);
-        Collections.sort(notUsedAndNotWillUseList, comparator);
+        notUsedAndWillUseList = sortRecommendationFeedback(notUsedAndWillUseList);
+        usedAlreadyList = sortRecommendationFeedback(usedAlreadyList);
+        notUsedAndNotWillUseList = sortRecommendationFeedback(notUsedAndNotWillUseList);
         
         return Arrays.asList(notUsedAndWillUseList, usedAlreadyList, notUsedAndNotWillUseList);
     }
@@ -83,4 +94,45 @@ public class RecommendationFeedbackSummaryCrudMBean extends AbstractFeedbackSumm
                              "Recommendations that you already use in your course.",
                              "Recommendations that you won't use in your course.");
     }
+
+    @Override
+    public void setBean(RecommendationFeedback bean) {
+        super.setBean(bean);
+        
+        List<Challenge> challengeConflictList = bean.getRecommendation().getChallengeConflicts()
+            .stream().map(cc -> cc.getChallenge()).toList();
+        challengeFeedbackConflictList = challengeFeedbackService.findByChallengeInAndUser(
+    challengeConflictList, userMBean.getLoggedUser());        
+        challengeFeedbackConflictList = challengeFeedbackList(challengeConflictList, challengeFeedbackConflictList);
+        
+        List<Challenge> challengeLinkList = bean.getRecommendation().getLinks()
+            .stream().map(cc -> cc.getChallenge()).toList();
+        challengeFeedbackLinkList = challengeFeedbackService.findByChallengeInAndUser(
+    challengeLinkList, userMBean.getLoggedUser());
+        challengeFeedbackLinkList = challengeFeedbackList(challengeLinkList, challengeFeedbackLinkList);
+
+        Set<Recommendation> recommendationConflictList = bean.getRecommendation().getRecommendationConflicts();
+        recommendationFeedbackConflictList = recommendationFeedbackService.findByRecommendationInAndUser(
+recommendationConflictList, userMBean.getLoggedUser());        
+        recommendationFeedbackConflictList = recommendationFeedbackList(recommendationConflictList, recommendationFeedbackConflictList);
+    }
+
+    protected List<ChallengeFeedback> challengeFeedbackList(Collection<Challenge> challenges,   
+            List<ChallengeFeedback> challengeFeedbackList) {
+        List<ChallengeFeedback> result = new ArrayList<>();
+        Map<Challenge, ChallengeFeedback> challengeChallengeFeedbackMap = 
+            challengeFeedbackList.stream().collect(Collectors.toMap(ChallengeFeedback::getChallenge, Function.identity()));
+        for(Challenge bean : challenges) {
+            ChallengeFeedback cf = challengeChallengeFeedbackMap.get(bean);
+            if (cf == null) {
+                cf = ChallengeFeedback.builder()
+                    .challenge(bean)
+                    .user(userMBean.getLoggedUser())
+                    .build();
+            }
+            result.add(cf);
+        }
+        return sortChallengeFeedback(result);
+    }
+    
 }

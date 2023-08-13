@@ -105,7 +105,7 @@
                                rendered="#{not empty recommendationFeedbackSummaryCrudMBean.bean.recommendation.challengeConflicts}">
                             <p:dataTable id="conflictDatatable"
                                          widgetVar="conflictDatatable"
-                                         value="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.challengeConflicts}"
+                                         value="#{recommendationFeedbackSummaryCrudMBean.challengeFeedbackConflictList}"
                                          var="challengeConflict"
                                          emptyMessage="Sem Registros"
                                          rows="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.challengeConflicts.size()}"
@@ -114,6 +114,8 @@
                                          rowIndexVar="rowIdx"
                                          >
                                 <c:columnMainIdea field="challenge.mainIdea" />
+
+                                <c:columnWillMitigateComment field="willMitigateComment" />
 
                                 <c:columnInterviews field="challenge.challengeInterviews.size()" 
                                                     style="width: 70px;"
@@ -138,28 +140,32 @@
                                rendered="#{not empty recommendationFeedbackSummaryCrudMBean.bean.recommendation.recommendationConflicts}">
                             <p:dataTable id="conflictRecommendationDatatable"
                                          widgetVar="conflictDatatable"
-                                         value="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.recommendationConflicts}"
-                                         var="recommendation"
+                                         value="#{recommendationFeedbackSummaryCrudMBean.recommendationFeedbackConflictList}"
+                                         var="recommendationFeedback"
                                          emptyMessage="Sem Registros"
                                          rows="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.recommendationConflicts.size()}"
                                          paginator="false"
                                          stripedRows="true"
                                          rowIndexVar="rowIdx"
                                          >
-                                <c:columnMainIdea field="mainIdea" />
+                                <c:columnMainIdea field="recommendation.mainIdea" />
 
-                                <c:columnInterviews field="recommendationInterviews.size()" 
+                                <c:columnUsedAlreadyComment field="usedAlreadyComment" />
+                    
+                                <c:columnWillUseComment field="willUseComment" />
+
+                                <c:columnInterviews field="recommendation.recommendationInterviews.size()" 
                                                     style="width: 110px;"
                                                     sortable="true"
                                                     filterable="false" />
 
-                                <c:columnLinks field="links.size()"
+                                <c:columnLinks field="recommendation.links.size()"
                                                style="width: 110px;" 
                                                sortable="true"
                                                filterable="false" />
 
-                                <c:columnTheme field="theme" 
-                                               value="#{recommendation.theme.value}"
+                                <c:columnTheme field="recommendation.theme" 
+                                               value="#{recommendationFeedback.recommendation.theme.value}"
                                                sortable="true" 
                                                filterable="false"/>
                             </p:dataTable>
@@ -170,8 +176,8 @@
                                titletip="Show / hide the list of linked challenges">
                             <p:dataTable id="linkDatatable"
                                          widgetVar="linkDatatable"
-                                         value="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.linkSortedByChallengeChallengeInterviewsSizeList}"
-                                         var="link"
+                                         value="#{recommendationFeedbackSummaryCrudMBean.challengeFeedbackLinkList}"
+                                         var="challengeFeedback"
                                          emptyMessage="Sem Registros"
                                          rows="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.links.size() gt 5 ? 5 : recommendationFeedbackSummaryCrudMBean.bean.recommendation.links.size()}"
                                          paginator="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.links.size() gt 5}"
@@ -182,6 +188,8 @@
                                          >
 
                                 <c:columnMainIdea field="challenge.mainIdea" />
+
+                                <c:columnWillMitigateComment field="willMitigateComment" />
 
                                 <c:columnInterviews field="challenge.challengeInterviews.size()"
                                                              style="width: 110px;"
@@ -194,7 +202,7 @@
                                                         filterable="false" />
 
                                 <c:columnTheme field="challenge.theme" 
-                                                        value="#{link.challenge.theme.value}"
+                                                        value="#{challengeFeedback.challenge.theme.value}"
                                                         sortable="true" 
                                                         filterable="false"/>
 
@@ -267,8 +275,8 @@
                                rendered="#{not empty challengeFeedbackSummaryCrudMBean.bean.challenge.conflicts}">
                             <p:dataTable id="conflictDatatable"
                                          widgetVar="conflictDatatable"
-                                         value="#{challengeFeedbackSummaryCrudMBean.bean.challenge.conflicts}"
-                                         var="conflict"
+                                         value="#{challengeFeedbackSummaryCrudMBean.recommendationFeedbackConflictList}"
+                                         var="recommendationFeedback"
                                          emptyMessage="Sem Registros"
                                          rows="#{challengeFeedbackSummaryCrudMBean.bean.challenge.conflicts.size()}"
                                          paginator="false"
@@ -276,6 +284,10 @@
                                          rowIndexVar="rowIdx"
                                          >
                                 <c:columnMainIdea field="recommendation.mainIdea" />
+
+                                <c:columnUsedAlreadyComment field="usedAlreadyComment" />
+                    
+                                <c:columnWillUseComment field="willUseComment" />
 
                                 <c:columnInterviews field="recommendation.recommendationInterviews.size()" 
                                                     style="width: 110px;"
@@ -288,7 +300,7 @@
                                                filterable="false" />
 
                                 <c:columnTheme field="recommendation.theme" 
-                                               value="#{conflict.recommendation.theme.value}"
+                                               value="#{recommendationFeedback.recommendation.theme.value}"
                                                sortable="true" 
                                                filterable="false"/>
                             </p:dataTable>
@@ -299,8 +311,8 @@
                                titletip="Show / hide the list of linked recommendations">
                             <p:dataTable id="linkDatatable"
                                          widgetVar="linkDatatable"
-                                         value="#{challengeFeedbackSummaryCrudMBean.bean.challenge.linkSortedByRecommendationRecommendationInterviewsSizeList}"
-                                         var="link"
+                                         value="#{challengeFeedbackSummaryCrudMBean.recommendationFeedbackLinkList}"
+                                         var="recommendationFeedback"
                                          emptyMessage="Sem Registros"
                                          rows="#{challengeFeedbackSummaryCrudMBean.bean.challenge.links.size() gt 5 ? 5 : challengeFeedbackSummaryCrudMBean.bean.challenge.links.size()}"
                                          paginator="#{challengeFeedbackSummaryCrudMBean.bean.challenge.links.size() gt 5}"
@@ -311,6 +323,10 @@
                                          >
 
                                 <c:columnMainIdea field="recommendation.mainIdea" />
+
+                                <c:columnUsedAlreadyComment field="usedAlreadyComment" />
+                    
+                                <c:columnWillUseComment field="willUseComment" />
 
                                 <c:columnInterviews field="recommendation.recommendationInterviews.size()"
                                                              style="width: 110px;"
@@ -323,7 +339,7 @@
                                                         filterable="false" />
 
                                 <c:columnTheme field="recommendation.theme" 
-                                                        value="#{link.recommendation.theme.value}"
+                                                        value="#{recommendationFeedback.recommendation.theme.value}"
                                                         sortable="true" 
                                                         filterable="false"/>
 
