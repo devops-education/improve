@@ -4,11 +4,10 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.faces.view.ViewScoped;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.persapiens.improve.domain.ChallengeFeedback;
 import org.persapiens.improve.domain.Link;
@@ -17,7 +16,6 @@ import org.persapiens.improve.domain.RecommendationFeedback;
 import org.persapiens.improve.service.RecommendationFeedbackService;
 import org.persapiens.improve.service.ChallengeFeedbackService;
 import org.persapiens.improve.service.LinkService;
-import org.persapiens.improve.view.bean.UserMBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -39,9 +37,11 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
     @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
     private RecommendationFeedbackService recommendationFeedbackService;
-
-    @Autowired
-    private UserMBean userMBean;
+    
+    @Getter
+    private List<RecommendationFeedback> recommendationFeedbackConflictList;
+    @Getter
+    private List<RecommendationFeedback> recommendationFeedbackLinkList;
     
     @Override
     protected ChallengeFeedback createBean() {
@@ -88,13 +88,10 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
             }
         }
         
-        Comparator<ChallengeFeedback> comparator = (ChallengeFeedback o1, ChallengeFeedback o2) -> 
-            o2.getChallenge().getChallengeInterviews().size() - 
-                o1.getChallenge().getChallengeInterviews().size();
-        
-        Collections.sort(willMitigateAndNoRecommendation, comparator);
-        Collections.sort(willMitigateAndHasRecommendation, comparator);
-        Collections.sort(notWillMitigate, comparator);
+        willMitigateAndNoRecommendation = sortChallengeFeedback(willMitigateAndNoRecommendation);
+        willMitigateAndHasRecommendation = sortChallengeFeedback(willMitigateAndHasRecommendation);
+        notWillMitigate = sortChallengeFeedback(notWillMitigate);
+
         return Arrays.asList(willMitigateAndNoRecommendation, willMitigateAndHasRecommendation, notWillMitigate);
     }
 
@@ -117,4 +114,21 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
                              "Challenges that you won't mitigate.");
     }
 
+    @Override
+    public void setBean(ChallengeFeedback bean) {
+        super.setBean(bean); 
+
+        List<Recommendation> recommendationConflictList = bean.getChallenge().getConflicts()
+            .stream().map(cc -> cc.getRecommendation()).toList();
+        recommendationFeedbackConflictList = recommendationFeedbackService.findByRecommendationInAndUser(
+    recommendationConflictList, userMBean.getLoggedUser());
+        recommendationFeedbackConflictList = recommendationFeedbackList(recommendationConflictList, recommendationFeedbackConflictList);
+        
+        List<Recommendation> recommendationLinkList = bean.getChallenge().getLinks()
+            .stream().map(cc -> cc.getRecommendation()).toList();
+        recommendationFeedbackLinkList = recommendationFeedbackService.findByRecommendationInAndUser(
+    recommendationLinkList, userMBean.getLoggedUser());
+        recommendationFeedbackLinkList = recommendationFeedbackList(recommendationLinkList, recommendationFeedbackLinkList);        
+    }
+    
 }

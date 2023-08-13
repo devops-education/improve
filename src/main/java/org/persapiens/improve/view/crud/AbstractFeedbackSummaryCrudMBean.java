@@ -3,9 +3,19 @@ package org.persapiens.improve.view.crud;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.faces.view.ViewScoped;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
+import org.persapiens.improve.domain.ChallengeFeedback;
 import org.persapiens.improve.domain.IdBean;
+import org.persapiens.improve.domain.Recommendation;
+import org.persapiens.improve.domain.RecommendationFeedback;
+import org.persapiens.improve.view.bean.UserMBean;
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.charts.ChartData;
 import org.primefaces.model.charts.optionconfig.legend.Legend;
@@ -13,6 +23,7 @@ import org.primefaces.model.charts.optionconfig.legend.LegendLabel;
 import org.primefaces.model.charts.pie.PieChartDataSet;
 import org.primefaces.model.charts.pie.PieChartModel;
 import org.primefaces.model.charts.pie.PieChartOptions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -27,6 +38,9 @@ public abstract class AbstractFeedbackSummaryCrudMBean<T extends IdBean<Long>> e
     private PieChartModel pieModel;
     
     private List<List<T>> lists;
+
+    @Autowired
+    protected UserMBean userMBean;
 
     @SuppressFBWarnings("EI_EXPOSE_REP")
     public PieChartModel getPieModel() {
@@ -100,4 +114,42 @@ public abstract class AbstractFeedbackSummaryCrudMBean<T extends IdBean<Long>> e
         
         return result;
     }
+
+    protected List<ChallengeFeedback> sortChallengeFeedback(List<ChallengeFeedback> list) {
+        Comparator<ChallengeFeedback> comparator = (ChallengeFeedback o1, ChallengeFeedback o2) -> 
+            o2.getChallenge().getChallengeInterviews().size() - 
+                o1.getChallenge().getChallengeInterviews().size();
+        Collections.sort(list, comparator);
+        
+        return list;
+    }
+
+    protected List<RecommendationFeedback> sortRecommendationFeedback(List<RecommendationFeedback> list) {
+        Comparator<RecommendationFeedback> comparator = (RecommendationFeedback o1, RecommendationFeedback o2) -> 
+            o2.getRecommendation().getRecommendationInterviews().size() - 
+                o1.getRecommendation().getRecommendationInterviews().size();
+        Collections.sort(list, comparator);
+        
+        return list;
+    }
+    
+    protected List<RecommendationFeedback> recommendationFeedbackList(Collection<Recommendation> recommendations,   
+            List<RecommendationFeedback> recommendationFeedbackList) {
+        List<RecommendationFeedback> result = new ArrayList<>();
+        Map<Recommendation, RecommendationFeedback> recommendationRecommendationFeedbackMap = 
+            recommendationFeedbackList.stream().collect(Collectors.toMap(RecommendationFeedback::getRecommendation, Function.identity()));
+        for(Recommendation bean : recommendations) {
+            RecommendationFeedback cf = recommendationRecommendationFeedbackMap.get(bean);
+            if (cf == null) {
+                cf = RecommendationFeedback.builder()
+                    .recommendation(bean)
+                    .user(userMBean.getLoggedUser())
+                    .build();
+            }
+            result.add(cf);
+        }
+        
+        return sortRecommendationFeedback(result);
+    }
+    
 }
