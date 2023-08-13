@@ -1006,5 +1006,41 @@
             <type>java.lang.String</type>
         </attribute>
     </tag>
+    <tag>
+        <description>
+            Column used already comment
+        </description>
+        <tag-name>columnUsedAlreadyComment</tag-name>
+        <source>tag/columnUsedAlreadyComment.xhtml</source>
+        <attribute>
+            <description>field of the column</description>
+            <name>field</name>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <description>
+            Column will use comment
+        </description>
+        <tag-name>columnWillUseComment</tag-name>
+        <source>tag/columnWillUseComment.xhtml</source>
+        <attribute>
+            <description>field of the column</description>
+            <name>field</name>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <description>
+            Column will mitigate comment
+        </description>
+        <tag-name>columnWillMitigateComment</tag-name>
+        <source>tag/columnWillMitigateComment.xhtml</source>
+        <attribute>
+            <description>field of the column</description>
+            <name>field</name>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
 </facelet-taglib>
 
