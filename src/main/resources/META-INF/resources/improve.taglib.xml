@@ -928,7 +928,7 @@
         </attribute>
         <attribute>
             <description>field of the column</description>
-            <name>datatableId</name>
+            <name>dataTableId</name>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
@@ -960,7 +960,7 @@
         </attribute>
         <attribute>
             <description>field of the column</description>
-            <name>datatableId</name>
+            <name>dataTableId</name>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
@@ -987,7 +987,7 @@
         </attribute>
         <attribute>
             <description>field of the column</description>
-            <name>datatableId</name>
+            <name>dataTableId</name>
             <type>java.lang.String</type>
         </attribute>
         <attribute>

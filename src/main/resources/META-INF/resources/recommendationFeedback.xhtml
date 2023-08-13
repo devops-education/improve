@@ -38,13 +38,13 @@
                                filterable="true"/>
 
                 <c:columnUsedAlready field="usedAlready"
-                                     datatableId='datatable'
+                                     dataTableId='dataTable'
                                      feedbackCrudMBean="#{recommendationFeedbackCrudMBean}"
                                      recommendationFeedback="#{bean}"
                                      commandButtonUpdate="datatable" />                
                             
                 <c:columnWillUse field="willUse"
-                                 datatableId='datatable'
+                                 dataTableId='dataTable'
                                  feedbackCrudMBean="#{recommendationFeedbackCrudMBean}" 
                                  recommendationFeedback="#{bean}" />
                 
@@ -124,7 +124,7 @@
                                            filterable="false"/>
 
                             <c:columnWillMitigate field="challengeFeedback.willMitigate"
-                                                 datatableId='conflictDatatable' 
+                                                 dataTableId='conflictDatatable' 
                                                  feedbackCrudMBean="#{recommendationFeedbackCrudMBean}" 
                                                  challengeFeedback="#{conflictChallengeFeedback.challengeFeedback}"
                                                  commandButtonUpdate="challengeFeedbackAccordionPanel:conflictDatatable" />
@@ -163,13 +163,13 @@
                                            filterable="false"/>
 
                             <c:columnUsedAlready field="recommendationFeedback.usedAlready"
-                                                 datatableId='conflictRecommendationDatatable'
+                                                 dataTableId='conflictRecommendationDatatable'
                                                  feedbackCrudMBean="#{recommendationFeedbackCrudMBean}"
                                                  recommendationFeedback="#{conflictRecommendationFeedback.recommendationFeedback}"
                                                  commandButtonUpdate="challengeFeedbackAccordionPanel:conflictRecommendationDatatable" />
 
                             <c:columnWillUse field="recommendationFeedback.willUse"
-                                             datatableId='conflictRecommendationDatatable'
+                                             dataTableId='conflictRecommendationDatatable'
                                              feedbackCrudMBean="#{recommendationFeedbackCrudMBean}" 
                                              recommendationFeedback="#{conflictRecommendationFeedback.recommendationFeedback}" />
                         </p:dataTable>
@@ -209,7 +209,7 @@
                                            filterable="false"/>
 
                             <c:columnWillMitigate field="challengeFeedback.willMitigate" 
-                                                  datatableId='linkDatatable'
+                                                  dataTableId='linkDatatable'
                                                   feedbackCrudMBean="#{recommendationFeedbackCrudMBean}"
                                                   challengeFeedback="#{linkChallengeFeedback.challengeFeedback}"
                                                   commandButtonUpdate="challengeFeedbackAccordionPanel:linkDatatable" />

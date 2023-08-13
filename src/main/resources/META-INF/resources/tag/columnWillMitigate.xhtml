@@ -18,7 +18,7 @@
                        position="top"/>
         </f:facet>
         <f:facet name="filter">
-            <p:selectOneMenu onchange="PF(#{dataTableId}).filter()" >
+            <p:selectOneMenu onchange="PF('#{dataTableId}').filter()" >
                 <f:selectItem itemLabel="" itemValue="#{null}"/>
                 <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
             </p:selectOneMenu>

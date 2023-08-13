@@ -36,7 +36,7 @@
                                filterable="true"/>
 
                 <c:columnWillMitigate field="willMitigate"
-                                      datatableId='datatable'
+                                      dataTableId="dataTable"
                                       feedbackCrudMBean="#{challengeFeedbackCrudMBean}" 
                                       challengeFeedback="#{bean}"
                                       commandButtonUpdate="datatable" />
@@ -98,13 +98,13 @@
                                            filterable="false"/>
 
                             <c:columnUsedAlready field="recommendationFeedback.usedAlready"
-                                                 datatableId='conflictDatatable' 
+                                                 dataTableId='conflictDatatable' 
                                                  feedbackCrudMBean="#{challengeFeedbackCrudMBean}" 
                                                  recommendationFeedback="#{conflictRecommendationFeedback.recommendationFeedback}"
                                                  commandButtonUpdate="recommendationFeedbackAccordionPanel:conflictDatatable" />
                             
                             <c:columnWillUse field="recommendationFeedback.willUse"
-                                             datatableId='conflictDatatable'
+                                             dataTableId='conflictDatatable'
                                              feedbackCrudMBean="#{challengeFeedbackCrudMBean}" 
                                              recommendationFeedback="#{conflictRecommendationFeedback.recommendationFeedback}"
                                              />
@@ -144,13 +144,13 @@
                                            filterable="false"/>
 
                             <c:columnUsedAlready field="recommendationFeedback.usedAlready"
-                                                 datatableId='linkDatatable' 
+                                                 dataTableId='linkDatatable' 
                                                  feedbackCrudMBean="#{challengeFeedbackCrudMBean}" 
                                                  recommendationFeedback="#{linkRecommendationFeedback.recommendationFeedback}"
                                                  commandButtonUpdate="recommendationFeedbackAccordionPanel:linkDatatable" />
                             
                             <c:columnWillUse field="recommendationFeedback.willUse"
-                                             datatableId='linkDatatable'
+                                             dataTableId='linkDatatable'
                                              feedbackCrudMBean="#{challengeFeedbackCrudMBean}" 
                                              recommendationFeedback="#{linkRecommendationFeedback.recommendationFeedback}"
                                              />
