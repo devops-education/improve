@@ -106,7 +106,7 @@
     </tag>
     <tag>
         <description>Crud com operações de listar, incluir, alterar, detalhar e remover. &lt;br/&gt;
-            Para customização, utilize ui:define para middleTitle, listBeforeDatatable, listAfterDatatable, listColumns, listActionLinks, insert, update, detail, custom. 
+            Para customização, utilize ui:define para listBeforeDatatable, listAfterDatatable, listColumns, listActionLinks, insert, update, detail, custom. 
         </description>
         <tag-name>crud</tag-name>
         <source>tag/crud.xhtml</source>

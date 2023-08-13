@@ -11,12 +11,13 @@
     <p:outputPanel>
 
         <p:panel styleClass="title-panelgrid">
-            <p:panelGrid columns="2" layout="tabular">
+            <p:panelGrid columns="3" layout="tabular">
                 <p:graphicImage id="titleIcon#{titleTextId}" value="#{titleIcon}" width="#{titleIconWidth}" height="#{titleIconHeight}"/>
                 <h:outputText id="titleText#{titleTextId}"
                               value="#{titleText}" 
                               style="float:left;padding-right: 10px;font-size:2em;font-weight:bold;#{titleStyle}" 
                               styleClass="#{titleStyleClass}"/>
+                <ui:insert name="afterTitle"/>
             </p:panelGrid>
         </p:panel>
 

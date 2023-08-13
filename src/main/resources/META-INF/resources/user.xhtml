@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="improve.persapiens.org"
+    xmlns:d="http://xmlns.jcp.org/jsf/composite/improve"
+    template="/layout/template.xhtml">
+    <ui:define name="content" >
+        <c:crud titleText="Users" 
+                titleIcon="#{resource['images/warning-orange.png']}" 
+                titleStyleClass="challenge" 
+                managedBean="#{userCrudMBean}"                
+                showInsert="true" 
+                showUpdateActionLink="true">
+            <ui:define name="listColumns">
+                <p:column field="username" >
+                    <f:facet name="header">
+                        <h:outputText id="username" value="Username" />
+                        <p:tooltip for="username" 
+                                   value="Inform if the you want to filter by username" 
+                                   position="top"/>
+                    </f:facet>                    
+                </p:column>
+                <p:column field="admin" filterable="true" filterMatchMode="exact" 
+                          sortable="true"
+                          style="width: 90px !important">
+                    <f:facet name="header">
+                        <h:outputText id="admin" value="Admin" />
+                        <p:tooltip for="admin" 
+                                   value="Inform if the you want to filter by admin" 
+                                   position="top"/>
+                    </f:facet>
+                    
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('dataTable').filter()" >
+                            <f:selectItem itemLabel="" itemValue="#{null}"/>
+                            <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                        </p:selectOneMenu>
+                    </f:facet>
+                    
+                    <h:outputText value="#{booleanOptions.label(bean.admin)}" />                    
+                </p:column>
+                <p:column field="active" filterable="true" filterMatchMode="exact"
+                          sortable="true"
+                          style="width: 90px !important">
+                    <f:facet name="header">
+                        <h:outputText id="active" value="Active" />
+                        <p:tooltip for="active" 
+                                   value="Inform if the you want to filter by active" 
+                                   position="top"/>
+                    </f:facet>
+                    
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('dataTable').filter()" >
+                            <f:selectItem itemLabel="" itemValue="#{null}"/>
+                            <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                        </p:selectOneMenu>
+                    </f:facet>
+
+                    <h:outputText value="#{booleanOptions.label(bean.active)}" />
+                </p:column>
+            </ui:define>
+
+            <ui:define name="detail">
+                <d:userDetail crudMBean="#{userCrudMBean}" />
+            </ui:define>
+
+            <ui:define name="update">
+                <d:userUpdate crudMBean="#{userCrudMBean}" />
+            </ui:define>
+
+            <ui:define name="insert">
+                <d:userInsert crudMBean="#{userCrudMBean}" />
+            </ui:define>
+        </c:crud>
+    </ui:define>
+</ui:composition>

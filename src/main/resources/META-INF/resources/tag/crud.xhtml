@@ -20,22 +20,16 @@
             <c:set var="showInsert"      value="#{empty showInsert ? true : showInsert}" />
             <c:set var="showList"        value="#{empty showList ? true : showList}" />
 
-            <p:focus context="startInsertCommandButton" id="focusInsertCommandButton#{crudId}"/>
-
-            <span style="float:left;">
-                <p:commandButton
-                    rendered="#{(managedBean.visualizationMode == 'LIST') and showInsert}" id="startInsertCommandButton#{crudId}"
-                    title="Incluir" icon="pi pi-plus"
-                    style="padding: 4px 4px 4px 4px; width: 38px;"
-                    action="#{managedBean.startInsertAction}"
-                    process="@this"
-                    value="" 
-                    accesskey="i"
-                    update="@form" ajax="true">
-                </p:commandButton>
-            </span>
-
-            <ui:insert name="middleTitle"></ui:insert>
+            <p:commandButton
+                rendered="#{(managedBean.visualizationMode == 'LIST') and showInsert}" id="startInsertCommandButton#{crudId}"
+                title="New" icon="pi pi-plus"
+                style="padding: 4px 4px 4px 4px; width: 38px;"
+                action="#{managedBean.startInsertAction}"
+                process="@this"
+                value="" 
+                accesskey="i"
+                update="@form" ajax="true">
+            </p:commandButton>
 
         </ui:define>
 
@@ -54,8 +48,8 @@
             <c:set var="dataTableRows"                value="#{empty dataTableRows ? 7 : dataTableRows}" />
             <c:set var="dataTableRowsPerPageTemplate" value="#{empty dataTableRowsPerPageTemplate ? '7,10,20,50' : dataTableRowsPerPageTemplate}" />
             <c:set var="dataTableStyle"               value="#{empty dataTableStyle ? '' : dataTableStyle}" />
-            <c:set var="insertButtonLabel"            value="#{empty insertButtonLabel ? 'Incluir' : insertButtonLabel}" />
-            <c:set var="updateButtonLabel"            value="#{empty updateButtonLabel ? 'Salvar' : updateButtonLabel}" />
+            <c:set var="insertButtonLabel"            value="#{empty insertButtonLabel ? 'Insert' : insertButtonLabel}" />
+            <c:set var="updateButtonLabel"            value="#{empty updateButtonLabel ? 'Save' : updateButtonLabel}" />
             <c:set var="dataTablePaginator"           value="#{empty dataTablePaginator ? true : dataTablePaginator}" />
             <c:set var="dataTablePaginatorPosition"   value="#{empty dataTablePaginatorPosition ? 'both' : dataTablePaginatorPosition}" />
 
@@ -122,11 +116,11 @@
                         <p:spacer width="10px" rendered="#{managedBean.isCheckBeforeDelete(bean) and showDeleteActionLink}"/>
 
                         <p:commandButton
-                            title="Alterar"
+                            title="Update the information"
                             action="#{managedBean.startUpdateAction}"
                             rendered="#{showUpdateActionLink}"
                             disabled="#{not managedBean.isCheckStartUpdate(bean)}"
-                            value="Alterar" icon="pi pi-pencil"
+                            icon="pi pi-pencil"
                             process="@this"
                             update="@form" ajax="true">
                             <f:setPropertyActionListener
@@ -178,7 +172,7 @@
                     <p:spacer width="10px"/>
 
                     <p:commandButton
-                        title="Cancelar" value="Cancelar" 
+                        title="Cancel" value="Cancel" 
                         update="@form" ajax="true"
                         process="@this"
                         accesskey="c"
@@ -209,7 +203,7 @@
                     <p:spacer width="10px"/>
 
                     <p:commandButton
-                        title="Cancelar" value="Cancelar" 
+                        title="Cancel" value="Cancel" 
                         update="@form" ajax="true"
                         process="@this"
                         accesskey="c"
@@ -235,7 +229,7 @@
 
                     <p:spacer width="10px"/>
 
-                    <p:commandButton title="Alterar" value="Alterar" 
+                    <p:commandButton title="Update" value="Update" 
                                      accesskey="a"
                                      update="@form"
                                      ajax="true"

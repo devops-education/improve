@@ -47,6 +47,10 @@ body .ui-menu.ui-menubar {
   width: 40px !important;
 }
 
+.listActionLinksStyleClassTwo {
+  width: 100px !important;
+}
+
 .challenge {
   color: orange !important;
   font-size: large !important;

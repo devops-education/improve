@@ -18,6 +18,10 @@
         <p:menuitem id="menu-summary" title="Open Summary page"
                     icon="pi pi-list" value="Summary"
                     url="/summary.faces" />
+        <p:menuitem id="menu-user" title="Open User page"
+                    icon="pi pi-user" value="User"
+                    rendered="#{userMBean.loggedUser.admin}"
+                    url="/user.faces" />
         
         <p:menuitem title="Quit Improve" icon="pi pi-power-off" 
                     value="Quit" url="/logout"/>

@@ -29,15 +29,15 @@ public abstract class CrudMBean<T extends IdBean<ID>, ID extends Serializable>
 
     protected static final String ID_MESSAGES_CRUD = "messages";
 
-    protected static final String CADASTRO_SUCESSO = "Cadastro com sucesso!";
+    protected static final String CADASTRO_SUCESSO = "Successful insert!";
 
-    protected static final String ATUALIZACAO_SUCESSO = "Atualização com sucesso!";
+    protected static final String ATUALIZACAO_SUCESSO = "Successful update!";
 
-    protected static final String DELECAO_SUCESSO = "Remoção com sucesso!";
+    protected static final String DELECAO_SUCESSO = "Successful delete!";
 
-    protected static final String ATIVACAO_SUCESSO = "Ativação com sucesso!";
+    protected static final String ATIVACAO_SUCESSO = "Successful activation!";
 
-    protected static final String CANCELAMENTO_SUCESSO = "Cancelamento com sucesso!";
+    protected static final String CANCELAMENTO_SUCESSO = "Successful cancel!";
 
     protected static final String DETAIL = "DETAIL";
 
