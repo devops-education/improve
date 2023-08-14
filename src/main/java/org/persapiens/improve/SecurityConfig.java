@@ -1,6 +1,7 @@
 package org.persapiens.improve;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.persapiens.improve.domain.Authority;
 
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.annotation.Bean;
@@ -32,6 +33,7 @@ public class SecurityConfig {
                 .requestMatchers(mvc.pattern("/")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/login.faces")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/jakarta.faces.resource/**")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/user.faces")).hasAuthority(Authority.ROLE_ADMIN)
                 .anyRequest().authenticated());
             http = http.formLogin((formLogin) -> {formLogin
                 .loginPage("/login.faces")
