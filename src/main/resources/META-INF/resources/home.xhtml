@@ -2,11 +2,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:p="http://primefaces.org/ui"
     xmlns:m="improve.persapiens.org"
     template="/layout/template.xhtml"
-    >
+        
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
     <ui:define name="content" >
         <m:contentLayout 
             titleText="Improve your DevOps course!" 
@@ -15,21 +15,89 @@
             titleIconHeight="50px"
             titleStyleClass="home" >
 
-            <ui:define name="layoutContent" >
-                <p:panelGrid columns="1" layout="grid">
-                    <p:card styleClass="cardChallenge">
-                        <f:facet name="title" >Challenges</f:facet>
-                        Use Challenges menu link to browse through challenges on DevOps Education.
-                    </p:card>
-                        <p:card styleClass="cardRecommendation">
-                        <f:facet name="title" >Recommendations</f:facet>
-                        Use Recommendations menu link to browse through recommendations on DevOps Education.
-                    </p:card>
-                    <p:card >
-                        <f:facet name="title" >Summary</f:facet>
-                        Use Summary menu link to see the recommendations that you should apply to your course after browsing through challenges and recommendations.                        
-                    </p:card>
-                </p:panelGrid>
+            <ui:define name="layoutContent"  >
+
+                <p:accordionPanel >
+                    <p:tab title="Welcome to Improve!" >
+                        <p:panelGrid columns="1" layout="grid">
+                            <h:outputText value="Dear Professor, this software will provide recommendations to improve your DevOps Course." />
+                            <h:outputText value="The challenges and recommendations that we use in this tool are extracted from the paper:" />
+                            <p:link href="https://arxiv.org/pdf/2203.10324.pdf" value="DevOps Education: An Interview Study of Challenges and Recommedations." target="_blank" />
+                            <h:outputText value="Please follow the nexts tabs to see how to use this tool."/>
+                        </p:panelGrid>
+                    </p:tab>
+                    <p:tab title="Open Challenge page" >
+                        <p:panelGrid columns="1" layout="grid">
+                            <h:outputText value="Click the Challenges menu link to browse through challenges on DevOps Education." />
+                            <p:graphicImage value="#{resource['images/tutorial/openChallengePage.png']}" />
+                        </p:panelGrid>
+                    </p:tab>
+                    <p:tab title="Filter the Challenges" >
+                        <p:panelGrid columns="1" layout="grid">
+                            <h:outputText value="You can filter the challenges using two possibilities:" />
+                            <h:outputText value="I. Search query. For example, use the query '+limited + time' to filter challenges that contains both the words limited and time." /> 
+                            <h:outputText value="You can click 'Challenge Tags' button to open the Challenge Tags map." /> 
+                            <h:outputText value="You can also click 'Search Syntax' link to open the syntax explanation page." />
+                            <p:graphicImage value="#{resource['images/tutorial/filterSearchLimitedTime.png']}" />
+                            <h:outputText value="II. Column filters. For example, select one options of Theme column." />
+                            <p:graphicImage value="#{resource['images/tutorial/filterColumnThemeAssessment.png']}" />
+                            <h:outputText value="Tip: you can use the possibilities together :)" />
+                        </p:panelGrid>
+                    </p:tab>
+                    <p:tab title="Provide Challenge Feedback" >
+                        <p:panelGrid columns="1" layout="grid">
+                            <h:outputText value="I. Click 'Yes' or 'No' at 'Will Mitigate' button to inform if the you want to mitigate the challenge."/>
+                            <p:graphicImage value="#{resource['images/tutorial/willMitigateColumnSelected.png']}" />
+                            <h:outputText value="II. The Challenge popup will open. Please provide optional comment about how you will mitigate the challenge."/>
+                            <p:graphicImage value="#{resource['images/tutorial/willMitigatePopup.png']}" />
+                        </p:panelGrid>
+                    </p:tab>
+                    <p:tab title="See Challenge Details" >
+                        <p:panelGrid columns="1" layout="grid">
+                            <h:outputText value="I. Click the detail button to see full information about specific challenge."/>
+                            <p:graphicImage value="#{resource['images/tutorial/detailButtonSelected.png']}" />
+                            <h:outputText value="II. You will see Challenge details like 'Main Idea', Theme, 'Interviews Resumes and Quotes', Tags, Will Mitigate, Recommendation Conflicts, and Recommendation Links."/>
+                            <p:graphicImage value="#{resource['images/tutorial/challengeDetail.png']}" />
+                        </p:panelGrid>
+                    </p:tab>
+                    <p:tab title="Provide Recommendation Feedback" >
+                        <p:panelGrid columns="1" layout="grid">
+                            <h:outputText value="I. At recommendation list, click 'Yes' or 'No' at 'Used Already' or 'Will Use' buttons to inform if the you used already and if you want to use the recommendation."/>
+                            <p:graphicImage value="#{resource['images/tutorial/usedAlreadyWillUseColumnSelected.png']}" />
+                            <h:outputText value="II. The Recommendation popup will open. Please provide optional comment about how you used already and how you will use the recommendaiton."/>
+                            <p:graphicImage value="#{resource['images/tutorial/usedAlreadyWillUsePopup.png']}" />
+                        </p:panelGrid>
+                    </p:tab>
+                    <p:tab title="Open Recommendations Page" >
+                        <p:panelGrid columns="1" layout="grid">
+                            <h:outputText value="Click the Recommendations menu link to browse through recommendations on DevOps Education."/>
+                            <p:graphicImage value="#{resource['images/tutorial/openRecommendationPage.png']}" />
+                            <h:outputText value="You can filter, provide feedback, and see details in similar way as you do with challenges." />
+                        </p:panelGrid>                        
+                    </p:tab>
+                    <p:tab title="Open Summary Page" >
+                        <p:panelGrid columns="1" layout="grid">
+                            <h:outputText value="Click the Summary menu link to check the recommendations to improve your course."/>
+                            <p:graphicImage value="#{resource['images/tutorial/openSummaryPage.png']}" />
+                        </p:panelGrid>                                                
+                    </p:tab>
+                    <p:tab title="Check Summary results" >
+                        <p:panelGrid columns="1" layout="grid">
+                            <h:outputText value="I. You will see two pie charts. The first is about recommendation."/>
+                            <h:outputText value="The default green recommendation pie slice shows the recommendations that you should apply to your course."/>
+                            <p:graphicImage value="#{resource['images/tutorial/summaryRecommendationGreen.png']}" />
+                            <h:outputText value="II. If you click the blue slice, you will see recommendation that you already use in your course."/>
+                            <p:graphicImage value="#{resource['images/tutorial/summaryRecommendationBlue.png']}" />
+                            <h:outputText value="III. The second pie chart is about challenge."/>
+                            <h:outputText value="The default orange challenge pie slice shows the challenges that you will mitigate, but you use no linked recommendation."/>
+                            <p:graphicImage value="#{resource['images/tutorial/summaryChallengeOrange.png']}" />
+                            <h:outputText value="IV. If you click the blue slice, you will see challenges that you will mitigate and you use linked recommendation."/>
+                            <p:graphicImage value="#{resource['images/tutorial/summaryChallengeBlue.png']}" />
+                            <h:outputText value="Tip: you can export your results if you click the excel icon :)" />
+                        </p:panelGrid>
+                    </p:tab>
+                        
+                </p:accordionPanel>
             </ui:define>
         </m:contentLayout>
     </ui:define>

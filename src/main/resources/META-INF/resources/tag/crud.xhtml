@@ -61,7 +61,9 @@
             <c:set var="dataTableRowsPerPageTemplate" value="#{empty dataTableRowsPerPageTemplate ? '7,10,20,50' : dataTableRowsPerPageTemplate}" />
             <c:set var="dataTableStyle"               value="#{empty dataTableStyle ? '' : dataTableStyle}" />
             <c:set var="insertButtonLabel"            value="#{empty insertButtonLabel ? 'Insert' : insertButtonLabel}" />
+            <c:set var="insertButtonTitle"            value="#{empty insertButtonTitle ? 'Confirm the insert operation' : insertButtonTitle}" />
             <c:set var="updateButtonLabel"            value="#{empty updateButtonLabel ? 'Save' : updateButtonLabel}" />
+            <c:set var="updateButtonTitle"            value="#{empty updateButtonTitle ? 'Confirm the save operation' : updateButtonTitle}" />
             <c:set var="dataTablePaginator"           value="#{empty dataTablePaginator ? true : dataTablePaginator}" />
             <c:set var="dataTablePaginatorPosition"   value="#{empty dataTablePaginatorPosition ? 'both' : dataTablePaginatorPosition}" />
 
@@ -177,7 +179,8 @@
 
                 <p:outputPanel rendered="#{showInsert}">
                     <p:commandButton 
-                        title="#{insertButtonLabel}" value="#{insertButtonLabel}" 
+                        value="#{insertButtonLabel}" 
+                        title="#{insertButtonTitle}"
                         update="@form" ajax="true"
                         process=":contentForm:insertPanel#{crudId} :contentForm:messages#{crudId}"
                         accesskey="i"                        
@@ -188,7 +191,8 @@
                     <p:spacer width="10px"/>
 
                     <p:commandButton
-                        title="Cancel" value="Cancel" 
+                        value="Cancel" 
+                        title="Cancel the insert operation"
                         update="@form" ajax="true"
                         process="@this"
                         accesskey="c"
@@ -208,7 +212,8 @@
 
                 <p:outputPanel rendered="#{managedBean.isCheckStartUpdate(managedBean.bean)}">
                     <p:commandButton 
-                        title="#{updateButtonLabel}" value="#{updateButtonLabel}" 
+                        value="#{updateButtonLabel}" 
+                        title="#{updateButtonTitle}"
                         update="@form" ajax="true"
                         process=":contentForm:updatePanel :contentForm:messages#{crudId}"
                         accesskey="a"
@@ -219,7 +224,8 @@
                     <p:spacer width="10px"/>
 
                     <p:commandButton
-                        title="Cancel" value="Cancel" 
+                        value="Cancel"
+                        title="Cancel the save operation" 
                         update="@form" ajax="true"
                         process="@this"
                         accesskey="c"
