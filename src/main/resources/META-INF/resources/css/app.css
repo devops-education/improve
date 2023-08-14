@@ -56,13 +56,28 @@ body .ui-menu.ui-menubar {
   font-size: large !important;
 }
 
+.challenge-printer {
+  background-color: orange !important;
+  font-size: large !important;
+}
+
 .recommendation {
   color: limegreen !important;
   font-size: large !important;
 }
 
+.recommendation-printer {
+  background-color: limegreen !important;
+  font-size: large !important;
+}
+
 .conflict {
   color: chocolate !important;
+  font-size: large !important;
+}
+
+.conflict-printer {
+  background-color: chocolate !important;
   font-size: large !important;
 }
 

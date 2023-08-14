@@ -45,7 +45,7 @@
                     <p:ajax event="itemSelect" 
                             listener="#{recommendationFeedbackSummaryCrudMBean.pieListener}" 
                             process="@this" 
-                            update="datatable titleText titleIcon"/>
+                            update="datatable titleText titleIcon printerCommandButton"/>
                 </p:pieChart>
             </p:panel>
 
@@ -62,7 +62,8 @@
                     showInsert="false"
                     showUpdateActionLink="false"
                     dataTableLazy="false"
-                    showActionLinksColumn="true">
+                    showActionLinksColumn="true"
+                    showPrinter="true">
                 <ui:define name="listColumns">
                     <c:columnMainIdea field="recommendation.mainIdea" />
                     
@@ -219,7 +220,7 @@
                     <p:ajax event="itemSelect" 
                             listener="#{challengeFeedbackSummaryCrudMBean.pieListener}" 
                             process="@this"
-                            update="datatablechallenge titleTextchallenge titleIconchallenge"/>
+                            update="datatablechallenge titleTextchallenge titleIconchallenge printerCommandButtonchallenge"/>
                 </p:pieChart>
             </p:panel>        
 
@@ -238,7 +239,8 @@
                     showInsert="false"
                     showUpdateActionLink="false"
                     dataTableLazy="false"
-                    showActionLinksColumn="true">
+                    showActionLinksColumn="true"
+                    showPrinter="true">
                 <ui:define name="listColumns">
                     <c:columnMainIdea field="challenge.mainIdea" />
 

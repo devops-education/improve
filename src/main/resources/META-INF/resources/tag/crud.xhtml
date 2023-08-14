@@ -19,16 +19,28 @@
             <c:set var="crudId"          value="#{empty crudId ? '' : crudId}" />
             <c:set var="showInsert"      value="#{empty showInsert ? true : showInsert}" />
             <c:set var="showList"        value="#{empty showList ? true : showList}" />
+            <c:set var="showPrinter"     value="#{empty showPrinter ? false : showPrinter}" />
 
             <p:commandButton
-                rendered="#{(managedBean.visualizationMode == 'LIST') and showInsert}" id="startInsertCommandButton#{crudId}"
-                title="New" icon="pi pi-plus"
+                id="startInsertCommandButton#{crudId}"
+                rendered="#{(managedBean.visualizationMode == 'LIST') and showInsert}" 
+                title="New" 
+                icon="pi pi-plus"
                 style="padding: 4px 4px 4px 4px; width: 38px;"
                 action="#{managedBean.startInsertAction}"
                 process="@this"
                 value="" 
                 accesskey="i"
-                update="@form" ajax="true">
+                update="@form" ajax="true" />
+
+            <p:commandButton
+                id="printerCommandButton#{crudId}"
+                rendered="#{showPrinter}" 
+                title="Export the list as xlsx"
+                icon="pi pi-file-excel"
+                style="padding: 4px 4px 4px 4px; width: 36px; background-color: #{managedBean.crudTitleColor} !important"
+                value="">
+                <p:dataExporter type="xlsxstream" target="datatable#{crudId}" fileName="data" />
             </p:commandButton>
 
         </ui:define>
@@ -85,7 +97,13 @@
 
                     <ui:insert name="listColumns"></ui:insert>                
 
-                    <p:column headerText="Detail" styleClass="#{listActionLinksStyleClass}" rendered="#{showActionLinksColumn}" exportable="false">
+                    <p:column headerText="Detail"
+                              styleClass="#{listActionLinksStyleClass}" 
+                              rendered="#{showActionLinksColumn}" 
+                              exportable="false"
+                              exportHeaderValue="false"
+                              exportFooterValue="false"
+                              exportValue="">
                         <ui:insert name="listActionLinks"></ui:insert>
 
                         <p:commandButton

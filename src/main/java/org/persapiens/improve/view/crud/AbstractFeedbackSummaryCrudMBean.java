@@ -63,9 +63,16 @@ public abstract class AbstractFeedbackSummaryCrudMBean<T extends IdBean<Long>> e
         return crudTitleTexts().get(selectedIndex);
     }
     
+    private List<List<T>> getLists() {
+        if (lists == null) {
+            lists = feedbackLists();
+        }
+        return lists;
+    }
+    
     private List<Number> values() {
         List<Number> result = new ArrayList<>();
-        for(List<T> list : feedbackLists()) {
+        for(List<T> list : getLists()) {
             result.add(list.size());
         }
         return result;
@@ -73,10 +80,7 @@ public abstract class AbstractFeedbackSummaryCrudMBean<T extends IdBean<Long>> e
 
     @Override
     public List<T> find() {
-        if (lists == null) {
-            lists = feedbackLists();
-        }
-        return lists.get(selectedIndex);
+        return getLists().get(selectedIndex);
     }
     
     protected abstract List<String> backgroundColors();
