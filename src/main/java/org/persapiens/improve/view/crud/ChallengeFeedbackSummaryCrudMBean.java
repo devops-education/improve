@@ -5,7 +5,9 @@ import jakarta.faces.view.ViewScoped;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -53,10 +55,21 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
                 .stream().map(Link::getRecommendation).collect(Collectors.toList());
     }
     
-    private boolean hasRecommendationFeedbackUsedAlreadyOrWillUse(List<Recommendation> recommendations) {
+    private List<RecommendationFeedback> filter(List<Recommendation> recommendations, Map<Recommendation, RecommendationFeedback> recommendationFeedbackMap) {
+        List result = new ArrayList<>();
+        for (Recommendation recommendation: recommendations) {
+            RecommendationFeedback rf = recommendationFeedbackMap.get(recommendation);
+            if (rf != null) {
+                result.add(rf);
+            }
+        }
+        return result;        
+    }
+    
+    private boolean hasRecommendationFeedbackUsedAlreadyOrWillUse(List<Recommendation> recommendations, 
+            Map<Recommendation, RecommendationFeedback> recommendationFeedbackMap) {
         boolean result = false;
-        for (RecommendationFeedback recommendationFeedback : recommendationFeedbackService.findByRecommendationInAndUser(
-            recommendations, userMBean.getLoggedUser())) {
+        for (RecommendationFeedback recommendationFeedback : filter(recommendations, recommendationFeedbackMap)) {
             if (Boolean.TRUE.equals(recommendationFeedback.getUsedAlready())
                     || Boolean.TRUE.equals(recommendationFeedback.getWillUse())) {
                 result = true;
@@ -72,12 +85,15 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
         List<ChallengeFeedback> willMitigateAndHasRecommendation = new ArrayList<>();
         List<ChallengeFeedback> notWillMitigate = new ArrayList<>();
         
+        Map<Recommendation, RecommendationFeedback> recommendationFeedbackMap = recommendationFeedbackService.findByUser(userMBean.getLoggedUser())
+            .stream().collect(Collectors.toMap(RecommendationFeedback::getRecommendation, Function.identity()));
+        
         for(ChallengeFeedback cf : challengeFeedbackService.findByUser(userMBean.getLoggedUser())) {
             if (Objects.nonNull(cf.getWillMitigate())) {
                 if (cf.getWillMitigate()) {
                     List<Recommendation> recommendations = recommendations(cf);
 
-                    if (hasRecommendationFeedbackUsedAlreadyOrWillUse(recommendations)) {
+                    if (hasRecommendationFeedbackUsedAlreadyOrWillUse(recommendations, recommendationFeedbackMap)) {
                         willMitigateAndHasRecommendation.add(cf);
                     } else {
                         willMitigateAndNoRecommendation.add(cf);

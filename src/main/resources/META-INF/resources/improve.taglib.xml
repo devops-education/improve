@@ -176,6 +176,14 @@
             <type>java.lang.Boolean</type>
         </attribute>
         <attribute>
+            <description>Define se o botão de imprimir será renderizado. &lt;br/&gt;
+                Default true
+            </description>
+            <name>showPrinter</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
             <description>Define se o botão de atualização será renderizado na tela de atualização. &lt;br/&gt;
                 Default true
             </description>
