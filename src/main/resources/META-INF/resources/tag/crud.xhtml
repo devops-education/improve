@@ -80,7 +80,7 @@
                              rowsPerPageTemplate="#{dataTableRowsPerPageTemplate}"
                              paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
                              paginatorPosition="#{dataTablePaginatorPosition}"
-                             currentPageReportTemplate="{startRecord} a {endRecord} em {totalRecords} registro(s). {totalPages} página(s)."
+                             currentPageReportTemplate="{startRecord} to {endRecord} in {totalRecords} record(s). {totalPages} page(s)."
                              value="#{managedBean.beanList}"
                              filteredValue="#{managedBean.filteredBeanList}"
                              emptyMessage="Sem Registros"
@@ -101,9 +101,7 @@
                               styleClass="#{listActionLinksStyleClass}" 
                               rendered="#{showActionLinksColumn}" 
                               exportable="false"
-                              exportHeaderValue="false"
-                              exportFooterValue="false"
-                              exportValue="">
+                              responsivePriority="2">
                         <ui:insert name="listActionLinks"></ui:insert>
 
                         <p:commandButton

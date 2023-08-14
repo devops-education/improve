@@ -96,22 +96,22 @@ public class RecommendationFeedbackSummaryCrudMBean extends AbstractFeedbackSumm
     }
 
     @Override
-    public void setBean(RecommendationFeedback bean) {
-        super.setBean(bean);
+    public void startDetailAction() {
+        super.startDetailAction();
         
-        List<Challenge> challengeConflictList = bean.getRecommendation().getChallengeConflicts()
+        List<Challenge> challengeConflictList = getBean().getRecommendation().getChallengeConflicts()
             .stream().map(cc -> cc.getChallenge()).toList();
         challengeFeedbackConflictList = challengeFeedbackService.findByChallengeInAndUser(
     challengeConflictList, userMBean.getLoggedUser());        
         challengeFeedbackConflictList = challengeFeedbackList(challengeConflictList, challengeFeedbackConflictList);
         
-        List<Challenge> challengeLinkList = bean.getRecommendation().getLinks()
+        List<Challenge> challengeLinkList = getBean().getRecommendation().getLinks()
             .stream().map(cc -> cc.getChallenge()).toList();
         challengeFeedbackLinkList = challengeFeedbackService.findByChallengeInAndUser(
     challengeLinkList, userMBean.getLoggedUser());
         challengeFeedbackLinkList = challengeFeedbackList(challengeLinkList, challengeFeedbackLinkList);
 
-        Set<Recommendation> recommendationConflictList = bean.getRecommendation().getRecommendationConflicts();
+        Set<Recommendation> recommendationConflictList = getBean().getRecommendation().getRecommendationConflicts();
         recommendationFeedbackConflictList = recommendationFeedbackService.findByRecommendationInAndUser(
 recommendationConflictList, userMBean.getLoggedUser());        
         recommendationFeedbackConflictList = recommendationFeedbackList(recommendationConflictList, recommendationFeedbackConflictList);
