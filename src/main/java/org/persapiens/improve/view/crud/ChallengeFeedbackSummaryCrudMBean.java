@@ -131,16 +131,16 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
     }
 
     @Override
-    public void setBean(ChallengeFeedback bean) {
-        super.setBean(bean); 
+    public void startDetailAction() {
+        super.startDetailAction(); 
 
-        List<Recommendation> recommendationConflictList = bean.getChallenge().getConflicts()
+        List<Recommendation> recommendationConflictList = getBean().getChallenge().getConflicts()
             .stream().map(cc -> cc.getRecommendation()).toList();
         recommendationFeedbackConflictList = recommendationFeedbackService.findByRecommendationInAndUser(
     recommendationConflictList, userMBean.getLoggedUser());
         recommendationFeedbackConflictList = recommendationFeedbackList(recommendationConflictList, recommendationFeedbackConflictList);
         
-        List<Recommendation> recommendationLinkList = bean.getChallenge().getLinks()
+        List<Recommendation> recommendationLinkList = getBean().getChallenge().getLinks()
             .stream().map(cc -> cc.getRecommendation()).toList();
         recommendationFeedbackLinkList = recommendationFeedbackService.findByRecommendationInAndUser(
     recommendationLinkList, userMBean.getLoggedUser());
