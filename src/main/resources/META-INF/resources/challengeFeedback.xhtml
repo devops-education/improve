@@ -37,7 +37,7 @@
                 <d:challengeDetail crudMBean="#{challengeFeedbackCrudMBean}" />
 
                 <h:panelGrid columns="2" cellpadding="3">
-                    <c:label label="Will Mitigate" />
+                    <c:label label="Deal with" />
                     <p:selectOneButton id="willMitigateSelectOneButton" value="#{challengeFeedbackCrudMBean.bean.willMitigate}" >
                         <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
                         <p:ajax listener="#{challengeFeedbackCrudMBean.saveChallengeFeedback(challengeFeedbackCrudMBean.bean)}" update="willMitigateComment"/>
@@ -46,9 +46,9 @@
                 </h:panelGrid>
 
                 <h:panelGrid columns="2" cellpadding="3">
-                    <c:label label="Will Mitigate Comment" />
+                    <c:label label="Deal with Comment" />
                     <p:inputTextarea id="willMitigateComment" value="#{challengeFeedbackCrudMBean.bean.willMitigateComment}"
-                                     placeholder="Comment how you will mitigate this challenge. It is optional."
+                                     placeholder="Comment how you deal with this challenge. It is optional."
                                      rows="4" cols="80"
                                      disabled="#{challengeFeedbackCrudMBean.bean.willMitigate eq null}">
                         <p:ajax listener="#{challengeFeedbackCrudMBean.saveChallengeFeedback(challengeFeedbackCrudMBean.bean)}" />
