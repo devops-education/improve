@@ -14,9 +14,9 @@
               responsivePriority="2"
               exportable="true">
         <f:facet name="header">
-            <h:outputText id="usedAlready" value="Used Already" />
+            <h:outputText id="usedAlready" value="Already Used" />
             <p:tooltip for="usedAlready"
-                       value="Inform if you used already this recommendation"
+                       value="Inform if you already used this recommendation"
                        position="top"/>
         </f:facet>
         <f:facet name="filter">
@@ -37,20 +37,20 @@
                     <c:text readonly="true" value="#{recommendationFeedback.recommendation.mainIdea}" />
 
                     <p:outputPanel>
-                        <c:label label="Used Already" />
+                        <c:label label="Already Used" />
                         <p:spacer width="20"/>
                         <p:selectOneButton id="usedAlready" value="#{recommendationFeedback.usedAlready}">
                             <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
                             <p:ajax listener="#{feedbackCrudMBean.saveRecommendationFeedback(recommendationFeedback)}"/>
                         </p:selectOneButton>
                         <p:tooltip for="usedAlready"
-                                   value="Inform if you used already this recommendation"
+                                   value="Inform if you already used this recommendation"
                                    position="right"/>
                     </p:outputPanel>
 
-                    <c:label id="recommendationUsedAlreadyComment" label="Used Already Comment" />
+                    <c:label id="recommendationUsedAlreadyComment" label="Already Used Comment" />
                     <p:inputTextarea value="#{recommendationFeedback.usedAlreadyComment}"
-                                     placeholder="Comment how you used already this recommendation. It is optional."
+                                     placeholder="Comment how you already used this recommendation. It is optional."
                                      rows="3" cols="70">
                         <p:ajax listener="#{feedbackCrudMBean.saveRecommendationFeedback(recommendationFeedback)}" />
                     </p:inputTextarea>
