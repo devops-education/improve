@@ -13,9 +13,9 @@
               style="width: 120px;"
               exportable="true">
         <f:facet name="header">
-            <h:outputText id="willMitigate" value="Will mitigate" />
+            <h:outputText id="willMitigate" value="Deal with" />
             <p:tooltip for="willMitigate" 
-                       value="Inform if the you want to mitigate the challenge" 
+                       value="Inform if the you deal with the challenge" 
                        position="top"/>
         </f:facet>
         <f:facet name="filter">
@@ -36,7 +36,7 @@
                     <c:text readonly="true" value="#{challengeFeedback.challenge.mainIdea}" />
 
                     <p:outputPanel>
-                        <c:label label="Will mitigate" />
+                        <c:label label="Deal with" />
                         <p:spacer width="20"/>
                         <p:selectOneButton id="willMitigateSelectOneButton" value="#{challengeFeedback.willMitigate}">
                             <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
@@ -45,9 +45,9 @@
                         <p:tooltip for="willMitigateSelectOneButton" value="Inform if the you want to mitigate the challenge"/>
                     </p:outputPanel>
 
-                    <c:label id="challengeWillMitigateComment" label="Will Mitigate Comment" />
+                    <c:label id="challengeWillMitigateComment" label="Deal with Comment" />
                     <p:inputTextarea value="#{challengeFeedback.willMitigateComment}"
-                                     placeholder="Comment how you will mitigate challenge. It is optional."
+                                     placeholder="Comment how you deal with challenge. It is optional."
                                      rows="4" cols="70">
                         <p:ajax listener="#{feedbackCrudMBean.saveChallengeFeedback(challengeFeedback)}" />
                     </p:inputTextarea>

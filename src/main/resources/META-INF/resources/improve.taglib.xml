@@ -925,7 +925,7 @@
     </tag>
     <tag>
         <description>
-            Column will mitigate
+            Column Deal with
         </description>
         <tag-name>columnWillMitigate</tag-name>
         <source>tag/columnWillMitigate.xhtml</source>
@@ -1040,7 +1040,7 @@
     </tag>
     <tag>
         <description>
-            Column will mitigate comment
+            Column deal with comment
         </description>
         <tag-name>columnWillMitigateComment</tag-name>
         <source>tag/columnWillMitigateComment.xhtml</source>
