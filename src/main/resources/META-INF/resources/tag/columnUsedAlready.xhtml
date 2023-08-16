@@ -30,7 +30,7 @@
             <p:ajax listener="#{feedbackCrudMBean.saveRecommendationFeedbackUsedAlreadyDialog(recommendationFeedback)}"/>
         </p:selectOneButton>
 
-        <p:dialog header="Recommendation Feedback" widgetVar="recommendationDialog#{recommendationFeedback.recommendation.id}"
+        <p:dialog header="Recommendation" widgetVar="recommendationDialog#{recommendationFeedback.recommendation.id}"
                   showEffect="fade" dynamic="true" modal="true">
             <h:form>
                 <p:panelGrid columns="2" layout="flex">
