@@ -17,31 +17,8 @@
     <!-- IMPLEMENTATION -->
     <cc:implementation>
         <h:panelGrid columns="2" cellpadding="3">
-            <c:text readonly="true" value="#{cc.attrs.crudMBean.bean.challenge.mainIdea}" label="Main Idea" id="mainIdea"/>
+            <c:text readonly="true" value="#{cc.attrs.crudMBean.bean.challenge.mainIdea}" label="Challenge" id="mainIdea"/>
             <c:text readonly="true" value="#{cc.attrs.crudMBean.bean.challenge.theme.value}" label="Theme" id="theme"/>
         </h:panelGrid>
-
-        <p:accordionPanel multiple="true" activeIndex="-1">
-            <p:tab titletip="Click to show / hide the interviews Resumes and Quotes of this challenge"
-                   title="Interviews Resumes and Quotes (#{cc.attrs.crudMBean.bean.challenge.challengeInterviews.size()})">                
-                <p:dataTable var="challengeInterview" value="#{cc.attrs.crudMBean.bean.challenge.challengeInterviews}"
-                             rows="3" stripedRows="true" paginator="true" paginatorPosition="bottom"
-                             rowsPerPageTemplate='3,4,5,10'
-                             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}">
-                    <p:column headerText="P" field="interview.interviewee" style="width: 35px;" filterable="false" sortable="false"/>
-                    <p:column headerText="Resume">
-                        <h:outputText value="#{fn:replace(challengeInterview.resume, '\\n', '&lt;br/&gt;')}" escape="false" />
-                    </p:column>
-                    <p:column headerText="Quote">
-                        <h:outputText value="#{fn:replace(challengeInterview.quote, '\\n', '&lt;br/&gt;')}" escape="false" />
-                    </p:column>
-                </p:dataTable>                
-            </p:tab>
-
-            <p:tab titletip="Click to show / hide the tags of this challenge"
-                   title="Tags (#{cc.attrs.crudMBean.bean.challenge.challengeTags.size()})">
-                <h:outputText value="#{fn:replace(cc.attrs.crudMBean.bean.challenge.tags, '\\n', '&lt;br/&gt;')}" escape="false" />
-            </p:tab>
-        </p:accordionPanel>        
     </cc:implementation>
 </html>

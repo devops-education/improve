@@ -22,16 +22,6 @@
 
                 <c:columnMainIdea field="recommendation.mainIdea" />
 
-                <c:columnInterviews field="recommendation.recommendationInterviews.size()"
-                                    style="width: 110px;"
-                                    sortable="true"
-                                    filterable="true" />
-
-                <c:columnLinks field="recommendation.links.size()"
-                               style="width: 110px;"
-                               sortable="true"
-                               filterable="true" />
-
                 <c:columnTheme field="recommendation.theme" 
                                value="#{bean.recommendation.theme.value}"
                                sortable="true" 
@@ -55,14 +45,14 @@
 
                 <h:panelGrid columns="2" cellpadding="3">
                     <c:label label="Used Already" />
-                    <div>
-                        <p:selectOneButton id="usedAlreadySelectOneButton" value="#{recommendationFeedbackCrudMBean.bean.usedAlready}">
-                            <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                            <p:ajax listener="#{recommendationFeedbackCrudMBean.saveRecommendationFeedback(recommendationFeedbackCrudMBean.bean)}" update="usedAlreadyComment"/>
-                        </p:selectOneButton>
-                        <p:tooltip for="usedAlreadySelectOneButton" value="Inform if you used already this recommendation"/>
-                    </div>
+                    <p:selectOneButton id="usedAlreadySelectOneButton" value="#{recommendationFeedbackCrudMBean.bean.usedAlready}">
+                        <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                        <p:ajax listener="#{recommendationFeedbackCrudMBean.saveRecommendationFeedback(recommendationFeedbackCrudMBean.bean)}" update="usedAlreadyComment"/>
+                    </p:selectOneButton>
+                    <p:tooltip for="usedAlreadySelectOneButton" value="Inform if you used already this recommendation"/>
+                </h:panelGrid>
 
+                <h:panelGrid columns="2" cellpadding="3">
                     <c:label label="Used Already Comment" />
                     <p:inputTextarea id="usedAlreadyComment" value="#{recommendationFeedbackCrudMBean.bean.usedAlreadyComment}"
                                      placeholder="Comment how you used already this recommendation. It is optional."
@@ -74,14 +64,14 @@
                 
                 <h:panelGrid columns="2" cellpadding="3">
                     <c:label label="Will Use" />
-                    <div>
-                        <p:selectOneButton id="willUseSelectOneButton" value="#{recommendationFeedbackCrudMBean.bean.willUse}">
-                            <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                            <p:ajax listener="#{recommendationFeedbackCrudMBean.saveRecommendationFeedback(recommendationFeedbackCrudMBean.bean)}" update="willUseComment"/>
-                        </p:selectOneButton>
-                        <p:tooltip for="willUseSelectOneButton" value="Inform if you want to use this recommendation"/>
-                    </div>
+                    <p:selectOneButton id="willUseSelectOneButton" value="#{recommendationFeedbackCrudMBean.bean.willUse}">
+                        <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                        <p:ajax listener="#{recommendationFeedbackCrudMBean.saveRecommendationFeedback(recommendationFeedbackCrudMBean.bean)}" update="willUseComment"/>
+                    </p:selectOneButton>
+                    <p:tooltip for="willUseSelectOneButton" value="Inform if you want to use this recommendation"/>
+                </h:panelGrid>
                     
+                <h:panelGrid columns="2" cellpadding="3">
                     <c:label label="Will Use Comment" />
                     <p:inputTextarea id="willUseComment" value="#{recommendationFeedbackCrudMBean.bean.willUseComment}"
                                      placeholder="Comment how you will use this recommendation. It is optional."
@@ -107,16 +97,6 @@
                                      rowIndexVar="rowIdx"
                                      >
                             <c:columnMainIdea field="challengeFeedback.challenge.mainIdea" />
-                            
-                            <c:columnInterviews field="challengeFeedback.challenge.challengeInterviews.size()" 
-                                                style="width: 70px;"
-                                                sortable="true"
-                                                filterable="false" />
-
-                            <c:columnLinks field="challengeFeedback.challenge.links.size()"
-                                           style="width: 80px;" 
-                                           sortable="true"
-                                           filterable="false" />
                             
                             <c:columnTheme field="challengeFeedback.challenge.theme" 
                                            value="#{conflictChallengeFeedback.challengeFeedback.challenge.theme.value}"
@@ -146,16 +126,6 @@
                                      rowIndexVar="rowIdx"
                                      >
                             <c:columnMainIdea field="recommendationFeedback.recommendation.mainIdea" />
-                            
-                            <c:columnInterviews field="recommendationFeedback.recommendation.recommendationInterviews.size()" 
-                                                style="width: 70px;"
-                                                sortable="true"
-                                                filterable="false" />
-
-                            <c:columnLinks field="recommendationFeedback.recommendation.links.size()"
-                                           style="width: 80px;" 
-                                           sortable="true"
-                                           filterable="false" />
                             
                             <c:columnTheme field="recommendationFeedback.recommendation.theme" 
                                            value="#{conflictRecommendationFeedback.recommendationFeedback.recommendation.theme.value}"
@@ -192,16 +162,6 @@
                                      >
                             
                             <c:columnMainIdea field="link.challenge.mainIdea" />
-                            
-                            <c:columnInterviews field="link.challenge.challengeInterviews.size()" 
-                                                style="width: 70px;"
-                                                sortable="true"
-                                                filterable="false" />
-
-                            <c:columnLinks field="link.challenge.links.size()"
-                                           style="width: 130px;" 
-                                           sortable="true"
-                                           filterable="false" />
                             
                             <c:columnTheme field="link.challenge.theme" 
                                            value="#{linkChallengeFeedback.link.challenge.theme.value}"

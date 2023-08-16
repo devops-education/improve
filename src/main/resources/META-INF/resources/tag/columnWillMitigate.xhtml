@@ -29,11 +29,11 @@
             <p:ajax listener="#{feedbackCrudMBean.saveChallengeFeedbackWillMitigateDialog(challengeFeedback)}"/>
         </p:selectOneButton>
 
-        <p:dialog header="Challenge" widgetVar="challengeDialog#{challengeFeedback.challenge.id}" 
+        <p:dialog header="Challenge Feedback" widgetVar="challengeDialog#{challengeFeedback.challenge.id}" 
                   showEffect="fade" dynamic="true" modal="true" >
             <h:form>
                 <p:panelGrid columns="2" layout="flex">
-                    <c:text readonly="true" value="#{challengeFeedback.challenge.mainIdea}" label="Main Idea" />
+                    <c:text readonly="true" value="#{challengeFeedback.challenge.mainIdea}" />
 
                     <p:outputPanel>
                         <c:label label="Will mitigate" />

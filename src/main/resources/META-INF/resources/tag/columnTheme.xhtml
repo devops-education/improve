@@ -13,7 +13,7 @@
 
     <p:column field="#{field}" 
               responsivePriority="2" 
-              style="width: 125px;"
+              style="width: #{filterable ? '195': '125'}px;"
               sortable="#{sortable}" 
               filterable="#{filterable}"
               exportable="true">

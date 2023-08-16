@@ -20,16 +20,6 @@
                 
                 <c:columnMainIdea field="challenge.mainIdea" />
 
-                <c:columnInterviews field="challenge.challengeInterviews.size()"
-                                    style="width: 110px;"
-                                    sortable="true"
-                                    filterable="true" />
-
-                <c:columnLinks field="challenge.links.size()"
-                               style="width: 170px;"
-                               sortable="true"
-                               filterable="true" />
-
                 <c:columnTheme field="challenge.theme" 
                                value="#{bean.challenge.theme.value}"
                                sortable="true" 
@@ -48,14 +38,14 @@
 
                 <h:panelGrid columns="2" cellpadding="3">
                     <c:label label="Will Mitigate" />
-                    <div>
-                        <p:selectOneButton id="willMitigateSelectOneButton" value="#{challengeFeedbackCrudMBean.bean.willMitigate}" >
-                            <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                            <p:ajax listener="#{challengeFeedbackCrudMBean.saveChallengeFeedback(challengeFeedbackCrudMBean.bean)}" update="willMitigateComment"/>
-                        </p:selectOneButton>
-                        <p:tooltip for="willMitigateSelectOneButton" value="Inform if the you want to mitigate the challenge"/>
-                    </div>
+                    <p:selectOneButton id="willMitigateSelectOneButton" value="#{challengeFeedbackCrudMBean.bean.willMitigate}" >
+                        <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                        <p:ajax listener="#{challengeFeedbackCrudMBean.saveChallengeFeedback(challengeFeedbackCrudMBean.bean)}" update="willMitigateComment"/>
+                    </p:selectOneButton>
+                    <p:tooltip for="willMitigateSelectOneButton" value="Inform if the you want to mitigate the challenge"/>
+                </h:panelGrid>
 
+                <h:panelGrid columns="2" cellpadding="3">
                     <c:label label="Will Mitigate Comment" />
                     <p:inputTextarea id="willMitigateComment" value="#{challengeFeedbackCrudMBean.bean.willMitigateComment}"
                                      placeholder="Comment how you will mitigate this challenge. It is optional."
@@ -81,16 +71,6 @@
                                      rowIndexVar="rowIdx"
                                      >
                             <c:columnMainIdea field="recommendationFeedback.recommendation.mainIdea" />
-                            
-                            <c:columnInterviews field="recommendationFeedback.recommendation.recommendationInterviews.size()" 
-                                                style="width: 70px;"
-                                                sortable="true"
-                                                filterable="false" />
-
-                            <c:columnLinks field="recommendationFeedback.recommendation.links.size()"
-                                           style="width: 80px;" 
-                                           sortable="true"
-                                           filterable="false" />
                             
                             <c:columnTheme field="recommendationFeedback.recommendation.theme" 
                                            value="#{conflictRecommendationFeedback.recommendationFeedback.recommendation.theme.value}"
@@ -127,16 +107,6 @@
                                      rowIndexVar="rowIdx"
                                      >
                             <c:columnMainIdea field="link.recommendation.mainIdea" />
-                            
-                            <c:columnInterviews field="link.recommendation.recommendationInterviews.size()" 
-                                                style="width: 70px;"
-                                                sortable="true"
-                                                filterable="false" />
-
-                            <c:columnLinks field="link.recommendation.links.size()"
-                                           style="width: 80px;" 
-                                           sortable="true"
-                                           filterable="false" />
                             
                             <c:columnTheme field="link.recommendation.theme" 
                                            value="#{linkRecommendationFeedback.link.recommendation.theme.value}"
