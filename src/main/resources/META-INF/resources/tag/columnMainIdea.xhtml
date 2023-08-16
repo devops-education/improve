@@ -10,6 +10,7 @@
 
     <c:set var="challenge" value="#{field.contains('challenge')}" />
     <c:set var="text" value="#{challenge ? 'challenge' : 'recommendation'}" />
+    <c:set var="Text" value="#{challenge ? 'Challenge' : 'Recommendation'}" />
 
     <p:column field="#{field}"
               responsivePriority="1" 
@@ -17,9 +18,9 @@
               filterable="false"
               exportable="true">
         <f:facet name="header">
-            <h:outputText id="mainIdea" value="Main Idea" />
+            <h:outputText id="mainIdea" value="#{Text}" />
             <p:tooltip for="mainIdea" 
-                       value="Sort by #{text} main idea (description)"
+                       value="Sort by #{text} (description)"
                        position="top"/>
         </f:facet>
     </p:column>

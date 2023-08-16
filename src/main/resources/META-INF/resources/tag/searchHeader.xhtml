@@ -17,7 +17,7 @@
         <span class="ui-input-icon-left">
             <i class="pi pi-search" />
             <p:inputText id="globalFilter" onkeyup="PF('dataTable').filter()" style="width:330px"
-                         placeholder="Search main idea, abstracts, quotes, tags" >
+                         placeholder="Search description, abstracts, quotes, tags" >
                 <f:validator binding="#{searchValidator}" />
                 <p:ajax event="valueChange" update="searchMessage" />
             </p:inputText>
