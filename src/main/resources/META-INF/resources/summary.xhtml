@@ -89,59 +89,7 @@
                         <h:outputText id="willUseComment" value="#{fn:replace(recommendationFeedbackSummaryCrudMBean.bean.willUseComment, '\\n', '&lt;br/&gt;')}" escape="false" />
                     </h:panelGrid>
 
-                    <p:accordionPanel multiple="true" activeIndex="0,1,2" id="challengeFeedbackAccordionPanel">
-                        <p:tab title="Challenge Conflicts (#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.challengeConflicts.size()})"
-                               titleStyleClass="conflict" 
-                               titletip="Show / hide the list of challenges with conflict"
-                               rendered="#{not empty recommendationFeedbackSummaryCrudMBean.bean.recommendation.challengeConflicts}">
-                            <p:dataTable id="conflictDatatable"
-                                         widgetVar="conflictDatatable"
-                                         value="#{recommendationFeedbackSummaryCrudMBean.challengeFeedbackConflictList}"
-                                         var="challengeConflict"
-                                         emptyMessage="Sem Registros"
-                                         rows="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.challengeConflicts.size()}"
-                                         paginator="false"
-                                         stripedRows="true"
-                                         rowIndexVar="rowIdx"
-                                         >
-                                <c:columnMainIdea field="challenge.mainIdea" />
-
-                                <c:columnWillMitigateComment field="willMitigateComment" />
-
-                                <c:columnTheme field="challenge.theme" 
-                                               value="#{challengeConflict.challenge.theme.value}"
-                                               sortable="true" 
-                                               filterable="false"/>
-                            </p:dataTable>
-                        </p:tab>
-
-                        <p:tab title="Recommendation Conflicts (#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.recommendationConflicts.size()})"
-                               titleStyleClass="conflict" 
-                               titletip="Show / hide the list of recommendations with conflict"
-                               rendered="#{not empty recommendationFeedbackSummaryCrudMBean.bean.recommendation.recommendationConflicts}">
-                            <p:dataTable id="conflictRecommendationDatatable"
-                                         widgetVar="conflictDatatable"
-                                         value="#{recommendationFeedbackSummaryCrudMBean.recommendationFeedbackConflictList}"
-                                         var="recommendationFeedback"
-                                         emptyMessage="Sem Registros"
-                                         rows="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.recommendationConflicts.size()}"
-                                         paginator="false"
-                                         stripedRows="true"
-                                         rowIndexVar="rowIdx"
-                                         >
-                                <c:columnMainIdea field="recommendation.mainIdea" />
-
-                                <c:columnUsedAlreadyComment field="usedAlreadyComment" />
-                    
-                                <c:columnWillUseComment field="willUseComment" />
-
-                                <c:columnTheme field="recommendation.theme" 
-                                               value="#{recommendationFeedback.recommendation.theme.value}"
-                                               sortable="true" 
-                                               filterable="false"/>
-                            </p:dataTable>
-                        </p:tab>
-
+                    <p:accordionPanel multiple="true" activeIndex="0" id="challengeFeedbackAccordionPanel">
                         <p:tab title="Challenge Links (#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.links.size()})"
                                titleStyleClass="challenge"
                                titletip="Show / hide the list of linked challenges">
@@ -220,34 +168,7 @@
                         <h:outputText value="#{fn:replace(challengeFeedbackSummaryCrudMBean.bean.willMitigateComment, '\\n', '&lt;br/&gt;')}" escape="false" />
                     </h:panelGrid>
 
-                    <p:accordionPanel multiple="true" activeIndex="0,1" id="linkRecommendationFeedbackAccordionPanel">
-                        <p:tab title="Recommendation Conflicts (#{challengeFeedbackSummaryCrudMBean.bean.challenge.conflicts.size()})"
-                               titleStyleClass="conflict" 
-                               titletip="Show / hide the list of recommendations with conflict"
-                               rendered="#{not empty challengeFeedbackSummaryCrudMBean.bean.challenge.conflicts}">
-                            <p:dataTable id="conflictDatatable"
-                                         widgetVar="conflictDatatable"
-                                         value="#{challengeFeedbackSummaryCrudMBean.recommendationFeedbackConflictList}"
-                                         var="recommendationFeedback"
-                                         emptyMessage="Sem Registros"
-                                         rows="#{challengeFeedbackSummaryCrudMBean.bean.challenge.conflicts.size()}"
-                                         paginator="false"
-                                         stripedRows="true"
-                                         rowIndexVar="rowIdx"
-                                         >
-                                <c:columnMainIdea field="recommendation.mainIdea" />
-
-                                <c:columnUsedAlreadyComment field="usedAlreadyComment" />
-                    
-                                <c:columnWillUseComment field="willUseComment" />
-
-                                <c:columnTheme field="recommendation.theme" 
-                                               value="#{recommendationFeedback.recommendation.theme.value}"
-                                               sortable="true" 
-                                               filterable="false"/>
-                            </p:dataTable>
-                        </p:tab>
-
+                    <p:accordionPanel multiple="true" activeIndex="0" id="linkRecommendationFeedbackAccordionPanel">
                         <p:tab title="Recommendation Links (#{challengeFeedbackSummaryCrudMBean.bean.challenge.links.size()})"
                                titleStyleClass="recommendation"
                                titletip="Show / hide the list of linked recommendations">
