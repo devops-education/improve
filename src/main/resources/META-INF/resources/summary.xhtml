@@ -82,7 +82,7 @@
                     <d:recommendationDetail crudMBean="#{recommendationFeedbackSummaryCrudMBean}" />
 
                     <h:panelGrid columns="2" cellpadding="3">
-                        <c:label label="Used Already Comment" />
+                        <c:label label="Already Used Comment" />
                         <h:outputText id="usedAlreadyComment" value="#{fn:replace(recommendationFeedbackSummaryCrudMBean.bean.usedAlreadyComment, '\\n', '&lt;br/&gt;')}" escape="false" />
 
                         <c:label label="Will Use Comment" />

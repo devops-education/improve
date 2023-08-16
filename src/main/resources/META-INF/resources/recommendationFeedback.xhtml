@@ -44,18 +44,18 @@
                 <d:recommendationDetail crudMBean="#{recommendationFeedbackCrudMBean}" />
 
                 <h:panelGrid columns="2" cellpadding="3">
-                    <c:label label="Used Already" />
+                    <c:label label="Already Used" />
                     <p:selectOneButton id="usedAlreadySelectOneButton" value="#{recommendationFeedbackCrudMBean.bean.usedAlready}">
                         <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
                         <p:ajax listener="#{recommendationFeedbackCrudMBean.saveRecommendationFeedback(recommendationFeedbackCrudMBean.bean)}" update="usedAlreadyComment"/>
                     </p:selectOneButton>
-                    <p:tooltip for="usedAlreadySelectOneButton" value="Inform if you used already this recommendation"/>
+                    <p:tooltip for="usedAlreadySelectOneButton" value="Inform if you already used this recommendation"/>
                 </h:panelGrid>
 
                 <h:panelGrid columns="2" cellpadding="3">
-                    <c:label label="Used Already Comment" />
+                    <c:label label="Already Used Comment" />
                     <p:inputTextarea id="usedAlreadyComment" value="#{recommendationFeedbackCrudMBean.bean.usedAlreadyComment}"
-                                     placeholder="Comment how you used already this recommendation. It is optional."
+                                     placeholder="Comment how you already used this recommendation. It is optional."
                                      rows="4" cols="80"
                                      disabled="#{recommendationFeedbackCrudMBean.bean.usedAlready eq null}">
                         <p:ajax listener="#{recommendationFeedbackCrudMBean.saveRecommendationFeedback(recommendationFeedbackCrudMBean.bean)}" />

@@ -984,7 +984,7 @@
     </tag>
     <tag>
         <description>
-            Column used already
+            Column already used
         </description>
         <tag-name>columnUsedAlready</tag-name>
         <source>tag/columnUsedAlready.xhtml</source>
@@ -1016,7 +1016,7 @@
     </tag>
     <tag>
         <description>
-            Column used already comment
+            Column already used comment
         </description>
         <tag-name>columnUsedAlreadyComment</tag-name>
         <source>tag/columnUsedAlreadyComment.xhtml</source>
