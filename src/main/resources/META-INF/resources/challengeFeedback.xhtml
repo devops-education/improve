@@ -55,42 +55,7 @@
                     </p:inputTextarea>
                 </h:panelGrid>
 
-                <p:accordionPanel multiple="true" activeIndex="0,1" id="recommendationFeedbackAccordionPanel">
-                    <p:tab title="Recommendation Conflicts (#{challengeFeedbackCrudMBean.conflictRecommendationFeedbackList.size()})"
-                           titleStyleClass="conflict" 
-                           titletip="Show / hide the list of recommendations with conflict"
-                           rendered="#{not empty challengeFeedbackCrudMBean.conflictRecommendationFeedbackList}">
-                        <p:dataTable id="conflictDatatable"
-                                     widgetVar="conflictDatatable"
-                                     value="#{challengeFeedbackCrudMBean.conflictRecommendationFeedbackList}"
-                                     var="conflictRecommendationFeedback"
-                                     emptyMessage="Sem Registros"
-                                     rows="#{challengeFeedbackCrudMBean.conflictRecommendationFeedbackList.size()}"
-                                     paginator="false"
-                                     stripedRows="true"
-                                     rowIndexVar="rowIdx"
-                                     >
-                            <c:columnMainIdea field="recommendationFeedback.recommendation.mainIdea" />
-                            
-                            <c:columnTheme field="recommendationFeedback.recommendation.theme" 
-                                           value="#{conflictRecommendationFeedback.recommendationFeedback.recommendation.theme.value}"
-                                           sortable="true" 
-                                           filterable="false"/>
-
-                            <c:columnUsedAlready field="recommendationFeedback.usedAlready"
-                                                 dataTableId='conflictDatatable' 
-                                                 feedbackCrudMBean="#{challengeFeedbackCrudMBean}" 
-                                                 recommendationFeedback="#{conflictRecommendationFeedback.recommendationFeedback}"
-                                                 commandButtonUpdate="recommendationFeedbackAccordionPanel:conflictDatatable" />
-                            
-                            <c:columnWillUse field="recommendationFeedback.willUse"
-                                             dataTableId='conflictDatatable'
-                                             feedbackCrudMBean="#{challengeFeedbackCrudMBean}" 
-                                             recommendationFeedback="#{conflictRecommendationFeedback.recommendationFeedback}"
-                                             />
-                        </p:dataTable>
-                    </p:tab>
-
+                <p:accordionPanel multiple="true" activeIndex="0" id="recommendationFeedbackAccordionPanel">
                     <p:tab title="Recommendation Links (#{challengeFeedbackCrudMBean.linkRecommendationFeedbackList.size()})"
                            titleStyleClass="recommendation" 
                            titletip="Show / hide the list of linked recommendations">
