@@ -10,7 +10,6 @@ import org.persapiens.improve.domain.IdBean;
 import org.persapiens.improve.domain.RecommendationFeedback;
 import org.persapiens.improve.service.RecommendationFeedbackService;
 import org.persapiens.improve.service.ChallengeFeedbackService;
-import org.primefaces.PrimeFaces;
 import org.primefaces.util.LangUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -45,24 +44,16 @@ public abstract class AbstractFeedbackCrudMBean<T extends IdBean<Long>> extends 
 
     protected abstract boolean doGlobalFilterFunction(T value, String filter, Locale locale) throws ParseException, IOException;
     
-    public void saveRecommendationFeedbackKnownDialog(RecommendationFeedback recommendationFeedback) {
-        saveRecommendationFeedbackDialog(recommendationFeedback, recommendationFeedback.getKnown() != null);
-    }
- 
-    public void saveRecommendationFeedbackUsedAlreadyDialog(RecommendationFeedback recommendationFeedback) {
-        saveRecommendationFeedbackDialog(recommendationFeedback, recommendationFeedback.getUsedAlready()!= null);
-    }
- 
-    public void saveRecommendationFeedbackWillUseDialog(RecommendationFeedback recommendationFeedback) {
-        saveRecommendationFeedbackDialog(recommendationFeedback, recommendationFeedback.getWillUse()!= null);
-    }
- 
-    private void saveRecommendationFeedbackDialog(RecommendationFeedback recommendationFeedback, Boolean openDialog) {
+    public void saveRecommendationFeedbackKnown(RecommendationFeedback recommendationFeedback) {
         saveRecommendationFeedback(recommendationFeedback);
-        
-        if (openDialog) {
-            PrimeFaces.current().executeScript("PF('recommendationDialog"+recommendationFeedback.getRecommendation().getId()+"').show()");
-        }
+    }
+ 
+    public void saveRecommendationFeedbackUsedAlready(RecommendationFeedback recommendationFeedback) {
+        saveRecommendationFeedback(recommendationFeedback);
+    }
+ 
+    public void saveRecommendationFeedbackWillUse(RecommendationFeedback recommendationFeedback) {
+        saveRecommendationFeedback(recommendationFeedback);
     }
 
     public void saveRecommendationFeedback(RecommendationFeedback recommendationFeedback) {
@@ -72,20 +63,12 @@ public abstract class AbstractFeedbackCrudMBean<T extends IdBean<Long>> extends 
     public void saveChallengeFeedback(ChallengeFeedback challengeFeedback) {
         challengeFeedbackService.save(challengeFeedback);
     }
-    
-    private void saveChallengeFeedbackDialog(ChallengeFeedback challengeFeedback, Boolean openDialog) {
+
+    public void saveChallengeFeedbackKnown(ChallengeFeedback challengeFeedback) {
         saveChallengeFeedback(challengeFeedback);
-
-        if (openDialog) {
-            PrimeFaces.current().executeScript("PF('challengeDialog"+challengeFeedback.getChallenge().getId()+"').show()");
-        }
     }
 
-    public void saveChallengeFeedbackKnownDialog(ChallengeFeedback challengeFeedback) {
-        saveChallengeFeedbackDialog(challengeFeedback, challengeFeedback.getKnown() != null);
-    }
-
-    public void saveChallengeFeedbackWillMitigateDialog(ChallengeFeedback challengeFeedback) {
-        saveChallengeFeedbackDialog(challengeFeedback, challengeFeedback.getWillMitigate() != null);
+    public void saveChallengeFeedbackWillMitigate(ChallengeFeedback challengeFeedback) {
+        saveChallengeFeedback(challengeFeedback);
     }
 }
