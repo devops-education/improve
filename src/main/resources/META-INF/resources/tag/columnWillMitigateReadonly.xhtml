@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+                xmlns:c="improve.persapiens.org"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <p:column field="#{field}"
+              filterMatchMode="exact" 
+              responsivePriority="2" 
+              style="width: 120px;"
+              exportable="true">
+        <f:facet name="header">
+            <h:outputText id="willMitigate" value="Deal with" />
+            <p:tooltip for="willMitigate" 
+                       value="Inform if the you deal with the challenge" 
+                       position="top"/>
+        </f:facet>
+        <f:facet name="filter">
+            <p:selectOneMenu onchange="PF('#{dataTableId}').filter()" >
+                <f:selectItem itemLabel="" itemValue="#{null}"/>
+                <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+            </p:selectOneMenu>
+        </f:facet>
+        <h:outputText value="#{booleanOptions.label(challengeFeedback.willMitigate)}" />
+    </p:column>
+    
+</ui:composition>
