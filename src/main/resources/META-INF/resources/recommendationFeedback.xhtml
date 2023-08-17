@@ -15,7 +15,11 @@
                 titleIcon="#{resource['images/ok-limegreen.png']}"
                 managedBean="#{recommendationFeedbackCrudMBean}"
                 showInsert="false"
-                showUpdateActionLink="false"
+                showDetailActionLink="false"
+                showUpdateActionLink="true"
+                updateButtonRendered="false"
+                cancelButtonLabelAtUpdate="Ok"
+                cancelButtonTitleAtUpdate="Back to Recommendation list"
                 >
             <ui:define name="listColumns">
                 <c:searchHeader searchValidator="#{recommendationSearchValidator}" />
@@ -40,7 +44,7 @@
                 
             </ui:define>
 
-            <ui:define name="detail">
+            <ui:define name="update">
                 <d:recommendationDetail crudMBean="#{recommendationFeedbackCrudMBean}" />
 
                 <p:focus for="usedAlreadySelectOneButton" />
@@ -124,8 +128,8 @@
                                 </p:selectOneButton>
                             </p:column>
                             
-                            <p:column style="width:4rem">
-                                <p:rowToggler expandLabel="Comment" collapseLabel="Hide"/>
+                            <p:column style="width:4rem" headerText="Comment">
+                                <p:rowToggler />
                             </p:column>
                             <p:rowExpansion>
                                 <d:challengeFeedbackWillMitigateComment id="challengeFeedbackWillMitigateComment"

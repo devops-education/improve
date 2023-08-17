@@ -14,7 +14,11 @@
                 titleStyleClass="challenge" 
                 managedBean="#{challengeFeedbackCrudMBean}" 
                 showInsert="false" 
-                showUpdateActionLink="false">
+                showDetailActionLink="false"
+                showUpdateActionLink="true"
+                updateButtonRendered="false"
+                cancelButtonLabelAtUpdate="Ok"
+                cancelButtonTitleAtUpdate="Back to Challenge list">
             <ui:define name="listColumns">
                 <c:searchHeader searchValidator="#{challengeSearchValidator}" />
                 
@@ -33,7 +37,7 @@
 
             </ui:define>
 
-            <ui:define name="detail">
+            <ui:define name="update">
                 <d:challengeDetail crudMBean="#{challengeFeedbackCrudMBean}" />
 
                 <p:focus for="willMitigateSelectOneButton" />
@@ -129,8 +133,8 @@
                                 </p:selectOneButton>
                             </p:column>
                             
-                            <p:column style="width:4rem">
-                                <p:rowToggler expandLabel="Comment" collapseLabel="Hide"/>
+                            <p:column style="width:4rem" headerText="Comment">
+                                <p:rowToggler />
                             </p:column>
                             <p:rowExpansion>
                                 <d:recommendationFeedbackUsedAlreadyComment id="recommendationFeedbackUsedAlreadyComment"

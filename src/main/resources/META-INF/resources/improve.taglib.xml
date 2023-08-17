@@ -307,6 +307,54 @@
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>Rótulo do botão de atualizar. &lt;br/&gt;
+                Default 'Salvar'
+            </description>
+            <name>updateButtonTitle</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Rótulo do botão de atualizar. &lt;br/&gt;
+                Default 'Salvar'
+            </description>
+            <name>cancelButtonLabelAtUpdate</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Rótulo do botão de atualizar. &lt;br/&gt;
+                Default 'Salvar'
+            </description>
+            <name>cancelButtonTitleAtUpdate</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Rótulo do botão de atualizar. &lt;br/&gt;
+                Default 'Salvar'
+            </description>
+            <name>cancelButtonLabelAtInsert</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Rótulo do botão de atualizar. &lt;br/&gt;
+                Default 'Salvar'
+            </description>
+            <name>cancelButtonTitleAtInsert</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Rótulo do botão de atualizar. &lt;br/&gt;
+                Default 'Salvar'
+            </description>
+            <name>udpateButtonRendered</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
             <description>Estilo da coluna das ações da tabela de listagem. &lt;br/&gt;
                 Default: 'listActionLinksStyleClassTwo' - Cabe dois links 
             </description>
