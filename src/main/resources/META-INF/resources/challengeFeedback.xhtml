@@ -36,25 +36,22 @@
             <ui:define name="detail">
                 <d:challengeDetail crudMBean="#{challengeFeedbackCrudMBean}" />
 
+                <p:focus for="willMitigateSelectOneButton" />
+                
                 <h:panelGrid columns="2" cellpadding="3">
                     <c:label label="Deal with" />
                     <p:selectOneButton id="willMitigateSelectOneButton" value="#{challengeFeedbackCrudMBean.bean.willMitigate}" >
                         <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                        <p:ajax listener="#{challengeFeedbackCrudMBean.saveChallengeFeedback(challengeFeedbackCrudMBean.bean)}" update="willMitigateComment"/>
+                        <p:ajax listener="#{challengeFeedbackCrudMBean.saveChallengeFeedback(challengeFeedbackCrudMBean.bean)}"
+                                update="challengeFeedbackWillMitigateComment:willMitigateComment"/>
                     </p:selectOneButton>
                     <p:tooltip for="willMitigateSelectOneButton" value="Inform if the you want to mitigate the challenge"/>
                 </h:panelGrid>
 
-                <h:panelGrid columns="2" cellpadding="3">
-                    <c:label label="Deal with Comment" />
-                    <p:inputTextarea id="willMitigateComment" value="#{challengeFeedbackCrudMBean.bean.willMitigateComment}"
-                                     placeholder="Comment how you deal with this challenge. It is optional."
-                                     rows="4" cols="80"
-                                     disabled="#{challengeFeedbackCrudMBean.bean.willMitigate eq null}">
-                        <p:ajax listener="#{challengeFeedbackCrudMBean.saveChallengeFeedback(challengeFeedbackCrudMBean.bean)}" />
-                    </p:inputTextarea>
-                </h:panelGrid>
-
+                <d:challengeFeedbackWillMitigateComment id="challengeFeedbackWillMitigateComment"
+                                                        crudMBean="#{challengeFeedbackCrudMBean}" 
+                                                        challengeFeedback="#{challengeFeedbackCrudMBean.bean}" />
+                
                 <p:accordionPanel multiple="true" activeIndex="0" id="recommendationFeedbackAccordionPanel">
                     <p:tab title="Recommendation Links (#{challengeFeedbackCrudMBean.linkRecommendationFeedbackList.size()})"
                            titleStyleClass="recommendation" 
@@ -70,6 +67,7 @@
                                      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
                                      stripedRows="true"
                                      rowIndexVar="rowIdx"
+                                     rowKey="#{linkRecommendationFeedback.recommendationFeedback.recommendation.id}"
                                      >
                             <c:columnMainIdea field="link.recommendation.mainIdea" />
                             
@@ -78,18 +76,71 @@
                                            sortable="true" 
                                            filterable="false"/>
 
-                            <c:columnUsedAlready field="recommendationFeedback.usedAlready"
-                                                 dataTableId='linkDatatable' 
-                                                 feedbackCrudMBean="#{challengeFeedbackCrudMBean}" 
-                                                 recommendationFeedback="#{linkRecommendationFeedback.recommendationFeedback}"
-                                                 commandButtonUpdate="recommendationFeedbackAccordionPanel:linkDatatable" />
+                            <p:column field="recommendationFeedback.usedAlready"
+                                      filterable="true" 
+                                      filterMatchMode="exact" 
+                                      style="width: 130px;" 
+                                      responsivePriority="2"
+                                      exportable="true">
+                                <f:facet name="header">
+                                    <h:outputText id="usedAlready" value="Already Used" />
+                                    <p:tooltip for="usedAlready"
+                                               value="Inform if you already used this recommendation"
+                                               position="top"/>
+                                </f:facet>
+                                <f:facet name="filter">
+                                    <p:selectOneMenu onchange="PF('linkDatatable').filter()" >
+                                        <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
+                                        <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                                    </p:selectOneMenu>
+                                </f:facet>
+                                <p:selectOneButton value="#{linkRecommendationFeedback.recommendationFeedback.usedAlready}">
+                                    <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                                    <p:ajax listener="#{challengeFeedbackCrudMBean.saveRecommendationFeedbackUsedAlready(linkRecommendationFeedback.recommendationFeedback)}"
+                                            update="recommendationFeedbackUsedAlreadyComment:usedAlreadyComment willUseSelectOneButton recommendationFeedbackWillUseComment:willUseComment"/>
+                                </p:selectOneButton>
+                            </p:column>
+
+                            <p:column headerText="Will Use" 
+                                      field="recommendationFeedback.willUse"
+                                      filterable="true" 
+                                      filterMatchMode="exact" 
+                                      style="width: 120px;" 
+                                      responsivePriority="2"
+                                      exportable="true">
+                                <f:facet name="header">
+                                    <h:outputText id="willUse" value="Will Use" />
+                                    <p:tooltip for="willUse"
+                                               value="Inform if you want to use this recommendation"
+                                               position="top"/>
+                                </f:facet>
+                                <f:facet name="filter">
+                                    <p:selectOneMenu onchange="PF('linkDatatable').filter()" >
+                                        <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
+                                        <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                                    </p:selectOneMenu>
+                                </f:facet>
+                                <p:selectOneButton id="willUseSelectOneButton"
+                                                   value="#{linkRecommendationFeedback.recommendationFeedback.willUse}"
+                                                   disabled="#{linkRecommendationFeedback.recommendationFeedback.usedAlready}">
+                                    <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                                    <p:ajax listener="#{challengeFeedbackCrudMBean.saveRecommendationFeedbackWillUse(linkRecommendationFeedback.recommendationFeedback)}"
+                                            update="recommendationFeedbackWillUseComment:willUseComment"/>
+                                </p:selectOneButton>
+                            </p:column>
                             
-                            <c:columnWillUse field="recommendationFeedback.willUse"
-                                             dataTableId='linkDatatable'
-                                             feedbackCrudMBean="#{challengeFeedbackCrudMBean}" 
-                                             recommendationFeedback="#{linkRecommendationFeedback.recommendationFeedback}"
-                                             />
-                            
+                            <p:column style="width:4rem">
+                                <p:rowToggler expandLabel="Comment" collapseLabel="Hide"/>
+                            </p:column>
+                            <p:rowExpansion>
+                                <d:recommendationFeedbackUsedAlreadyComment id="recommendationFeedbackUsedAlreadyComment"
+                                                                            crudMBean="#{challengeFeedbackCrudMBean}" 
+                                                                            recommendationFeedback="#{linkRecommendationFeedback.recommendationFeedback}" />
+                                
+                                <d:recommendationFeedbackWillUseComment id="recommendationFeedbackWillUseComment"
+                                                                        crudMBean="#{challengeFeedbackCrudMBean}" 
+                                                                        recommendationFeedback="#{linkRecommendationFeedback.recommendationFeedback}" /> 
+                            </p:rowExpansion>
                         </p:dataTable>
                     </p:tab>
                 </p:accordionPanel>
