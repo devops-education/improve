@@ -20,8 +20,6 @@
                 cancelButtonLabelAtUpdate="Ok"
                 cancelButtonTitleAtUpdate="Back to Challenge list">
             <ui:define name="listColumns">
-                <c:searchHeader searchValidator="#{challengeSearchValidator}" />
-                
                 <c:columnMainIdea field="challenge.mainIdea" />
 
                 <c:columnTheme field="challenge.theme" 
@@ -34,7 +32,6 @@
                                       feedbackCrudMBean="#{challengeFeedbackCrudMBean}" 
                                       challengeFeedback="#{bean}"
                                       commandButtonUpdate="datatable" />
-
             </ui:define>
 
             <ui:define name="update">

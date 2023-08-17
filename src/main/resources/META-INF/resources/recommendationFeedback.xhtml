@@ -22,8 +22,6 @@
                 cancelButtonTitleAtUpdate="Back to Recommendation list"
                 >
             <ui:define name="listColumns">
-                <c:searchHeader searchValidator="#{recommendationSearchValidator}" />
-
                 <c:columnMainIdea field="recommendation.mainIdea" />
 
                 <c:columnTheme field="recommendation.theme" 
@@ -40,8 +38,7 @@
                 <c:columnWillUseReadonly field="willUse"
                                  dataTableId='dataTable'
                                  feedbackCrudMBean="#{recommendationFeedbackCrudMBean}" 
-                                 recommendationFeedback="#{bean}" />
-                
+                                 recommendationFeedback="#{bean}" />                
             </ui:define>
 
             <ui:define name="update">
