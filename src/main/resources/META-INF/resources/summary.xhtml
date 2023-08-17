@@ -45,7 +45,7 @@
                     <p:ajax event="itemSelect" 
                             listener="#{recommendationFeedbackSummaryCrudMBean.pieListener}" 
                             process="@this" 
-                            update="datatable titleText titleIcon printerCommandButton"/>
+                            update="datatable titleText titleIcon xlsCommandButton pdfCommandButton"/>
                 </p:pieChart>
             </p:panel>
 
@@ -128,7 +128,7 @@
                     <p:ajax event="itemSelect" 
                             listener="#{challengeFeedbackSummaryCrudMBean.pieListener}" 
                             process="@this"
-                            update="datatablechallenge titleTextchallenge titleIconchallenge printerCommandButtonchallenge"/>
+                            update="datatablechallenge titleTextchallenge titleIconchallenge xlsCommandButtonchallenge pdfCommandButtonchallenge"/>
                 </p:pieChart>
             </p:panel>        
 
