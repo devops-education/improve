@@ -34,13 +34,23 @@
                 update="@form" ajax="true" />
 
             <p:commandButton
-                id="printerCommandButton#{crudId}"
+                id="xlsCommandButton#{crudId}"
                 rendered="#{showPrinter}" 
                 title="Export the list as xlsx"
                 icon="pi pi-file-excel"
                 style="padding: 4px 4px 4px 4px; width: 36px; background-color: #{managedBean.crudTitleColor} !important"
                 value="">
                 <p:dataExporter type="xlsxstream" target="datatable#{crudId}" fileName="data" />
+            </p:commandButton>
+
+            <p:commandButton
+                id="pdfCommandButton#{crudId}"
+                rendered="#{showPrinter}" 
+                title="Export the list as xlsx"
+                icon="pi pi-file-pdf"
+                style="padding: 4px 4px 4px 4px; width: 36px; background-color: #{managedBean.crudTitleColor} !important"
+                value="">
+                <p:dataExporter type="pdf" target="datatable#{crudId}" fileName="data" />
             </p:commandButton>
 
         </ui:define>
