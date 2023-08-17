@@ -27,13 +27,13 @@
                                sortable="true" 
                                filterable="true"/>
 
-                <c:columnUsedAlready field="usedAlready"
+                <c:columnUsedAlreadyReadonly field="usedAlready"
                                      dataTableId='dataTable'
                                      feedbackCrudMBean="#{recommendationFeedbackCrudMBean}"
                                      recommendationFeedback="#{bean}"
                                      commandButtonUpdate="datatable" />                
                             
-                <c:columnWillUse field="willUse"
+                <c:columnWillUseReadonly field="willUse"
                                  dataTableId='dataTable'
                                  feedbackCrudMBean="#{recommendationFeedbackCrudMBean}" 
                                  recommendationFeedback="#{bean}" />

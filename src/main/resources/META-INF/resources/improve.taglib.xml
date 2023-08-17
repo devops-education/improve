@@ -1050,5 +1050,96 @@
             <type>java.lang.String</type>
         </attribute>
     </tag>
+    <tag>
+        <description>
+            Column Deal with readonly
+        </description>
+        <tag-name>columnWillMitigateReadonly</tag-name>
+        <source>tag/columnWillMitigateReadonly.xhtml</source>
+        <attribute>
+            <description>field of the column</description>
+            <name>field</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>dataTableId</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>feedbackCrudMBean</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>challengeFeedback</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>commandButtonUpdate</name>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <description>
+            Column will use
+        </description>
+        <tag-name>columnWillUseReadonly</tag-name>
+        <source>tag/columnWillUseReadonly.xhtml</source>
+        <attribute>
+            <description>field of the column</description>
+            <name>field</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>dataTableId</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>feedbackCrudMBean</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>recommendationFeedback</name>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <description>
+            Column already used
+        </description>
+        <tag-name>columnUsedAlreadyReadonly</tag-name>
+        <source>tag/columnUsedAlreadyReadonly.xhtml</source>
+        <attribute>
+            <description>field of the column</description>
+            <name>field</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>dataTableId</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>feedbackCrudMBean</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>recommendationFeedback</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>field of the column</description>
+            <name>commandButtonUpdate</name>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
 </facelet-taglib>
 
