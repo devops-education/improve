@@ -5,10 +5,13 @@ import lombok.Getter;
 
 public enum ViewLogType {
     LOGIN("login"),
+    HOME("menu home"),
+    CHALLENGE("menu challenge"),
+    RECOMMENDATION("menu recommendation"),
+    SUMMARY("menu summary"),
+    USER("menu user"),
     LOGOUT("logout"),
-    CHALLENGE_MENU("challenge menu"),
     CHALLENGE_DETAIL("challenge detail"),
-    RECOMMENDATION_MENU("recommendation menu"),
     RECOMMENDATION_DETAIL("recommendation detail");
     
     @Getter

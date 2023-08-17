@@ -35,7 +35,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @ToString
 @EqualsAndHashCode(of = {"type", "user", "time"})
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @SuperBuilder
 @Entity
 @SequenceGenerator(sequenceName = "seq_view_log", name = "ID_SEQUENCE", allocationSize = 1)
@@ -60,6 +60,9 @@ public class ViewLog implements IdBean<Long>, Comparable<ViewLog> {
 
     @Column(nullable = false)
     private LocalDateTime time;
+    
+    @Column(nullable = false)
+    private String description;
     
     @Override
     public int compareTo(ViewLog o) {

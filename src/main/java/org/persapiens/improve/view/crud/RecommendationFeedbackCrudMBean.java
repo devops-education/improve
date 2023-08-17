@@ -28,6 +28,7 @@ import org.persapiens.improve.service.LinkService;
 import org.persapiens.improve.service.RecommendationSearchService;
 import org.persapiens.improve.service.RecommendationService;
 import org.persapiens.improve.view.bean.UserMBean;
+import org.persapiens.improve.view.bean.ViewLogMBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -49,6 +50,9 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
 
     @Autowired
     private UserMBean userMBean;
+    
+    @Autowired
+    private ViewLogMBean viewLogMBean;
     
     @Getter
     @Setter
@@ -230,6 +234,14 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
                     .build());                    
         }
         setConflictRecommendationFeedbackList(newConflictRecommendationFeedbackList);
+        
+        viewLogMBean.logRecommendationDetail(getBean().getRecommendation());
     }    
+
+    @Override
+    protected void init() {
+        super.init();
+        viewLogMBean.logRecommendation();
+    }
         
 }

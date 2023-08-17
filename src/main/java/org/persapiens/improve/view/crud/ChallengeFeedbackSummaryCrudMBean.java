@@ -18,6 +18,7 @@ import org.persapiens.improve.domain.RecommendationFeedback;
 import org.persapiens.improve.service.RecommendationFeedbackService;
 import org.persapiens.improve.service.ChallengeFeedbackService;
 import org.persapiens.improve.service.LinkService;
+import org.persapiens.improve.view.bean.ViewLogMBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -39,6 +40,9 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
     @SuppressFBWarnings("SE_BAD_FIELD")
     @Autowired
     private RecommendationFeedbackService recommendationFeedbackService;
+    
+    @Autowired
+    private ViewLogMBean viewLogMBean;
     
     @Getter
     private List<RecommendationFeedback> recommendationFeedbackConflictList;
@@ -145,6 +149,12 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
         recommendationFeedbackLinkList = recommendationFeedbackService.findByRecommendationInAndUser(
     recommendationLinkList, userMBean.getLoggedUser());
         recommendationFeedbackLinkList = recommendationFeedbackList(recommendationLinkList, recommendationFeedbackLinkList);        
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        viewLogMBean.logSummary();
     }
     
 }
