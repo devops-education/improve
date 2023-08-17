@@ -154,8 +154,8 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
     }
     
     @Override
-    public void startDetailAction() {
-        super.startDetailAction(); 
+    public void startUpdateAction() {
+        super.startUpdateAction(); 
         
         // recuperando os challenges feedback dos links da recommendacao
         Map<Challenge, ChallengeFeedback> challengeChallengeFeedbackMap = challengeChallengeFeedbackMap();

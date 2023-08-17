@@ -72,8 +72,13 @@
             <c:set var="dataTableStyle"               value="#{empty dataTableStyle ? '' : dataTableStyle}" />
             <c:set var="insertButtonLabel"            value="#{empty insertButtonLabel ? 'Insert' : insertButtonLabel}" />
             <c:set var="insertButtonTitle"            value="#{empty insertButtonTitle ? 'Confirm the insert operation' : insertButtonTitle}" />
+            <c:set var="cancelButtonLabelAtInsert"    value="#{empty cancelButtonLabelAtInsert ? 'Cancel' : cancelButtonLabelAtInsert}" />
+            <c:set var="cancelButtonTitleAtInsert"    value="#{empty cancelButtonTitleAtInsert ? 'Cancel the insert operation' : cancelButtonTitleAtInsert}" />
             <c:set var="updateButtonLabel"            value="#{empty updateButtonLabel ? 'Save' : updateButtonLabel}" />
             <c:set var="updateButtonTitle"            value="#{empty updateButtonTitle ? 'Confirm the save operation' : updateButtonTitle}" />
+            <c:set var="updateButtonRendered"         value="#{empty updateButtonRendered ? true : updateButtonRendered}" />
+            <c:set var="cancelButtonLabelAtUpdate"    value="#{empty cancelButtonLabelAtUpdate ? 'Cancel' : cancelButtonLabelAtUpdate}" />
+            <c:set var="cancelButtonTitleAtUpdate"    value="#{empty cancelButtonTitleAtUpdate ? 'Cancel the edit operation' : cancelButtonTitleAtUpdate}" />
             <c:set var="dataTablePaginator"           value="#{empty dataTablePaginator ? true : dataTablePaginator}" />
             <c:set var="dataTablePaginatorPosition"   value="#{empty dataTablePaginatorPosition ? 'bottom' : dataTablePaginatorPosition}" />
 
@@ -109,18 +114,18 @@
 
                     <ui:insert name="listColumns"></ui:insert>                
 
-                    <p:column headerText="Detail"
-                              styleClass="#{listActionLinksStyleClass}" 
-                              rendered="#{showActionLinksColumn}" 
+                    <p:column headerText="Remove"
+                              styleClass="listActionLinksStyleClassOne" 
+                              rendered="#{showDeleteActionLink}" 
                               exportable="false"
                               responsivePriority="2">
                         <ui:insert name="listActionLinks"></ui:insert>
 
                         <p:commandButton
-                            title="Remover"
+                            title="Remove"
                             rendered="#{showDeleteActionLink and !managedBean.alarmOnDelete(bean)}"
                             action="#{managedBean.deleteAction(visualizationModeAfterDelete)}"
-                            value="Remover" styleClass="pi pi-trash"
+                            value="Remove" styleClass="pi pi-trash"
                             update="@form" ajax="true"
                             process="@this"
                             disabled="#{!managedBean.isCheckBeforeDelete(bean)}">
@@ -130,21 +135,25 @@
                         </p:commandButton>
 
                         <p:commandButton
-                            title="Remover"
+                            title="Remove"
                             rendered="#{showDeleteActionLink and managedBean.alarmOnDelete(bean)}"
                             oncomplete="PF('confirmationDelete').show()"
-                            value="Remover" icon="pi pi-trash"
+                            value="Remove" icon="pi pi-trash"
                             process="@this"
                             disabled="#{!managedBean.isCheckBeforeDelete(bean)}">
                             <f:setPropertyActionListener
                                 target="#{managedBean.bean}"
                                 value="#{bean}" />                        
                         </p:commandButton>
-
-                        <p:spacer width="10px" rendered="#{managedBean.isCheckBeforeDelete(bean) and showDeleteActionLink}"/>
-
+                    </p:column>
+                                        
+                    <p:column headerText="Edit"
+                              styleClass="listActionLinksStyleClassOne" 
+                              rendered="#{showUpdateActionLink}" 
+                              exportable="false"
+                              responsivePriority="2">
                         <p:commandButton
-                            title="Update the information"
+                            title="Edit the information"
                             action="#{managedBean.startUpdateAction}"
                             rendered="#{showUpdateActionLink}"
                             disabled="#{not managedBean.isCheckStartUpdate(bean)}"
@@ -155,9 +164,13 @@
                                 target="#{managedBean.bean}"
                                 value="#{bean}" />
                         </p:commandButton>
-
-                        <p:spacer width="10px" rendered="#{showUpdateActionLink}"/>
-
+                    </p:column>
+                    
+                    <p:column headerText="Detail"
+                              styleClass="listActionLinksStyleClassOne" 
+                              rendered="#{showDetailActionLink}" 
+                              exportable="false"
+                              responsivePriority="2">
                         <p:commandButton
                             title="Detail the information"
                             action="#{managedBean.startDetailAction}"
@@ -201,8 +214,8 @@
                     <p:spacer width="10px"/>
 
                     <p:commandButton
-                        value="Cancel" 
-                        title="Cancel the insert operation"
+                        value="#{cancelButtonLabelAtUpdate}" 
+                        title="#{cancelButtonTitleAtUpdate}"
                         update="@form" ajax="true"
                         process="@this"
                         accesskey="c"
@@ -229,13 +242,14 @@
                         accesskey="a"
                         action="#{managedBean.updateAction(visualizationModeAfterUpdate)}"
                         disabled="#{managedBean.disabledUpdateButton}" 
+                        rendered="#{updateButtonRendered}"
                         />
 
-                    <p:spacer width="10px"/>
+                    <p:spacer width="10px" rendered="#{updateButtonRendered}" />
 
                     <p:commandButton
-                        value="Cancel"
-                        title="Cancel the save operation" 
+                        value="#{cancelButtonLabelAtUpdate}"
+                        title="#{cancelButtonTitleAtUpdate}" 
                         update="@form" ajax="true"
                         process="@this"
                         accesskey="c"

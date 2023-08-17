@@ -27,6 +27,11 @@ public abstract class AbstractFeedbackCrudMBean<T extends IdBean<Long>> extends 
     @Autowired
     protected RecommendationFeedbackService recommendationFeedbackService;
 
+    @Override
+    public boolean isCheckStartUpdate(T bean) {
+        return true;
+    }
+
     public boolean globalFilterFunction(T value, Object filter, Locale locale) {
         boolean result = false;
         try {
