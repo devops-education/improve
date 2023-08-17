@@ -41,7 +41,8 @@
                         <p:spacer width="20"/>
                         <p:selectOneButton id="usedAlready" value="#{recommendationFeedback.usedAlready}">
                             <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                            <p:ajax listener="#{feedbackCrudMBean.saveRecommendationFeedback(recommendationFeedback)}"/>
+                            <p:ajax listener="#{feedbackCrudMBean.saveRecommendationFeedback(recommendationFeedback)}"
+                                    update="usedAlreadyComment willUseSelectOneButton willUseComment"/>
                         </p:selectOneButton>
                         <p:tooltip for="usedAlready"
                                    value="Inform if you already used this recommendation"
@@ -49,28 +50,35 @@
                     </p:outputPanel>
 
                     <c:label id="recommendationUsedAlreadyComment" label="Already Used Comment" />
-                    <p:inputTextarea value="#{recommendationFeedback.usedAlreadyComment}"
+                    <p:inputTextarea id="usedAlreadyComment"
+                                     value="#{recommendationFeedback.usedAlreadyComment}"
                                      placeholder="Comment how you already used this recommendation. It is optional."
-                                     rows="3" cols="70">
+                                     rows="3" cols="70"
+                                     disabled="#{recommendationFeedback.usedAlready eq null}">
                         <p:ajax listener="#{feedbackCrudMBean.saveRecommendationFeedback(recommendationFeedback)}" />
                     </p:inputTextarea>
 
                     <p:outputPanel>
                         <c:label label="Will Use" />
                         <p:spacer width="20"/>
-                        <p:selectOneButton id="willUse" value="#{recommendationFeedback.willUse}">
+                        <p:selectOneButton id="willUseSelectOneButton"
+                                           value="#{recommendationFeedback.willUse}"
+                                           disabled="#{recommendationFeedback.usedAlready}">
                             <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                            <p:ajax listener="#{feedbackCrudMBean.saveRecommendationFeedback(recommendationFeedback)}"/>
+                            <p:ajax listener="#{feedbackCrudMBean.saveRecommendationFeedback(recommendationFeedback)}"
+                                    update="willUseComment"/>
                         </p:selectOneButton>
-                        <p:tooltip for="willUse"
+                        <p:tooltip for="willUseSelectOneButton"
                                    value="Inform if you want to use this recommendation"
                                    position="right"/>
                     </p:outputPanel>
 
                     <c:label id="recommendationWillUseComment" label="Will Use Comment" />
-                    <p:inputTextarea value="#{recommendationFeedback.willUseComment}"
+                    <p:inputTextarea id="willUseComment"
+                                     value="#{recommendationFeedback.willUseComment}"
                                      placeholder="Comment how you will use this recommendation. It is optional."
-                                     rows="3" cols="70">
+                                     rows="3" cols="70"
+                                     disabled="#{recommendationFeedback.usedAlready or recommendationFeedback.willUse eq null}">
                         <p:ajax listener="#{feedbackCrudMBean.saveRecommendationFeedback(recommendationFeedback)}" />
                     </p:inputTextarea>
 
