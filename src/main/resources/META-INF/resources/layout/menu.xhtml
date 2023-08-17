@@ -6,28 +6,41 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <p:menubar styleClass="menu">
-        <p:menuitem id="menu-open" title="Open home page" 
-                    icon="home-icon" value="Improve" 
+        <p:menuitem id="menu-open" 
+                    title="Open home page" 
+                    icon="home-icon" 
+                    value="Improve" 
                     url="/" />
-        <p:menuitem id="menu-challenge" title="Open Challenges page" 
-                    icon="pi pi-exclamation-triangle" value="Challenges"
+        <p:menuitem id="menu-challenge" 
+                    title="Open Challenges page" 
+                    icon="pi pi-exclamation-triangle" 
+                    value="Challenges"
                     url="/challengeFeedback.faces" />
-        <p:menuitem id="menu-recommendation" title="Open Recommendations page"
-                    icon="pi pi-thumbs-up" value="Recommendations"
+        <p:menuitem id="menu-recommendation" 
+                    title="Open Recommendations page"
+                    icon="pi pi-thumbs-up" 
+                    value="Recommendations"
                     url="/recommendationFeedback.faces" />
-        <p:menuitem id="menu-summary" title="Open Summary page"
-                    icon="pi pi-list" value="Summary"
+        <p:menuitem id="menu-summary"
+                    title="Open Summary page"
+                    icon="pi pi-list"
+                    value="Summary"
                     url="/summary.faces" />
-        <p:menuitem id="menu-user" title="Open User page"
-                    icon="pi pi-user" value="User"
+        <p:menuitem id="menu-user" 
+                    title="Open User page"
+                    icon="pi pi-user"
+                    value="User"
                     rendered="#{userMBean.loggedUser.admin}"
                     url="/user.faces" />
         
-        <p:menuitem title="Quit Improve" icon="pi pi-power-off" 
-                    value="Quit" url="/logout"/>
+        <p:menuitem title="Quit Improve" 
+                    icon="pi pi-power-off" 
+                    value="Quit" 
+                    url="/logout" />
     </p:menubar>
     <p:tooltip for="menu-open" position="bottom" />
     <p:tooltip for="menu-challenge" position="bottom" />
     <p:tooltip for="menu-recommendation" position="bottom" />
     <p:tooltip for="menu-summary" position="bottom" />
+    <p:tooltip for="menu-user" position="bottom" />
 </ui:composition>

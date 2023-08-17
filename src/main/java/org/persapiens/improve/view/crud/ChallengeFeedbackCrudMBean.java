@@ -27,6 +27,7 @@ import org.persapiens.improve.service.LinkService;
 import org.persapiens.improve.service.ChallengeSearchService;
 import org.persapiens.improve.service.ChallengeService;
 import org.persapiens.improve.view.bean.UserMBean;
+import org.persapiens.improve.view.bean.ViewLogMBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -48,6 +49,9 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
 
     @Autowired
     private UserMBean userMBean;
+    
+    @Autowired
+    private ViewLogMBean viewLogMBean;
     
     @Getter
     @Setter
@@ -174,6 +178,14 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
                     .build());                    
         }
         setConflictRecommendationFeedbackList(newConflictRecommendationFeedbackList);
+        
+        viewLogMBean.logChallengeDetail(getBean().getChallenge());
     }    
+
+    @Override
+    protected void init() {
+        super.init();
+        viewLogMBean.logChallenge();
+    }
     
 }
