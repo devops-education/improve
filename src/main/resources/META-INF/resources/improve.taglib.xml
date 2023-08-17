@@ -350,7 +350,7 @@
             <description>Rótulo do botão de atualizar. &lt;br/&gt;
                 Default 'Salvar'
             </description>
-            <name>udpateButtonRendered</name>
+            <name>updateButtonRendered</name>
             <required>false</required>
             <type>java.lang.Boolean</type>
         </attribute>
