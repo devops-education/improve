@@ -47,7 +47,8 @@
                     <c:label label="Already Used" />
                     <p:selectOneButton id="usedAlreadySelectOneButton" value="#{recommendationFeedbackCrudMBean.bean.usedAlready}">
                         <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                        <p:ajax listener="#{recommendationFeedbackCrudMBean.saveRecommendationFeedback(recommendationFeedbackCrudMBean.bean)}" update="usedAlreadyComment"/>
+                        <p:ajax listener="#{recommendationFeedbackCrudMBean.saveRecommendationFeedback(recommendationFeedbackCrudMBean.bean)}"
+                                update="usedAlreadyComment willUseSelectOneButton willUseComment"/>
                     </p:selectOneButton>
                     <p:tooltip for="usedAlreadySelectOneButton" value="Inform if you already used this recommendation"/>
                 </h:panelGrid>
@@ -64,9 +65,12 @@
                 
                 <h:panelGrid columns="2" cellpadding="3">
                     <c:label label="Will Use" />
-                    <p:selectOneButton id="willUseSelectOneButton" value="#{recommendationFeedbackCrudMBean.bean.willUse}">
+                    <p:selectOneButton id="willUseSelectOneButton" 
+                                       value="#{recommendationFeedbackCrudMBean.bean.willUse}"
+                                       disabled="#{recommendationFeedbackCrudMBean.bean.usedAlready}">
                         <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                        <p:ajax listener="#{recommendationFeedbackCrudMBean.saveRecommendationFeedback(recommendationFeedbackCrudMBean.bean)}" update="willUseComment"/>
+                        <p:ajax listener="#{recommendationFeedbackCrudMBean.saveRecommendationFeedback(recommendationFeedbackCrudMBean.bean)}"
+                                update="willUseComment"/>
                     </p:selectOneButton>
                     <p:tooltip for="willUseSelectOneButton" value="Inform if you want to use this recommendation"/>
                 </h:panelGrid>
@@ -76,7 +80,7 @@
                     <p:inputTextarea id="willUseComment" value="#{recommendationFeedbackCrudMBean.bean.willUseComment}"
                                      placeholder="Comment how you will use this recommendation. It is optional."
                                      rows="4" cols="80"
-                                     disabled="#{recommendationFeedbackCrudMBean.bean.willUse eq null}">
+                                     disabled="#{recommendationFeedbackCrudMBean.bean.usedAlready or recommendationFeedbackCrudMBean.bean.willUse eq null}">
                         <p:ajax listener="#{recommendationFeedbackCrudMBean.saveRecommendationFeedback(recommendationFeedbackCrudMBean.bean)}" />
                     </p:inputTextarea>
                 </h:panelGrid>
