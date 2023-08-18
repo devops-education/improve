@@ -107,4 +107,12 @@ public class Recommendation implements IdBean<Long>, Comparable<Recommendation> 
         result.addAll(recommendation2Conflicts.stream().map(RecommendationsConflict::getRecommendation1).collect(Collectors.toSet()));
         return result;
     }
+    
+    public Set<TeachingMethod> getLinkedTeachingMethods() {
+        Set<TeachingMethod> result = new HashSet<>();
+        for (Link link: getLinks()) {
+            result.addAll(link.getTeachingMethodLinks().stream().map(TeachingMethodLink::getTeachingMethod).toList());
+        }
+        return result;
+    }
 }

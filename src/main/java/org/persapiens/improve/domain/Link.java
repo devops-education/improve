@@ -5,7 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import java.util.Comparator;
+import java.util.Set;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -13,6 +15,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Singular;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Cache;
@@ -43,6 +46,11 @@ public class Link implements IdBean<LinkId>, Comparable<Link> {
     @ManyToOne
     @JoinColumn(name = "recommendation", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_link_recommendation"))
     private Recommendation recommendation;
+
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Singular
+    @OneToMany(mappedBy = "link")
+    private Set<TeachingMethodLink> teachingMethodLinks;
 
     @Override
     public int compareTo(Link o) {

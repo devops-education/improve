@@ -74,4 +74,14 @@
             <skipTests>true</skipTests>
         </properties>
     </action>
+    <action>
+        <actionName>CUSTOM-plantuml</actionName>
+        <displayName>plantuml</displayName>
+        <goals>
+            <goal>generate-resources</goal>
+        </goals>
+        <activatedProfiles>
+            <activatedProfile>plantuml</activatedProfile>
+        </activatedProfiles>
+    </action>
 </actions>
