@@ -18,8 +18,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Getter
 @Setter
-@ToString(of = {"id", "descricao"})
-@EqualsAndHashCode(of = "descricao")
+@ToString(of = {"id", "name", "definition"})
+@EqualsAndHashCode(of = "name")
 @SuperBuilder
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -32,11 +32,14 @@ public class TeachingMethod implements IdBean<Long>, Comparable<TeachingMethod> 
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String descricao;
+    private String name;
+
+    @Column(nullable = false, length = LENGTH)
+    private String definition;
 
     @Override
     public int compareTo(TeachingMethod o) {
-        return this.descricao.compareTo(o.descricao);
+        return this.name.compareTo(o.name);
     }
 
 }
