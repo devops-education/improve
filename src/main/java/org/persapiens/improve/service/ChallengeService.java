@@ -10,6 +10,7 @@ import org.persapiens.improve.domain.ChallengeInterview;
 import org.persapiens.improve.domain.ChallengeRecommendationConflict;
 import org.persapiens.improve.domain.ChallengeTag;
 import org.persapiens.improve.domain.Link;
+import org.persapiens.improve.domain.TeachingMethodLink;
 import org.persapiens.improve.persistence.ChallengeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,12 @@ public class ChallengeService extends InMemoryCrudService <Challenge, Long> {
     private InterviewService interviewService;
 
     private RecommendationService recommendationService;
+    
+    @Autowired
+    private TeachingMethodLinkService teachingMethodLinkService;
+    
+    @Autowired
+    private TeachingMethodService teachingMethodService;
     
     @SuppressFBWarnings("EI_EXPOSE_REP2")
     @Autowired
@@ -93,6 +100,13 @@ public class ChallengeService extends InMemoryCrudService <Challenge, Long> {
         for (Link bean: result.getLinks()) {
             bean.setChallenge(result);
             bean.setRecommendation(recommendationService.findById(bean.getRecommendation().getId()).get());
+            
+            bean.setTeachingMethodLinks(teachingMethodLinkService.findByLink(bean));
+            for (TeachingMethodLink teachingMethodLink: bean.getTeachingMethodLinks()) {
+                teachingMethodLink.setLink(bean);
+                teachingMethodLink.setTeachingMethod(
+         teachingMethodService.findById(teachingMethodLink.getTeachingMethod().getId()).get());
+            }            
         }
         
         return result;

@@ -9,6 +9,7 @@ import jakarta.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
@@ -86,6 +87,14 @@ public class Challenge implements IdBean<Long>, Comparable<Challenge> {
         List<Link> result = new ArrayList<>();
         result.addAll(getLinks());
         Collections.sort(result, Comparator.comparing(Link::getRecommendation, (s1, s2) -> { return Long.valueOf(s1.getRecommendationInterviews().size() - s2.getRecommendationInterviews().size()).intValue();}).reversed());
+        return result;
+    }
+    
+    public Set<TeachingMethod> getLinkedTeachingMethods() {
+        Set<TeachingMethod> result = new HashSet<>();
+        for (Link link: getLinks()) {
+            result.addAll(link.getTeachingMethodLinks().stream().map(TeachingMethodLink::getTeachingMethod).toList());
+        }
         return result;
     }
 }
