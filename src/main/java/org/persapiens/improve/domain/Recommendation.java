@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import lombok.AccessLevel;
@@ -108,10 +109,12 @@ public class Recommendation implements IdBean<Long>, Comparable<Recommendation> 
         return result;
     }
     
-    public Set<TeachingMethod> getLinkedTeachingMethods() {
-        Set<TeachingMethod> result = new HashSet<>();
+    public Set<TeachingMethodLink> getTeachingMethodLinks() {
+        Set<TeachingMethodLink> result = new TreeSet<>(Comparator
+            .comparing(TeachingMethodLink::getTeachingMethod)
+            .thenComparing(TeachingMethodLink::getInterviewSnippet)::compare);
         for (Link link: getLinks()) {
-            result.addAll(link.getTeachingMethodLinks().stream().map(TeachingMethodLink::getTeachingMethod).toList());
+            result.addAll(link.getTeachingMethodLinks());
         }
         return result;
     }
