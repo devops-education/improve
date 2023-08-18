@@ -1,46 +1,46 @@
-Challenge,Recommendation,TeachingMethod,Text snippet (from the interview transcription),Relevant link
-2,1,6,teach my class in sprints,Yes
-7,7,6,"Present [...] cases on how this translates, [...] eliminating the silos between operations and development.",No
-7,8,6,I always ask them to sozialize [...] and do pair programming,No
-8,10,10,I always ask them to sozialize [...] and do pair programming,Yes
-9,1,6,I always ask them to sozialize [...] and do pair programming,Yes
-12,15,6,nine teams of five students each,No
-13,23,6,nine teams of five students each,Yes
-13,22,8,"Bringing the concept applied, then use an approach like CDL, or PBL, that helps a lot because then you have a way to present the problem and then show the concept behind the resolution of that problem.",No
-14,21,3, I spent a couple of discussing about the concepts discussing about the issues.,Yes
-14,15,6,Docker and VM,No
-14,19,6,The microservice tool is [...] an enviroment in wich we out the student`s solutions there and they can see more,No
-14,25,6,the tools we use on a day-to-day basis facilitate,No
-15,21,3,The microservice tool is [...] an enviroment in wich we out the student`s solutions there and they can see more,No
-15,15,6,is quite common for them to use this environment,No
-16,25,6,"within the tool, he knows the most diverse aspects",No
-19,21,3,The microservice tool is one of the tolls I have been using with them,Yes
+Challenge,Recommendation,TeachingMethod,Interview Snippet,Relevant link
+2,1,6,"Most of these tools have free layers, in the case of Cloud providers. All three of the main ones have an education-oriented version, and that is very good. This for the teacher is a very great facilitator.",Yes
+7,7,6,"I don't know any specific teaching devops tool
+I think a potential candidate is GNS3.",No
+7,8,6,Ansible or Terraform,No
+8,10,10,"The practice that should occupy eighty percent of the class there, at least. The practical discipline has a balance between concept and practice, with the practice being the most important. So all of us, we covered a bit in really in the course, but also the, I mean, the lectures, but also they practice that in the lab.",Yes
+9,1,6,"Most of these tools have free layers, in the case of Cloud providers. All three of the main ones have an education-oriented version, and that is very good. This for the teacher is a very great facilitator.",Yes
+12,15,6,The microservice tool is [...] an enviroment in wich we out the student`s solutions there and they can see more,No
+13,23,6,the tools we use on a day-to-day basis facilitate,Yes
+13,22,8,They [...] put this system  on the air for [...] the client who is the teachers themselves,No
+14,21,3,I always ask them to sozialize [...] and do pair programming,Yes
+14,15,6,The microservice tool is [...] an enviroment in wich we out the student`s solutions there and they can see more,No
+14,19,6,is quite common for them to use this environment,No
+14,25,6,"within the tool, he knows the most diverse aspects",No
+15,21,3,I always ask them to sozialize [...] and do pair programming,No
+15,15,6,The microservice tool is one of the tolls I have been using with them,No
+16,25,6,The microservice tool is one of the tolls I have been using with them,No
+19,21,3,I always ask them to sozialize [...] and do pair programming,Yes
 22,25,6,The microservice tool is one of the tolls I have been using with them,No
-22,19,6,The microservice tool is one of the tolls I have been using with them,No
-22,23,6,is quite common for them to use this environment,No
-25,33,2,the tools we use on a day-to-day basis facilitate,No
-25,37,5,"Most of these tools have free layers, in the case of Cloud providers. All three of the main ones have an education-oriented version, and that is very good. This for the teacher is a very great facilitator.",Yes
-26,30,7,"I don't know any specific teaching devops tool
-I think a potential candidate is GNS3.",Yes
-27,57,6,Ansible or Terraform,No
-27,54,12,"Most of these tools have free layers, in the case of Cloud providers. All three of the main ones have an education-oriented version, and that is very good. This for the teacher is a very great facilitator.",No
-29,29,13,teaching my classes on zoom,No
+22,19,6,is quite common for them to use this environment,No
+22,23,6,the tools we use on a day-to-day basis facilitate,No
+25,33,2,"Present [...] cases on how this translates, [...] eliminating the silos between operations and development.",No
+25,37,5,I spent a couple of discussing about the concepts discussing about the issues.,Yes
+26,30,7,"Having a unique mechanism and an initial step, the final step you want to reach within this test, makes it much easier when you teach, when you do, especially for examples. Explain how the methodology can be applied, with examples and even tools.",Yes
+27,57,6,teaching my classes on zoom,No
+27,54,12,there is a specific infra team to answer any doubts,No
+29,29,13,The recommendation is to understand the learning context of the class. Adapt the menu according to the student profile you have.,No
 30,30,7,"Having a unique mechanism and an initial step, the final step you want to reach within this test, makes it much easier when you teach, when you do, especially for examples. Explain how the methodology can be applied, with examples and even tools.",No
-30,29,13,"Having a unique mechanism and an initial step, the final step you want to reach within this test, makes it much easier when you teach, when you do, especially for examples. Explain how the methodology can be applied, with examples and even tools.",Yes
-32,49,13,,Yes
-32,43,13,They [...] put this system  on the air for [...] the client who is the teachers themselves,No
-32,55,13,twe [...] could answer ther questions,No
-32,63,13,"The practice that should occupy eighty percent of the class there, at least. The practical discipline has a balance between concept and practice, with the practice being the most important. So all of us, we covered a bit in really in the course, but also the, I mean, the lectures, but also they practice that in the lab.",No
-36,43,13,The lectures [...] were presented by people in the industry,No
-37,80,6,"Some settings you can have for us to help, like, oh, you have the monitors team, for example, this allows you to go to a more excellent practical line because you'll have more arms to help you, evaluate and everything else.",No
-39,79,7,there is a specific infra team to answer any doubts,Yes
-40,76,15,"The recommendation is to understand the learning context of the class. Adapt the menu according to the student profile you have.",No
-48,103,4,Adapt the menu according to the student profile you have.,No
-48,112,14,You need to assume your class [..]  has a bit of knowledge [...] or you need to assume your class does not have that much experience,Yes
-49,109,12,I`ll try to find some differentr way to make that connection with you,Yes
-56,115,1,"then work wuth the student, talk look and talk more calmly",No
-56,114,3,you have to watch how they're working,No
-58,114,3,I`ll try to find some differentr way to make that connection with you,No
-58,130,9,"PBL matches very well with, at least like this, how I see the DevOps signals or architecture, or MicroServices, which is another discipline I have; it's cool because you can start from the problem and show why people are using what are you using. So I think it matches perfectly.",No
-76,165,15,,Yes
-81,187,11,Also making the project interesting is important,Yes
+30,29,13,Adapt the menu according to the student profile you have.,Yes
+32,49,13,You need to assume your class [..]  has a bit of knowledge [...] or you need to assume your class does not have that much experience,Yes
+32,43,13,I`ll try to find some differentr way to make that connection with you,No
+32,55,13,"then work wuth the student, talk look and talk more calmly",No
+32,63,13,you have to watch how they're working,No
+36,43,13,I`ll try to find some differentr way to make that connection with you,No
+37,80,6,Docker and VM,No
+39,79,7,,Yes
+40,76,15,,No
+48,103,4,"Bringing the concept applied, then use an approach like CDL, or PBL, that helps a lot because then you have a way to present the problem and then show the concept behind the resolution of that problem.",No
+48,112,14,"PBL matches very well with, at least like this, how I see the DevOps signals or architecture, or MicroServices, which is another discipline I have; it's cool because you can start from the problem and show why people are using what are you using. So I think it matches perfectly.",Yes
+49,109,12,"Some settings you can have for us to help, like, oh, you have the monitors team, for example, this allows you to go to a more excellent practical line because you'll have more arms to help you, evaluate and everything else.",Yes
+56,115,1,teach my class in sprints,No
+56,114,3,nine teams of five students each,No
+58,114,3,nine teams of five students each,No
+58,130,9,twe [...] could answer ther questions,No
+76,165,15,Also making the project interesting is important,Yes
+81,187,11,The lectures [...] were presented by people in the industry,Yes

@@ -9,10 +9,10 @@ import jakarta.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -90,10 +90,12 @@ public class Challenge implements IdBean<Long>, Comparable<Challenge> {
         return result;
     }
     
-    public Set<TeachingMethod> getLinkedTeachingMethods() {
-        Set<TeachingMethod> result = new HashSet<>();
+    public Set<TeachingMethodLink> getTeachingMethodLinks() {
+        Set<TeachingMethodLink> result = new TreeSet<>(Comparator
+            .comparing(TeachingMethodLink::getTeachingMethod)
+            .thenComparing(TeachingMethodLink::getInterviewSnippet)::compare);
         for (Link link: getLinks()) {
-            result.addAll(link.getTeachingMethodLinks().stream().map(TeachingMethodLink::getTeachingMethod).toList());
+            result.addAll(link.getTeachingMethodLinks());
         }
         return result;
     }
