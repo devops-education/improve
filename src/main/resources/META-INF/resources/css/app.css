@@ -71,6 +71,16 @@ body .ui-menu.ui-menubar {
   font-size: large !important;
 }
 
+.teachingMethod {
+  color: limegreen !important;
+  font-size: large !important;
+}
+
+.teachingMethod-printer {
+  background-color: limegreen !important;
+  font-size: large !important;
+}
+
 .conflict {
   color: chocolate !important;
   font-size: large !important;
@@ -160,7 +170,7 @@ body .ui-menu.ui-menubar {
   font-size: 12px !important;
 }
 
-#recommendationPieChartPanel_content, #challengePieChartPanel_content {
+#teachingMethodPieChartPanel_content, #challengePieChartPanel_content, #challengePieChartPanel_content {
   border: 0px !important;    
   width: 300px !important; 
   height: 300px !important;

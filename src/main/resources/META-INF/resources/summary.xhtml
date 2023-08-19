@@ -39,169 +39,229 @@
         };
         </h:outputScript>
         
-        <p:panelGrid columns="2" layout="tabular" columnClasses="align-top">
-            <p:panel id="recommendationPieChartPanel">
-                <p:pieChart model="#{recommendationFeedbackSummaryCrudMBean.pieModel}" >
-                    <p:ajax event="itemSelect" 
-                            listener="#{recommendationFeedbackSummaryCrudMBean.pieListener}" 
-                            process="@this" 
-                            update="datatable titleText titleIcon xlsCommandButton pdfCommandButton"/>
-                </p:pieChart>
-            </p:panel>
+        <p:tabView widgetVar="basic">
+            <p:tab title="Recommendations">
+                <p:panelGrid columns="2" layout="tabular" columnClasses="align-top">
+                    <p:panel id="recommendationPieChartPanel">
+                        <p:pieChart model="#{recommendationFeedbackSummaryCrudMBean.pieModel}" >
+                            <p:ajax event="itemSelect" 
+                                    listener="#{recommendationFeedbackSummaryCrudMBean.pieListener}" 
+                                    process="@this" 
+                                    update="datatable titleText titleIcon xlsCommandButton pdfCommandButton"/>
+                        </p:pieChart>
+                    </p:panel>
 
-            <t:set var="image" value="images/ok-#{recommendationFeedbackSummaryCrudMBean.crudTitleColor}.png" />
-                
-            <c:crud titleText="#{recommendationFeedbackSummaryCrudMBean.crudTitleText}"
-                    titleStyleClass="recommendation"                
-                    titleIcon="#{resource[image]}"
-                    titleStyle="color: #{recommendationFeedbackSummaryCrudMBean.crudTitleColor} !important"
-                    managedBean="#{recommendationFeedbackSummaryCrudMBean}"
-                    dataTableRows="#{recommendationFeedbackSummaryCrudMBean.beanList.size() gt 5 ? 5 : recommendationFeedbackSummaryCrudMBean.beanList.size()}"
-                    dataTablePaginator="#{recommendationFeedbackSummaryCrudMBean.beanList.size() gt 5}"
-                    dataTableRowsPerPageTemplate="5,10,20,50"
-                    showInsert="false"
-                    showUpdateActionLink="false"
-                    dataTableLazy="false"
-                    showActionLinksColumn="true"
-                    showPrinter="true">
-                <ui:define name="listColumns">
-                    <c:columnMainIdea field="recommendation.mainIdea" />
-                    
-                    <c:columnUsedAlreadyComment field="usedAlreadyComment" />
-                    
-                    <c:columnWillUseComment field="willUseComment" />
+                    <t:set var="image" value="images/ok-#{recommendationFeedbackSummaryCrudMBean.crudTitleColor}.png" />
 
-                    <c:columnTheme field="recommendation.theme" 
-                                            value="#{bean.recommendation.theme.value}"
-                                            sortable="true" 
-                                            filterable="false"/>
+                    <c:crud titleText="#{recommendationFeedbackSummaryCrudMBean.crudTitleText}"
+                            titleStyleClass="recommendation"                
+                            titleIcon="#{resource[image]}"
+                            titleStyle="color: #{recommendationFeedbackSummaryCrudMBean.crudTitleColor} !important"
+                            managedBean="#{recommendationFeedbackSummaryCrudMBean}"
+                            dataTableRows="#{recommendationFeedbackSummaryCrudMBean.beanList.size() gt 8 ? 8 : recommendationFeedbackSummaryCrudMBean.beanList.size()}"
+                            dataTablePaginator="#{recommendationFeedbackSummaryCrudMBean.beanList.size() gt 8}"
+                            dataTableRowsPerPageTemplate="8,10,20,50"
+                            showInsert="false"
+                            showUpdateActionLink="false"
+                            dataTableLazy="false"
+                            showActionLinksColumn="true"
+                            showPrinter="true">
+                        <ui:define name="listColumns">
+                            <c:columnMainIdea field="recommendation.mainIdea" />
 
-                </ui:define>
+                            <c:columnUsedAlreadyComment field="usedAlreadyComment" />
 
-                <ui:define name="detail">
-                    <d:recommendationDetail crudMBean="#{recommendationFeedbackSummaryCrudMBean}" />
+                            <c:columnWillUseComment field="willUseComment" />
 
-                    <h:panelGrid columns="2" cellpadding="3">
-                        <c:label label="Already Used Comment" />
-                        <h:outputText id="usedAlreadyComment" value="#{fn:replace(recommendationFeedbackSummaryCrudMBean.bean.usedAlreadyComment, '\\n', '&lt;br/&gt;')}" escape="false" />
+                            <c:columnTheme field="recommendation.theme" 
+                                                    value="#{bean.recommendation.theme.value}"
+                                                    sortable="true" 
+                                                    filterable="false"/>
 
-                        <c:label label="Will Use Comment" />
-                        <h:outputText id="willUseComment" value="#{fn:replace(recommendationFeedbackSummaryCrudMBean.bean.willUseComment, '\\n', '&lt;br/&gt;')}" escape="false" />
-                    </h:panelGrid>
+                        </ui:define>
 
-                    <p:accordionPanel multiple="true" activeIndex="0" id="challengeFeedbackAccordionPanel">
-                        <p:tab title="Challenge Links (#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.links.size()})"
-                               titleStyleClass="challenge"
-                               titletip="Show / hide the list of linked challenges">
-                            <p:dataTable id="linkDatatable"
-                                         widgetVar="linkDatatable"
-                                         value="#{recommendationFeedbackSummaryCrudMBean.challengeFeedbackLinkList}"
-                                         var="challengeFeedback"
-                                         emptyMessage="Sem Registros"
-                                         rows="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.links.size() gt 5 ? 5 : recommendationFeedbackSummaryCrudMBean.bean.recommendation.links.size()}"
-                                         paginator="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.links.size() gt 5}"
-                                         rowsPerPageTemplate="5,10,20,50"
-                                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
-                                         stripedRows="true"
-                                         rowIndexVar="rowIdx"
-                                         >
+                        <ui:define name="detail">
+                            <d:recommendationDetail crudMBean="#{recommendationFeedbackSummaryCrudMBean}" />
 
-                                <c:columnMainIdea field="challenge.mainIdea" />
+                            <h:panelGrid columns="2" cellpadding="3">
+                                <c:label label="Already Used Comment" />
+                                <h:outputText id="usedAlreadyComment" value="#{fn:replace(recommendationFeedbackSummaryCrudMBean.bean.usedAlreadyComment, '\\n', '&lt;br/&gt;')}" escape="false" />
 
-                                <c:columnWillMitigateComment field="willMitigateComment" />
+                                <c:label label="Will Use Comment" />
+                                <h:outputText id="willUseComment" value="#{fn:replace(recommendationFeedbackSummaryCrudMBean.bean.willUseComment, '\\n', '&lt;br/&gt;')}" escape="false" />
+                            </h:panelGrid>
 
-                                <c:columnTheme field="challenge.theme" 
-                                                        value="#{challengeFeedback.challenge.theme.value}"
-                                                        sortable="true" 
-                                                        filterable="false"/>
+                            <p:accordionPanel multiple="true" activeIndex="0" id="challengeFeedbackAccordionPanel">
+                                <p:tab title="Challenge Links (#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.links.size()})"
+                                       titleStyleClass="challenge"
+                                       titletip="Show / hide the list of linked challenges">
+                                    <p:dataTable id="linkDatatable"
+                                                 widgetVar="linkDatatable"
+                                                 value="#{recommendationFeedbackSummaryCrudMBean.challengeFeedbackLinkList}"
+                                                 var="challengeFeedback"
+                                                 emptyMessage="Sem Registros"
+                                                 rows="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.links.size() gt 5 ? 5 : recommendationFeedbackSummaryCrudMBean.bean.recommendation.links.size()}"
+                                                 paginator="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation.links.size() gt 5}"
+                                                 rowsPerPageTemplate="5,10,20,50"
+                                                 paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+                                                 stripedRows="true"
+                                                 rowIndexVar="rowIdx"
+                                                 >
 
-                            </p:dataTable>
-                        </p:tab>
-                    </p:accordionPanel>
-                </ui:define>
-            </c:crud>
-        </p:panelGrid>        
+                                        <c:columnMainIdea field="challenge.mainIdea" />
+
+                                        <c:columnWillMitigateComment field="willMitigateComment" />
+
+                                        <c:columnTheme field="challenge.theme" 
+                                                                value="#{challengeFeedback.challenge.theme.value}"
+                                                                sortable="true" 
+                                                                filterable="false"/>
+
+                                    </p:dataTable>
+                                </p:tab>
+                            </p:accordionPanel>
+                        </ui:define>
+                    </c:crud>
+                </p:panelGrid>
+            </p:tab>
         
-        <p:panelGrid columns="2" layout="tabular" columnClasses="align-top" >
-            <p:panel id="challengePieChartPanel">
-                <p:pieChart model="#{challengeFeedbackSummaryCrudMBean.pieModel}" >
-                    <p:ajax event="itemSelect" 
-                            listener="#{challengeFeedbackSummaryCrudMBean.pieListener}" 
-                            process="@this"
-                            update="datatablechallenge titleTextchallenge titleIconchallenge xlsCommandButtonchallenge pdfCommandButtonchallenge"/>
-                </p:pieChart>
-            </p:panel>        
+            <p:tab title="Teaching Methods">
+                <p:panelGrid columns="2" layout="tabular" columnClasses="align-top">
+                    <p:panel id="teachingMethodPieChartPanel">
+                        <p:pieChart model="#{teachingMethodFeedbackSummaryCrudMBean.pieModel}" >
+                            <p:ajax event="itemSelect" 
+                                    listener="#{teachingMethodFeedbackSummaryCrudMBean.pieListener}" 
+                                    process="@this"
+                                    update="datatableteachingMethod titleTextteachingMethod titleIconteachingMethod xlsCommandButtonteachingMethod pdfCommandButtonteachingMethod"/>
+                        </p:pieChart>
+                    </p:panel>        
 
-            <t:set var="imagechallenge" value="images/warning-#{challengeFeedbackSummaryCrudMBean.crudTitleColor}.png" />
-                
-            <c:crud crudId="challenge"
-                    titleText="#{challengeFeedbackSummaryCrudMBean.crudTitleText}"
-                    titleStyleClass="challenge"
-                    titleIcon="#{resource[imagechallenge]}" 
-                    titleStyle="color: #{challengeFeedbackSummaryCrudMBean.crudTitleColor} !important"
-                    titleTextId="challenge"
-                    managedBean="#{challengeFeedbackSummaryCrudMBean}"
-                    dataTableRows="#{challengeFeedbackSummaryCrudMBean.beanList.size() gt 5 ? 5 : challengeFeedbackSummaryCrudMBean.beanList.size()}"
-                    dataTablePaginator="#{challengeFeedbackSummaryCrudMBean.beanList.size() gt 5}"
-                    dataTableRowsPerPageTemplate="5,10,20,50"
-                    showInsert="false"
-                    showUpdateActionLink="false"
-                    dataTableLazy="false"
-                    showActionLinksColumn="true"
-                    showPrinter="true">
-                <ui:define name="listColumns">
-                    <c:columnMainIdea field="challenge.mainIdea" />
+                    <t:set var="imageteachingMethod" value="images/ok-#{teachingMethodFeedbackSummaryCrudMBean.crudTitleColor}.png" />
 
-                    <c:columnWillMitigateComment field="willMitigateComment" />
+                    <c:crud crudId="teachingMethod"
+                            titleText="#{teachingMethodFeedbackSummaryCrudMBean.crudTitleText}"
+                            titleStyleClass="teachingMethod"
+                            titleIcon="#{resource[imageteachingMethod]}" 
+                            titleStyle="color: #{teachingMethodFeedbackSummaryCrudMBean.crudTitleColor} !important"
+                            titleTextId="teachingMethod"
+                            managedBean="#{teachingMethodFeedbackSummaryCrudMBean}"
+                            dataTableRows="#{teachingMethodFeedbackSummaryCrudMBean.beanList.size() gt 8 ? 8 : teachingMethodFeedbackSummaryCrudMBean.beanList.size()}"
+                            dataTablePaginator="#{teachingMethodFeedbackSummaryCrudMBean.beanList.size() gt 8}"
+                            dataTableRowsPerPageTemplate="8,10,20,50"
+                            showInsert="false"
+                            showUpdateActionLink="false"
+                            dataTableLazy="false"
+                            showActionLinksColumn="true"
+                            showPrinter="true"
+                            showDetailActionLink="false">
+                        <ui:define name="listColumns">
+                            <c:columnTeachingMethodName field="teachingMethod.name" />
 
-                    <c:columnTheme field="challenge.theme" 
-                                            value="#{bean.challenge.theme.value}"
-                                            sortable="true" 
-                                            filterable="false"/>
-                </ui:define>
+                            <c:columnTeachingMethodDefinition field="teachingMethod.definition" />
+                            
+                            <p:column style="width:4rem" headerText="Example">
+                                <p:rowToggler />
+                            </p:column>
+                            <p:rowExpansion>
+                                <p:dataTable value="#{teachingMethodFeedbackSummaryCrudMBean.getTeachingMethodLinks(bean.teachingMethod)}"
+                                             var="teachingMethodLink"
+                                             emptyMessage="Sem Registros"
+                                             rows="#{teachingMethodFeedbackSummaryCrudMBean.getTeachingMethodLinks(bean.teachingMethod).size()}"
+                                             paginator="false"
+                                             stripedRows="true"
+                                             rowIndexVar="rowIdx"
+                                             >
+                                    <c:columnTeachingMethodLinkInterviewSnippet field="interviewSnippet" />
+                                </p:dataTable>
+                            </p:rowExpansion>
+                        </ui:define>
+                    </c:crud>
+                </p:panelGrid>
+            </p:tab>
+        
+            <p:tab title="Challenges">                    
+                <p:panelGrid columns="2" layout="tabular" columnClasses="align-top" >
+                    <p:panel id="challengePieChartPanel">
+                        <p:pieChart model="#{challengeFeedbackSummaryCrudMBean.pieModel}" >
+                            <p:ajax event="itemSelect" 
+                                    listener="#{challengeFeedbackSummaryCrudMBean.pieListener}" 
+                                    process="@this"
+                                    update="datatablechallenge titleTextchallenge titleIconchallenge xlsCommandButtonchallenge pdfCommandButtonchallenge"/>
+                        </p:pieChart>
+                    </p:panel>        
 
-                <ui:define name="detail">
-                    <d:challengeDetail crudMBean="#{challengeFeedbackSummaryCrudMBean}" />
+                    <t:set var="imagechallenge" value="images/warning-#{challengeFeedbackSummaryCrudMBean.crudTitleColor}.png" />
 
-                    <h:panelGrid columns="2" cellpadding="3">
-                        <c:label id="willMitigateCommentChallenge" label="Deal with Comment" />
-                        <h:outputText value="#{fn:replace(challengeFeedbackSummaryCrudMBean.bean.willMitigateComment, '\\n', '&lt;br/&gt;')}" escape="false" />
-                    </h:panelGrid>
+                    <c:crud crudId="challenge"
+                            titleText="#{challengeFeedbackSummaryCrudMBean.crudTitleText}"
+                            titleStyleClass="challenge"
+                            titleIcon="#{resource[imagechallenge]}" 
+                            titleStyle="color: #{challengeFeedbackSummaryCrudMBean.crudTitleColor} !important"
+                            titleTextId="challenge"
+                            managedBean="#{challengeFeedbackSummaryCrudMBean}"
+                            dataTableRows="#{challengeFeedbackSummaryCrudMBean.beanList.size() gt 8 ? 8 : challengeFeedbackSummaryCrudMBean.beanList.size()}"
+                            dataTablePaginator="#{challengeFeedbackSummaryCrudMBean.beanList.size() gt 8}"
+                            dataTableRowsPerPageTemplate="8,10,20,50"
+                            showInsert="false"
+                            showUpdateActionLink="false"
+                            dataTableLazy="false"
+                            showActionLinksColumn="true"
+                            showPrinter="true">
+                        <ui:define name="listColumns">
+                            <c:columnMainIdea field="challenge.mainIdea" />
 
-                    <p:accordionPanel multiple="true" activeIndex="0" id="linkRecommendationFeedbackAccordionPanel">
-                        <p:tab title="Recommendation Links (#{challengeFeedbackSummaryCrudMBean.bean.challenge.links.size()})"
-                               titleStyleClass="recommendation"
-                               titletip="Show / hide the list of linked recommendations">
-                            <p:dataTable id="linkDatatable"
-                                         widgetVar="linkDatatable"
-                                         value="#{challengeFeedbackSummaryCrudMBean.recommendationFeedbackLinkList}"
-                                         var="recommendationFeedback"
-                                         emptyMessage="Sem Registros"
-                                         rows="#{challengeFeedbackSummaryCrudMBean.bean.challenge.links.size() gt 5 ? 5 : challengeFeedbackSummaryCrudMBean.bean.challenge.links.size()}"
-                                         paginator="#{challengeFeedbackSummaryCrudMBean.bean.challenge.links.size() gt 5}"
-                                         rowsPerPageTemplate="5,10,20,50"
-                                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
-                                         stripedRows="true"
-                                         rowIndexVar="rowIdx"
-                                         >
+                            <c:columnWillMitigateComment field="willMitigateComment" />
 
-                                <c:columnMainIdea field="recommendation.mainIdea" />
+                            <c:columnTheme field="challenge.theme" 
+                                                    value="#{bean.challenge.theme.value}"
+                                                    sortable="true" 
+                                                    filterable="false"/>
+                        </ui:define>
 
-                                <c:columnUsedAlreadyComment field="usedAlreadyComment" />
-                    
-                                <c:columnWillUseComment field="willUseComment" />
+                        <ui:define name="detail">
+                            <d:challengeDetail crudMBean="#{challengeFeedbackSummaryCrudMBean}" />
 
-                                <c:columnTheme field="recommendation.theme" 
-                                                        value="#{recommendationFeedback.recommendation.theme.value}"
-                                                        sortable="true" 
-                                                        filterable="false"/>
+                            <h:panelGrid columns="2" cellpadding="3">
+                                <c:label id="willMitigateCommentChallenge" label="Deal with Comment" />
+                                <h:outputText value="#{fn:replace(challengeFeedbackSummaryCrudMBean.bean.willMitigateComment, '\\n', '&lt;br/&gt;')}" escape="false" />
+                            </h:panelGrid>
 
-                            </p:dataTable>
-                        </p:tab>
-                    </p:accordionPanel>
-                </ui:define>
-            </c:crud>
-        </p:panelGrid>
+                            <p:accordionPanel multiple="true" activeIndex="0" id="linkRecommendationFeedbackAccordionPanel">
+                                <p:tab title="Recommendation Links (#{challengeFeedbackSummaryCrudMBean.bean.challenge.links.size()})"
+                                       titleStyleClass="recommendation"
+                                       titletip="Show / hide the list of linked recommendations">
+                                    <p:dataTable id="linkDatatable"
+                                                 widgetVar="linkDatatable"
+                                                 value="#{challengeFeedbackSummaryCrudMBean.recommendationFeedbackLinkList}"
+                                                 var="recommendationFeedback"
+                                                 emptyMessage="Sem Registros"
+                                                 rows="#{challengeFeedbackSummaryCrudMBean.bean.challenge.links.size() gt 5 ? 5 : challengeFeedbackSummaryCrudMBean.bean.challenge.links.size()}"
+                                                 paginator="#{challengeFeedbackSummaryCrudMBean.bean.challenge.links.size() gt 5}"
+                                                 rowsPerPageTemplate="5,10,20,50"
+                                                 paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+                                                 stripedRows="true"
+                                                 rowIndexVar="rowIdx"
+                                                 >
+
+                                        <c:columnMainIdea field="recommendation.mainIdea" />
+
+                                        <c:columnUsedAlreadyComment field="usedAlreadyComment" />
+
+                                        <c:columnWillUseComment field="willUseComment" />
+
+                                        <c:columnTheme field="recommendation.theme" 
+                                                                value="#{recommendationFeedback.recommendation.theme.value}"
+                                                                sortable="true" 
+                                                                filterable="false"/>
+
+                                    </p:dataTable>
+                                </p:tab>
+                            </p:accordionPanel>
+                        </ui:define>
+                    </c:crud>
+                </p:panelGrid>
+            </p:tab>
+        </p:tabView>
         
     </ui:define>
 </ui:composition>
