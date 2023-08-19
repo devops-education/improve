@@ -54,35 +54,10 @@
                                                         challengeFeedback="#{challengeFeedbackCrudMBean.bean}" />
                 
                 <p:accordionPanel multiple="true" activeIndex="0,1" id="recommendationFeedbackAccordionPanel">
-                    <p:tab title="Teaching Method Links (#{challengeFeedbackCrudMBean.bean.challenge.teachingMethodLinks.size()})"
+                    <p:tab title="Teaching Method Links (#{challengeFeedbackCrudMBean.teachingMethodLinkTeachingMethodFeedbackList.size()})"
                            titleStyleClass="recommendation" 
                            titletip="Show / hide the list of linked teaching methods">
-                        <p:dataTable id="linkTeachingMethodDatatable"
-                                     widgetVar="linkTeachingMethodDatatable"
-                                     value="#{challengeFeedbackCrudMBean.bean.challenge.teachingMethodLinks}"
-                                     var="linkTeachingMethodFeedback"
-                                     emptyMessage="Sem Registros"
-                                     rows="#{challengeFeedbackCrudMBean.bean.challenge.teachingMethodLinks.size() gt 7 ? 7 : challengeFeedbackCrudMBean.bean.challenge.teachingMethodLinks.size()}"
-                                     paginator="#{challengeFeedbackCrudMBean.bean.challenge.teachingMethodLinks.size() gt 7}"
-                                     rowsPerPageTemplate="7,10,20,50"
-                                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
-                                     stripedRows="true"
-                                     rowIndexVar="rowIdx"
-                                     rowKey="#{linkTeachingMethodFeedback.id}"
-                                     >
-                            <p:column headerText="Teaching Method Name"
-                                      field="teachingMethod.name"
-                                      filterable="false" 
-                                      sortable="false" />
-                            <p:column headerText="Teaching Method Definition"
-                                      field="teachingMethod.definition"
-                                      filterable="false"  
-                                      sortable="false" />
-                            <p:column headerText="Example"
-                                      field="interviewSnippet"
-                                      filterable="false"  
-                                      sortable="false" />
-                        </p:dataTable>
+                        <c:teachingMethodFeedbackDatatable crudMBean="#{challengeFeedbackCrudMBean}" />
                     </p:tab>
 
                     <p:tab title="Recommendation Links (#{challengeFeedbackCrudMBean.linkRecommendationFeedbackList.size()})"

@@ -59,13 +59,7 @@ public class ChallengeFeedback implements IdBean<Long>, Comparable<ChallengeFeed
     private User user;
 
     @Column
-    private Boolean known;
-
-    @Column
     private Boolean willMitigate;
-
-    @Column(length = LENGTH)
-    private String knownComment;
 
     @Column(length = LENGTH)
     private String willMitigateComment;
@@ -80,7 +74,6 @@ public class ChallengeFeedback implements IdBean<Long>, Comparable<ChallengeFeed
     public int compareTo(ChallengeFeedback o) {
         return Comparator.comparing(ChallengeFeedback::getChallenge)
                 .thenComparing(ChallengeFeedback::getUser)
-                .thenComparing(Comparator.nullsLast(Comparator.comparing(ChallengeFeedback::getKnown)))
                 .thenComparing(Comparator.nullsLast(Comparator.comparing(ChallengeFeedback::getWillMitigate)))
                 .compare(this, o);
     }
