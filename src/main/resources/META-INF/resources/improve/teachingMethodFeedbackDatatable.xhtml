@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+    xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+    xmlns:c="improve.persapiens.org"
+    xmlns:d="http://xmlns.jcp.org/jsf/composite/improve"    
+    xmlns:p="http://primefaces.org/ui">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="crudMBean" />
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <p:dataTable id="linkTeachingMethodDatatable"
+                     widgetVar="linkTeachingMethodDatatable"
+                     value="#{cc.attrs.crudMBean.teachingMethodLinkTeachingMethodFeedbackList}"
+                     var="teachingMethodLinkTeachingMethodFeedback"
+                     emptyMessage="Sem Registros"
+                     rows="#{cc.attrs.crudMBean.teachingMethodLinkTeachingMethodFeedbackList.size() gt 7 ? 7 : cc.attrs.crudMBean.teachingMethodLinkTeachingMethodFeedbackList.size()}"
+                     paginator="#{cc.attrs.crudMBean.teachingMethodLinkTeachingMethodFeedbackList.size() gt 7}"
+                     rowsPerPageTemplate="7,10,20,50"
+                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+                     stripedRows="true"
+                     rowIndexVar="rowIdx"
+                     rowKey="#{teachingMethodLinkTeachingMethodFeedback.teachingMethodFeedback.teachingMethod.id}"
+                     >
+            <p:column field="teachingMethodLink.teachingMethod.name"
+                      filterable="false" 
+                      sortable="false" 
+                      responsivePriority="1"
+                      exportable="true"
+                      exportHeaderValue="Teaching Method Name" >
+                <f:facet name="header">
+                    <h:outputText id="teachingMethodName" value="Teaching Method Name" />
+                    <p:tooltip for="teachingMethodName" 
+                               value="The name of teaching method"
+                               position="top"/>
+                </f:facet>
+            </p:column>
+            <p:column field="teachingMethodLink.teachingMethod.definition"
+                      filterable="false"  
+                      sortable="false" 
+                      responsivePriority="2"
+                      exportable="true"
+                      exportHeaderValue="Teaching Method Definition" >
+                <f:facet name="header">
+                    <h:outputText id="teachingMethodDefinition" value="Teaching Method Definition" />
+                    <p:tooltip for="teachingMethodDefinition" 
+                               value="The definition of teaching method"
+                               position="top"/>
+                </f:facet>
+            </p:column>
+            <p:column field="teachingMethodLink.interviewSnippet"
+                      filterable="false"  
+                      sortable="false" 
+                      responsivePriority="1"
+                      exportable="true"
+                      exportHeaderValue="Example" >
+                <f:facet name="header">
+                    <h:outputText id="interviewSnippet" value="Example" />
+                    <p:tooltip for="interviewSnippet" 
+                               value="The example of how the teaching method is linked"
+                               position="top"/>
+                </f:facet>
+            </p:column>
+            
+            <p:column field="teachingMethodFeedback.usedAlready"
+                      filterable="true" 
+                      filterMatchMode="exact" 
+                      style="width: 130px;" 
+                      responsivePriority="2"
+                      exportable="true">
+                <f:facet name="header">
+                    <h:outputText id="usedAlready" value="Already Used" />
+                    <p:tooltip for="usedAlready"
+                               value="Inform if you already used this teaching method"
+                               position="top"/>
+                </f:facet>
+                <f:facet name="filter">
+                    <p:selectOneMenu onchange="PF('linkTeachingMethodDatatable').filter()" >
+                        <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                    </p:selectOneMenu>
+                </f:facet>
+                <p:selectOneButton value="#{teachingMethodLinkTeachingMethodFeedback.teachingMethodFeedback.usedAlready}">
+                    <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                    <p:ajax listener="#{cc.attrs.crudMBean.saveTeachingMethodFeedbackUsedAlready(teachingMethodLinkTeachingMethodFeedback.teachingMethodFeedback)}"
+                            update="teachingMethodFeedbackUsedAlreadyComment:usedAlreadyComment willUseSelectOneButton teachingMethodFeedbackWillUseComment:willUseComment"/>
+                </p:selectOneButton>
+            </p:column>
+
+            <p:column headerText="Will Use" 
+                      field="teachingMethodFeedback.willUse"
+                      filterable="true" 
+                      filterMatchMode="exact" 
+                      style="width: 120px;" 
+                      responsivePriority="2"
+                      exportable="true">
+                <f:facet name="header">
+                    <h:outputText id="willUse" value="Will Use" />
+                    <p:tooltip for="willUse"
+                               value="Inform if you want to use this teaching method"
+                               position="top"/>
+                </f:facet>
+                <f:facet name="filter">
+                    <p:selectOneMenu onchange="PF('linkTeachingMethodDatatable').filter()" >
+                        <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                    </p:selectOneMenu>
+                </f:facet>
+                <p:selectOneButton id="willUseSelectOneButton"
+                                   value="#{teachingMethodLinkTeachingMethodFeedback.teachingMethodFeedback.willUse}"
+                                   disabled="#{teachingMethodLinkTeachingMethodFeedback.teachingMethodFeedback.usedAlready}">
+                    <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
+                    <p:ajax listener="#{cc.attrs.crudMBean.saveTeachingMethodFeedbackWillUse(teachingMethodLinkTeachingMethodFeedback.teachingMethodFeedback)}"
+                            update="teachingMethodFeedbackWillUseComment:willUseComment"/>
+                </p:selectOneButton>
+            </p:column>
+
+            <p:column style="width:4rem" headerText="Comment">
+                <p:rowToggler />
+            </p:column>
+            <p:rowExpansion>
+                <d:teachingMethodFeedbackUsedAlreadyComment id="teachingMethodFeedbackUsedAlreadyComment"
+                                                            crudMBean="#{cc.attrs.crudMBean}" 
+                                                            teachingMethodFeedback="#{teachingMethodLinkTeachingMethodFeedback.teachingMethodFeedback}" />
+
+                <d:teachingMethodFeedbackWillUseComment id="teachingMethodFeedbackWillUseComment"
+                                                        crudMBean="#{cc.attrs.crudMBean}" 
+                                                        teachingMethodFeedback="#{teachingMethodLinkTeachingMethodFeedback.teachingMethodFeedback}" /> 
+            </p:rowExpansion>
+            
+        </p:dataTable>
+    </cc:implementation>
+</html>

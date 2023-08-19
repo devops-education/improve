@@ -31,14 +31,14 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"recommendation", "user"})
+@EqualsAndHashCode(of = {"teachingMethod", "user"})
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
 @Entity
-@SequenceGenerator(sequenceName = "seq_recommendation_feedback", name = "ID_SEQUENCE", allocationSize = 1)
-@Table(indexes = @Index(name = "idx_recommendationfeedback_recommendation_user", unique = true, columnList = "recommendation_id, user_id"))
-public class RecommendationFeedback implements IdBean<Long>, Comparable<RecommendationFeedback> {
+@SequenceGenerator(sequenceName = "seq_teachingMethod_feedback", name = "ID_SEQUENCE", allocationSize = 1)
+@Table(indexes = @Index(name = "idx_teachingMethodfeedback_teachingMethod_user", unique = true, columnList = "teaching_method_id, user_id"))
+public class TeachingMethodFeedback implements IdBean<Long>, Comparable<TeachingMethodFeedback> {
 
     private static final long serialVersionUID = 1L;
 
@@ -49,13 +49,13 @@ public class RecommendationFeedback implements IdBean<Long>, Comparable<Recommen
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @NonNull
     @ManyToOne
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_recommendationFeedback_recommendation"))
-    private Recommendation recommendation;
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_teachingMethodFeedback_teachingMethod"))
+    private TeachingMethod teachingMethod;
     
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @NonNull
     @ManyToOne
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_recommendationFeedback_user"))
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_teachingMethodFeedback_user"))
     private User user;
 
     @Column
@@ -75,13 +75,15 @@ public class RecommendationFeedback implements IdBean<Long>, Comparable<Recommen
     
     @Column(nullable = false)
     private LocalDateTime updateTime;
-
+    
     @Override
-    public int compareTo(RecommendationFeedback o) {
-        return Comparator.comparing(RecommendationFeedback::getRecommendation)
-                .thenComparing(RecommendationFeedback::getUser)
-                .thenComparing(Comparator.nullsLast(Comparator.comparing(RecommendationFeedback::getUsedAlready)))
-                .thenComparing(Comparator.nullsLast(Comparator.comparing(RecommendationFeedback::getWillUse)))
+    public int compareTo(TeachingMethodFeedback o) {
+        return Comparator.comparing(TeachingMethodFeedback::getTeachingMethod)
+                .thenComparing(TeachingMethodFeedback::getUser)
+                .thenComparing(Comparator.nullsLast(Comparator.comparing(TeachingMethodFeedback::getUsedAlready)))
+                .thenComparing(Comparator.nullsLast(Comparator.comparing(TeachingMethodFeedback::getWillUse)))
+                .thenComparing(Comparator.nullsLast(Comparator.comparing(TeachingMethodFeedback::getUsedAlreadyComment)))
+                .thenComparing(Comparator.nullsLast(Comparator.comparing(TeachingMethodFeedback::getWillUseComment)))
                 .compare(this, o);
     }
 
@@ -93,5 +95,5 @@ public class RecommendationFeedback implements IdBean<Long>, Comparable<Recommen
     public void update() {
         updateTime = LocalDateTime.now();
     }
-
+    
 }
