@@ -865,6 +865,42 @@
         <description>
             Column main idea.
         </description>
+        <tag-name>columnTeachingMethodName</tag-name>
+        <source>tag/columnTeachingMethodName.xhtml</source>
+        <attribute>
+            <description>field of the column</description>
+            <name>field</name>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <description>
+            Column main idea.
+        </description>
+        <tag-name>columnTeachingMethodDefinition</tag-name>
+        <source>tag/columnTeachingMethodDefinition.xhtml</source>
+        <attribute>
+            <description>field of the column</description>
+            <name>field</name>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <description>
+            Column main idea.
+        </description>
+        <tag-name>columnTeachingMethodLinkInterviewSnippet</tag-name>
+        <source>tag/columnTeachingMethodLinkInterviewSnippet.xhtml</source>
+        <attribute>
+            <description>field of the column</description>
+            <name>field</name>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <description>
+            Column main idea.
+        </description>
         <tag-name>columnMainIdea</tag-name>
         <source>tag/columnMainIdea.xhtml</source>
         <attribute>

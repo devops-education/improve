@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.Getter;
 import org.persapiens.improve.domain.Link;
+import org.persapiens.improve.domain.TeachingMethod;
 import org.persapiens.improve.domain.TeachingMethodLink;
 import org.persapiens.improve.domain.TeachingMethodLinkId;
 import org.persapiens.improve.persistence.TeachingMethodLinkRepository;
@@ -18,6 +19,11 @@ public class TeachingMethodLinkService extends InMemoryCrudService <TeachingMeth
 
     public Set<TeachingMethodLink> findByLink(Link link) {
         return getBeans().values().stream().filter( t -> t.getLink().equals(link))
+            .collect(Collectors.toSet());
+    }
+
+    public Set<TeachingMethodLink> findByTeachingMethod(TeachingMethod teachingMethod) {
+        return getBeans().values().stream().filter( t -> t.getTeachingMethod().equals(teachingMethod))
             .collect(Collectors.toSet());
     }
 

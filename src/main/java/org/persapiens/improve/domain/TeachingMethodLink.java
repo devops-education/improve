@@ -7,6 +7,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.util.Comparator;
+import java.util.Set;
+import java.util.TreeSet;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -61,6 +63,12 @@ public class TeachingMethodLink implements IdBean<TeachingMethodLinkId>, Compara
                 .thenComparing(TeachingMethodLink::getTeachingMethod)
                 .thenComparing(TeachingMethodLink::isRelevantLink)
                 .compare(this, o);
+    }
+    
+    public static Set<TeachingMethodLink> getSetSortedByTeachingMethodAndInterviewSnippet() {
+        return new TreeSet<>(Comparator
+            .comparing(TeachingMethodLink::getTeachingMethod)
+            .thenComparing(TeachingMethodLink::getInterviewSnippet)::compare);
     }
 
 }

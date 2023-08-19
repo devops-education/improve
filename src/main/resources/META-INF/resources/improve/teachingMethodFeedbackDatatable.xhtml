@@ -31,45 +31,11 @@
                      rowIndexVar="rowIdx"
                      rowKey="#{teachingMethodLinkTeachingMethodFeedback.teachingMethodFeedback.teachingMethod.id}"
                      >
-            <p:column field="teachingMethodLink.teachingMethod.name"
-                      filterable="false" 
-                      sortable="false" 
-                      responsivePriority="1"
-                      exportable="true"
-                      exportHeaderValue="Teaching Method Name" >
-                <f:facet name="header">
-                    <h:outputText id="teachingMethodName" value="Teaching Method Name" />
-                    <p:tooltip for="teachingMethodName" 
-                               value="The name of teaching method"
-                               position="top"/>
-                </f:facet>
-            </p:column>
-            <p:column field="teachingMethodLink.teachingMethod.definition"
-                      filterable="false"  
-                      sortable="false" 
-                      responsivePriority="2"
-                      exportable="true"
-                      exportHeaderValue="Teaching Method Definition" >
-                <f:facet name="header">
-                    <h:outputText id="teachingMethodDefinition" value="Teaching Method Definition" />
-                    <p:tooltip for="teachingMethodDefinition" 
-                               value="The definition of teaching method"
-                               position="top"/>
-                </f:facet>
-            </p:column>
-            <p:column field="teachingMethodLink.interviewSnippet"
-                      filterable="false"  
-                      sortable="false" 
-                      responsivePriority="1"
-                      exportable="true"
-                      exportHeaderValue="Example" >
-                <f:facet name="header">
-                    <h:outputText id="interviewSnippet" value="Example" />
-                    <p:tooltip for="interviewSnippet" 
-                               value="The example of how the teaching method is linked"
-                               position="top"/>
-                </f:facet>
-            </p:column>
+            <c:columnTeachingMethodName field="teachingMethodLink.teachingMethod.name" />
+            
+            <c:columnTeachingMethodDefinition field="teachingMethodLink.teachingMethod.definition" />
+            
+            <c:columnTeachingMethodLinkInterviewSnippet field="teachingMethodLink.interviewSnippet" />            
             
             <p:column field="teachingMethodFeedback.usedAlready"
                       filterable="true" 
