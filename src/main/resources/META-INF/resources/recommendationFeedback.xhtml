@@ -7,7 +7,6 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="improve.persapiens.org"
     xmlns:d="http://xmlns.jcp.org/jsf/composite/improve"
-    xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
     template="/layout/template.xhtml">
     <ui:define name="content" >
         <c:crud titleText="Recommendations on DevOps Education"
@@ -79,7 +78,8 @@
                 <p:accordionPanel multiple="true" activeIndex="0,1" id="challengeFeedbackAccordionPanel">
                     <p:tab title="Teaching Method Links (#{recommendationFeedbackCrudMBean.teachingMethodLinkTeachingMethodFeedbackList.size()})"
                            titleStyleClass="recommendation" 
-                           titletip="Show / hide the list of linked teaching methods">
+                           titletip="Show / hide the list of linked teaching methods"
+                           rendered="#{not empty recommendationFeedbackCrudMBean.teachingMethodLinkTeachingMethodFeedbackList}">
                         <c:teachingMethodFeedbackDatatable crudMBean="#{recommendationFeedbackCrudMBean}" />
                     </p:tab>
 
