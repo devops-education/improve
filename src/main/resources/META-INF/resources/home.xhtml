@@ -51,12 +51,20 @@
                             <p:graphicImage value="#{resource['images/tutorial/challengeFeedbackWillMitigateSelected.png']}" />
                         </p:panelGrid>
                     </p:tab>
+                    <p:tab title="Provide Teaching Method Feedback" >
+                        <p:panelGrid columns="1" layout="grid">
+                            <h:outputText value="I. At teaching method list, click 'Yes' or 'No' at 'Already Used' or 'Will Use' buttons to inform if the you already used and if you want to use the teaching method."/>
+                            <p:graphicImage value="#{resource['images/tutorial/teachingMethodUsedAlreadyWillUseColumnSelected.png']}" />
+                            <h:outputText value="II. If you click 'Comment' button, the Comments expansion will open. Please provide optional comment about how you already used and how you will use the teaching method."/>
+                            <p:graphicImage value="#{resource['images/tutorial/teachingMethodFeedbackCommentsSelected.png']}" />
+                        </p:panelGrid>
+                    </p:tab>
                     <p:tab title="Provide Recommendation Feedback" >
                         <p:panelGrid columns="1" layout="grid">
                             <h:outputText value="I. At recommendation list, click 'Yes' or 'No' at 'Already Used' or 'Will Use' buttons to inform if the you already used and if you want to use the recommendation."/>
-                            <p:graphicImage value="#{resource['images/tutorial/usedAlreadyWillUseColumnSelected.png']}" />
+                            <p:graphicImage value="#{resource['images/tutorial/recommendationUsedAlreadyWillUseColumnSelected.png']}" />
                             <h:outputText value="II. If you click 'Comment' button, the Comments expansion will open. Please provide optional comment about how you already used and how you will use the recommendaiton."/>
-                            <p:graphicImage value="#{resource['images/tutorial/RecommendationFeedbackCommentsSelected.png']}" />
+                            <p:graphicImage value="#{resource['images/tutorial/recommendationFeedbackCommentsSelected.png']}" />
                         </p:panelGrid>
                     </p:tab>
                     <p:tab title="Open Recommendations Page" >
@@ -74,15 +82,18 @@
                     </p:tab>
                     <p:tab title="Check Summary results" >
                         <p:panelGrid columns="1" layout="grid">
-                            <h:outputText value="I. You will see two pie charts. The first is about recommendation."/>
+                            <h:outputText value="I. You will see three pie charts. The first is about recommendation."/>
                             <h:outputText value="The default green recommendation pie slice shows the recommendations that you should apply to your course."/>
                             <p:graphicImage value="#{resource['images/tutorial/summaryRecommendationGreen.png']}" />
                             <h:outputText value="II. If you click the blue slice, you will see recommendation that you already use in your course."/>
                             <p:graphicImage value="#{resource['images/tutorial/summaryRecommendationBlue.png']}" />
-                            <h:outputText value="III. The second pie chart is about challenge."/>
+                            <h:outputText value="III. The second pie chart is about teaching methods."/>
+                            <h:outputText value="Similar to the recommendations, the default green teaching method pie slice shows the teaching methods that you deal with, but you use no linked challenge and recommendation."/>
+                            <p:graphicImage value="#{resource['images/tutorial/summaryTeachingMethodGreen.png']}" />
+                            <h:outputText value="IV. Now, the third pie chart is about challenge."/>
                             <h:outputText value="The default orange challenge pie slice shows the challenges that you deal with, but you use no linked recommendation."/>
                             <p:graphicImage value="#{resource['images/tutorial/summaryChallengeOrange.png']}" />
-                            <h:outputText value="IV. If you click the blue slice, you will see challenges that you deal with and you use linked recommendation."/>
+                            <h:outputText value="V. If you click the blue slice, you will see challenges that you deal with and you use linked recommendation."/>
                             <p:graphicImage value="#{resource['images/tutorial/summaryChallengeBlue.png']}" />
                             <h:outputText value="Tip: you can export your results if you click the excel icon :)" />
                         </p:panelGrid>
