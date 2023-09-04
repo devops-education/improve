@@ -20,13 +20,18 @@
                 cancelButtonLabelAtUpdate="Ok"
                 cancelButtonTitleAtUpdate="Back to Recommendation list"
                 >
+            
+            <ui:define name="listBeforeDatatable">
+                <c:themeFilter feedbackCrudMBean="#{recommendationFeedbackCrudMBean}" />
+            </ui:define>                
+
             <ui:define name="listColumns">
                 <c:columnMainIdea field="recommendation.mainIdea" />
 
                 <c:columnTheme field="recommendation.theme" 
                                value="#{bean.recommendation.theme.value}"
                                sortable="true" 
-                               filterable="true"/>
+                               filterable="false"/>
 
                 <c:columnUsedAlreadyReadonly field="usedAlready"
                                      dataTableId='dataTable'

@@ -23,6 +23,7 @@ import org.persapiens.improve.domain.Link;
 
 import org.persapiens.improve.domain.Recommendation;
 import org.persapiens.improve.domain.RecommendationFeedback;
+import org.persapiens.improve.domain.Theme;
 import org.persapiens.improve.service.LinkService;
 import org.persapiens.improve.service.ChallengeSearchService;
 import org.persapiens.improve.service.ChallengeService;
@@ -104,6 +105,8 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
             result.add(challengeFeedback);
         }
 
+        result = filterTheme(result);
+        
         return result;
     }
     
@@ -168,6 +171,21 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
     protected void init() {
         super.init();
         viewLogMBean.logChallenge();
+    }
+
+    private List<ChallengeFeedback> filterTheme(List<ChallengeFeedback> result) {
+        Set<Theme> themeFilter = themeFilter();
+        if (!themeFilter.isEmpty()) {
+            List<ChallengeFeedback> newResult = new ArrayList<>();
+            for (ChallengeFeedback cf: result) {
+                if (themeFilter.contains(cf.getChallenge().getTheme())) {
+                    newResult.add(cf);
+                }
+            }
+            result = newResult;
+        }
+        
+        return result;
     }
     
 }

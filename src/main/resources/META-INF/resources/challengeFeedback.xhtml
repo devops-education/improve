@@ -19,13 +19,18 @@
                 updateButtonRendered="false"
                 cancelButtonLabelAtUpdate="Ok"
                 cancelButtonTitleAtUpdate="Back to Challenge list">
+            
+            <ui:define name="listBeforeDatatable">
+                <c:themeFilter feedbackCrudMBean="#{challengeFeedbackCrudMBean}" />
+            </ui:define>                
+
             <ui:define name="listColumns">
                 <c:columnMainIdea field="challenge.mainIdea" />
 
                 <c:columnTheme field="challenge.theme" 
                                value="#{bean.challenge.theme.value}"
                                sortable="true" 
-                               filterable="true"/>
+                               filterable="false"/>
 
                 <c:columnWillMitigateReadonly field="willMitigate"
                                       dataTableId="dataTable"

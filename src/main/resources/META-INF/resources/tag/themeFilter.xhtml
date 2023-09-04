@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    Theme: 
+    <p:selectBooleanButton offLabel="Assessment" onLabel="Assessment" value="#{feedbackCrudMBean.assessmentFilter}" >
+        <p:ajax update="datatable" listener="#{feedbackCrudMBean.themeFilterAction}"/>
+    </p:selectBooleanButton>
+    <p:spacer width="5px" />
+    <p:selectBooleanButton offLabel="Class Preparation" onLabel="Class Preparation" value="#{feedbackCrudMBean.classPreparationFilter}" >
+        <p:ajax update="datatable" listener="#{feedbackCrudMBean.themeFilterAction}"/>
+    </p:selectBooleanButton>
+    <p:spacer width="5px" />
+    <p:selectBooleanButton offLabel="Curriculum" onLabel="Curriculum" value="#{feedbackCrudMBean.curriculumFilter}" >
+        <p:ajax update="datatable" listener="#{feedbackCrudMBean.themeFilterAction}"/>
+    </p:selectBooleanButton>
+    <p:spacer width="5px" />
+    <p:selectBooleanButton offLabel="Environment Setup" onLabel="Environment Setup" value="#{feedbackCrudMBean.environmentSetupFilter}" >
+        <p:ajax update="datatable" listener="#{feedbackCrudMBean.themeFilterAction}"/>
+    </p:selectBooleanButton>
+    <p:spacer width="5px" />
+    <p:selectBooleanButton offLabel="DevOps Concepts" onLabel="DevOps Concepts" value="#{feedbackCrudMBean.devopsConceptsFilter}" >
+        <p:ajax update="datatable" listener="#{feedbackCrudMBean.themeFilterAction}"/>
+    </p:selectBooleanButton>
+    <p:spacer width="5px" />
+    <p:selectBooleanButton offLabel="Strategies in Course Execution" onLabel="Strategies in Course Execution" value="#{feedbackCrudMBean.strategiesInCourseExecutionFilter}" >
+        <p:ajax update="datatable" listener="#{feedbackCrudMBean.themeFilterAction}"/>
+    </p:selectBooleanButton>
+    <p:spacer width="5px" />
+    <p:selectBooleanButton offLabel="Tool / Technology" onLabel="Tool / Technology" value="#{feedbackCrudMBean.toolTechnologyFilter}" >
+        <p:ajax update="datatable" listener="#{feedbackCrudMBean.themeFilterAction}"/>
+    </p:selectBooleanButton>
+    
+</ui:composition>

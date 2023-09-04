@@ -24,6 +24,7 @@ import org.persapiens.improve.domain.Link;
 import org.persapiens.improve.domain.Recommendation;
 import org.persapiens.improve.domain.RecommendationFeedback;
 import org.persapiens.improve.domain.RecommendationsConflict;
+import org.persapiens.improve.domain.Theme;
 import org.persapiens.improve.service.LinkService;
 import org.persapiens.improve.service.RecommendationSearchService;
 import org.persapiens.improve.service.RecommendationService;
@@ -110,6 +111,8 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
             result.add(recommendationFeedback);
         }
 
+        result = filterTheme(result);
+        
         return result;
     }
 
@@ -216,6 +219,21 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
     protected void init() {
         super.init();
         viewLogMBean.logRecommendation();
+    }
+
+    private List<RecommendationFeedback> filterTheme(List<RecommendationFeedback> result) {
+        Set<Theme> themeFilter = themeFilter();
+        if (!themeFilter.isEmpty()) {
+            List<RecommendationFeedback> newResult = new ArrayList<>();
+            for (RecommendationFeedback cf: result) {
+                if (themeFilter.contains(cf.getRecommendation().getTheme())) {
+                    newResult.add(cf);
+                }
+            }
+            result = newResult;
+        }
+        
+        return result;
     }
         
 }
