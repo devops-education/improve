@@ -178,7 +178,8 @@
                             disabled="#{not managedBean.isDetailable(bean)}" 
                             icon="pi pi-search-plus"
                             process="@this"
-                            update="@form" ajax="true">
+                            update="@(.content-layout-panel)"
+                            ajax="true">
                             <f:setPropertyActionListener
                                 target="#{managedBean.bean}"
                                 value="#{bean}" />
@@ -260,14 +261,16 @@
 
             </p:panel>
 
-            <p:panel id="detailPanel#{crudId}" rendered="#{managedBean.visualizationMode == 'DETAIL' and (managedBean.isDetailable(managedBean.bean))}" 
+            <p:panel id="detailPanel#{crudId}" 
+                     styleClass="detailPanel#{crudId}Style"
+                     rendered="#{managedBean.visualizationMode == 'DETAIL' and (managedBean.isDetailable(managedBean.bean))}" 
                      style="padding: 10px 10px 10px 10px !important">
                 <ui:insert name="detail"></ui:insert>
 
                 <br />
                 <p:outputPanel rendered="#{showButtonsAtDetailMode}">
                     <p:commandButton title="Ok" value="Ok" 
-                                     update="@form"
+                                     update="@(.content-layout-panel)"
                                      ajax="true"
                                      process="@this"
                                      accesskey="o"

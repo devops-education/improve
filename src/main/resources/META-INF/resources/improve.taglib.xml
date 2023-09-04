@@ -1134,5 +1134,17 @@
             <type>java.lang.String</type>
         </attribute>
     </tag>
+    <tag>
+        <description>
+            Theme filter
+        </description>
+        <tag-name>themeFilter</tag-name>
+        <source>tag/themeFilter.xhtml</source>
+        <attribute>
+            <description>field of the column</description>
+            <name>feedbackCrudMBean</name>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
 </facelet-taglib>
 

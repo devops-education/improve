@@ -3,6 +3,7 @@ package org.persapiens.improve.view.crud;
 import jakarta.faces.view.ViewScoped;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -21,6 +22,7 @@ import org.persapiens.improve.domain.RecommendationFeedback;
 import org.persapiens.improve.domain.TeachingMethod;
 import org.persapiens.improve.domain.TeachingMethodFeedback;
 import org.persapiens.improve.domain.TeachingMethodLink;
+import org.persapiens.improve.domain.Theme;
 import org.persapiens.improve.service.RecommendationFeedbackService;
 import org.persapiens.improve.service.ChallengeFeedbackService;
 import org.persapiens.improve.service.TeachingMethodFeedbackService;
@@ -52,6 +54,34 @@ public abstract class AbstractFeedbackCrudMBean<T extends IdBean<Long>> extends 
     @Setter
     private List<TeachingMethodLinkTeachingMethodFeedback> teachingMethodLinkTeachingMethodFeedbackList;
 
+    @Getter
+    @Setter
+    private boolean assessmentFilter;
+
+    @Getter
+    @Setter
+    private boolean classPreparationFilter;
+
+    @Getter
+    @Setter
+    private boolean curriculumFilter;
+
+    @Getter
+    @Setter
+    private boolean environmentSetupFilter;
+
+    @Getter
+    @Setter
+    private boolean devopsConceptsFilter;
+
+    @Getter
+    @Setter
+    private boolean strategiesInCourseExecutionFilter;
+
+    @Getter
+    @Setter
+    private boolean toolTechnologyFilter;
+    
     @Override
     public boolean isCheckStartUpdate(T bean) {
         return true;
@@ -169,4 +199,33 @@ public abstract class AbstractFeedbackCrudMBean<T extends IdBean<Long>> extends 
         setTeachingMethodLinkTeachingMethodFeedbackList(newTeachingMethodLinkTeachingMethodFeedbackList);
     }
     
+    protected Set<Theme> themeFilter() {
+        Set<Theme> result = new HashSet<>();
+        if (assessmentFilter) {
+            result.add(Theme.ASSESSMENT);
+        }
+        if (classPreparationFilter) {
+            result.add(Theme.CLASS_PREPARATION);
+        }
+        if (curriculumFilter) {
+            result.add(Theme.CURRICULUM);
+        }
+        if (devopsConceptsFilter) {
+            result.add(Theme.DEVOPS_CONCEPTS);
+        }
+        if (environmentSetupFilter) {
+            result.add(Theme.ENVIRONMENT_SETUP);
+        }
+        if (strategiesInCourseExecutionFilter) {
+            result.add(Theme.STRATEGIES_IN_COURSE_EXECUTION);
+        }
+        if (toolTechnologyFilter) {
+            result.add(Theme.TOOL_TECHNOLOGY);
+        }
+        return result;
+    }
+    
+    public void themeFilterAction() {
+        findAction();
+    }
 }
