@@ -52,7 +52,7 @@ public abstract class AbstractFeedbackCrudMBean<T extends IdBean<Long>> extends 
     
     @Getter
     @Setter
-    private List<TeachingMethodLinkTeachingMethodFeedback> teachingMethodLinkTeachingMethodFeedbackList;
+    private List<TeachingMethodLinksTeachingMethodFeedback> teachingMethodLinksTeachingMethodFeedbackList;
 
     @Getter
     @Setter
@@ -181,22 +181,42 @@ public abstract class AbstractFeedbackCrudMBean<T extends IdBean<Long>> extends 
             .stream().collect(Collectors.toMap(TeachingMethodFeedback::getTeachingMethod, Function.identity()));        
     }
 
+    protected TeachingMethodLinksTeachingMethodFeedback teachingMethodLinkTeachingMethodFeedback(TeachingMethodFeedback teachingMethodFeedback,
+        List<TeachingMethodLinksTeachingMethodFeedback> newTeachingMethodLinkTeachingMethodFeedbackList) {
+        TeachingMethodLinksTeachingMethodFeedback result = null;
+        for(TeachingMethodLinksTeachingMethodFeedback bean : newTeachingMethodLinkTeachingMethodFeedbackList) {
+            if (bean.getTeachingMethodFeedback().equals(teachingMethodFeedback)) {
+                result = bean;
+                break;
+            }
+        }
+        
+        if (result == null) {
+            result = TeachingMethodLinksTeachingMethodFeedback.builder()
+                .teachingMethodFeedback(teachingMethodFeedback)
+                .teachingMethodLinks(new ArrayList<>())
+                .build();
+            newTeachingMethodLinkTeachingMethodFeedbackList.add(result);
+        }
+        
+        return result;
+    }
+    
     protected void createTeachingMethodFeedbackLists(Set<TeachingMethodLink> teachingMethodLinks) {
         Map<TeachingMethod, TeachingMethodFeedback> teachingMethodTeachingMethodFeedbackMap = 
             teachingMethodTeachingMethodFeedbackMap(teachingMethodLinks);
         
-        List<TeachingMethodLinkTeachingMethodFeedback> newTeachingMethodLinkTeachingMethodFeedbackList = new ArrayList<>();        
+        List<TeachingMethodLinksTeachingMethodFeedback> newTeachingMethodLinkTeachingMethodFeedbackList = new ArrayList<>();
         // varrendo os teaching method links
         for (TeachingMethodLink link : teachingMethodLinks) {
             TeachingMethod teachingMethod = link.getTeachingMethod();
             TeachingMethodFeedback teachingMethodFeedback = teachingMethodFeedback(teachingMethod, teachingMethodTeachingMethodFeedbackMap);
 
-            newTeachingMethodLinkTeachingMethodFeedbackList.add(TeachingMethodLinkTeachingMethodFeedback.builder()
-                .teachingMethodFeedback(teachingMethodFeedback)
-                .teachingMethodLink(link)
-                .build());
+            TeachingMethodLinksTeachingMethodFeedback teachingMethodLinkTeachingMethodFeedback = 
+                teachingMethodLinkTeachingMethodFeedback(teachingMethodFeedback, newTeachingMethodLinkTeachingMethodFeedbackList);
+            teachingMethodLinkTeachingMethodFeedback.getTeachingMethodLinks().add(link);            
         }
-        setTeachingMethodLinkTeachingMethodFeedbackList(newTeachingMethodLinkTeachingMethodFeedbackList);
+        setTeachingMethodLinksTeachingMethodFeedbackList(newTeachingMethodLinkTeachingMethodFeedbackList);
     }
     
     protected Set<Theme> themeFilter() {
