@@ -59,10 +59,10 @@
                                                         challengeFeedback="#{challengeFeedbackCrudMBean.bean}" />
                 
                 <p:accordionPanel multiple="true" activeIndex="0,1" id="recommendationFeedbackAccordionPanel">
-                    <p:tab title="Teaching Method Links (#{challengeFeedbackCrudMBean.teachingMethodLinkTeachingMethodFeedbackList.size()})"
+                    <p:tab title="Teaching Method Links (#{challengeFeedbackCrudMBean.teachingMethodLinksTeachingMethodFeedbackList.size()})"
                            titleStyleClass="recommendation" 
                            titletip="Show / hide the list of linked teaching methods"
-                           rendered="#{not empty challengeFeedbackCrudMBean.teachingMethodLinkTeachingMethodFeedbackList}">
+                           rendered="#{not empty challengeFeedbackCrudMBean.teachingMethodLinksTeachingMethodFeedbackList}">
                         <c:teachingMethodFeedbackDatatable crudMBean="#{challengeFeedbackCrudMBean}" />
                     </p:tab>
 

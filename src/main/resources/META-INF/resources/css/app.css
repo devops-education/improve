@@ -179,3 +179,7 @@ body .ui-menu.ui-menubar {
 .align-top {
   vertical-align: top;
 }
+
+.hideColumnHeader thead {
+  display:none;
+}

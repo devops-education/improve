@@ -3,6 +3,7 @@ package org.persapiens.improve.view.crud;
 import java.io.Serializable;
 
 import java.util.Comparator;
+import java.util.List;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -22,18 +23,17 @@ import org.persapiens.improve.domain.TeachingMethodLink;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
-public class TeachingMethodLinkTeachingMethodFeedback implements Serializable, Comparable<TeachingMethodLinkTeachingMethodFeedback> {
+public class TeachingMethodLinksTeachingMethodFeedback implements Serializable, Comparable<TeachingMethodLinksTeachingMethodFeedback> {
 
     private static final long serialVersionUID = 1L;
     
-    private TeachingMethodLink teachingMethodLink;
+    private List<TeachingMethodLink> teachingMethodLinks;
     
     private TeachingMethodFeedback teachingMethodFeedback;
     
     @Override
-    public int compareTo(TeachingMethodLinkTeachingMethodFeedback o) {
-        return Comparator.comparing(TeachingMethodLinkTeachingMethodFeedback::getTeachingMethodFeedback)
-                .thenComparing(TeachingMethodLinkTeachingMethodFeedback::getTeachingMethodLink)
+    public int compareTo(TeachingMethodLinksTeachingMethodFeedback o) {
+        return Comparator.comparing(TeachingMethodLinksTeachingMethodFeedback::getTeachingMethodFeedback)
                 .compare(this, o);
     }
 

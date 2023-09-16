@@ -12,29 +12,54 @@
 
     <!-- INTERFACE -->
     <cc:interface>
-        <cc:attribute name="crudMBean" />
+        <cc:attribute name="crudMBean" type="org.persapiens.improve.view.crud.AbstractFeedbackCrudMBean"/>
     </cc:interface>
 
     <!-- IMPLEMENTATION -->
     <cc:implementation>
         <p:dataTable id="linkTeachingMethodDatatable"
                      widgetVar="linkTeachingMethodDatatable"
-                     value="#{cc.attrs.crudMBean.teachingMethodLinkTeachingMethodFeedbackList}"
-                     var="teachingMethodLinkTeachingMethodFeedback"
+                     value="#{cc.attrs.crudMBean.teachingMethodLinksTeachingMethodFeedbackList}"
+                     var="teachingMethodLinksTeachingMethodFeedback"
                      emptyMessage="Sem Registros"
-                     rows="#{cc.attrs.crudMBean.teachingMethodLinkTeachingMethodFeedbackList.size() gt 7 ? 7 : cc.attrs.crudMBean.teachingMethodLinkTeachingMethodFeedbackList.size()}"
-                     paginator="#{cc.attrs.crudMBean.teachingMethodLinkTeachingMethodFeedbackList.size() gt 7}"
+                     rows="#{cc.attrs.crudMBean.teachingMethodLinksTeachingMethodFeedbackList.size() gt 7 ? 7 : cc.attrs.crudMBean.teachingMethodLinksTeachingMethodFeedbackList.size()}"
+                     paginator="#{cc.attrs.crudMBean.teachingMethodLinksTeachingMethodFeedbackList.size() gt 7}"
                      rowsPerPageTemplate="7,10,20,50"
                      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
                      stripedRows="true"
                      rowIndexVar="rowIdx"
-                     rowKey="#{teachingMethodLinkTeachingMethodFeedback.teachingMethodFeedback.teachingMethod.id}"
+                     rowKey="#{teachingMethodLinksTeachingMethodFeedback.teachingMethodFeedback.teachingMethod.id}"
                      >
-            <c:columnTeachingMethodName field="teachingMethodLink.teachingMethod.name" />
+            <c:columnTeachingMethodName field="teachingMethodFeedback.teachingMethod.name" />
             
-            <c:columnTeachingMethodDefinition field="teachingMethodLink.teachingMethod.definition" />
+            <c:columnTeachingMethodDefinition field="teachingMethodFeedback.teachingMethod.definition" />
             
-            <c:columnTeachingMethodLinkInterviewSnippet field="teachingMethodLink.interviewSnippet" />            
+            <p:column responsivePriority="1"
+                      exportable="false" >
+                <f:facet name="header">
+                    <h:outputText id="interviewSnippet" value="Examples" />
+                    <p:tooltip for="interviewSnippet" 
+                               value="The example of how the teaching method is linked"
+                               position="top"/>
+                </f:facet>
+                <p:dataTable value="#{teachingMethodLinksTeachingMethodFeedback.teachingMethodLinks}"
+                             var="teachingMethodLink"
+                             emptyMessage="Sem Registros"
+                             rows="#{teachingMethodFeedbackSummaryCrudMBean.getTeachingMethodLinks(bean.teachingMethod).size()}"
+                             paginator="false"
+                             stripedRows="true"
+                             rowIndexVar="rowIdx"
+                             styleClass="hideColumnHeader"
+                             >
+                    <p:column field="interviewSnippet"
+                        filterable="false"  
+                        sortable="false" 
+                        responsivePriority="1"
+                        exportable="false"
+                        exportHeaderValue="Example"
+                        headerText=""/>
+                </p:dataTable>
+            </p:column>
             
             <p:column field="teachingMethodFeedback.usedAlready"
                       filterable="true" 
@@ -54,9 +79,9 @@
                         <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
                     </p:selectOneMenu>
                 </f:facet>
-                <p:selectOneButton value="#{teachingMethodLinkTeachingMethodFeedback.teachingMethodFeedback.usedAlready}">
+                <p:selectOneButton value="#{teachingMethodLinksTeachingMethodFeedback.teachingMethodFeedback.usedAlready}">
                     <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                    <p:ajax listener="#{cc.attrs.crudMBean.saveTeachingMethodFeedbackUsedAlready(teachingMethodLinkTeachingMethodFeedback.teachingMethodFeedback)}"
+                    <p:ajax listener="#{cc.attrs.crudMBean.saveTeachingMethodFeedbackUsedAlready(teachingMethodLinksTeachingMethodFeedback.teachingMethodFeedback)}"
                             update="teachingMethodFeedbackUsedAlreadyComment:usedAlreadyComment willUseSelectOneButton teachingMethodFeedbackWillUseComment:willUseComment"/>
                 </p:selectOneButton>
             </p:column>
@@ -81,10 +106,10 @@
                     </p:selectOneMenu>
                 </f:facet>
                 <p:selectOneButton id="willUseSelectOneButton"
-                                   value="#{teachingMethodLinkTeachingMethodFeedback.teachingMethodFeedback.willUse}"
-                                   disabled="#{teachingMethodLinkTeachingMethodFeedback.teachingMethodFeedback.usedAlready}">
+                                   value="#{teachingMethodLinksTeachingMethodFeedback.teachingMethodFeedback.willUse}"
+                                   disabled="#{teachingMethodLinksTeachingMethodFeedback.teachingMethodFeedback.usedAlready}">
                     <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
-                    <p:ajax listener="#{cc.attrs.crudMBean.saveTeachingMethodFeedbackWillUse(teachingMethodLinkTeachingMethodFeedback.teachingMethodFeedback)}"
+                    <p:ajax listener="#{cc.attrs.crudMBean.saveTeachingMethodFeedbackWillUse(teachingMethodLinksTeachingMethodFeedback.teachingMethodFeedback)}"
                             update="teachingMethodFeedbackWillUseComment:willUseComment"/>
                 </p:selectOneButton>
             </p:column>
@@ -95,11 +120,11 @@
             <p:rowExpansion>
                 <d:teachingMethodFeedbackUsedAlreadyComment id="teachingMethodFeedbackUsedAlreadyComment"
                                                             crudMBean="#{cc.attrs.crudMBean}" 
-                                                            teachingMethodFeedback="#{teachingMethodLinkTeachingMethodFeedback.teachingMethodFeedback}" />
+                                                            teachingMethodFeedback="#{teachingMethodLinksTeachingMethodFeedback.teachingMethodFeedback}" />
 
                 <d:teachingMethodFeedbackWillUseComment id="teachingMethodFeedbackWillUseComment"
                                                         crudMBean="#{cc.attrs.crudMBean}" 
-                                                        teachingMethodFeedback="#{teachingMethodLinkTeachingMethodFeedback.teachingMethodFeedback}" /> 
+                                                        teachingMethodFeedback="#{teachingMethodLinksTeachingMethodFeedback.teachingMethodFeedback}" /> 
             </p:rowExpansion>
             
         </p:dataTable>
