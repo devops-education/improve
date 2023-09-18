@@ -86,8 +86,9 @@ public class RecommendationFeedback implements IdBean<Long>, Comparable<Recommen
     }
 
     public void insert() {
-        insertTime = LocalDateTime.now();
-        updateTime = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now();
+        insertTime = now;
+        updateTime = now;
     }
 
     public void update() {

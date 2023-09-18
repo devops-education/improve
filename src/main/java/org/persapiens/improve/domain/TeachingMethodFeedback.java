@@ -88,8 +88,9 @@ public class TeachingMethodFeedback implements IdBean<Long>, Comparable<Teaching
     }
 
     public void insert() {
-        insertTime = LocalDateTime.now();
-        updateTime = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now();
+        insertTime = now;
+        updateTime = now;
     }
 
     public void update() {

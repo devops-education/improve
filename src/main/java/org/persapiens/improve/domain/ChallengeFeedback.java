@@ -79,8 +79,9 @@ public class ChallengeFeedback implements IdBean<Long>, Comparable<ChallengeFeed
     }
 
     public void insert() {
-        insertTime = LocalDateTime.now();
-        updateTime = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now();
+        insertTime = now;
+        updateTime = now;
     }
 
     public void update() {
