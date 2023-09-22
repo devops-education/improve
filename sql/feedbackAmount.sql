@@ -1,5 +1,7 @@
-select f.user_id, count(distinct f.id) as quantidade_challenge
-from challenge_feedback f
+select f.user_id, max(u.username), count(distinct f.id) as quantidade_challenge
+from challenge_feedback f, users u
+where f.user_id = u.id
+and f.user_id not in (1,3,23,25,25,26)
 group by f.user_id;
 
 select f.user_id, count(distinct f.id) as quantidade_challenge_comment
