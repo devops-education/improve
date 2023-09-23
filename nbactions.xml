@@ -53,17 +53,14 @@
         </properties>
     </action>
     <action>
-        <actionName>CUSTOM-duplicate-checkstyle-pmd-cpd-cycles-spotbugs-dependency</actionName>
-        <displayName>duplicate-checkstyle-pmd-cpd-cycles-spotbugs-dependency</displayName>
+        <actionName>CUSTOM-duplicate-pmd-cpd-cycles-spotbugs-dependency</actionName>
+        <displayName>duplicate-pmd-cpd-cycles-spotbugs-dependency</displayName>
         <goals>
             <goal>clean</goal>
             <goal>verify</goal>
         </goals>
         <activatedProfiles>
             <activatedProfile>check-duplicate</activatedProfile>
-            <!--
-            <activatedProfile>check-checkstyle</activatedProfile>
-            -->
             <activatedProfile>check-cycles</activatedProfile>
             <activatedProfile>check-cpd</activatedProfile>
             <activatedProfile>check-pmd</activatedProfile>
@@ -82,6 +79,26 @@
         </goals>
         <activatedProfiles>
             <activatedProfile>plantuml</activatedProfile>
+        </activatedProfiles>
+    </action>
+    <action>
+        <actionName>CUSTOM-spring-javaformat</actionName>
+        <displayName>spring-javaformat</displayName>
+        <goals>
+            <goal>validate</goal>
+        </goals>
+        <activatedProfiles>
+            <activatedProfile>check-spring-javaformat</activatedProfile>
+        </activatedProfiles>
+    </action>
+    <action>
+        <actionName>CUSTOM-checkstyle</actionName>
+        <displayName>checkstyle</displayName>
+        <goals>
+            <goal>validate</goal>
+        </goals>
+        <activatedProfiles>
+            <activatedProfile>check-checkstyle</activatedProfile>
         </activatedProfiles>
     </action>
 </actions>

@@ -5,9 +5,9 @@ import org.springframework.security.authentication.event.LogoutSuccessEvent;
 
 public class LogoutSuccessEventLogger extends AbstractAuthenticationEventLogger<LogoutSuccessEvent> {
 
-    @Override
-    protected ViewLogType viewLogType() {
-        return ViewLogType.LOGOUT;
-    }
+	@Override
+	protected ViewLogType viewLogType() {
+		return ViewLogType.LOGOUT;
+	}
 
 }

@@ -16,10 +16,10 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class LinkId implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private long challenge;
+	private long challenge;
 
-    private long recommendation;
+	private long recommendation;
 
 }

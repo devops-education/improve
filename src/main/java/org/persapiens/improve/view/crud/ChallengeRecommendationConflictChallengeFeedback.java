@@ -22,20 +22,20 @@ import org.persapiens.improve.domain.ChallengeFeedback;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
-public class ChallengeRecommendationConflictChallengeFeedback implements Serializable, 
-        Comparable<ChallengeRecommendationConflictChallengeFeedback> {
+public class ChallengeRecommendationConflictChallengeFeedback
+		implements Serializable, Comparable<ChallengeRecommendationConflictChallengeFeedback> {
 
-    private static final long serialVersionUID = 1L;
-    
-    private ChallengeRecommendationConflict conflict;
-    
-    private ChallengeFeedback challengeFeedback;
-    
-    @Override
-    public int compareTo(ChallengeRecommendationConflictChallengeFeedback o) {
-        return Comparator.comparing(ChallengeRecommendationConflictChallengeFeedback::getChallengeFeedback)
-                .thenComparing(ChallengeRecommendationConflictChallengeFeedback::getConflict)
-                .compare(this, o);
-    }
+	private static final long serialVersionUID = 1L;
+
+	private ChallengeRecommendationConflict conflict;
+
+	private ChallengeFeedback challengeFeedback;
+
+	@Override
+	public int compareTo(ChallengeRecommendationConflictChallengeFeedback o) {
+		return Comparator.comparing(ChallengeRecommendationConflictChallengeFeedback::getChallengeFeedback)
+			.thenComparing(ChallengeRecommendationConflictChallengeFeedback::getConflict)
+			.compare(this, o);
+	}
 
 }

@@ -31,70 +31,71 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"teachingMethod", "user"})
+@EqualsAndHashCode(of = { "teachingMethod", "user" })
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
 @Entity
 @SequenceGenerator(sequenceName = "seq_teachingMethod_feedback", name = "ID_SEQUENCE", allocationSize = 1)
-@Table(indexes = @Index(name = "idx_teachingMethodfeedback_teachingMethod_user", unique = true, columnList = "teaching_method_id, user_id"))
+@Table(indexes = @Index(name = "idx_teachingMethodfeedback_teachingMethod_user", unique = true,
+		columnList = "teaching_method_id, user_id"))
 public class TeachingMethodFeedback implements IdBean<Long>, Comparable<TeachingMethodFeedback> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
-    @Id
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
+	@Id
+	private Long id;
 
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @NonNull
-    @ManyToOne
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_teachingMethodFeedback_teachingMethod"))
-    private TeachingMethod teachingMethod;
-    
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @NonNull
-    @ManyToOne
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_teachingMethodFeedback_user"))
-    private User user;
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@NonNull
+	@ManyToOne
+	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_teachingMethodFeedback_teachingMethod"))
+	private TeachingMethod teachingMethod;
 
-    @Column
-    private Boolean usedAlready;
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@NonNull
+	@ManyToOne
+	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_teachingMethodFeedback_user"))
+	private User user;
 
-    @Column
-    private Boolean willUse;
+	@Column
+	private Boolean usedAlready;
 
-    @Column(length = LENGTH)
-    private String usedAlreadyComment;
+	@Column
+	private Boolean willUse;
 
-    @Column(length = LENGTH)
-    private String willUseComment;
+	@Column(length = LENGTH)
+	private String usedAlreadyComment;
 
-    @Column(nullable = false)
-    private LocalDateTime insertTime;
-    
-    @Column(nullable = false)
-    private LocalDateTime updateTime;
-    
-    @Override
-    public int compareTo(TeachingMethodFeedback o) {
-        return Comparator.comparing(TeachingMethodFeedback::getTeachingMethod)
-                .thenComparing(TeachingMethodFeedback::getUser)
-                .thenComparing(Comparator.nullsLast(Comparator.comparing(TeachingMethodFeedback::getUsedAlready)))
-                .thenComparing(Comparator.nullsLast(Comparator.comparing(TeachingMethodFeedback::getWillUse)))
-                .thenComparing(Comparator.nullsLast(Comparator.comparing(TeachingMethodFeedback::getUsedAlreadyComment)))
-                .thenComparing(Comparator.nullsLast(Comparator.comparing(TeachingMethodFeedback::getWillUseComment)))
-                .compare(this, o);
-    }
+	@Column(length = LENGTH)
+	private String willUseComment;
 
-    public void insert() {
-        LocalDateTime now = LocalDateTime.now();
-        insertTime = now;
-        updateTime = now;
-    }
+	@Column(nullable = false)
+	private LocalDateTime insertTime;
 
-    public void update() {
-        updateTime = LocalDateTime.now();
-    }
-    
+	@Column(nullable = false)
+	private LocalDateTime updateTime;
+
+	@Override
+	public int compareTo(TeachingMethodFeedback o) {
+		return Comparator.comparing(TeachingMethodFeedback::getTeachingMethod)
+			.thenComparing(TeachingMethodFeedback::getUser)
+			.thenComparing(Comparator.nullsLast(Comparator.comparing(TeachingMethodFeedback::getUsedAlready)))
+			.thenComparing(Comparator.nullsLast(Comparator.comparing(TeachingMethodFeedback::getWillUse)))
+			.thenComparing(Comparator.nullsLast(Comparator.comparing(TeachingMethodFeedback::getUsedAlreadyComment)))
+			.thenComparing(Comparator.nullsLast(Comparator.comparing(TeachingMethodFeedback::getWillUseComment)))
+			.compare(this, o);
+	}
+
+	public void insert() {
+		LocalDateTime now = LocalDateTime.now();
+		insertTime = now;
+		updateTime = now;
+	}
+
+	public void update() {
+		updateTime = LocalDateTime.now();
+	}
+
 }

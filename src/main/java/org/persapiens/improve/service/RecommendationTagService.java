@@ -11,13 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RecommendationTagService extends InMemoryCrudService <RecommendationTag, RecommendationTagId> {
-    @Getter
-    @Autowired
-    private RecommendationTagRepository repository;
+public class RecommendationTagService extends InMemoryCrudService<RecommendationTag, RecommendationTagId> {
 
-    public Set<RecommendationTag> findByRecommendation(Recommendation recommendation) {
-        return getBeans().values().stream().filter( t -> t.getRecommendation().equals(recommendation))
-            .collect(Collectors.toSet());
-    }
+	@Getter
+	@Autowired
+	private RecommendationTagRepository repository;
+
+	public Set<RecommendationTag> findByRecommendation(Recommendation recommendation) {
+		return getBeans().values()
+			.stream()
+			.filter(t -> t.getRecommendation().equals(recommendation))
+			.collect(Collectors.toSet());
+	}
+
 }

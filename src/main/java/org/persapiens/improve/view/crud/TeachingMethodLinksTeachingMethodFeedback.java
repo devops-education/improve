@@ -23,18 +23,19 @@ import org.persapiens.improve.domain.TeachingMethodLink;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
-public class TeachingMethodLinksTeachingMethodFeedback implements Serializable, Comparable<TeachingMethodLinksTeachingMethodFeedback> {
+public class TeachingMethodLinksTeachingMethodFeedback
+		implements Serializable, Comparable<TeachingMethodLinksTeachingMethodFeedback> {
 
-    private static final long serialVersionUID = 1L;
-    
-    private List<TeachingMethodLink> teachingMethodLinks;
-    
-    private TeachingMethodFeedback teachingMethodFeedback;
-    
-    @Override
-    public int compareTo(TeachingMethodLinksTeachingMethodFeedback o) {
-        return Comparator.comparing(TeachingMethodLinksTeachingMethodFeedback::getTeachingMethodFeedback)
-                .compare(this, o);
-    }
+	private static final long serialVersionUID = 1L;
+
+	private List<TeachingMethodLink> teachingMethodLinks;
+
+	private TeachingMethodFeedback teachingMethodFeedback;
+
+	@Override
+	public int compareTo(TeachingMethodLinksTeachingMethodFeedback o) {
+		return Comparator.comparing(TeachingMethodLinksTeachingMethodFeedback::getTeachingMethodFeedback)
+			.compare(this, o);
+	}
 
 }

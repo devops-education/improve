@@ -7,5 +7,7 @@ import org.springframework.stereotype.Component;
 @ViewScoped
 @Component
 public class RecommendationSearchValidator extends SearchValidator<Recommendation> {
-    private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 1L;
+
 }

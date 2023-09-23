@@ -8,20 +8,21 @@ import org.springframework.data.repository.core.RepositoryCreationException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ViewLogService extends RepositoryCrudService <ViewLog, Long> {
+public class ViewLogService extends RepositoryCrudService<ViewLog, Long> {
 
-    @Getter
-    @Autowired
-    private ViewLogRepository repository;
+	@Getter
+	@Autowired
+	private ViewLogRepository repository;
 
-    @Override
-    public void save(ViewLog bean) {
-        if (bean.getId() == null) {
-            bean.insert();
-        } else {
-            throw new RepositoryCreationException("Cannot update viewLog", RepositoryCrudService.class);
-        }
-        super.save(bean);
-    }
-    
+	@Override
+	public void save(ViewLog bean) {
+		if (bean.getId() == null) {
+			bean.insert();
+		}
+		else {
+			throw new RepositoryCreationException("Cannot update viewLog", RepositoryCrudService.class);
+		}
+		super.save(bean);
+	}
+
 }

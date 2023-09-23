@@ -8,9 +8,7 @@ public class ImproveApplicationMain {
 	}
 
 	public static void main(String[] args) {
-		new SpringApplicationBuilder()
-			.sources(ImproveApplication.class)
-			.run(args);
+		new SpringApplicationBuilder().sources(ImproveApplication.class).run(args);
 	}
 
 }

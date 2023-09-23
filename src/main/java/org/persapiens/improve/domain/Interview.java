@@ -27,17 +27,17 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 public class Interview implements IdBean<Long>, Comparable<Interview> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    private Long id;
+	@Id
+	private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String interviewee;
+	@Column(nullable = false, unique = true)
+	private String interviewee;
 
-    @Override
-    public int compareTo(Interview o) {
-        return this.interviewee.compareTo(o.interviewee);
-    }
+	@Override
+	public int compareTo(Interview o) {
+		return this.interviewee.compareTo(o.interviewee);
+	}
 
 }

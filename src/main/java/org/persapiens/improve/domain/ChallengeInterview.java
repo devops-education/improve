@@ -23,38 +23,42 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"interview", "challenge"})
+@EqualsAndHashCode(of = { "interview", "challenge" })
 @SuperBuilder
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChallengeInterview implements IdBean<ChallengeInterviewId>, Comparable<ChallengeInterview> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @EmbeddedId
-    private ChallengeInterviewId id;
+	@EmbeddedId
+	private ChallengeInterviewId id;
 
-    @Column(nullable = false, length = LENGTH)
-    private String quote;
-    @Column(nullable = false, length = LENGTH)
-    private String resume;
-    
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @ManyToOne
-    @JoinColumn(name= "interview", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_challengeinterview_interview"))
-    private Interview interview;
-    
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @ManyToOne
-    @JoinColumn(name= "challenge", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_challengeinterview_challenge"))
-    private Challenge challenge;
+	@Column(nullable = false, length = LENGTH)
+	private String quote;
 
-    @Override
-    public int compareTo(ChallengeInterview o) {
-        return Comparator.comparing(ChallengeInterview::getChallenge)
-                .thenComparing(ChallengeInterview::getInterview)
-                .thenComparing(ChallengeInterview::getQuote)
-                .compare(this, o);
-    }
+	@Column(nullable = false, length = LENGTH)
+	private String resume;
+
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@ManyToOne
+	@JoinColumn(name = "interview", nullable = false, insertable = false, updatable = false,
+			foreignKey = @ForeignKey(name = "fk_challengeinterview_interview"))
+	private Interview interview;
+
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@ManyToOne
+	@JoinColumn(name = "challenge", nullable = false, insertable = false, updatable = false,
+			foreignKey = @ForeignKey(name = "fk_challengeinterview_challenge"))
+	private Challenge challenge;
+
+	@Override
+	public int compareTo(ChallengeInterview o) {
+		return Comparator.comparing(ChallengeInterview::getChallenge)
+			.thenComparing(ChallengeInterview::getInterview)
+			.thenComparing(ChallengeInterview::getQuote)
+			.compare(this, o);
+	}
+
 }

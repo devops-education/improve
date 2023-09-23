@@ -24,17 +24,17 @@ import org.persapiens.improve.domain.RecommendationFeedback;
 @SuperBuilder
 public class LinkRecommendationFeedback implements Serializable, Comparable<LinkRecommendationFeedback> {
 
-    private static final long serialVersionUID = 1L;
-    
-    private Link link;
-    
-    private RecommendationFeedback recommendationFeedback;
-    
-    @Override
-    public int compareTo(LinkRecommendationFeedback o) {
-        return Comparator.comparing(LinkRecommendationFeedback::getRecommendationFeedback)
-                .thenComparing(LinkRecommendationFeedback::getLink)
-                .compare(this, o);
-    }
+	private static final long serialVersionUID = 1L;
+
+	private Link link;
+
+	private RecommendationFeedback recommendationFeedback;
+
+	@Override
+	public int compareTo(LinkRecommendationFeedback o) {
+		return Comparator.comparing(LinkRecommendationFeedback::getRecommendationFeedback)
+			.thenComparing(LinkRecommendationFeedback::getLink)
+			.compare(this, o);
+	}
 
 }

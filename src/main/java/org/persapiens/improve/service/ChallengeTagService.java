@@ -11,13 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ChallengeTagService extends InMemoryCrudService <ChallengeTag, ChallengeTagId> {
-    @Getter
-    @Autowired
-    private ChallengeTagRepository repository;
+public class ChallengeTagService extends InMemoryCrudService<ChallengeTag, ChallengeTagId> {
 
-    public Set<ChallengeTag> findByChallenge(Challenge challenge) {
-        return getBeans().values().stream().filter( t -> t.getChallenge().equals(challenge))
-            .collect(Collectors.toSet());
-    }
+	@Getter
+	@Autowired
+	private ChallengeTagRepository repository;
+
+	public Set<ChallengeTag> findByChallenge(Challenge challenge) {
+		return getBeans().values().stream().filter(t -> t.getChallenge().equals(challenge)).collect(Collectors.toSet());
+	}
+
 }

@@ -12,14 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ChallengeInterviewService extends InMemoryCrudService <ChallengeInterview, ChallengeInterviewId> {
+public class ChallengeInterviewService extends InMemoryCrudService<ChallengeInterview, ChallengeInterviewId> {
 
-    @Getter
-    @Autowired
-    private ChallengeInterviewRepository repository;
-    
-    public SortedSet<ChallengeInterview> findByChallenge(Challenge challenge) {
-        return new TreeSet<>(getBeans().values().stream().filter( t -> t.getChallenge().equals(challenge))
-            .collect(Collectors.toSet()));
-    }
+	@Getter
+	@Autowired
+	private ChallengeInterviewRepository repository;
+
+	public SortedSet<ChallengeInterview> findByChallenge(Challenge challenge) {
+		return new TreeSet<>(getBeans().values()
+			.stream()
+			.filter(t -> t.getChallenge().equals(challenge))
+			.collect(Collectors.toSet()));
+	}
+
 }

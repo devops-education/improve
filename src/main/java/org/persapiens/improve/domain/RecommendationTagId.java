@@ -16,10 +16,10 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class RecommendationTagId implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private long recommendation;
+	private long recommendation;
 
-    private long tag;
+	private long tag;
 
 }

@@ -25,86 +25,89 @@ import org.springframework.stereotype.Component;
 @Component
 public class TeachingMethodFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCrudMBean<TeachingMethodFeedback> {
 
-    private static final long serialVersionUID = 1L;
-    
-    private Map<TeachingMethod, Set<TeachingMethodLink>> teachingMethodTeachingMethodLinkSetMap = new HashMap<>();
-    
-    @SuppressFBWarnings("SE_BAD_FIELD")
-    @Autowired
-    private TeachingMethodFeedbackService teachingMethodFeedbackService;
-    
-    @SuppressFBWarnings("SE_BAD_FIELD")
-    @Autowired
-    private TeachingMethodLinkService teachingMethodLinkService;
+	private static final long serialVersionUID = 1L;
 
-    @Override
-    protected TeachingMethodFeedback createBean() {
-        return TeachingMethodFeedback.builder().build();
-    }
+	private Map<TeachingMethod, Set<TeachingMethodLink>> teachingMethodTeachingMethodLinkSetMap = new HashMap<>();
 
-    @Override
-    protected List<List<TeachingMethodFeedback>> feedbackLists() {
-        List<TeachingMethodFeedback> notUsedAndWillUseList = new ArrayList<>();
-        List<TeachingMethodFeedback> usedAlreadyList = new ArrayList<>();
-        List<TeachingMethodFeedback> notUsedAndNotWillUseList = new ArrayList<>();
-        
-        for (TeachingMethodFeedback rf : teachingMethodFeedbackService.findByUser(userMBean.getLoggedUser())) {
-            if (Objects.nonNull(rf.getUsedAlready())) {
-                if (rf.getUsedAlready()) {
-                    usedAlreadyList.add(rf);
-                } else if (Objects.nonNull(rf.getWillUse())) {
-                    if (rf.getWillUse()) {
-                        notUsedAndWillUseList.add(rf);
-                    } else {
-                        notUsedAndNotWillUseList.add(rf);
-                    }
-                }
-            }
-        }
-        
-        notUsedAndWillUseList = sortTeachingMethodFeedback(notUsedAndWillUseList);
-        usedAlreadyList = sortTeachingMethodFeedback(usedAlreadyList);
-        notUsedAndNotWillUseList = sortTeachingMethodFeedback(notUsedAndNotWillUseList);
-        
-        return Arrays.asList(notUsedAndWillUseList, usedAlreadyList, notUsedAndNotWillUseList);
-    }
+	@SuppressFBWarnings("SE_BAD_FIELD")
+	@Autowired
+	private TeachingMethodFeedbackService teachingMethodFeedbackService;
 
-    protected List<TeachingMethodFeedback> sortTeachingMethodFeedback(List<TeachingMethodFeedback> list) {
-        Comparator<TeachingMethodFeedback> comparator = (TeachingMethodFeedback o1, TeachingMethodFeedback o2) -> 
-            o2.getTeachingMethod().getName().compareTo(o1.getTeachingMethod().getName());
-        Collections.sort(list, comparator);
-        
-        return list;
-    }
+	@SuppressFBWarnings("SE_BAD_FIELD")
+	@Autowired
+	private TeachingMethodLinkService teachingMethodLinkService;
 
-    @Override
-    protected List<String> backgroundColors() {
-        return Arrays.asList("limegreen", "dodgerblue", "grey");
-    }
+	@Override
+	protected TeachingMethodFeedback createBean() {
+		return TeachingMethodFeedback.builder().build();
+	}
 
-    @Override
-    protected List<String> labels() {
-        return Arrays.asList("Not used and will use",
-                             "Used",
-                             "Not used and won't use");
-    }
+	@Override
+	protected List<List<TeachingMethodFeedback>> feedbackLists() {
+		List<TeachingMethodFeedback> notUsedAndWillUseList = new ArrayList<>();
+		List<TeachingMethodFeedback> usedAlreadyList = new ArrayList<>();
+		List<TeachingMethodFeedback> notUsedAndNotWillUseList = new ArrayList<>();
 
-    @Override
-    protected List<String> crudTitleTexts() {
-        return Arrays.asList("Teaching methods that you should apply to your course.",
-                             "Teaching methods that you already use in your course.",
-                             "Teaching methods that you won't use in your course.");
-    }
+		for (TeachingMethodFeedback rf : teachingMethodFeedbackService.findByUser(userMBean.getLoggedUser())) {
+			if (Objects.nonNull(rf.getUsedAlready())) {
+				if (rf.getUsedAlready()) {
+					usedAlreadyList.add(rf);
+				}
+				else if (Objects.nonNull(rf.getWillUse())) {
+					if (rf.getWillUse()) {
+						notUsedAndWillUseList.add(rf);
+					}
+					else {
+						notUsedAndNotWillUseList.add(rf);
+					}
+				}
+			}
+		}
 
-    public Set<TeachingMethodLink> getTeachingMethodLinks(TeachingMethod teachingMethod) {
-        Set<TeachingMethodLink> result = teachingMethodTeachingMethodLinkSetMap.get(teachingMethod);
-            
-        if (result == null) {
-            result = TeachingMethodLink.getSetSortedByTeachingMethodAndInterviewSnippet();
-            result.addAll(teachingMethodLinkService.findByTeachingMethod(teachingMethod));
-            teachingMethodTeachingMethodLinkSetMap.put(teachingMethod, result);
-        }
-        
-        return result;
-    }
+		notUsedAndWillUseList = sortTeachingMethodFeedback(notUsedAndWillUseList);
+		usedAlreadyList = sortTeachingMethodFeedback(usedAlreadyList);
+		notUsedAndNotWillUseList = sortTeachingMethodFeedback(notUsedAndNotWillUseList);
+
+		return Arrays.asList(notUsedAndWillUseList, usedAlreadyList, notUsedAndNotWillUseList);
+	}
+
+	protected List<TeachingMethodFeedback> sortTeachingMethodFeedback(List<TeachingMethodFeedback> list) {
+		Comparator<TeachingMethodFeedback> comparator = (TeachingMethodFeedback o1, TeachingMethodFeedback o2) -> o2
+			.getTeachingMethod()
+			.getName()
+			.compareTo(o1.getTeachingMethod().getName());
+		Collections.sort(list, comparator);
+
+		return list;
+	}
+
+	@Override
+	protected List<String> backgroundColors() {
+		return Arrays.asList("limegreen", "dodgerblue", "grey");
+	}
+
+	@Override
+	protected List<String> labels() {
+		return Arrays.asList("Not used and will use", "Used", "Not used and won't use");
+	}
+
+	@Override
+	protected List<String> crudTitleTexts() {
+		return Arrays.asList("Teaching methods that you should apply to your course.",
+				"Teaching methods that you already use in your course.",
+				"Teaching methods that you won't use in your course.");
+	}
+
+	public Set<TeachingMethodLink> getTeachingMethodLinks(TeachingMethod teachingMethod) {
+		Set<TeachingMethodLink> result = teachingMethodTeachingMethodLinkSetMap.get(teachingMethod);
+
+		if (result == null) {
+			result = TeachingMethodLink.getSetSortedByTeachingMethodAndInterviewSnippet();
+			result.addAll(teachingMethodLinkService.findByTeachingMethod(teachingMethod));
+			teachingMethodTeachingMethodLinkSetMap.put(teachingMethod, result);
+		}
+
+		return result;
+	}
+
 }

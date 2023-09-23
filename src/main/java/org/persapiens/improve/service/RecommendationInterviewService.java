@@ -12,13 +12,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RecommendationInterviewService extends InMemoryCrudService <RecommendationInterview, RecommendationInterviewId> {
-    @Getter
-    @Autowired
-    private RecommendationInterviewRepository repository;
+public class RecommendationInterviewService
+		extends InMemoryCrudService<RecommendationInterview, RecommendationInterviewId> {
 
-    public SortedSet<RecommendationInterview> findByRecommendation(Recommendation recommendation) {
-        return new TreeSet<>(getBeans().values().stream().filter( t -> t.getRecommendation().equals(recommendation))
-            .collect(Collectors.toSet()));
-    }
+	@Getter
+	@Autowired
+	private RecommendationInterviewRepository repository;
+
+	public SortedSet<RecommendationInterview> findByRecommendation(Recommendation recommendation) {
+		return new TreeSet<>(getBeans().values()
+			.stream()
+			.filter(t -> t.getRecommendation().equals(recommendation))
+			.collect(Collectors.toSet()));
+	}
+
 }

@@ -38,68 +38,66 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Entity(name = "users")
 public class User implements IdBean<Long>, Comparable<User> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
-    @Id
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
+	@Id
+	private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String username;
+	@Column(nullable = false, unique = true)
+	private String username;
 
-    @Column(nullable = false)
-    private String password;
+	@Column(nullable = false)
+	private String password;
 
-    @Column(nullable = false)
-    private boolean active;
+	@Column(nullable = false)
+	private boolean active;
 
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Singular
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Authority> authorities;
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@Singular
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Authority> authorities;
 
-    @Override
-    public int compareTo(User o) {
-        return this.username.compareTo(o.username);
-    }
+	@Override
+	public int compareTo(User o) {
+		return this.username.compareTo(o.username);
+	}
 
-    public boolean isAdmin() {
-        boolean result = false;
-        for (Authority authority: getAuthorities()) {
-            if (authority.getAuthority().equals(Authority.ROLE_ADMIN)) {
-                result = true;
-                break;
-            }
-        }
-        return result;
-    }
+	public boolean isAdmin() {
+		boolean result = false;
+		for (Authority authority : getAuthorities()) {
+			if (authority.getAuthority().equals(Authority.ROLE_ADMIN)) {
+				result = true;
+				break;
+			}
+		}
+		return result;
+	}
 
-    public void setAdmin(boolean admin) {
-        if (isAdmin() != admin) {
-            String authority;
-            if (admin) {
-                authority = Authority.ROLE_ADMIN;
-            } else {
-                authority = Authority.ROLE_USER;                
-            }
-            setAuthorities(new HashSet<>());
-                        
-            getAuthorities().add(Authority.builder()
-                .authority(authority)
-                .user(this)
-                .build());
-        }
-    }
+	public void setAdmin(boolean admin) {
+		if (isAdmin() != admin) {
+			String authority;
+			if (admin) {
+				authority = Authority.ROLE_ADMIN;
+			}
+			else {
+				authority = Authority.ROLE_USER;
+			}
+			setAuthorities(new HashSet<>());
 
-    public UserDetails userDetails() {
-        User user = this;
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getUsername())
-                .password(encoder.encode(user.getPassword()))
-                .disabled(!user.isActive())
-                .authorities(user.getAuthorities().stream().map(u -> u.getAuthority()).toArray(String[]::new))
-                .build();
-    }
-    
+			getAuthorities().add(Authority.builder().authority(authority).user(this).build());
+		}
+	}
+
+	public UserDetails userDetails() {
+		User user = this;
+		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		return org.springframework.security.core.userdetails.User.builder()
+			.username(user.getUsername())
+			.password(encoder.encode(user.getPassword()))
+			.disabled(!user.isActive())
+			.authorities(user.getAuthorities().stream().map(u -> u.getAuthority()).toArray(String[]::new))
+			.build();
+	}
+
 }

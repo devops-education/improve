@@ -24,35 +24,35 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"challenge", "tag"})
+@EqualsAndHashCode(of = { "challenge", "tag" })
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
 @Entity
 public class ChallengeTag implements IdBean<ChallengeTagId>, Comparable<ChallengeTag> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @EmbeddedId
-    private ChallengeTagId id;
+	@EmbeddedId
+	private ChallengeTagId id;
 
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name = "challenge", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_challengeTag_challenge"))
-    private Challenge challenge;
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@NonNull
+	@ManyToOne
+	@JoinColumn(name = "challenge", nullable = false, insertable = false, updatable = false,
+			foreignKey = @ForeignKey(name = "fk_challengeTag_challenge"))
+	private Challenge challenge;
 
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name= "tag", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_challengeTag_tag"))
-    private Tag tag;
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@NonNull
+	@ManyToOne
+	@JoinColumn(name = "tag", nullable = false, insertable = false, updatable = false,
+			foreignKey = @ForeignKey(name = "fk_challengeTag_tag"))
+	private Tag tag;
 
-    @Override
-    public int compareTo(ChallengeTag o) {
-        return Comparator.comparing(ChallengeTag::getChallenge)
-                .thenComparing(ChallengeTag::getTag)
-                .compare(this, o);
-    }
+	@Override
+	public int compareTo(ChallengeTag o) {
+		return Comparator.comparing(ChallengeTag::getChallenge).thenComparing(ChallengeTag::getTag).compare(this, o);
+	}
 
 }

@@ -31,61 +31,62 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"challenge", "user"})
+@EqualsAndHashCode(of = { "challenge", "user" })
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
 @Entity
 @SequenceGenerator(sequenceName = "seq_challenge_feedback", name = "ID_SEQUENCE", allocationSize = 1)
-@Table(indexes = @Index(name = "idx_challengefeedback_challenge_user", unique = true, columnList = "challenge_id, user_id"))
+@Table(indexes = @Index(name = "idx_challengefeedback_challenge_user", unique = true,
+		columnList = "challenge_id, user_id"))
 public class ChallengeFeedback implements IdBean<Long>, Comparable<ChallengeFeedback> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
-    @Id
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
+	@Id
+	private Long id;
 
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @NonNull
-    @ManyToOne
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_challengeFeedback_challenge"))
-    private Challenge challenge;
-    
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @NonNull
-    @ManyToOne
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_challengeFeedback_user"))
-    private User user;
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@NonNull
+	@ManyToOne
+	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_challengeFeedback_challenge"))
+	private Challenge challenge;
 
-    @Column
-    private Boolean willMitigate;
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@NonNull
+	@ManyToOne
+	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_challengeFeedback_user"))
+	private User user;
 
-    @Column(length = LENGTH)
-    private String willMitigateComment;
+	@Column
+	private Boolean willMitigate;
 
-    @Column(nullable = false)
-    private LocalDateTime insertTime;
-    
-    @Column(nullable = false)
-    private LocalDateTime updateTime;
-    
-    @Override
-    public int compareTo(ChallengeFeedback o) {
-        return Comparator.comparing(ChallengeFeedback::getChallenge)
-                .thenComparing(ChallengeFeedback::getUser)
-                .thenComparing(Comparator.nullsLast(Comparator.comparing(ChallengeFeedback::getWillMitigate)))
-                .compare(this, o);
-    }
+	@Column(length = LENGTH)
+	private String willMitigateComment;
 
-    public void insert() {
-        LocalDateTime now = LocalDateTime.now();
-        insertTime = now;
-        updateTime = now;
-    }
+	@Column(nullable = false)
+	private LocalDateTime insertTime;
 
-    public void update() {
-        updateTime = LocalDateTime.now();
-    }
-    
+	@Column(nullable = false)
+	private LocalDateTime updateTime;
+
+	@Override
+	public int compareTo(ChallengeFeedback o) {
+		return Comparator.comparing(ChallengeFeedback::getChallenge)
+			.thenComparing(ChallengeFeedback::getUser)
+			.thenComparing(Comparator.nullsLast(Comparator.comparing(ChallengeFeedback::getWillMitigate)))
+			.compare(this, o);
+	}
+
+	public void insert() {
+		LocalDateTime now = LocalDateTime.now();
+		insertTime = now;
+		updateTime = now;
+	}
+
+	public void update() {
+		updateTime = LocalDateTime.now();
+	}
+
 }

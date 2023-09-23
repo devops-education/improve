@@ -9,24 +9,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class BooleanOptions extends Options<Boolean, Boolean> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Override
-    public String label(Boolean e) {
-        String result = "";
-        if (e != null) {
-            result = e ? "Yes" : "No";
-        }
-        return result;
-    }
+	@Override
+	public String label(Boolean e) {
+		String result = "";
+		if (e != null) {
+			result = e ? "Yes" : "No";
+		}
+		return result;
+	}
 
-    @Override
-    protected Object key(Boolean e) {
-        return e;
-    }
+	@Override
+	protected Object key(Boolean e) {
+		return e;
+	}
 
-    @Override
-    protected List<Boolean> fillList() {
-        return Arrays.asList(Boolean.TRUE, Boolean.FALSE);
-    }
+	@Override
+	protected List<Boolean> fillList() {
+		return Arrays.asList(Boolean.TRUE, Boolean.FALSE);
+	}
+
 }
