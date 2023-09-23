@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TeachingMethodService extends InMemoryCrudService <TeachingMethod, Long> {
-    @Getter
-    @Autowired
-    private TeachingMethodRepository repository;
+public class TeachingMethodService extends InMemoryCrudService<TeachingMethod, Long> {
+
+	@Getter
+	@Autowired
+	private TeachingMethodRepository repository;
 
 }

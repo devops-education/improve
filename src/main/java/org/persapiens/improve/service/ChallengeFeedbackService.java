@@ -11,44 +11,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ChallengeFeedbackService extends RepositoryCrudService <ChallengeFeedback, Long> {
+public class ChallengeFeedbackService extends RepositoryCrudService<ChallengeFeedback, Long> {
 
-    @Getter
-    @Autowired
-    private ChallengeFeedbackRepository repository;
-    
-    @Autowired
-    private ChallengeService challengeService;
-    
-    @Autowired
-    private UserService userService;
-    
-    private List<ChallengeFeedback> fill(List<ChallengeFeedback> result) {
-        for (ChallengeFeedback bean : result) {
-            bean.setChallenge(challengeService.findById(bean.getChallenge().getId()).get());
-            bean.setUser(userService.findById(bean.getUser().getId()).get());
-        }
-        
-        return result;
-    }
-    
-    public List<ChallengeFeedback> findByUser(User user) {
-        return fill(repository.findByUser(user));
-    }
-    
-    public List<ChallengeFeedback> findByChallengeInAndUser(Collection<Challenge> challenge, User user) {
-        return fill(repository.findByChallengeInAndUser(challenge, user));
-    }
+	@Getter
+	@Autowired
+	private ChallengeFeedbackRepository repository;
 
-    @Override
-    public void save(ChallengeFeedback bean) {
-        if (bean.getId() == null) {
-            bean.insert();
-        } else {
-            bean.update();
-        }
+	@Autowired
+	private ChallengeService challengeService;
 
-        super.save(bean);
-    }
-    
+	@Autowired
+	private UserService userService;
+
+	private List<ChallengeFeedback> fill(List<ChallengeFeedback> result) {
+		for (ChallengeFeedback bean : result) {
+			bean.setChallenge(challengeService.findById(bean.getChallenge().getId()).get());
+			bean.setUser(userService.findById(bean.getUser().getId()).get());
+		}
+
+		return result;
+	}
+
+	public List<ChallengeFeedback> findByUser(User user) {
+		return fill(repository.findByUser(user));
+	}
+
+	public List<ChallengeFeedback> findByChallengeInAndUser(Collection<Challenge> challenge, User user) {
+		return fill(repository.findByChallengeInAndUser(challenge, user));
+	}
+
+	@Override
+	public void save(ChallengeFeedback bean) {
+		if (bean.getId() == null) {
+			bean.insert();
+		}
+		else {
+			bean.update();
+		}
+
+		super.save(bean);
+	}
+
 }

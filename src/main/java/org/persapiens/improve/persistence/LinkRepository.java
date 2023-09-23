@@ -5,5 +5,6 @@ import org.persapiens.improve.domain.LinkId;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface LinkRepository extends CrudRepository<Link, LinkId> {    
+public interface LinkRepository extends CrudRepository<Link, LinkId> {
+
 }

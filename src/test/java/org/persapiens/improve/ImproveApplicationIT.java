@@ -14,4 +14,5 @@ public class ImproveApplicationIT {
 	@Test
 	public void contextLoads() {
 	}
+
 }

@@ -12,107 +12,107 @@ import org.persapiens.improve.view.AbstractMBean;
 
 public abstract class Options<T, ID extends Serializable> extends AbstractMBean {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    protected static final String EI_EXPOSE_REP = "EI_EXPOSE_REP";
-    private boolean listCreated = false;
+	protected static final String EI_EXPOSE_REP = "EI_EXPOSE_REP";
 
-    /**
-     * SOBRESCREVA se quiser alterar a forma padrao de como os beans sao
-     * recuperados. Devolve a lista de beans. Por default, chama o service
-     *
-     * @return list of beans
-     */
-    protected abstract List<T> fillList();
+	private boolean listCreated = false;
 
-    protected void verify() {
-        if (!this.listCreated) {
-            List<T> newList = fillList();
-            setList(newList);
-            this.listCreated = true;
+	/**
+	 * SOBRESCREVA se quiser alterar a forma padrao de como os beans sao recuperados.
+	 * Devolve a lista de beans. Por default, chama o service
+	 * @return list of beans
+	 */
+	protected abstract List<T> fillList();
 
-            if (this.list != null) {
-                this.options = createOptions();
-                this.emptyOptions = createEmptyOptions(this.options);
-            }
-        }
-    }
+	protected void verify() {
+		if (!this.listCreated) {
+			List<T> newList = fillList();
+			setList(newList);
+			this.listCreated = true;
 
-    protected void clear() {
-        this.emptyOptions = null;
-        this.options = null;
+			if (this.list != null) {
+				this.options = createOptions();
+				this.emptyOptions = createEmptyOptions(this.options);
+			}
+		}
+	}
 
-        this.listConverter = null;
+	protected void clear() {
+		this.emptyOptions = null;
+		this.options = null;
 
-        this.listCreated = false;
-    }
+		this.listConverter = null;
 
-    protected abstract Object key(T e);
+		this.listCreated = false;
+	}
 
-    private transient ListConverter listConverter;
+	protected abstract Object key(T e);
 
-    @SuppressFBWarnings(EI_EXPOSE_REP)
-    public Converter getListConverter() {
-        verify();
+	private transient ListConverter listConverter;
 
-        if (this.listConverter == null) {
-            this.listConverter = new ListConverter();
-            this.listConverter.setList(getList());
-        }
+	@SuppressFBWarnings(EI_EXPOSE_REP)
+	public Converter getListConverter() {
+		verify();
 
-        return this.listConverter;
-    }
+		if (this.listConverter == null) {
+			this.listConverter = new ListConverter();
+			this.listConverter.setList(getList());
+		}
 
-    private List<T> list;
+		return this.listConverter;
+	}
 
-    @SuppressFBWarnings("EI_EXPOSE_REP2")
-    public void setList(List<T> list) {
-        this.list = list;
+	private List<T> list;
 
-        clear();
-    }
+	@SuppressFBWarnings("EI_EXPOSE_REP2")
+	public void setList(List<T> list) {
+		this.list = list;
 
-    @SuppressFBWarnings(EI_EXPOSE_REP)
-    public final List<T> getList() {
-        verify();
+		clear();
+	}
 
-        return this.list;
-    }
+	@SuppressFBWarnings(EI_EXPOSE_REP)
+	public final List<T> getList() {
+		verify();
 
-    private List<SelectItem> options;
+		return this.list;
+	}
 
-    protected final List<SelectItem> createOptions() {
-        List<SelectItem> result = new ArrayList<SelectItem>();
-        for (T e : this.list) {
-            Object key = key(e);
-            result.add(new SelectItem(key, label(e)));
-        }
-        return result;
-    }
+	private List<SelectItem> options;
 
-    @SuppressFBWarnings(EI_EXPOSE_REP)
-    public final List<SelectItem> getOptions() {
-        verify();
+	protected final List<SelectItem> createOptions() {
+		List<SelectItem> result = new ArrayList<SelectItem>();
+		for (T e : this.list) {
+			Object key = key(e);
+			result.add(new SelectItem(key, label(e)));
+		}
+		return result;
+	}
 
-        return this.options;
-    }
+	@SuppressFBWarnings(EI_EXPOSE_REP)
+	public final List<SelectItem> getOptions() {
+		verify();
 
-    private List<SelectItem> emptyOptions;
+		return this.options;
+	}
 
-    protected final List<SelectItem> createEmptyOptions(List<SelectItem> options) {
-        List<SelectItem> result = new ArrayList<SelectItem>(options.size() + 1);
-        result.add(new SelectItem("", "", ""));
-        result.addAll(options);
-        return result;
-    }
+	private List<SelectItem> emptyOptions;
 
-    @SuppressFBWarnings(EI_EXPOSE_REP)
-    public final List<SelectItem> getEmptyOptions() {
-        verify();
+	protected final List<SelectItem> createEmptyOptions(List<SelectItem> options) {
+		List<SelectItem> result = new ArrayList<SelectItem>(options.size() + 1);
+		result.add(new SelectItem("", "", ""));
+		result.addAll(options);
+		return result;
+	}
 
-        return this.emptyOptions;
-    }
+	@SuppressFBWarnings(EI_EXPOSE_REP)
+	public final List<SelectItem> getEmptyOptions() {
+		verify();
 
-    public abstract String label(T e);
+		return this.emptyOptions;
+	}
+
+	public abstract String label(T e);
 
 }

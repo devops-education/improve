@@ -12,19 +12,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TeachingMethodLinkService extends InMemoryCrudService <TeachingMethodLink, TeachingMethodLinkId> {
-    @Getter
-    @Autowired
-    private TeachingMethodLinkRepository repository;
+public class TeachingMethodLinkService extends InMemoryCrudService<TeachingMethodLink, TeachingMethodLinkId> {
 
-    public Set<TeachingMethodLink> findByLink(Link link) {
-        return getBeans().values().stream().filter( t -> t.getLink().equals(link))
-            .collect(Collectors.toSet());
-    }
+	@Getter
+	@Autowired
+	private TeachingMethodLinkRepository repository;
 
-    public Set<TeachingMethodLink> findByTeachingMethod(TeachingMethod teachingMethod) {
-        return getBeans().values().stream().filter( t -> t.getTeachingMethod().equals(teachingMethod))
-            .collect(Collectors.toSet());
-    }
+	public Set<TeachingMethodLink> findByLink(Link link) {
+		return getBeans().values().stream().filter(t -> t.getLink().equals(link)).collect(Collectors.toSet());
+	}
+
+	public Set<TeachingMethodLink> findByTeachingMethod(TeachingMethod teachingMethod) {
+		return getBeans().values()
+			.stream()
+			.filter(t -> t.getTeachingMethod().equals(teachingMethod))
+			.collect(Collectors.toSet());
+	}
 
 }

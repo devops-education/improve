@@ -16,10 +16,10 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class RecommendationsConflictId implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private long recommendation1;
+	private long recommendation1;
 
-    private long recommendation2;
+	private long recommendation2;
 
 }

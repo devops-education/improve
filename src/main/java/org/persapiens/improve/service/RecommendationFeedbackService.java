@@ -11,44 +11,46 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RecommendationFeedbackService extends RepositoryCrudService <RecommendationFeedback, Long> {
+public class RecommendationFeedbackService extends RepositoryCrudService<RecommendationFeedback, Long> {
 
-    @Getter
-    @Autowired
-    private RecommendationFeedbackRepository repository;
-    
-    @Autowired
-    private RecommendationService recommendationService;
-    
-    @Autowired
-    private UserService userService;
-    
-    private List<RecommendationFeedback> fill(List<RecommendationFeedback> result) {
-        for (RecommendationFeedback bean : result) {
-            bean.setRecommendation(recommendationService.findById(bean.getRecommendation().getId()).get());
-            bean.setUser(userService.findById(bean.getUser().getId()).get());
-        }
-        
-        return result;
-    }
-    
-    public List<RecommendationFeedback> findByUser(User user) {
-        return fill(repository.findByUser(user));
-    }
-    
-    public List<RecommendationFeedback> findByRecommendationInAndUser(Collection<Recommendation> recommendation, User user) {
-        return fill(repository.findByRecommendationInAndUser(recommendation, user));
-    }
+	@Getter
+	@Autowired
+	private RecommendationFeedbackRepository repository;
 
-    @Override
-    public void save(RecommendationFeedback bean) {
-        if (bean.getId() == null) {
-            bean.insert();
-        } else {
-            bean.update();
-        }
+	@Autowired
+	private RecommendationService recommendationService;
 
-        super.save(bean);
-    }
-    
+	@Autowired
+	private UserService userService;
+
+	private List<RecommendationFeedback> fill(List<RecommendationFeedback> result) {
+		for (RecommendationFeedback bean : result) {
+			bean.setRecommendation(recommendationService.findById(bean.getRecommendation().getId()).get());
+			bean.setUser(userService.findById(bean.getUser().getId()).get());
+		}
+
+		return result;
+	}
+
+	public List<RecommendationFeedback> findByUser(User user) {
+		return fill(repository.findByUser(user));
+	}
+
+	public List<RecommendationFeedback> findByRecommendationInAndUser(Collection<Recommendation> recommendation,
+			User user) {
+		return fill(repository.findByRecommendationInAndUser(recommendation, user));
+	}
+
+	@Override
+	public void save(RecommendationFeedback bean) {
+		if (bean.getId() == null) {
+			bean.insert();
+		}
+		else {
+			bean.update();
+		}
+
+		super.save(bean);
+	}
+
 }

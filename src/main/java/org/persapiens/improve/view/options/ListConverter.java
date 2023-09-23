@@ -9,37 +9,36 @@ import java.util.Objects;
 
 public class ListConverter implements Converter<Object> {
 
-    private List<?> list;
+	private List<?> list;
 
-    @Override
-    public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        for (Object listValue : list) {
-            String convertedListValue = getAsString(context, component, listValue);
-            if (Objects.equals(value, convertedListValue)) {
-                return listValue;
-            }
-        }
+	@Override
+	public Object getAsObject(FacesContext context, UIComponent component, String value) {
+		for (Object listValue : list) {
+			String convertedListValue = getAsString(context, component, listValue);
+			if (Objects.equals(value, convertedListValue)) {
+				return listValue;
+			}
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    @Override
-    public String getAsString(FacesContext context, UIComponent component, Object value) {
-        if (value == null) {
-            return null;
-        }
+	@Override
+	public String getAsString(FacesContext context, UIComponent component, Object value) {
+		if (value == null) {
+			return null;
+		}
 
-        return value.toString();
-    }
+		return value.toString();
+	}
 
-    /**
-     * Sets the list of available items.
-     *
-     * @param list The list of available items.
-     */
-    @SuppressFBWarnings("EI_EXPOSE_REP2")
-    public void setList(List<?> list) {
-        this.list = list;
-    }
+	/**
+	 * Sets the list of available items.
+	 * @param list The list of available items.
+	 */
+	@SuppressFBWarnings("EI_EXPOSE_REP2")
+	public void setList(List<?> list) {
+		this.list = list;
+	}
 
 }

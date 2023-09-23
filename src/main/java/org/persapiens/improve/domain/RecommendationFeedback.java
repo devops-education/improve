@@ -31,68 +31,69 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"recommendation", "user"})
+@EqualsAndHashCode(of = { "recommendation", "user" })
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
 @Entity
 @SequenceGenerator(sequenceName = "seq_recommendation_feedback", name = "ID_SEQUENCE", allocationSize = 1)
-@Table(indexes = @Index(name = "idx_recommendationfeedback_recommendation_user", unique = true, columnList = "recommendation_id, user_id"))
+@Table(indexes = @Index(name = "idx_recommendationfeedback_recommendation_user", unique = true,
+		columnList = "recommendation_id, user_id"))
 public class RecommendationFeedback implements IdBean<Long>, Comparable<RecommendationFeedback> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
-    @Id
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
+	@Id
+	private Long id;
 
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @NonNull
-    @ManyToOne
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_recommendationFeedback_recommendation"))
-    private Recommendation recommendation;
-    
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @NonNull
-    @ManyToOne
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_recommendationFeedback_user"))
-    private User user;
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@NonNull
+	@ManyToOne
+	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_recommendationFeedback_recommendation"))
+	private Recommendation recommendation;
 
-    @Column
-    private Boolean usedAlready;
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@NonNull
+	@ManyToOne
+	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_recommendationFeedback_user"))
+	private User user;
 
-    @Column
-    private Boolean willUse;
+	@Column
+	private Boolean usedAlready;
 
-    @Column(length = LENGTH)
-    private String usedAlreadyComment;
+	@Column
+	private Boolean willUse;
 
-    @Column(length = LENGTH)
-    private String willUseComment;
+	@Column(length = LENGTH)
+	private String usedAlreadyComment;
 
-    @Column(nullable = false)
-    private LocalDateTime insertTime;
-    
-    @Column(nullable = false)
-    private LocalDateTime updateTime;
+	@Column(length = LENGTH)
+	private String willUseComment;
 
-    @Override
-    public int compareTo(RecommendationFeedback o) {
-        return Comparator.comparing(RecommendationFeedback::getRecommendation)
-                .thenComparing(RecommendationFeedback::getUser)
-                .thenComparing(Comparator.nullsLast(Comparator.comparing(RecommendationFeedback::getUsedAlready)))
-                .thenComparing(Comparator.nullsLast(Comparator.comparing(RecommendationFeedback::getWillUse)))
-                .compare(this, o);
-    }
+	@Column(nullable = false)
+	private LocalDateTime insertTime;
 
-    public void insert() {
-        LocalDateTime now = LocalDateTime.now();
-        insertTime = now;
-        updateTime = now;
-    }
+	@Column(nullable = false)
+	private LocalDateTime updateTime;
 
-    public void update() {
-        updateTime = LocalDateTime.now();
-    }
+	@Override
+	public int compareTo(RecommendationFeedback o) {
+		return Comparator.comparing(RecommendationFeedback::getRecommendation)
+			.thenComparing(RecommendationFeedback::getUser)
+			.thenComparing(Comparator.nullsLast(Comparator.comparing(RecommendationFeedback::getUsedAlready)))
+			.thenComparing(Comparator.nullsLast(Comparator.comparing(RecommendationFeedback::getWillUse)))
+			.compare(this, o);
+	}
+
+	public void insert() {
+		LocalDateTime now = LocalDateTime.now();
+		insertTime = now;
+		updateTime = now;
+	}
+
+	public void update() {
+		updateTime = LocalDateTime.now();
+	}
 
 }

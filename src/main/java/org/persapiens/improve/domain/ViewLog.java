@@ -33,7 +33,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"type", "user", "time"})
+@EqualsAndHashCode(of = { "type", "user", "time" })
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @SuperBuilder
@@ -42,38 +42,38 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(indexes = @Index(name = "idx_viewlog_type_user_time", unique = true, columnList = "type, user_id, time"))
 public class ViewLog implements IdBean<Long>, Comparable<ViewLog> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
-    @Id
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
+	@Id
+	private Long id;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private ViewLogType type;
-    
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @NonNull
-    @ManyToOne
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_challengeFeedback_user"))
-    private User user;
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private ViewLogType type;
 
-    @Column(nullable = false)
-    private LocalDateTime time;
-    
-    @Column(nullable = false)
-    private String description;
-    
-    @Override
-    public int compareTo(ViewLog o) {
-        return Comparator.comparing(ViewLog::getUser)
-                .thenComparing(ViewLog::getType)
-                .thenComparing(ViewLog::getTime)
-                .compare(this, o);
-    }
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@NonNull
+	@ManyToOne
+	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_challengeFeedback_user"))
+	private User user;
 
-    public void insert() {
-        time = LocalDateTime.now();
-    }
-    
+	@Column(nullable = false)
+	private LocalDateTime time;
+
+	@Column(nullable = false)
+	private String description;
+
+	@Override
+	public int compareTo(ViewLog o) {
+		return Comparator.comparing(ViewLog::getUser)
+			.thenComparing(ViewLog::getType)
+			.thenComparing(ViewLog::getTime)
+			.compare(this, o);
+	}
+
+	public void insert() {
+		time = LocalDateTime.now();
+	}
+
 }

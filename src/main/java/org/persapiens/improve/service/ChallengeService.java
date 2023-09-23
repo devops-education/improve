@@ -16,117 +16,118 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ChallengeService extends InMemoryCrudService <Challenge, Long> {
-    @Getter
-    @Autowired
-    private ChallengeRepository repository;
+public class ChallengeService extends InMemoryCrudService<Challenge, Long> {
 
-    @Autowired
-    private ChallengeTagService challengeTagService;
+	@Getter
+	@Autowired
+	private ChallengeRepository repository;
 
-    @Autowired
-    private ChallengeInterviewService challengeInterviewService;
+	@Autowired
+	private ChallengeTagService challengeTagService;
 
-    @Autowired
-    private LinkService linkService;
+	@Autowired
+	private ChallengeInterviewService challengeInterviewService;
 
-    @Autowired
-    private ChallengeRecommendationConflictService challengeRecommendationConflictService;
+	@Autowired
+	private LinkService linkService;
 
-    @Autowired
-    private TagService tagService;
+	@Autowired
+	private ChallengeRecommendationConflictService challengeRecommendationConflictService;
 
-    @Autowired
-    private InterviewService interviewService;
+	@Autowired
+	private TagService tagService;
 
-    private RecommendationService recommendationService;
-    
-    @Autowired
-    private TeachingMethodLinkService teachingMethodLinkService;
-    
-    @Autowired
-    private TeachingMethodService teachingMethodService;
-    
-    @SuppressFBWarnings("EI_EXPOSE_REP2")
-    @Autowired
-    public void setRecommendationService(RecommendationService recommendationService) {
-        this.recommendationService = recommendationService;
-    }
-    
-    @Override
-    public void init() {
-        recommendationService.setChallengeService(this);
-        
-        super.init();
-    }
-    
-    @Override
-    protected Challenge fill(Challenge result) {
-        result = super.fill(result); 
-        
-        result = fillChallengeTags(result);
-        
-        result = fillChallengeInterviews(result);
-        
-        result = fillLinks(result);
-        
-        result = fillConflicts(result);
-        
-        return result;
-    }
+	@Autowired
+	private InterviewService interviewService;
 
-    private Challenge fillChallengeTags(Challenge result) {
-        result.setChallengeTags(challengeTagService.findByChallenge(result));
-        for (ChallengeTag bean: result.getChallengeTags()) {
-            bean.setChallenge(result);
-            bean.setTag(tagService.findById(bean.getTag().getId()).get());
-        }
-        
-        return result;
-    }
+	private RecommendationService recommendationService;
 
-    private Challenge fillChallengeInterviews(Challenge result) {
-        result.setChallengeInterviews(challengeInterviewService.findByChallenge(result));
-        for (ChallengeInterview bean: result.getChallengeInterviews()) {
-            bean.setChallenge(result);
-            bean.setInterview(interviewService.findById(bean.getInterview().getId()).get());
-        }
-        
-        return result;
-    }
+	@Autowired
+	private TeachingMethodLinkService teachingMethodLinkService;
 
-    private Challenge fillLinks(Challenge result) {
-        result.setLinks(linkService.findByChallenge(result));
-        for (Link bean: result.getLinks()) {
-            bean.setChallenge(result);
-            bean.setRecommendation(recommendationService.findById(bean.getRecommendation().getId()).get());
-            
-            bean.setTeachingMethodLinks(teachingMethodLinkService.findByLink(bean));
-            for (TeachingMethodLink teachingMethodLink: bean.getTeachingMethodLinks()) {
-                teachingMethodLink.setLink(bean);
-                teachingMethodLink.setTeachingMethod(
-         teachingMethodService.findById(teachingMethodLink.getTeachingMethod().getId()).get());
-            }            
-        }
-        
-        return result;
-    }
+	@Autowired
+	private TeachingMethodService teachingMethodService;
 
-    private Challenge fillConflicts(Challenge result) {
-        result.setConflicts(challengeRecommendationConflictService.findByChallenge(result));
-        for (ChallengeRecommendationConflict bean: result.getConflicts()) {
-            bean.setChallenge(result);
-            bean.setRecommendation(recommendationService.findById(bean.getRecommendation().getId()).get());
-        }
-        
-        return result;
-    }
+	@SuppressFBWarnings("EI_EXPOSE_REP2")
+	@Autowired
+	public void setRecommendationService(RecommendationService recommendationService) {
+		this.recommendationService = recommendationService;
+	}
 
-    public List<Challenge> findByOrderByChallengeInterviewsSizeDesc() {
-        List<Challenge> result = new ArrayList<>(getBeans().values());
-        Collections.sort(result, (Challenge o1, Challenge o2) -> 
-            o2.getChallengeInterviews().size() - o1.getChallengeInterviews().size());
-        return result;
-    }
-    
+	@Override
+	public void init() {
+		recommendationService.setChallengeService(this);
+
+		super.init();
+	}
+
+	@Override
+	protected Challenge fill(Challenge result) {
+		result = super.fill(result);
+
+		result = fillChallengeTags(result);
+
+		result = fillChallengeInterviews(result);
+
+		result = fillLinks(result);
+
+		result = fillConflicts(result);
+
+		return result;
+	}
+
+	private Challenge fillChallengeTags(Challenge result) {
+		result.setChallengeTags(challengeTagService.findByChallenge(result));
+		for (ChallengeTag bean : result.getChallengeTags()) {
+			bean.setChallenge(result);
+			bean.setTag(tagService.findById(bean.getTag().getId()).get());
+		}
+
+		return result;
+	}
+
+	private Challenge fillChallengeInterviews(Challenge result) {
+		result.setChallengeInterviews(challengeInterviewService.findByChallenge(result));
+		for (ChallengeInterview bean : result.getChallengeInterviews()) {
+			bean.setChallenge(result);
+			bean.setInterview(interviewService.findById(bean.getInterview().getId()).get());
+		}
+
+		return result;
+	}
+
+	private Challenge fillLinks(Challenge result) {
+		result.setLinks(linkService.findByChallenge(result));
+		for (Link bean : result.getLinks()) {
+			bean.setChallenge(result);
+			bean.setRecommendation(recommendationService.findById(bean.getRecommendation().getId()).get());
+
+			bean.setTeachingMethodLinks(teachingMethodLinkService.findByLink(bean));
+			for (TeachingMethodLink teachingMethodLink : bean.getTeachingMethodLinks()) {
+				teachingMethodLink.setLink(bean);
+				teachingMethodLink.setTeachingMethod(
+						teachingMethodService.findById(teachingMethodLink.getTeachingMethod().getId()).get());
+			}
+		}
+
+		return result;
+	}
+
+	private Challenge fillConflicts(Challenge result) {
+		result.setConflicts(challengeRecommendationConflictService.findByChallenge(result));
+		for (ChallengeRecommendationConflict bean : result.getConflicts()) {
+			bean.setChallenge(result);
+			bean.setRecommendation(recommendationService.findById(bean.getRecommendation().getId()).get());
+		}
+
+		return result;
+	}
+
+	public List<Challenge> findByOrderByChallengeInterviewsSizeDesc() {
+		List<Challenge> result = new ArrayList<>(getBeans().values());
+		Collections.sort(result, (Challenge o1, Challenge o2) -> o2.getChallengeInterviews().size()
+				- o1.getChallengeInterviews().size());
+		return result;
+	}
+
 }

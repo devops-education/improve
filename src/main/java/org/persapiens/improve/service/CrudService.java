@@ -5,14 +5,15 @@ import java.util.Optional;
 import org.persapiens.improve.domain.IdBean;
 
 public interface CrudService<T extends IdBean<ID>, ID extends Serializable> {
-    
-    Optional findById(ID id);
-    
-    long count();
-    
-    Iterable<T> findAll();
 
-    void save(T bean);
+	Optional findById(ID id);
 
-    void delete(T bean);
+	long count();
+
+	Iterable<T> findAll();
+
+	void save(T bean);
+
+	void delete(T bean);
+
 }

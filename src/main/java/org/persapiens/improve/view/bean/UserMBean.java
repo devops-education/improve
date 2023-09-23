@@ -16,17 +16,17 @@ public class UserMBean extends AbstractMBean {
 	private static final long serialVersionUID = 1L;
 
 	private User loggedUser;
-	
-        @SuppressFBWarnings("SE_BAD_FIELD")
-        @Autowired
-        private UserService userService;
-        
-        @SuppressFBWarnings("EI_EXPOSE_REP")
-        public User getLoggedUser() {
+
+	@SuppressFBWarnings("SE_BAD_FIELD")
+	@Autowired
+	private UserService userService;
+
+	@SuppressFBWarnings("EI_EXPOSE_REP")
+	public User getLoggedUser() {
 		if (loggedUser == null) {
-                    loggedUser = userService.findByUsername(username()).get();
-                }
-                return loggedUser;
+			loggedUser = userService.findByUsername(username()).get();
+		}
+		return loggedUser;
 	}
 
 }

@@ -24,35 +24,37 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Getter
 @Setter
 @ToString(of = "id")
-@EqualsAndHashCode(of = {"recommendation1", "recommendation2"})
+@EqualsAndHashCode(of = { "recommendation1", "recommendation2" })
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
 @Entity
 public class RecommendationsConflict implements IdBean<RecommendationsConflictId>, Comparable<RecommendationsConflict> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @EmbeddedId
-    private RecommendationsConflictId id;
+	@EmbeddedId
+	private RecommendationsConflictId id;
 
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name = "recommendation1", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_recommendationsConflict_recommendation1"))
-    private Recommendation recommendation1;
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@NonNull
+	@ManyToOne
+	@JoinColumn(name = "recommendation1", nullable = false, insertable = false, updatable = false,
+			foreignKey = @ForeignKey(name = "fk_recommendationsConflict_recommendation1"))
+	private Recommendation recommendation1;
 
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name= "recommendation2", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_recommendationsConflict_recommendation2"))
-    private Recommendation recommendation2;
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@NonNull
+	@ManyToOne
+	@JoinColumn(name = "recommendation2", nullable = false, insertable = false, updatable = false,
+			foreignKey = @ForeignKey(name = "fk_recommendationsConflict_recommendation2"))
+	private Recommendation recommendation2;
 
-    @Override
-    public int compareTo(RecommendationsConflict o) {
-        return Comparator.comparing(RecommendationsConflict::getRecommendation1)
-                .thenComparing(RecommendationsConflict::getRecommendation2)
-                .compare(this, o);
-    }
+	@Override
+	public int compareTo(RecommendationsConflict o) {
+		return Comparator.comparing(RecommendationsConflict::getRecommendation1)
+			.thenComparing(RecommendationsConflict::getRecommendation2)
+			.compare(this, o);
+	}
 
 }

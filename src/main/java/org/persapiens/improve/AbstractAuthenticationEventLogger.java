@@ -9,24 +9,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AbstractAuthenticationEvent;
 
-public abstract class AbstractAuthenticationEventLogger <T extends AbstractAuthenticationEvent> implements ApplicationListener<T> {
+public abstract class AbstractAuthenticationEventLogger<T extends AbstractAuthenticationEvent>
+		implements ApplicationListener<T> {
 
-    @Autowired
-    private ViewLogService viewLogService;
+	@Autowired
+	private ViewLogService viewLogService;
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    protected abstract ViewLogType viewLogType();
-    
-    @Override
-    public void onApplicationEvent(final T event) {
-        event.getAuthentication().getName();
-        viewLogService.save(ViewLog.builder()
-            .type(viewLogType())
-            .user(userService.findByUsername(event.getAuthentication().getName()).get())
-            .description("")
-            .build());
-    }
+	protected abstract ViewLogType viewLogType();
+
+	@Override
+	public void onApplicationEvent(final T event) {
+		event.getAuthentication().getName();
+		viewLogService.save(ViewLog.builder()
+			.type(viewLogType())
+			.user(userService.findByUsername(event.getAuthentication().getName()).get())
+			.description("")
+			.build());
+	}
 
 }

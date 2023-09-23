@@ -23,34 +23,37 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"recommendation", "tag"})
+@EqualsAndHashCode(of = { "recommendation", "tag" })
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
 @Entity
 public class RecommendationTag implements IdBean<RecommendationTagId>, Comparable<RecommendationTag> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @EmbeddedId
-    private RecommendationTagId id;
+	@EmbeddedId
+	private RecommendationTagId id;
 
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name= "recommendation", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_recommendationTag_recommendation"))
-    private Recommendation recommendation;
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@NonNull
+	@ManyToOne
+	@JoinColumn(name = "recommendation", nullable = false, insertable = false, updatable = false,
+			foreignKey = @ForeignKey(name = "fk_recommendationTag_recommendation"))
+	private Recommendation recommendation;
 
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name= "tag", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_recommendationTag_tag"))
-    private Tag tag;
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@NonNull
+	@ManyToOne
+	@JoinColumn(name = "tag", nullable = false, insertable = false, updatable = false,
+			foreignKey = @ForeignKey(name = "fk_recommendationTag_tag"))
+	private Tag tag;
 
-    @Override
-    public int compareTo(RecommendationTag o) {
-        return Comparator.comparing(RecommendationTag::getRecommendation)
-                .thenComparing(RecommendationTag::getTag)
-                .compare(this, o);
-    }
+	@Override
+	public int compareTo(RecommendationTag o) {
+		return Comparator.comparing(RecommendationTag::getRecommendation)
+			.thenComparing(RecommendationTag::getTag)
+			.compare(this, o);
+	}
+
 }

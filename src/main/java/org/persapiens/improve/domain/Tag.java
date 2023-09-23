@@ -18,7 +18,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Getter
 @Setter
-@ToString(of = {"id", "descricao"})
+@ToString(of = { "id", "descricao" })
 @EqualsAndHashCode(of = "descricao")
 @SuperBuilder
 @Entity
@@ -26,17 +26,17 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Tag implements IdBean<Long>, Comparable<Tag> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    private Long id;
+	@Id
+	private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String descricao;
+	@Column(nullable = false, unique = true)
+	private String descricao;
 
-    @Override
-    public int compareTo(Tag o) {
-        return this.descricao.compareTo(o.descricao);
-    }
+	@Override
+	public int compareTo(Tag o) {
+		return this.descricao.compareTo(o.descricao);
+	}
 
 }

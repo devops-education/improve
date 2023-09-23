@@ -11,30 +11,30 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserCrudMBean extends CrudMBean<User, Long> {
 
-    private static final long serialVersionUID = 1L;
-    
-    @Autowired
-    private ViewLogMBean viewLogMBean;
+	private static final long serialVersionUID = 1L;
 
-    @Override
-    protected User createBean() {
-        return User.builder().build();
-    }
+	@Autowired
+	private ViewLogMBean viewLogMBean;
 
-    @Override
-    public boolean isCheckStartUpdate(User bean) {
-        return true;
-    }
+	@Override
+	protected User createBean() {
+		return User.builder().build();
+	}
 
-    @Override
-    public boolean isCheckStartInsert(User bean) {
-        return true;
-    }
+	@Override
+	public boolean isCheckStartUpdate(User bean) {
+		return true;
+	}
 
-    @Override
-    protected void init() {
-        super.init();
-        viewLogMBean.logUser();
-    }
-    
+	@Override
+	public boolean isCheckStartInsert(User bean) {
+		return true;
+	}
+
+	@Override
+	protected void init() {
+		super.init();
+		viewLogMBean.logUser();
+	}
+
 }

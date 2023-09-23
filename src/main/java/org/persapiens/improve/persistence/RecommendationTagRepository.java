@@ -5,4 +5,5 @@ import org.persapiens.improve.domain.RecommendationTagId;
 import org.springframework.data.repository.CrudRepository;
 
 public interface RecommendationTagRepository extends CrudRepository<RecommendationTag, RecommendationTagId> {
+
 }

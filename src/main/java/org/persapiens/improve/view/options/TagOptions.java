@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class TagOptions extends IdBeanOptions<Tag, Long> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Override
-    public String label(Tag e) {
-        return e.getDescricao();
-    }
+	@Override
+	public String label(Tag e) {
+		return e.getDescricao();
+	}
 
 }

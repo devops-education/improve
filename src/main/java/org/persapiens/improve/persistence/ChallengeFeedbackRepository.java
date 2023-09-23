@@ -9,7 +9,9 @@ import org.persapiens.improve.domain.User;
 import org.springframework.data.repository.CrudRepository;
 
 public interface ChallengeFeedbackRepository extends CrudRepository<ChallengeFeedback, Long> {
-    List<ChallengeFeedback> findByUser(User user);
-    
-    List<ChallengeFeedback> findByChallengeInAndUser(Collection<Challenge> challenge, User user);
+
+	List<ChallengeFeedback> findByUser(User user);
+
+	List<ChallengeFeedback> findByChallengeInAndUser(Collection<Challenge> challenge, User user);
+
 }

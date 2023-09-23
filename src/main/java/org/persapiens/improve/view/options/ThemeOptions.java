@@ -10,20 +10,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class ThemeOptions extends Options<Theme, Theme> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Override
-    public String label(Theme e) {
-        return e.getValue();
-    }
+	@Override
+	public String label(Theme e) {
+		return e.getValue();
+	}
 
-    @Override
-    protected Object key(Theme e) {
-        return e;
-    }
+	@Override
+	protected Object key(Theme e) {
+		return e;
+	}
 
-    @Override
-    protected List<Theme> fillList() {
-        return Arrays.asList(Theme.values());
-    }
+	@Override
+	protected List<Theme> fillList() {
+		return Arrays.asList(Theme.values());
+	}
+
 }

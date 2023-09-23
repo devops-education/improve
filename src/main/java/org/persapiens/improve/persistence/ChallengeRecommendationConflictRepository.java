@@ -5,5 +5,7 @@ import org.persapiens.improve.domain.ChallengeRecommendationConflictId;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface ChallengeRecommendationConflictRepository extends CrudRepository<ChallengeRecommendationConflict, ChallengeRecommendationConflictId> {
+public interface ChallengeRecommendationConflictRepository
+		extends CrudRepository<ChallengeRecommendationConflict, ChallengeRecommendationConflictId> {
+
 }

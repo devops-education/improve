@@ -12,18 +12,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class HomeMBean extends AbstractMBean {
 
-    private static final long serialVersionUID = 1L;
-    
-    @Autowired
-    private ViewLogMBean viewLogMBean;
+	private static final long serialVersionUID = 1L;
 
-    @Override
-    protected void init() {
-        super.init();
-        viewLogMBean.logHome();
-    }
-    
-    public String getEmptyToLog() {
-        return "";
-    }
+	@Autowired
+	private ViewLogMBean viewLogMBean;
+
+	@Override
+	protected void init() {
+		super.init();
+		viewLogMBean.logHome();
+	}
+
+	public String getEmptyToLog() {
+		return "";
+	}
+
 }

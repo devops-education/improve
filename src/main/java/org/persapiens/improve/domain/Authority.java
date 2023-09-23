@@ -38,29 +38,28 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Authority implements IdBean<Long>, Comparable<Authority> {
 
-    private static final long serialVersionUID = 1L;
-    
-    public static final String ROLE_ADMIN = "ROLE_ADMIN";
-    public static final String ROLE_USER = "ROLE_USER";
+	private static final long serialVersionUID = 1L;
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
-    @Id
-    private Long id;
+	public static final String ROLE_ADMIN = "ROLE_ADMIN";
 
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name= "user_id", nullable = false, foreignKey = @ForeignKey(name = "fk_authority_user"))
-    private User user;
+	public static final String ROLE_USER = "ROLE_USER";
 
-    @Column(nullable = false)
-    private String authority;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
+	@Id
+	private Long id;
 
-    @Override
-    public int compareTo(Authority o) {
-        return Comparator.comparing(Authority::getUser)
-                .thenComparing(Authority::getAuthority)
-                .compare(this, o);
-    }
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@NonNull
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "fk_authority_user"))
+	private User user;
+
+	@Column(nullable = false)
+	private String authority;
+
+	@Override
+	public int compareTo(Authority o) {
+		return Comparator.comparing(Authority::getUser).thenComparing(Authority::getAuthority).compare(this, o);
+	}
 
 }

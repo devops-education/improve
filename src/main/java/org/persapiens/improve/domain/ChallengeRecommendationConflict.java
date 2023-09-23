@@ -23,37 +23,39 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Getter
 @Setter
-@ToString(of= "id")
-@EqualsAndHashCode(of = {"challenge", "recommendation"})
+@ToString(of = "id")
+@EqualsAndHashCode(of = { "challenge", "recommendation" })
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @SuperBuilder
 @Entity
-public class ChallengeRecommendationConflict implements IdBean<ChallengeRecommendationConflictId>, 
-        Comparable<ChallengeRecommendationConflict> {
+public class ChallengeRecommendationConflict
+		implements IdBean<ChallengeRecommendationConflictId>, Comparable<ChallengeRecommendationConflict> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @EmbeddedId
-    private ChallengeRecommendationConflictId id;
+	@EmbeddedId
+	private ChallengeRecommendationConflictId id;
 
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name = "challenge", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_challengeRecommendationConflict_challenge"))
-    private Challenge challenge;
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@NonNull
+	@ManyToOne
+	@JoinColumn(name = "challenge", nullable = false, insertable = false, updatable = false,
+			foreignKey = @ForeignKey(name = "fk_challengeRecommendationConflict_challenge"))
+	private Challenge challenge;
 
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name= "recommendation", nullable = false, insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_challengeRecommendationConflict_recommendation"))
-    private Recommendation recommendation;
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@NonNull
+	@ManyToOne
+	@JoinColumn(name = "recommendation", nullable = false, insertable = false, updatable = false,
+			foreignKey = @ForeignKey(name = "fk_challengeRecommendationConflict_recommendation"))
+	private Recommendation recommendation;
 
-    @Override
-    public int compareTo(ChallengeRecommendationConflict o) {
-        return Comparator.comparing(ChallengeRecommendationConflict::getChallenge)
-                .thenComparing(ChallengeRecommendationConflict::getRecommendation)
-                .compare(this, o);
-    }
+	@Override
+	public int compareTo(ChallengeRecommendationConflict o) {
+		return Comparator.comparing(ChallengeRecommendationConflict::getChallenge)
+			.thenComparing(ChallengeRecommendationConflict::getRecommendation)
+			.compare(this, o);
+	}
 
 }

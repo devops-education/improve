@@ -9,7 +9,9 @@ import org.persapiens.improve.domain.User;
 import org.springframework.data.repository.CrudRepository;
 
 public interface RecommendationFeedbackRepository extends CrudRepository<RecommendationFeedback, Long> {
-    List<RecommendationFeedback> findByUser(User user);
-    
-    List<RecommendationFeedback> findByRecommendationInAndUser(Collection<Recommendation> recommendations, User user);
+
+	List<RecommendationFeedback> findByUser(User user);
+
+	List<RecommendationFeedback> findByRecommendationInAndUser(Collection<Recommendation> recommendations, User user);
+
 }

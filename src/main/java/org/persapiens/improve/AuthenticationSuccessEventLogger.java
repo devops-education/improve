@@ -5,9 +5,9 @@ import org.springframework.security.authentication.event.AuthenticationSuccessEv
 
 public class AuthenticationSuccessEventLogger extends AbstractAuthenticationEventLogger<AuthenticationSuccessEvent> {
 
-    @Override
-    protected ViewLogType viewLogType() {
-        return ViewLogType.LOGIN;
-    }
+	@Override
+	protected ViewLogType viewLogType() {
+		return ViewLogType.LOGIN;
+	}
 
 }
