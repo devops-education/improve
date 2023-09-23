@@ -110,6 +110,9 @@
 
                                         <c:columnMainIdea field="challenge.mainIdea" />
 
+                                        <c:columnWillMitigateReadonly field="willMitigate"                                                              
+                                                              challengeFeedback="#{challengeFeedback}" />
+
                                         <c:columnWillMitigateComment field="willMitigateComment" />
 
                                         <c:columnTheme field="challenge.theme" 
@@ -245,7 +248,15 @@
 
                                         <c:columnMainIdea field="recommendation.mainIdea" />
 
+                                        <c:columnUsedAlreadyReadonly field="usedAlready"
+                                                             recommendationFeedback="#{recommendationFeedback}"
+                                                             style="width: 70px;" />
+                                        
                                         <c:columnUsedAlreadyComment field="usedAlreadyComment" />
+                            
+                                        <c:columnWillUseReadonly field="willUse"
+                                                         recommendationFeedback="#{recommendationFeedback}"
+                                                         style="width: 60px;" />
 
                                         <c:columnWillUseComment field="willUseComment" />
 

@@ -1101,6 +1101,11 @@
             <name>recommendationFeedback</name>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <description>style of the column</description>
+            <name>style</name>
+            <type>java.lang.String</type>
+        </attribute>
     </tag>
     <tag>
         <description>
@@ -1131,6 +1136,11 @@
         <attribute>
             <description>field of the column</description>
             <name>commandButtonUpdate</name>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>style of the column</description>
+            <name>style</name>
             <type>java.lang.String</type>
         </attribute>
     </tag>
