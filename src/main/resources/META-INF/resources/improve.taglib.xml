@@ -908,6 +908,16 @@
             <name>field</name>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <description>challenge</description>
+            <name>challenge</name>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description>filterable</description>
+            <name>filterable</name>
+            <type>java.lang.Boolean</type>
+        </attribute>
     </tag>
     <tag>
         <description>

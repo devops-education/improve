@@ -8,7 +8,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-    <c:set var="challenge" value="#{field.contains('challenge')}" />
+    <c:set var="challenge" value="#{field.contains('challenge') or challenge}" />
     <c:set var="text" value="#{challenge ? 'challenge' : 'recommendation'}" />
 
     <p:column field="#{field}" 

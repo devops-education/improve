@@ -11,14 +11,14 @@
 
     <!-- INTERFACE -->
     <cc:interface>
-        <cc:attribute name="crudMBean"/>
+        <cc:attribute name="challenge"/>
     </cc:interface>
 
     <!-- IMPLEMENTATION -->
     <cc:implementation>
         <h:panelGrid columns="2" cellpadding="3">
-            <c:text readonly="true" value="#{cc.attrs.crudMBean.bean.challenge.mainIdea}" label="Challenge" id="mainIdea"/>
-            <c:text readonly="true" value="#{cc.attrs.crudMBean.bean.challenge.theme.value}" label="Theme" id="theme"/>
+            <c:text readonly="true" value="#{cc.attrs.challenge.mainIdea}" label="Challenge" id="mainIdea"/>
+            <c:text readonly="true" value="#{cc.attrs.challenge.theme.value}" label="Theme" id="theme"/>
         </h:panelGrid>
     </cc:implementation>
 </html>

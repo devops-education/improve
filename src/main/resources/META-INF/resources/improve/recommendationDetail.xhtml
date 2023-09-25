@@ -12,14 +12,14 @@
 
     <!-- INTERFACE -->
     <cc:interface>
-        <cc:attribute name="crudMBean"/>
+        <cc:attribute name="recommendation"/>
     </cc:interface>
 
     <!-- IMPLEMENTATION -->
     <cc:implementation>
         <h:panelGrid columns="2" cellpadding="3">
-            <c:text readonly="true" value="#{cc.attrs.crudMBean.bean.recommendation.mainIdea}" label="Recommendation" />
-            <c:text readonly="true" value="#{cc.attrs.crudMBean.bean.recommendation.theme.value}" label="Theme" />
+            <c:text readonly="true" value="#{cc.attrs.recommendation.mainIdea}" label="Recommendation" />
+            <c:text readonly="true" value="#{cc.attrs.recommendation.theme.value}" label="Theme" />
         </h:panelGrid>
     </cc:implementation>
 </html>

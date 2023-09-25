@@ -46,7 +46,7 @@
             </ui:define>
 
             <ui:define name="update">
-                <d:recommendationDetail crudMBean="#{recommendationFeedbackCrudMBean}" />
+                <d:recommendationDetail recommendation="#{recommendationFeedbackCrudMBean.bean.recommendation}" />
 
                 <p:focus for="usedAlreadySelectOneButton" />
                 
