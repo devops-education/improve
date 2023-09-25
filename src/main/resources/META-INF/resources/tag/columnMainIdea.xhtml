@@ -8,14 +8,15 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-    <c:set var="challenge" value="#{field.contains('challenge')}" />
+    <c:set var="filterable" value="#{empty filterable ? false : filterable}" />
+    <c:set var="challenge" value="#{field.contains('challenge') or challenge}" />
     <c:set var="text" value="#{challenge ? 'challenge' : 'recommendation'}" />
     <c:set var="Text" value="#{challenge ? 'Challenge' : 'Recommendation'}" />
 
     <p:column field="#{field}"
               responsivePriority="1" 
               sortable="true"
-              filterable="false"
+              filterable="#{filterable}"
               exportable="true"
               exportHeaderValue="#{Text}">
         <f:facet name="header">

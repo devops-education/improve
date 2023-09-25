@@ -40,7 +40,7 @@
             </ui:define>
 
             <ui:define name="update">
-                <d:challengeDetail crudMBean="#{challengeFeedbackCrudMBean}" />
+                <d:challengeDetail challenge="#{challengeFeedbackCrudMBean.bean.challenge}" />
 
                 <p:focus for="willMitigateSelectOneButton" />
                 

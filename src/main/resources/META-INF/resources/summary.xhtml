@@ -81,7 +81,7 @@
                         </ui:define>
 
                         <ui:define name="detail">
-                            <d:recommendationDetail crudMBean="#{recommendationFeedbackSummaryCrudMBean}" />
+                            <d:recommendationDetail recommendation="#{recommendationFeedbackSummaryCrudMBean.bean.recommendation}" />
 
                             <h:panelGrid columns="2" cellpadding="3">
                                 <c:label label="Already Used Comment" />
@@ -222,7 +222,7 @@
                         </ui:define>
 
                         <ui:define name="detail">
-                            <d:challengeDetail crudMBean="#{challengeFeedbackSummaryCrudMBean}" />
+                            <d:challengeDetail challenge="#{challengeFeedbackSummaryCrudMBean.bean.challenge}" />
 
                             <h:panelGrid columns="2" cellpadding="3">
                                 <c:label id="willMitigateCommentChallenge" label="Deal with Comment" />

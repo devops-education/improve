@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="improve.persapiens.org"
+    xmlns:d="http://xmlns.jcp.org/jsf/composite/improve"
+    template="/layout/template.xhtml">
+    <ui:define name="content" >
+        <c:crud titleText="Recommendations on DevOps Education" 
+                titleIcon="#{resource['images/ok-limegreen.png']}" 
+                titleStyleClass="recommendation" 
+                managedBean="#{recommendationCrudMBean}" 
+                showInsert="false" 
+                showDetailActionLink="true"
+                showUpdateActionLink="true"
+                updateButtonRendered="true"
+                cancelButtonLabelAtUpdate="Cancel"
+                cancelButtonTitleAtUpdate="Back to Recommendation list">
+
+            <ui:define name="listColumns">
+                <c:columnMainIdea field="mainIdea"
+                                  challenge="false"
+                                  filterable="true" />
+
+                <c:columnTheme field="theme" 
+                               value="#{bean.theme.value}"
+                               sortable="true" 
+                               filterable="true" />
+            </ui:define>
+
+            <ui:define name="detail">
+                <d:recommendationDetail recommendation="#{recommendationCrudMBean.bean}" />
+            </ui:define>
+
+            <ui:define name="update">
+                <h:panelGrid columns="2" cellpadding="3">
+                    <c:text value="#{recommendationCrudMBean.bean.mainIdea}" label="Recommendation"/>
+
+                    <c:label label="Theme" />
+                    <p:selectOneMenu value="#{recommendationCrudMBean.bean.theme}">
+                        <f:selectItem itemLabel="" itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItems value="#{themeOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{entry.value}"/>
+                    </p:selectOneMenu>                    
+                </h:panelGrid>
+            </ui:define>
+        </c:crud>
+    </ui:define>
+</ui:composition>
