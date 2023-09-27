@@ -20,3 +20,49 @@ and f.user_id = u.id
 group by f.user_id, f.will_mitigate
 order by 2;
 
+
+-- listando os desafios mais comentados que SERÃO mitigados
+-- limitando a quantidade de feedback em 4
+select cf.challenge_id, max(c.theme), count(cf.id) as quantidade, max(c.main_idea)
+from challenge_feedback cf, challenge c
+where cf.challenge_id = c.id
+and cf.will_mitigate = true
+group by cf.challenge_id
+having count(cf.id) >= 4
+order by quantidade desc
+
+
+-- listando os desafios mais comentados que NÃO vao ser mitigados
+-- limitando a quantidade de feedback em 3
+select cf.challenge_id, max(c.theme), count(cf.id) as quantidade, max(c.main_idea)
+from challenge_feedback cf, challenge c
+where cf.challenge_id = c.id
+and cf.will_mitigate = false
+group by cf.challenge_id
+having count(cf.id) >= 3
+order by quantidade desc
+
+
+-- listando as desafios que serao ao mesmo tempo mitigados e nao mitigados
+-- limitando a quantidade de feedback em 3
+-- PODE INDICAR MÁ ESCRITA DO DESAFIO? OU ALGO MAIS A INVESTIGAR?
+select challenge_id, min(quantidade), max(quantidade), min(main_idea)
+from (
+	select cf.challenge_id as challenge_id, 
+		max(c.theme) as theme, 
+		cf.will_mitigate as will_mitigate,
+		count(cf.id) as quantidade,
+		max(c.main_idea) as main_idea
+	from challenge_feedback cf, challenge c
+	where cf.challenge_id = c.id
+	group by cf.challenge_id, cf.will_mitigate
+	having count(cf.id) >= 3
+)
+group by challenge_id
+having count(challenge_id) = 2
+order by 1 
+
+
+-- top 10 e total de challenges com mais respostas "vai mitigar", e "tem link com recomendação"
+
+-- top 10 e total de challenges com mais respostas "vai mitigar", e "NÂO tem link com recomendação"
