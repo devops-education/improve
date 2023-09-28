@@ -68,7 +68,7 @@
                     <c:label label="Will Use" />
                     <p:selectOneButton id="willUseSelectOneButton" 
                                        value="#{recommendationFeedbackCrudMBean.bean.willUse}"
-                                       disabled="#{recommendationFeedbackCrudMBean.bean.usedAlready}">
+                                       disabled="#{empty recommendationFeedbackCrudMBean.bean.usedAlready or recommendationFeedbackCrudMBean.bean.usedAlready}">
                         <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
                         <p:ajax listener="#{recommendationFeedbackCrudMBean.saveRecommendationFeedback(recommendationFeedbackCrudMBean.bean)}"
                                 update="recommendationFeedbackWillUseComment:willUseComment"/>
