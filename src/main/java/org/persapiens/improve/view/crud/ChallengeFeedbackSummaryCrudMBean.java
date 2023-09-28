@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.persapiens.improve.domain.ChallengeFeedback;
 import org.persapiens.improve.domain.Link;
@@ -19,6 +20,7 @@ import org.persapiens.improve.service.RecommendationFeedbackService;
 import org.persapiens.improve.service.ChallengeFeedbackService;
 import org.persapiens.improve.service.LinkService;
 import org.persapiens.improve.view.bean.ViewLogMBean;
+import org.primefaces.component.datatable.DataTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -49,6 +51,10 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
 
 	@Getter
 	private List<RecommendationFeedback> recommendationFeedbackLinkList;
+
+	@Getter
+	@Setter
+        private DataTable recommendationLinkDataTable;
 
 	@Override
 	protected ChallengeFeedback createBean() {
@@ -163,6 +169,10 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
 			.findByRecommendationInAndUser(recommendationLinkList, userMBean.getLoggedUser());
 		recommendationFeedbackLinkList = recommendationFeedbackList(recommendationLinkList,
 				recommendationFeedbackLinkList);
+                
+                if (recommendationLinkDataTable != null) {
+                    recommendationLinkDataTable.reset();
+                }
 	}
 
 	@Override

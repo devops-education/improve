@@ -107,6 +107,7 @@
                              stripedRows="true"
                              widgetVar="dataTable"
                              globalFilterFunction="#{managedBean.globalFilterFunction}"
+                             binding="#{dataTableBinding}"
                              >
                     <p:ajax event="sort" oncomplete="applyStyleLine()" />
                     <p:ajax event="filter" oncomplete="applyStyleLine()" />

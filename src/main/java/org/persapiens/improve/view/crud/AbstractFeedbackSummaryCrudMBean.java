@@ -10,12 +10,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.persapiens.improve.domain.ChallengeFeedback;
 import org.persapiens.improve.domain.IdBean;
 import org.persapiens.improve.domain.Recommendation;
 import org.persapiens.improve.domain.RecommendationFeedback;
 import org.persapiens.improve.view.bean.UserMBean;
+import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.charts.ChartData;
 import org.primefaces.model.charts.optionconfig.legend.Legend;
@@ -42,6 +45,10 @@ public abstract class AbstractFeedbackSummaryCrudMBean<T extends IdBean<Long>> e
 	@Autowired
 	protected UserMBean userMBean;
 
+	@Getter
+	@Setter
+        private DataTable dataTable;
+
 	@SuppressFBWarnings("EI_EXPOSE_REP")
 	public PieChartModel getPieModel() {
 		if (pieModel == null) {
@@ -53,6 +60,10 @@ public abstract class AbstractFeedbackSummaryCrudMBean<T extends IdBean<Long>> e
 	public void pieListener(ItemSelectEvent e) {
 		selectedIndex = e.getItemIndex();
 		findAction();
+                
+                if (dataTable != null) {
+                    dataTable.reset();
+                }
 	}
 
 	public String getCrudTitleColor() {
