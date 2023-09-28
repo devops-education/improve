@@ -28,6 +28,7 @@ import org.persapiens.improve.service.LinkService;
 import org.persapiens.improve.service.ChallengeSearchService;
 import org.persapiens.improve.service.ChallengeService;
 import org.persapiens.improve.view.bean.ViewLogMBean;
+import org.primefaces.component.datatable.DataTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -58,6 +59,10 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
 	@Setter
 	private List<ChallengeRecommendationConflictRecommendationFeedback> conflictRecommendationFeedbackList;
 
+	@Getter
+	@Setter
+        private DataTable recommendationLinkDataTable;
+        
 	@Override
 	protected ChallengeFeedback createBean() {
 		return ChallengeFeedback.builder().build();
@@ -174,6 +179,10 @@ public class ChallengeFeedbackCrudMBean extends AbstractFeedbackCrudMBean<Challe
 		createTeachingMethodFeedbackLists(getBean().getChallenge().getTeachingMethodLinks());
 
 		viewLogMBean.logChallengeDetail(getBean().getChallenge());
+                
+                if (recommendationLinkDataTable != null) {
+                    recommendationLinkDataTable.reset();
+                }
 	}
 
 	@Override

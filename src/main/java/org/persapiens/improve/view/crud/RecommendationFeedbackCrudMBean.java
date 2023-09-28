@@ -29,6 +29,7 @@ import org.persapiens.improve.service.LinkService;
 import org.persapiens.improve.service.RecommendationSearchService;
 import org.persapiens.improve.service.RecommendationService;
 import org.persapiens.improve.view.bean.ViewLogMBean;
+import org.primefaces.component.datatable.DataTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -62,6 +63,10 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
 	@Getter
 	@Setter
 	private List<RecommendationsConflictRecommendationFeedback> conflictRecommendationFeedbackList;
+
+	@Getter
+	@Setter
+        private DataTable challengeLinkDataTable;
 
 	@Override
 	protected RecommendationFeedback createBean() {
@@ -229,6 +234,10 @@ public class RecommendationFeedbackCrudMBean extends AbstractFeedbackCrudMBean<R
 		createTeachingMethodFeedbackLists(getBean().getRecommendation().getTeachingMethodLinks());
 
 		viewLogMBean.logRecommendationDetail(getBean().getRecommendation());
+                
+                if (challengeLinkDataTable != null) {
+                    challengeLinkDataTable.reset();
+                }
 	}
 
 	@Override

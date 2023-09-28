@@ -65,7 +65,8 @@
                             showUpdateActionLink="false"
                             dataTableLazy="false"
                             showActionLinksColumn="true"
-                            showPrinter="true">
+                            showPrinter="true"
+                            dataTableBinding="#{recommendationFeedbackSummaryCrudMBean.dataTable}">
                         <ui:define name="listColumns">
                             <c:columnMainIdea field="recommendation.mainIdea" />
 
@@ -106,6 +107,7 @@
                                                  paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
                                                  stripedRows="true"
                                                  rowIndexVar="rowIdx"
+                                                 binding="#{recommendationFeedbackSummaryCrudMBean.challengeLinkDataTable}"
                                                  >
 
                                         <c:columnMainIdea field="challenge.mainIdea" />
@@ -156,7 +158,8 @@
                             dataTableLazy="false"
                             showActionLinksColumn="true"
                             showPrinter="true"
-                            showDetailActionLink="false">
+                            showDetailActionLink="false"
+                            dataTableBinding="#{teachingMethodFeedbackSummaryCrudMBean.dataTable}">
                         <ui:define name="listColumns">
                             <c:columnTeachingMethodName field="teachingMethod.name" />
 
@@ -209,7 +212,8 @@
                             showUpdateActionLink="false"
                             dataTableLazy="false"
                             showActionLinksColumn="true"
-                            showPrinter="true">
+                            showPrinter="true"
+                            dataTableBinding="#{challengeFeedbackSummaryCrudMBean.dataTable}">
                         <ui:define name="listColumns">
                             <c:columnMainIdea field="challenge.mainIdea" />
 
@@ -244,6 +248,7 @@
                                                  paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
                                                  stripedRows="true"
                                                  rowIndexVar="rowIdx"
+                                                 binding="#{challengeFeedbackSummaryCrudMBean.recommendationLinkDataTable}"
                                                  >
 
                                         <c:columnMainIdea field="recommendation.mainIdea" />
