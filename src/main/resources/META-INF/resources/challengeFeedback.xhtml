@@ -136,7 +136,7 @@
                                 </f:facet>
                                 <p:selectOneButton id="willUseSelectOneButton"
                                                    value="#{linkRecommendationFeedback.recommendationFeedback.willUse}"
-                                                   disabled="#{linkRecommendationFeedback.recommendationFeedback.usedAlready}">
+                                                   disabled="#{empty linkRecommendationFeedback.recommendationFeedback.usedAlready or linkRecommendationFeedback.recommendationFeedback.usedAlready}">
                                     <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
                                     <p:ajax listener="#{challengeFeedbackCrudMBean.saveRecommendationFeedbackWillUse(linkRecommendationFeedback.recommendationFeedback)}"
                                             update="recommendationFeedbackWillUseComment:willUseComment"/>
