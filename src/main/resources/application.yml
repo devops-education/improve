@@ -24,6 +24,9 @@ spring:
   devtools:
     restart:
       enabled: true
+  threads:
+    virtual:
+      enabled: true
 joinfaces:
   faces:
     project-stage: Development
