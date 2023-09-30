@@ -107,7 +107,7 @@
                 </f:facet>
                 <p:selectOneButton id="willUseSelectOneButton"
                                    value="#{teachingMethodLinksTeachingMethodFeedback.teachingMethodFeedback.willUse}"
-                                   disabled="#{teachingMethodLinksTeachingMethodFeedback.teachingMethodFeedback.usedAlready}">
+                                   disabled="#{empty teachingMethodLinksTeachingMethodFeedback.teachingMethodFeedback.usedAlready or teachingMethodLinksTeachingMethodFeedback.teachingMethodFeedback.usedAlready}">
                     <f:selectItems value="#{booleanOptions.list}" var="entry" itemValue="#{entry}" itemLabel="#{booleanOptions.label(entry)}"/>
                     <p:ajax listener="#{cc.attrs.crudMBean.saveTeachingMethodFeedbackWillUse(teachingMethodLinksTeachingMethodFeedback.teachingMethodFeedback)}"
                             update="teachingMethodFeedbackWillUseComment:willUseComment"/>
