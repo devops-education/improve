@@ -40,6 +40,7 @@ order by 2;
 select rf.recommendation_id, max(r.theme), count(rf.id) as quantidade, max(r.main_idea)
 from recommendation_feedback rf, recommendation r
 where rf.recommendation_id = r.id
+and rf.user_id not in (1,3,23,25,25,26)
 and rf.used_already = true
 group by rf.recommendation_id
 having count(rf.id) >= 4
@@ -51,6 +52,7 @@ order by quantidade desc
 select rf.recommendation_id, max(r.theme), count(rf.id) as quantidade, max(r.main_idea)
 from recommendation_feedback rf, recommendation r
 where rf.recommendation_id = r.id
+and rf.user_id not in (1,3,23,25,25,26)
 and rf.used_already = false
 and rf.will_use = true
 group by rf.recommendation_id
@@ -63,6 +65,7 @@ order by quantidade desc
 select rf.recommendation_id, max(r.theme), count(rf.id) as quantidade, max(r.main_idea)
 from recommendation_feedback rf, recommendation r
 where rf.recommendation_id = r.id
+and rf.user_id not in (1,3,23,25,25,26)
 and rf.used_already = false
 and rf.will_use = false
 group by rf.recommendation_id
@@ -82,6 +85,7 @@ from (
 		max(r.main_idea) as main_idea
 	from recommendation_feedback rf, recommendation r
 	where rf.recommendation_id = r.id
+        and rf.user_id not in (1,3,23,25,25,26)
 	group by rf.recommendation_id, rf.used_already
 	having count(rf.id) >= 4
 )
@@ -103,6 +107,7 @@ from (
 		max(r.main_idea) as main_idea
 	from recommendation_feedback rf, recommendation r
 	where rf.recommendation_id = r.id
+        and rf.user_id not in (1,3,23,25,25,26)
 		and rf.used_already = true
 	group by rf.recommendation_id, rf.will_use
 	having count(rf.id) >= 2

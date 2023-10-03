@@ -26,6 +26,7 @@ order by 2;
 select cf.challenge_id, max(c.theme), count(cf.id) as quantidade, max(c.main_idea)
 from challenge_feedback cf, challenge c
 where cf.challenge_id = c.id
+and cf.user_id not in (1,3,23,25,25,26)
 and cf.will_mitigate = true
 group by cf.challenge_id
 having count(cf.id) >= 4
@@ -37,6 +38,7 @@ order by quantidade desc
 select cf.challenge_id, max(c.theme), count(cf.id) as quantidade, max(c.main_idea)
 from challenge_feedback cf, challenge c
 where cf.challenge_id = c.id
+and cf.user_id not in (1,3,23,25,25,26)
 and cf.will_mitigate = false
 group by cf.challenge_id
 having count(cf.id) >= 3
@@ -55,6 +57,7 @@ from (
 		max(c.main_idea) as main_idea
 	from challenge_feedback cf, challenge c
 	where cf.challenge_id = c.id
+            and cf.user_id not in (1,3,23,25,25,26)
 	group by cf.challenge_id, cf.will_mitigate
 	having count(cf.id) >= 3
 )

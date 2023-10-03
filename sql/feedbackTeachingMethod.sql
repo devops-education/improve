@@ -43,6 +43,7 @@ order by 2;
 select rf.teaching_method_id, count(rf.id) as quantidade, max(r.definition)
 from teaching_method_feedback rf, teaching_method r
 where rf.teaching_method_id = r.id
+and rf.user_id not in (1,3,23,25,25,26)
 and rf.used_already = true
 group by rf.teaching_method_id
 having count(rf.id) >= 3
@@ -54,6 +55,7 @@ order by quantidade desc
 select rf.teaching_method_id, count(rf.id) as quantidade, max(r.definition)
 from teaching_method_feedback rf, teaching_method r
 where rf.teaching_method_id = r.id
+and rf.user_id not in (1,3,23,25,25,26)
 and rf.used_already = false
 and rf.will_use = true
 group by rf.teaching_method_id
@@ -66,6 +68,7 @@ order by quantidade desc
 select rf.teaching_method_id, count(rf.id) as quantidade, max(r.definition)
 from teaching_method_feedback rf, teaching_method r
 where rf.teaching_method_id = r.id
+and rf.user_id not in (1,3,23,25,25,26)
 and rf.used_already = false
 and rf.will_use = false
 group by rf.teaching_method_id
@@ -85,6 +88,7 @@ from (
 		max(r.definition) as definition
 	from teaching_method_feedback rf, teaching_method r
 	where rf.teaching_method_id = r.id
+            and rf.user_id not in (1,3,23,25,25,26)
 	group by rf.teaching_method_id, rf.used_already
 	having count(rf.id) >= 2
 )
@@ -105,7 +109,8 @@ from (
 		max(r.definition) as definition
 	from teaching_method_feedback rf, teaching_method r
 	where rf.teaching_method_id = r.id
-		and rf.used_already = true
+            and rf.user_id not in (1,3,23,25,25,26)
+            and rf.used_already = true
 	group by rf.teaching_method_id, rf.will_use
 	having count(rf.id) >= 1
 )
