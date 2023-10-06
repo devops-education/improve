@@ -108,10 +108,10 @@ from (
 	from recommendation_feedback rf, recommendation r
 	where rf.recommendation_id = r.id
         and rf.user_id not in (1,3,23,25,25,26)
-		and rf.used_already = true
+		and rf.used_already = false
 	group by rf.recommendation_id, rf.will_use
-	having count(rf.id) >= 2
+	having count(rf.id) >= 3
 )
 group by recommendation_id
-having count(recommendation_id) = 2
+having count(recommendation_id) >= 2
 order by 1 

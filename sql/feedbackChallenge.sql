@@ -48,7 +48,7 @@ order by quantidade desc
 -- listando as desafios que serao ao mesmo tempo mitigados e nao mitigados
 -- limitando a quantidade de feedback em 3
 -- PODE INDICAR MÁ ESCRITA DO DESAFIO? OU ALGO MAIS A INVESTIGAR?
-select challenge_id, min(quantidade), max(quantidade), min(main_idea)
+select challenge_id, min(quantidade), max(quantidade), min(main_idea), max(theme)
 from (
 	select cf.challenge_id as challenge_id, 
 		max(c.theme) as theme, 
