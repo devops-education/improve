@@ -76,7 +76,7 @@ order by quantidade desc
 -- listando as recomendações que ao mesmo tempo FORAM E NÃO FORAM UTILIZADAS
 -- limitando a quantidade de feedback em 4
 -- PODE INDICAR MÁ ESCRITA DA RECOMENDAÇÃO? OU SERIA ALGO MAIS?
-select recommendation_id, min(quantidade), max(quantidade), min(main_idea)
+select recommendation_id, min(quantidade), max(quantidade), min(main_idea), max(theme)
 from (
 	select rf.recommendation_id as recommendation_id, 
 		max(r.theme) as theme, 
@@ -98,7 +98,7 @@ order by 1
 -- listando as recomendações que não foram utilizadas e ao mesmo tempo SERÃO E NÃO SERÃO UTILIZADAS
 -- limitando a quantidade de feedback em 2
 -- PODE INDICAR MÁ ESCRITA DA RECOMENDAÇÃO? OU SERIA ALGO MAIS?
-select recommendation_id, min(quantidade), max(quantidade), min(main_idea)
+select recommendation_id, min(quantidade), max(quantidade), min(main_idea), max(theme)
 from (
 	select rf.recommendation_id as recommendation_id, 
 		max(r.theme) as theme, 
