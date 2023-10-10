@@ -29,175 +29,200 @@ import org.springframework.stereotype.Component;
 @Component
 public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCrudMBean<ChallengeFeedback> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@SuppressFBWarnings("SE_BAD_FIELD")
-	@Autowired
-	private ChallengeFeedbackService challengeFeedbackService;
+    @SuppressFBWarnings("SE_BAD_FIELD")
+    @Autowired
+    private ChallengeFeedbackService challengeFeedbackService;
 
-	@SuppressFBWarnings("SE_BAD_FIELD")
-	@Autowired
-	private LinkService linkService;
+    @SuppressFBWarnings("SE_BAD_FIELD")
+    @Autowired
+    private LinkService linkService;
 
-	@SuppressFBWarnings("SE_BAD_FIELD")
-	@Autowired
-	private RecommendationFeedbackService recommendationFeedbackService;
+    @SuppressFBWarnings("SE_BAD_FIELD")
+    @Autowired
+    private RecommendationFeedbackService recommendationFeedbackService;
 
-	@Autowired
-	private ViewLogMBean viewLogMBean;
+    @Autowired
+    private ViewLogMBean viewLogMBean;
 
-	@Getter
-	private List<RecommendationFeedback> recommendationFeedbackConflictList;
+    @Getter
+    private List<RecommendationFeedback> recommendationFeedbackConflictList;
 
-	@Getter
-	private List<RecommendationFeedback> recommendationFeedbackLinkList;
+    @Getter
+    private List<RecommendationFeedback> recommendationFeedbackLinkList;
 
-	@Getter
-	@Setter
-	private DataTable recommendationLinkDataTable;
+    @Getter
+    @Setter
+    private DataTable recommendationLinkDataTable;
 
-	@Override
-	protected ChallengeFeedback createBean() {
-		return ChallengeFeedback.builder().build();
-	}
+    @Override
+    protected ChallengeFeedback createBean() {
+        return ChallengeFeedback.builder().build();
+    }
 
-	private List<Recommendation> recommendations(ChallengeFeedback challengeFeedback) {
-		return linkService.findByChallenge(challengeFeedback.getChallenge())
-			.stream()
-			.map(Link::getRecommendation)
-			.collect(Collectors.toList());
-	}
+    private List<Recommendation> recommendations(ChallengeFeedback challengeFeedback) {
+        return linkService.findByChallenge(challengeFeedback.getChallenge())
+                .stream()
+                .map(Link::getRecommendation)
+                .collect(Collectors.toList());
+    }
 
-	private List<RecommendationFeedback> filter(List<Recommendation> recommendations,
-			Map<Recommendation, RecommendationFeedback> recommendationFeedbackMap) {
-		List result = new ArrayList<>();
-		for (Recommendation recommendation : recommendations) {
-			RecommendationFeedback rf = recommendationFeedbackMap.get(recommendation);
-			if (rf != null) {
-				result.add(rf);
-			}
-		}
-		return result;
-	}
+    private List<RecommendationFeedback> filter(List<Recommendation> recommendations,
+            Map<Recommendation, RecommendationFeedback> recommendationFeedbackMap) {
+        List result = new ArrayList<>();
+        for (Recommendation recommendation : recommendations) {
+            RecommendationFeedback rf = recommendationFeedbackMap.get(recommendation);
+            if (rf != null) {
+                result.add(rf);
+            }
+        }
+        return result;
+    }
 
-	private boolean hasRecommendationFeedbackUsedAlready(List<Recommendation> recommendations,
-			Map<Recommendation, RecommendationFeedback> recommendationFeedbackMap) {
-		boolean result = false;
-		for (RecommendationFeedback recommendationFeedback : filter(recommendations, recommendationFeedbackMap)) {
-			if (Boolean.TRUE.equals(recommendationFeedback.getUsedAlready())) {
-				result = true;
-				break;
-			}
-		}
-		return result;
-	}
+    private boolean hasRecommendationFeedbackUsedAlreadyAndWillUse(List<Recommendation> recommendations,
+            Map<Recommendation, RecommendationFeedback> recommendationFeedbackMap) {
+        boolean result = false;
+        for (RecommendationFeedback recommendationFeedback : filter(recommendations, recommendationFeedbackMap)) {
+            if (Boolean.TRUE.equals(recommendationFeedback.getUsedAlready())
+                    && Boolean.TRUE.equals(recommendationFeedback.getWillUse())) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
 
-	private boolean hasRecommendationFeedbackWillUse(List<Recommendation> recommendations,
-			Map<Recommendation, RecommendationFeedback> recommendationFeedbackMap) {
-		boolean result = false;
-		for (RecommendationFeedback recommendationFeedback : filter(recommendations, recommendationFeedbackMap)) {
-			if (Boolean.TRUE.equals(recommendationFeedback.getWillUse())) {
-				result = true;
-				break;
-			}
-		}
-		return result;
-	}
+    private boolean hasRecommendationFeedbackUsedAlready(List<Recommendation> recommendations,
+            Map<Recommendation, RecommendationFeedback> recommendationFeedbackMap) {
+        boolean result = false;
+        for (RecommendationFeedback recommendationFeedback : filter(recommendations, recommendationFeedbackMap)) {
+            if (Boolean.TRUE.equals(recommendationFeedback.getUsedAlready())) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
 
-	@Override
-	protected List<List<ChallengeFeedback>> feedbackLists() {
-		List<ChallengeFeedback> willMitigateAndNoRecommendation = new ArrayList<>();
-		List<ChallengeFeedback> willMitigateAndWillUseRecommendation = new ArrayList<>();
-		List<ChallengeFeedback> willMitigateAndUsedAlreadyRecommendation = new ArrayList<>();
-		List<ChallengeFeedback> notWillMitigate = new ArrayList<>();
+    private boolean hasRecommendationFeedbackWillUse(List<Recommendation> recommendations,
+            Map<Recommendation, RecommendationFeedback> recommendationFeedbackMap) {
+        boolean result = false;
+        for (RecommendationFeedback recommendationFeedback : filter(recommendations, recommendationFeedbackMap)) {
+            if (Boolean.TRUE.equals(recommendationFeedback.getWillUse())) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
 
-		Map<Recommendation, RecommendationFeedback> recommendationFeedbackMap = recommendationFeedbackService
-			.findByUser(userMBean.getLoggedUser())
-			.stream()
-			.collect(Collectors.toMap(RecommendationFeedback::getRecommendation, Function.identity()));
+    @Override
+    protected List<List<ChallengeFeedback>> feedbackLists() {
+        List<ChallengeFeedback> willMitigateAndNoRecommendation = new ArrayList<>();
+        List<ChallengeFeedback> willMitigateAndUsedAlreadyAndWillUseRecommendation = new ArrayList<>();
+        List<ChallengeFeedback> willMitigateAndWillUseRecommendation = new ArrayList<>();
+        List<ChallengeFeedback> willMitigateAndUsedAlreadyRecommendation = new ArrayList<>();
+        List<ChallengeFeedback> notWillMitigate = new ArrayList<>();
 
-		for (ChallengeFeedback cf : challengeFeedbackService.findByUser(userMBean.getLoggedUser())) {
-			if (Objects.nonNull(cf.getWillMitigate())) {
-				if (cf.getWillMitigate()) {
-					List<Recommendation> recommendations = recommendations(cf);
+        Map<Recommendation, RecommendationFeedback> recommendationFeedbackMap = recommendationFeedbackService
+                .findByUser(userMBean.getLoggedUser())
+                .stream()
+                .collect(Collectors.toMap(RecommendationFeedback::getRecommendation, Function.identity()));
 
-					if (hasRecommendationFeedbackUsedAlready(recommendations, recommendationFeedbackMap)) {
-						willMitigateAndUsedAlreadyRecommendation.add(cf);
-					}
-					else if (hasRecommendationFeedbackWillUse(recommendations, recommendationFeedbackMap)) {
-						willMitigateAndWillUseRecommendation.add(cf);
-					}
-					else {
-						willMitigateAndNoRecommendation.add(cf);
-					}
-				}
-				else {
-					notWillMitigate.add(cf);
-				}
-			}
-		}
+        for (ChallengeFeedback cf : challengeFeedbackService.findByUser(userMBean.getLoggedUser())) {
+            if (Objects.nonNull(cf.getWillMitigate())) {
+                if (cf.getWillMitigate()) {
+                    List<Recommendation> recommendations = recommendations(cf);
 
-		willMitigateAndNoRecommendation = sortChallengeFeedback(willMitigateAndNoRecommendation);
-		willMitigateAndWillUseRecommendation = sortChallengeFeedback(willMitigateAndWillUseRecommendation);
-		willMitigateAndUsedAlreadyRecommendation = sortChallengeFeedback(willMitigateAndUsedAlreadyRecommendation);
-		notWillMitigate = sortChallengeFeedback(notWillMitigate);
+                    if (hasRecommendationFeedbackUsedAlreadyAndWillUse(recommendations, recommendationFeedbackMap)) {
+                        willMitigateAndUsedAlreadyAndWillUseRecommendation.add(cf);
+                    } else if (hasRecommendationFeedbackUsedAlready(recommendations, recommendationFeedbackMap)) {
+                        willMitigateAndUsedAlreadyRecommendation.add(cf);
+                    } else if (hasRecommendationFeedbackWillUse(recommendations, recommendationFeedbackMap)) {
+                        willMitigateAndWillUseRecommendation.add(cf);
+                    } else {
+                        willMitigateAndNoRecommendation.add(cf);
+                    }
+                } else {
+                    notWillMitigate.add(cf);
+                }
+            }
+        }
 
-		return Arrays.asList(willMitigateAndNoRecommendation, willMitigateAndWillUseRecommendation,
-				willMitigateAndUsedAlreadyRecommendation, notWillMitigate);
-	}
+        willMitigateAndNoRecommendation = sortChallengeFeedback(willMitigateAndNoRecommendation);
+        willMitigateAndUsedAlreadyAndWillUseRecommendation = sortChallengeFeedback(willMitigateAndUsedAlreadyAndWillUseRecommendation);
+        willMitigateAndWillUseRecommendation = sortChallengeFeedback(willMitigateAndWillUseRecommendation);
+        willMitigateAndUsedAlreadyRecommendation = sortChallengeFeedback(willMitigateAndUsedAlreadyRecommendation);
+        notWillMitigate = sortChallengeFeedback(notWillMitigate);
 
-	@Override
-	protected List<String> backgroundColors() {
-		return Arrays.asList("orange", "limegreen", "dodgerblue", "grey");
-	}
+        return Arrays.asList(willMitigateAndNoRecommendation,
+                willMitigateAndUsedAlreadyAndWillUseRecommendation,
+                willMitigateAndWillUseRecommendation,
+                willMitigateAndUsedAlreadyRecommendation,
+                notWillMitigate);
+    }
 
-	@Override
-	protected List<String> labels() {
-		return Arrays.asList("Will mitigate with no used links", "Will mitigate with new recommendations",
-				"Will mitigate with current recommendations", "No mitigation");
-	}
+    @Override
+    protected List<String> backgroundColors() {
+        return Arrays.asList("orange",
+                "teal",
+                "limegreen",
+                "dodgerblue",
+                "grey");
+    }
 
-	@Override
-	protected List<String> crudTitleTexts() {
-		return Arrays.asList("Challenges that you will mitigate, but you use no linked recommendation.",
-				"Challenges that you will mitigate and you will use new recommendations.",
-				"Challenges that you will mitigate and you already use recommendation.",
-				"Challenges that you won't mitigate.");
-	}
+    @Override
+    protected List<String> labels() {
+        return Arrays.asList("Will mitigate with no links",
+                "Will mitigate with current and new links",
+                "Will mitigate with new links",
+                "Will mitigate with current links",
+                "No mitigation");
+    }
 
-	@Override
-	public void startDetailAction() {
-		super.startDetailAction();
+    @Override
+    protected List<String> crudTitleTexts() {
+        return Arrays.asList("Challenges that you will mitigate, but you use no linked recommendation.",
+                "Challenges that you will mitigate and you already use and will use new recommendations.",
+                "Challenges that you will mitigate and you will use new recommendations.",
+                "Challenges that you will mitigate and you already use recommendation.",
+                "Challenges that you won't mitigate.");
+    }
 
-		List<Recommendation> recommendationConflictList = getBean().getChallenge()
-			.getConflicts()
-			.stream()
-			.map(cc -> cc.getRecommendation())
-			.toList();
-		recommendationFeedbackConflictList = recommendationFeedbackService
-			.findByRecommendationInAndUser(recommendationConflictList, userMBean.getLoggedUser());
-		recommendationFeedbackConflictList = recommendationFeedbackList(recommendationConflictList,
-				recommendationFeedbackConflictList);
+    @Override
+    public void startDetailAction() {
+        super.startDetailAction();
 
-		List<Recommendation> recommendationLinkList = getBean().getChallenge()
-			.getLinks()
-			.stream()
-			.map(cc -> cc.getRecommendation())
-			.toList();
-		recommendationFeedbackLinkList = recommendationFeedbackService
-			.findByRecommendationInAndUser(recommendationLinkList, userMBean.getLoggedUser());
-		recommendationFeedbackLinkList = recommendationFeedbackList(recommendationLinkList,
-				recommendationFeedbackLinkList);
+        List<Recommendation> recommendationConflictList = getBean().getChallenge()
+                .getConflicts()
+                .stream()
+                .map(cc -> cc.getRecommendation())
+                .toList();
+        recommendationFeedbackConflictList = recommendationFeedbackService
+                .findByRecommendationInAndUser(recommendationConflictList, userMBean.getLoggedUser());
+        recommendationFeedbackConflictList = recommendationFeedbackList(recommendationConflictList,
+                recommendationFeedbackConflictList);
 
-		if (recommendationLinkDataTable != null) {
-			recommendationLinkDataTable.reset();
-		}
-	}
+        List<Recommendation> recommendationLinkList = getBean().getChallenge()
+                .getLinks()
+                .stream()
+                .map(cc -> cc.getRecommendation())
+                .toList();
+        recommendationFeedbackLinkList = recommendationFeedbackService
+                .findByRecommendationInAndUser(recommendationLinkList, userMBean.getLoggedUser());
+        recommendationFeedbackLinkList = recommendationFeedbackList(recommendationLinkList,
+                recommendationFeedbackLinkList);
 
-	@Override
-	protected void init() {
-		super.init();
-		viewLogMBean.logSummary();
-	}
+        if (recommendationLinkDataTable != null) {
+            recommendationLinkDataTable.reset();
+        }
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        viewLogMBean.logSummary();
+    }
 
 }
