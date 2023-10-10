@@ -80,19 +80,6 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
         return result;
     }
 
-    private boolean hasRecommendationFeedbackUsedAlreadyAndWillUse(List<Recommendation> recommendations,
-            Map<Recommendation, RecommendationFeedback> recommendationFeedbackMap) {
-        boolean result = false;
-        for (RecommendationFeedback recommendationFeedback : filter(recommendations, recommendationFeedbackMap)) {
-            if (Boolean.TRUE.equals(recommendationFeedback.getUsedAlready())
-                    && Boolean.TRUE.equals(recommendationFeedback.getWillUse())) {
-                result = true;
-                break;
-            }
-        }
-        return result;
-    }
-
     private boolean hasRecommendationFeedbackUsedAlready(List<Recommendation> recommendations,
             Map<Recommendation, RecommendationFeedback> recommendationFeedbackMap) {
         boolean result = false;
@@ -135,7 +122,7 @@ public class ChallengeFeedbackSummaryCrudMBean extends AbstractFeedbackSummaryCr
                 if (cf.getWillMitigate()) {
                     List<Recommendation> recommendations = recommendations(cf);
 
-                    if (hasRecommendationFeedbackUsedAlreadyAndWillUse(recommendations, recommendationFeedbackMap)) {
+                    if (hasRecommendationFeedbackUsedAlready(recommendations, recommendationFeedbackMap) && hasRecommendationFeedbackWillUse(recommendations, recommendationFeedbackMap)) {
                         willMitigateAndUsedAlreadyAndWillUseRecommendation.add(cf);
                     } else if (hasRecommendationFeedbackUsedAlready(recommendations, recommendationFeedbackMap)) {
                         willMitigateAndUsedAlreadyRecommendation.add(cf);
