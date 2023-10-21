@@ -67,6 +67,40 @@ ON WONT.challenge_id= WILL.challenge_id
 ORDER BY 2 DESC, 3 DESC
 
 
+
+
+-- listando a quantidade de will mitigate por challenge
+select r.id, r.main_idea, r.theme, coalesce(q.QUANTIDADE,0)
+from challenge R
+left join 
+(
+select rf.challenge_id, count(rf.id) as quantidade
+from challenge_feedback rf, challenge r
+where rf.challenge_id = r.id
+and rf.will_mitigate = true
+and rf.user_id in (27,28,29,30,31,32,35,36,37,40,41)
+group by rf.challenge_id
+) q
+on R.id = q.challenge_id
+order by 1
+
+
+
+-- listando a quantidade de wont mitigate por challenge
+select r.id, r.main_idea, r.theme, coalesce(q.QUANTIDADE,0)
+from challenge R
+left join 
+(
+select rf.challenge_id, count(rf.id) as quantidade
+from challenge_feedback rf, challenge r
+where rf.challenge_id = r.id
+and rf.will_mitigate = false
+and rf.user_id in (27,28,29,30,31,32,35,36,37,40,41)
+group by rf.challenge_id
+) q
+on R.id = q.challenge_id
+order by 1
+
 -- top 10 e total de challenges com mais respostas "vai mitigar", e "tem link com recomendação"
 
 -- top 10 e total de challenges com mais respostas "vai mitigar", e "NÂO tem link com recomendação"

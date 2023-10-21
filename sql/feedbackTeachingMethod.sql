@@ -108,3 +108,55 @@ JOIN
 ON WONT_USE.teaching_method_id= USED_ALREADY_WILL_USE.teaching_method_id
 
 ORDER BY 2 DESC, 3 DESC
+
+
+-- listando a quantidade de already used por recomendacao
+select r.id, r.name, coalesce(q.QUANTIDADE,0)
+from teaching_method R
+left join 
+(
+select rf.teaching_method_id, count(rf.id) as quantidade
+from teaching_method_feedback rf, teaching_method r
+where rf.teaching_method_id = r.id
+and rf.used_already = true
+and rf.user_id in (27,28,29,30,31,32,35,36,37,40,41)
+group by rf.teaching_method_id
+) q
+on R.id = q.teaching_method_id
+order by 1
+
+
+
+-- listando a quantidade de will use por recomendacao
+select r.id, r.name, coalesce(q.QUANTIDADE,0)
+from teaching_method R
+left join 
+(
+select rf.teaching_method_id, count(rf.id) as quantidade
+from teaching_method_feedback rf, teaching_method r
+where rf.teaching_method_id = r.id
+and rf.used_already = false
+and rf.will_use = true
+and rf.user_id in (27,28,29,30,31,32,35,36,37,40,41)
+group by rf.teaching_method_id
+) q
+on R.id = q.teaching_method_id
+order by 1
+
+
+
+-- listando a quantidade de wont use por recomendacao
+select r.id, r.name, coalesce(q.QUANTIDADE,0)
+from teaching_method R
+left join 
+(
+select rf.teaching_method_id, count(rf.id) as quantidade
+from teaching_method_feedback rf, teaching_method r
+where rf.teaching_method_id = r.id
+and rf.used_already = false
+and rf.will_use = false
+and rf.user_id in (27,28,29,30,31,32,35,36,37,40,41)
+group by rf.teaching_method_id
+) q
+on R.id = q.teaching_method_id
+order by 1
