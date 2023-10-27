@@ -4,12 +4,9 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.persapiens.improve.domain.Authority;
 
 import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
-import org.springframework.security.authentication.event.LogoutSuccessEvent;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -76,12 +73,12 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	public ApplicationListener<AuthenticationSuccessEvent> authenticationSuccessEventLogger() {
+	public AuthenticationSuccessEventLogger authenticationSuccessEventLogger() {
 		return new AuthenticationSuccessEventLogger();
 	}
 
 	@Bean
-	public ApplicationListener<LogoutSuccessEvent> logoutSuccessEventLogger() {
+	public LogoutSuccessEventLogger logoutSuccessEventLogger() {
 		return new LogoutSuccessEventLogger();
 	}
 
