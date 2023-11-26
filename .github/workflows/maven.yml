@@ -33,10 +33,6 @@ jobs:
       - uses: browser-actions/setup-firefox@latest
       - uses: browser-actions/setup-chrome@latest
 
-      - name: Debug owner
-        shell: bash
-        run: echo "GH_REPO_O: ${{ github.repository_owner }}"
-
       - name: Validate with Maven
         run: ./mvnw -B clean validate
 
