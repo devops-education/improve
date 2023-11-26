@@ -34,9 +34,9 @@ jobs:
       - uses: browser-actions/setup-chrome@latest
 
       - name: Debug owner
-        run: echo "GH_REPO_O: $GH_REPO_O"
         env: 
           GH_REPO_O: ${{ github.repository_owner }}
+        run: echo "GH_REPO_O: $GH_REPO_O"
 
       - name: Validate with Maven
         run: ./mvnw -B clean validate
